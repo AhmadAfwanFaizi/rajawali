@@ -29,12 +29,13 @@ class HRD extends CI_Controller {
         if($this->form_validation->run() == FALSE) {
             $data = [
                 'judul' => 'data divisi',
+                'data'  => $this->hrd_m->getDivisi()
             ];
             $this->template->load('template/template', 'HRD/divisi', $data);
 
         } else {
+// TAMBAH DATA DIVISI
             $post = $this->input->post(null, TRUE);
-
             $this->hrd_m->tambahDivisi($post);
             if($this->db->affected_rows() > 0) {
                 echo 'BERHASIL';
@@ -43,10 +44,17 @@ class HRD extends CI_Controller {
         
     }
 
-    public function coba()
+// HAPUS DATA DIVISI
+    public function hapusDivisi()
     {
-        $a = ['namaDivisi'=> 'a'];
-        var_dump( $this->hrd_m->tambahDivisi($a));
+        $idDivisi = $this->input->post("idDivisi", true);
+        $this->hrd_m->hapusDivisi($idDivisi);
+        if($this->db->affected_rows() > 0) {
+            return "true";
+        } else {
+            return "false";
+        }
     }
+
 
 }

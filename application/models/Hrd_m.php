@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class HRD_m extends CI_model {
+class Hrd_m extends CI_model {
 
     public function getDivisi()
     {
@@ -17,6 +17,11 @@ class HRD_m extends CI_model {
             'dibuat'      => waktu_sekarang()
         ];
         $this->db->insert('tb_divisi', $data);
+    }
+
+    public function hapusDivisi($idDivisi)
+    {
+        $this->db->delete('tb_divisi', ['id' => $idDivisi]);
     }
 
 }

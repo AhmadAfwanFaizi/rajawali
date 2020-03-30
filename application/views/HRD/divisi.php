@@ -52,52 +52,98 @@
 </div>
 
 
+
+<div class="modal fade hapusModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Perhatian!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Apakah anda yakin ingin menghapus?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-danger hapusDivisi">Hapus</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script>
   $(document).ready(function () {
 
-    $('#tableDivisi').dataTable({
-    //   ajax   : "<?= base_url('HRD/getDivisi') ?>",
-    //   columns: [
+    // $('#tableDivisi').dataTable({
+    //   "processing": "true",
+    //   "serverSide": "true",
+    //   "ajax"      : "<?= base_url('HRD/getDivisi') ?>",
+    //   "columns"   : [
     //     {data : "id"},
     //     {data : "nama_divisi"},
-    //     {render : function(){
-    //       var html  = "<a href=''>EDIT</a> | "
-    //                     html += "<a href=''>DELETE</a>"
-    //                     return html
-    //     }}
-    //  ]
-    });
-
-    loadDivisi();
+    //     {data : "id"}
+    //  ], 
+    //  "rowCallback" : function(row, data) {
+    //   console.log(data);
+    //   $('td:eq(2)', row).html( 
+    //     "<button class='btn btn-sm btn-danger' data-target='.hapusModal' onclick=modalHapus('"+data.id+"')>Hapus</button>" + 
+    //     " <button class='btn btn-sm btn-warning'>Ubah</button>"
+    //   );
+    //  }
+    // });
+    loadData();
     resetForm();
     tambahDivisi();
 
   });
 
-  function loadDivisi()
+  function loadData()
   {
-    $.ajax({
-      method  : "POST",
-      url     : "<?= base_url('HRD/getDivisi') ?>",
-      dataType: "JSON",
-      success : function(res){
-        console.log(res.data)
-        var html = '';
-        var i
-        var no = 1;
-        for(i = 0; i < res.data.length; i++) {
-          html += '<tr>'+
-          '<td>'+ (i+1) +'</td>' +
-            '<td>'+ res.data[i].nama_divisi +'</td>' +
-            '<td> <a href="#" class="btn btn-danger">Hapus</a> </td>' +
-          +'</tr>';
-        }
-        $('#tableDivisi > tbody').html(html)
-          
-      }
+    $('#tableDivisi').dataTable({
+      "processing": "true",
+      "serverSide": "true",
+      "ajax"      : "<?= base_url('HRD/getDivisi') ?>",
+      "columns"   : [
+        {"data" : "id"},
+        {"data" : "nama_divisi"},
+        {"data" : "id"}
+     ], 
+     "rowCallback" : function(row, data) {
+      console.log(data);
+      $('td:eq(2)', row).html( 
+        "<button class='btn btn-sm btn-danger' data-target='.hapusModal' onclick=modalHapus('"+data.id+"')>Hapus</button>" + 
+        " <button class='btn btn-sm btn-warning'>Ubah</button>"
+      );
+     }
     });
 
   }
+
+  // function loadData()
+  // {
+  //   $.ajax({
+  //     method  : "POST",
+  //     url     : "<?= base_url('HRD/getDivisi') ?>",
+  //     dataType: "JSON",
+  //     success : function(res){
+  //       // console.log(res)
+  //       $.each(res, function(i, v){
+  //          console.log(i, v)
+  //         $('#tableDivisi > tbody:last-child').append(
+  //           "<tr>" +
+  //             +"<td>"+i+"</td>"
+  //             +"<td>"+v.nama_divisi+"</td>"
+  //             +"<td><button class='btn btn-sm btn-danger' v-target='.hapusModal' onclick=modalHapus('"+v.id+"')>Hapus</button>"
+  //             +" <button class='btn btn-sm btn-warning'>Ubah</button></td>"+
+  //           "</tr>"
+  //         )
+  //       })
+  //     }
+  //   })
+  // }
 
   function resetForm()
   {
@@ -131,14 +177,33 @@
           data   : data,
           success: function(res) {
 
-            loadDivisi();
+            loadData();
             $('.formTambahDivisi').trigger('reset');
-            
+   
           }
         });
       }
 
     });
   }
+
+  function modalHapus(param)
+  {
+    $('.hapusModal').modal('show');
+    $('.hapusDivisi').click(function(){
+
+      $.ajax({
+        method : "post",
+        url    : "<?= base_url('HRD/hapusDivisi') ?>",
+        data   : {"idDivisi" : param},
+        success: function(res) {
+          
+        }
+      });
+
+    });
+  }
+
+
 
 </script>
