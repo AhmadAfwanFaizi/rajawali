@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Mar 2020 pada 19.26
+-- Waktu pembuatan: 31 Mar 2020 pada 19.20
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -56,12 +56,9 @@ CREATE TABLE `tb_divisi` (
 --
 
 INSERT INTO `tb_divisi` (`id`, `nama_divisi`, `dibuat`, `diubah`) VALUES
-(1, 'asd', '0000-00-00 00:00:00', NULL),
-(2, 'b', '2020-03-29 21:39:16', NULL),
-(3, 'c', '2020-03-29 22:16:02', NULL),
-(4, 'v', '2020-03-29 22:17:24', NULL),
-(5, 'asd', '2020-03-29 22:17:57', NULL),
-(6, 'q', '2020-03-29 22:18:10', NULL);
+(23, 'IT', '2020-03-31 15:49:50', '2020-03-31 15:54:45'),
+(24, 'MARKETING', '2020-03-31 15:50:23', '2020-03-31 20:26:27'),
+(25, 'PAJAK', '2020-03-31 15:50:56', '2020-03-31 20:26:30');
 
 -- --------------------------------------------------------
 
@@ -72,20 +69,32 @@ INSERT INTO `tb_divisi` (`id`, `nama_divisi`, `dibuat`, `diubah`) VALUES
 CREATE TABLE `tb_karyawan` (
   `id` int(11) NOT NULL,
   `nik` varchar(20) NOT NULL,
-  `no_karyawan` varchar(20) NOT NULL,
+  `nip` varchar(20) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `jenis_kelamin` enum('L','P') NOT NULL,
-  `agama` varchar(25) NOT NULL,
+  `agama` enum('ISLAM','KSTOLIK','PROTESTAN','BUDHA','KONGHUCU','LAIN-LAIN') NOT NULL,
   `tempat_lahir` varchar(50) NOT NULL,
   `tanggal_lahir` varchar(10) NOT NULL,
   `alamat` text NOT NULL,
   `email` varchar(100) NOT NULL,
   `nomor_telepon` varchar(15) NOT NULL,
-  `level` enum('PEGAWAI','KETUA_DIVISI','HRD') NOT NULL,
-  `divisi` enum('HOUSE_KEEPING','FND','DAPUR','KEUANGAN') NOT NULL,
+  `jabatan` enum('PEGAWAI','KETUA_DIVISI','HRD') NOT NULL,
+  `divisi` varchar(30) NOT NULL,
   `dibuat` datetime NOT NULL DEFAULT current_timestamp(),
-  `diubah` datetime DEFAULT NULL
+  `diubah` datetime DEFAULT NULL,
+  `dihapus` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_karyawan`
+--
+
+INSERT INTO `tb_karyawan` (`id`, `nik`, `nip`, `nama`, `jenis_kelamin`, `agama`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `email`, `nomor_telepon`, `jabatan`, `divisi`, `dibuat`, `diubah`, `dihapus`) VALUES
+(1, '360', '270', 'yazid', 'L', 'ISLAM', 'tangerang', '1998-23-11', 'rajwg', 'yazid@gmail.com', '021', 'PEGAWAI', 'DAPUR', '2020-03-31 18:41:46', NULL, '2020-03-31 22:42:19'),
+(2, 'nik', 'nip', 'nama', '', '', 'tempatLahir', 'tanggalLah', 'alamat', 'email', 'nomorTelepon', '', 'divisi', '2020-03-31 22:22:39', NULL, '2020-03-31 22:50:45'),
+(3, 'nik', 'nip', 'nama', '', '', 'tempatLahir', 'tanggalLah', 'alamat', 'email', 'nomorTelepon', '', 'divisi', '2020-03-31 22:22:45', NULL, NULL),
+(4, '111', '111', 'ali', 'L', 'ISLAM', 'tangerang', '1997-11-23', 'bnz              \r\n              ', 'faiz@gmial.com', '098', 'KETUA_DIVISI', 'IT', '2020-03-31 22:29:02', NULL, NULL),
+(5, '222', '222', 'faiz', 'L', 'ISLAM', 'tangerang', '1997-11-23', 'banze              \r\n              ', 'ahmadafwanfaizi@gmail.com', '078', 'KETUA_DIVISI', 'IT', '2020-03-31 22:30:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -145,13 +154,13 @@ ALTER TABLE `tb_absen`
 -- AUTO_INCREMENT untuk tabel `tb_divisi`
 --
 ALTER TABLE `tb_divisi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_karyawan`
 --
 ALTER TABLE `tb_karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_user`

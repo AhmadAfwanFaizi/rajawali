@@ -133,13 +133,15 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i>
-            <span>Pegawai</span>
+            <span>Karyawan</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?= base_url('HRD/divisi') ?>"><i class="fa fa-circle-o"></i> Berdaasarka divisi</a></li>
+            <?php $divisi = $this->db->select('id, nama_divisi')->get('tb_divisi'); foreach($divisi->result() as $d) { ?>
+              <li><a href="<?= base_url('HRD/karyawan/'. $d->id) ?>"><i class="fa fa-circle-o"></i><?= $d->nama_divisi ?></a></li>
+            <?php } ?>
           </ul>
         </li>
         <li class="treeview">
@@ -168,15 +170,13 @@
     <section class="content-header">
       <h1>
         <?= ucwords($judul) ?>
-        <small><?= 'kosong' ?></small>
+        <small><?= @strtoupper($subJudul) ?></small>
       </h1>
       <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <?php if($this->uri->segment(2) != null) {?>
           <li><a href="#?>"><?= ucwords($this->uri->segment(2)) ?></a></li>
-        <?php } if ($this->uri->segment(3) != null) { ?>
-          <li><a href="#"><?= ucwords($this->uri->segment(3)) ?></a></li>
-        <?php } ?>
+        <?php }?>
 
         <!-- <li class="active">Blank page</li> -->
       </ol>

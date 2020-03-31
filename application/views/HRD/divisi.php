@@ -4,6 +4,7 @@
     <div class="box-header">
       <!-- <h3 class="box-title">Data Table With Full Features</h3> -->
       <button class="btn btn-primary" data-toggle="modal" data-target="#tambahDivisiModal">Tambah</button>
+      <button data-toggle="modal" id="alert" >Alert</button>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -16,6 +17,16 @@
         </tr>
         </thead>
         <tbody>
+          <?php $no = 1; foreach($data->result() as $d) { ?>
+            <tr>
+              <td><?= $no++ ?></td>
+              <td><?= $d->nama_divisi ?></td>
+              <td width="130px">
+                <button class="btn btn-sm btn-danger" onclick="modalHapus('<?= $d->id ?>')">Hapus</button>
+                <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#ubahDivisiModal" onclick="modalUbahDivisi('<?= $d->id ?>')">Ubah</button>
+              </td>
+            </tr>
+          <?php } ?>
         </tbody>
       </table>
     </div>
@@ -23,6 +34,7 @@
 
 </section>
 
+<!-- MODAL TAMBAH -->
 <div class="modal fade" id="tambahDivisiModal" tabindex="-1" role="dialog" aria-labelledby="tambahDivisiModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -51,8 +63,38 @@
   </div>
 </div>
 
+<!-- MODAL UBAH -->
+<div class="modal fade" id="ubahDivisiModal" tabindex="-1" role="dialog" aria-labelledby="ubahDivisiModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form action="" method="post" class="formUbahDivisi">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ubahDivisiModalLabel">Ubah Divisi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+        <div class="form-group">
+          <input type="hidden" name="ubahIdDivisi" id="ubahIdDivisi">
+          <label for="ubahNamaDivisi">Nama Divisi</label>
+          <input type="text" class="form-control" id="ubahNamaDivisi" name="ubahNamaDivisi">
+          <p class="err ubahNamaDivisi_err"></p>
+        </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+          <button type="button" class="btn btn-primary tombolUbahDivisi">Ubah</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 
+<!-- ODAL HAPUS -->
 <div class="modal fade hapusModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
@@ -73,118 +115,110 @@
   </div>
 </div>
 
+<div class="modal fade alertModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document" style="margin: 4% 33%">
+    <div class="modal-content" style="border-radius: 3px; width: 500px; text-align: center;">
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-check"></i> Alert!</h4>
+        Success alert preview. This alert is dismissable.
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
   $(document).ready(function () {
-
-    // $('#tableDivisi').dataTable({
-    //   "processing": "true",
-    //   "serverSide": "true",
-    //   "ajax"      : "<?= base_url('HRD/getDivisi') ?>",
-    //   "columns"   : [
-    //     {data : "id"},
-    //     {data : "nama_divisi"},
-    //     {data : "id"}
-    //  ], 
-    //  "rowCallback" : function(row, data) {
-    //   console.log(data);
-    //   $('td:eq(2)', row).html( 
-    //     "<button class='btn btn-sm btn-danger' data-target='.hapusModal' onclick=modalHapus('"+data.id+"')>Hapus</button>" + 
-    //     " <button class='btn btn-sm btn-warning'>Ubah</button>"
-    //   );
-    //  }
-    // });
-    loadData();
     resetForm();
     tambahDivisi();
-
+    modalUbahDivisi();
+    ubahDivisi();
+    modalAlert();
   });
 
-  function loadData()
-  {
-    $('#tableDivisi').dataTable({
-      "processing": "true",
-      "serverSide": "true",
-      "ajax"      : "<?= base_url('HRD/getDivisi') ?>",
-      "columns"   : [
-        {"data" : "id"},
-        {"data" : "nama_divisi"},
-        {"data" : "id"}
-     ], 
-     "rowCallback" : function(row, data) {
-      console.log(data);
-      $('td:eq(2)', row).html( 
-        "<button class='btn btn-sm btn-danger' data-target='.hapusModal' onclick=modalHapus('"+data.id+"')>Hapus</button>" + 
-        " <button class='btn btn-sm btn-warning'>Ubah</button>"
-      );
-     }
-    });
-
-  }
-
-  // function loadData()
-  // {
-  //   $.ajax({
-  //     method  : "POST",
-  //     url     : "<?= base_url('HRD/getDivisi') ?>",
-  //     dataType: "JSON",
-  //     success : function(res){
-  //       // console.log(res)
-  //       $.each(res, function(i, v){
-  //          console.log(i, v)
-  //         $('#tableDivisi > tbody:last-child').append(
-  //           "<tr>" +
-  //             +"<td>"+i+"</td>"
-  //             +"<td>"+v.nama_divisi+"</td>"
-  //             +"<td><button class='btn btn-sm btn-danger' v-target='.hapusModal' onclick=modalHapus('"+v.id+"')>Hapus</button>"
-  //             +" <button class='btn btn-sm btn-warning'>Ubah</button></td>"+
-  //           "</tr>"
-  //         )
-  //       })
-  //     }
-  //   })
-  // }
 
   function resetForm()
   {
+    // var param = $('.modal').attr('class');
+    //   if(param == 'modal fade'){
+    //     $('.formTambahDivisi').trigger('reset');
+    //     $('.namaDivisi_err').html('');
+    //     $('#namaDivisi').removeClass('err_border');
+    //   }
+
     $('[data-dismiss]').click(function(){
       $('.formTambahDivisi').trigger('reset');
       $('.namaDivisi_err').html('');
       $('#namaDivisi').removeClass('err_border');
     })
+
   }
 
   function tambahDivisi()
   {
     $('.tambahDivisi').click(function(){
-      var namaDivisi = $('#namaDivisi').val();
-
-      if(namaDivisi == ''){
-        $('#namaDivisi').addClass('err_border');
-        $('.namaDivisi_err').html('Nama divisi tidak boleh kosong');
-      } else {
-        $('.namaDivisi_err').html('');
-        $('#namaDivisi').removeClass('err_border');
-        var status = true;
-      }
-
-      if(status == true) {
-        var data = $('.formTambahDivisi').serialize();
+      var data = $('.formTambahDivisi').serialize();
 
         $.ajax({
-          method : "POST",
-          url    : "<?= base_url('HRD/divisi') ?>",
-          data   : data,
-          success: function(res) {
-
-            loadData();
-            $('.formTambahDivisi').trigger('reset');
-   
+          method  : "POST",
+          url     : "<?= base_url('HRD/tambahDivisi') ?>",
+          dataType: "JSON",
+          data    : data,
+          success : function(res) {
+            console.log(res);
+            if(res != 'true') {
+              $('#namaDivisi').addClass('err_border');
+              $('.namaDivisi_err').html(res);
+            }else{
+              location.reload();
+            }
+           
           }
         });
-      }
-
     });
+  }
+
+  function modalUbahDivisi(param)
+  {
+    $.ajax({
+      method  : "POST",
+      url     : "<?= base_url('HRD/getDivisi/') ?>" + param,
+      dataType: "JSON",
+      data    : {'id' : param},
+      success : function(res) {
+        if(res != 'false') {
+          console.log(res);
+          $('#ubahIdDivisi').val(res[0].id);
+          $('#ubahNamaDivisi').val(res[0].nama_divisi);
+        }else{
+          // location.reload(true);
+          alert('kosong');
+        }
+      }
+    });
+  }
+
+  function ubahDivisi()
+  {
+    $('.tombolUbahDivisi').click(function(){
+      var data = $('.formUbahDivisi').serialize();
+
+      $.ajax({
+        url     : "<?= base_url('HRD/ubahDivisi') ?>",
+        method  : "POST",
+        dataType: "JSON",
+        data    : data,
+        success : function(res) {
+          if(res != "true") {
+              $('#ubahNamaDivisi').addClass('err_border');
+              $('.ubahNamaDivisi_err').html(res);
+          } else {
+            location.reload(true);
+          }
+        }
+      });
+    })
   }
 
   function modalHapus(param)
@@ -197,11 +231,24 @@
         url    : "<?= base_url('HRD/hapusDivisi') ?>",
         data   : {"idDivisi" : param},
         success: function(res) {
-          
+          location.reload();
         }
       });
 
     });
+  }
+
+  function modalAlert()
+  {
+    $('#alert').click(function(){
+
+      $('.alertModal').modal('show');
+      setTimeout(function(){
+        $('.alertModal').modal('hide');
+      }, 2000)
+
+
+    })
   }
 
 
