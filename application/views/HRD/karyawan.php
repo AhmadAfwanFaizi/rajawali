@@ -34,8 +34,8 @@
               <td><?= $d->email ?></td>
               <td><?= $d->nomor_telepon ?></td>
               <td width="130px">
-                <button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('<?= $d->id ?>')">Hapus</button>
-                <button type="button" class="btn btn-sm btn-warning ubahKaryawan">Ubah</button>
+                <button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('<?= $d->id_karyawan ?>')">Hapus</button>
+                <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('<?= $d->id_karyawan ?>')">Ubah</button>
               </td>
             </tr>
           <?php } ?>
@@ -52,13 +52,13 @@
     <div class="modal-content">
       <form action="" method="post" class="formTambahKaryawan">
         <div class="modal-header">
-          <h5 class="modal-title" id="tambahKaryawanModalLabel">Tambah Karyawan Divisi <?= $subJudul ?></h5>
+          <h5 class="modal-title" id="tambahKaryawanModalLabel">Tambah Karyawan <?= $subJudul ?></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            <input type="hidden" name="divisi" id="divisi" value="<?= $subJudul ?>">
+            <input type="hidden" name="idDivisi" id="idDivisi" value="<?= $idDivisi ?>">
         <div class="form-row">
             <div class="form-group col-md-4">
               <label for="nik">NIK</label>
@@ -158,8 +158,116 @@
 </div>
 
 <!-- MODAL UBAH -->
+<div class="modal fade bd-example-modal-lg" id="ubahKaryawanModal" tabindex="-1" role="dialog" aria-labelledby="ubahKaryawanModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+      <form action="" method="post" class="formUbahKaryawan">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ubahKaryawanModalLabel">Ubah Karyawan <?= $subJudul ?></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <input type="text" name="uIdKaryawan" id="uIdKaryawan">
+            <input type="text" name="uIdDivisi" id="uIdDivisi">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="uNik">NIK</label>
+              <input type="text" class="form-control" id="uNik" name="uNik">
+              <p class="err uNik_err"></p>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="uNip">NIP</label>
+              <input type="text" class="form-control" id="uNip" name="uNip">
+              <p class="err uNip_err"></p>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="uNama">Nama</label>
+              <input type="text" class="form-control" id="uNama" name="uNama">
+              <p class="err uNama_err"></p>
+            </div>
+        </div>
 
+        <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="uJenisKelamin">Jenis Kelamin</label>
+                <select name="uJenisKelamin" id="uJenisKelamin" class="form-control">
+                  <option value="" hidden>Pilih terlebih dahulu</option>
+                  <option value="L">Laki-Laki</option>
+                  <option value="P">Perempuan</option>
+                </select>
+              <p class="err uJenisKelamin_err"></p>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="uAgama">uAgama</label>
+                <select name="uAgama" id="uAgama" class="form-control">
+                  <option value="" hidden>Pilih terlebih dahulu</option>
+                  <option value="ISLAM">ISLAM</option>
+                  <option value="KATOLIK">KATOLIK</option>
+                  <option value="PROTESTAN">PROTESTAN</option>
+                  <option value="KONGHUCU">KONGHUCU</option>
+                  <option value="BUDHA">BUDHA</option>
+                  <option value="LAIN-LAIN">LAIN-LAIN</option>
+                </select>
+              <p class="err uAgama_err"></p>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="uTempatLahir">Tempta Lahir</label>
+              <input type="text" class="form-control" id="uTempatLahir" name="uTempatLahir">
+              <p class="err uTempatLahir_err"></p>
+            </div>
+        </div>
 
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="uTanggalLahir">Tanggal Lahir</label>
+              <input type="date" class="form-control" id="uTanggalLahir" name="uTanggalLahir">
+              <p class="err uTanggalLahir_err"></p>
+            </div>
+            <div class="form-group col-md-6">
+            <label for="uJabatan">Jabatan</label>
+                <select name="uJabatan" id="uJabatan" class="form-control">
+                  <option value="" hidden>Pilih terlebih dahulu</option>
+                  <option value="PEGAWAI">PEGAWAI</option>
+                  <option value="KETUA_DIVISI">KETUA DIVISI</option>
+                </select>
+              <p class="err uJabatan_err"></p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+              <label for="uNomorTelepon">Nomor Telepon</label>
+              <input type="text" class="form-control" id="uNomorTelepon" name="uNomorTelepon">
+              <p class="err uNomorTelepon_err"></p>
+          </div>
+          <div class="form-group col-md-6">
+              <label for="uEmail">uEmail</label>
+              <input type="text" class="form-control" id="uEmail" name="uEmail">
+              <p class="err uEmail_err"></p>
+          </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="uAlamat">uAlamat</label>
+              <textarea name="uAlamat" id="uAlamat" class="form-control" cols="" rows="3">
+              
+              </textarea>
+            </div>
+        </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+          <button type="button" class="btn btn-primary ubahhKaryawan">Simpan</button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>  
 
 <!-- ODAL HAPUS -->
 <div class="modal fade hapusModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -199,8 +307,6 @@
   $(document).ready(function () {
     resetForm();
     tambahKaryawan();
-    modalUbahKaryawan();
-    ubahKaryawan();
     modalAlert();
   });
 
@@ -311,24 +417,37 @@
     });
   }
 
-  function modalUbahKaryawan(param)
+  function ubahKaryawanModal(param)
   {
-    $.ajax({
-      method  : "POST",
-      url     : "<?= base_url('HRD/getDivisi/') ?>" + param,
-      dataType: "JSON",
-      data    : {'id' : param},
-      success : function(res) {
-        if(res != 'false') {
-          // console.log(res[0].nama_divisi);
-          $('#ubahIdDivisi').val(res[0].id);
-          $('#ubahNamaDivisi').val(res[0].nama_divisi);
-        }else{
-          // location.reload(true);
-          alert('kosong');
+      $('#ubahKaryawanModal').modal('show');
+        $.ajax({
+        method  : "POST",
+        url     : "<?= base_url('HRD/getKaryawan') ?>",
+        dataType: "JSON",
+        data    : {'id_karyawan' : param},
+        success : function(res) {
+          if(res.res == 'true') {
+            var data = res.data[0];
+            console.log(data);
+            $('#uIdKaryawan').val(data.id_karyawan);
+            $('#uIdDivisi').val(data.id_divisi);
+            $('#uNik').val(data.nik);
+            $('#uNip').val(data.nip);
+            $('#uNama').val(data.nama);
+            $('#uJenisKelamin').val(data.jenis_kelamin);
+            $('#uAgama').val(data.agama);
+            $('#uTempatLahir').val(data.tempat_Lahir);
+            $('#uTanggalLahir').val(data.tanggaL_Lahir);
+            $('#uJabatan').val(data.jabatan);
+            $('#uNomorTelepon').val(data.nomor_telepon);
+            $('#uEmail').val(data.email);
+            $('#uAlamat').val(data.alamat);
+          }else{
+            alert('kosong');
+          }
         }
-      }
-    });
+      })
+
   }
 
   function ubahKaryawan()
@@ -357,13 +476,14 @@
   {
     $('.hapusModal').modal('show');
     $('.hapusKaryawan').click(function(){
-
+      
       $.ajax({
         method : "post",
         url    : "<?= base_url('HRD/hapusKaryawan') ?>",
-        data   : {"id" : param},
+        data   : {"id_karyawan" : param},
         success: function(res) {
-          location.reload();
+          alert(res)
+          // location.reload();
         }
       });
 

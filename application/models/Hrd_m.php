@@ -5,12 +5,12 @@ class Hrd_m extends CI_model {
 
 // MODEL DIVISI ================================================================================================================
 
-    public function getDivisi($param = null)
+    public function getDivisi($idDivisi = null)
     {
         $this->db->select('*');
         $this->db->from('tb_divisi');
-        if($param) {
-            $this->db->where('id', $param);
+        if($idDivisi) {
+            $this->db->where('id_divisi', $idDivisi);
         }
         return $this->db->get();
     }
@@ -30,26 +30,30 @@ class Hrd_m extends CI_model {
             'nama_divisi' => htmlspecialchars(strtoupper($post['ubahNamaDivisi'])),
             'diubah'      => waktu_sekarang()
         ];
-        $this->db->update('tb_divisi', $data, ['id' => $post['ubahIdDivisi']]);
+        $this->db->update('tb_divisi', $data, ['id_divisi' => $post['ubahIdDivisi']]);
     }
 
     public function hapusDivisi($idDivisi)
     {
-        $this->db->delete('tb_divisi', ['id' => $idDivisi]);
+        $this->db->delete('tb_divisi', ['id_divisi' => $idDivisi]);
     }
 
 
 // MODEL KARYAWAN ================================================================================================================
 
-    public function getKaryawan($idDivisi = null)
+    public function getKaryawan($paramKaryawan = null, $paramDivisi = null)
     {
-        $this->db->select('*');
-        $this->db->from('tb_karyawan');
-        $this->db->where("dihapus is null or dihapus =", '');
-        if($idDivisi) {
-            $this->db->where('id', $idDivisi);
+        if($paramKaryawan) {
+            $idKaryawan = "tb_karyawan.id_karyawan = '$paramKaryawan' AND ";
+        } else {
+            $idKaryawan = "";
         }
-        return $this->db->get();
+        if($paramDivisi) {
+            $idDivisi = "tb_divisi.id_divisi = '$paramDivisi' and";
+        } else {
+            $idDivisi = "";
+        }
+        return $this->db->query("SELECT * from tb_karyawan inner join tb_divisi on tb_divisi.id_divisi = tb_karyawan.id_divisi where $idKaryawan $idDivisi tb_karyawan.dihapus is null");
     }
 
     public function tambahKaryawan($post)
@@ -66,16 +70,16 @@ class Hrd_m extends CI_model {
             'email'         => htmlspecialchars($post['email']),
             'nomor_telepon' => htmlspecialchars($post['nomorTelepon']),
             'jabatan'       => htmlspecialchars($post['jabatan']),
-            'divisi'        => htmlspecialchars($post['divisi']),
+            'id_divisi'     => htmlspecialchars($post['idDivisi']),
             'dibuat'        => waktu_sekarang()
             
         ];
         $this->db->insert('tb_karyawan', $data);
     }
 
-    public function hapusKaryawan($id)
+    public function hapusKaryawan($idKaryawan)
     {
-        $this->db->set('dihapus', waktu_sekarang())->where('id', $id)->update('tb_karyawan');
+        $this->db->set('dihapus', waktu_sekarang())->where('id_karyawan', $idKaryawan)->update('tb_karyawan');
     }
 
 // TUTUP CLASS

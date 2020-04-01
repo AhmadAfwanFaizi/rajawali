@@ -22,8 +22,8 @@
               <td><?= $no++ ?></td>
               <td><?= $d->nama_divisi ?></td>
               <td width="130px">
-                <button class="btn btn-sm btn-danger" onclick="modalHapus('<?= $d->id ?>')">Hapus</button>
-                <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#ubahDivisiModal" onclick="modalUbahDivisi('<?= $d->id ?>')">Ubah</button>
+                <button class="btn btn-sm btn-danger" onclick="modalHapus('<?= $d->id_divisi ?>')">Hapus</button>
+                <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#ubahDivisiModal" onclick="modalUbahDivisi('<?= $d->id_divisi ?>')">Ubah</button>
               </td>
             </tr>
           <?php } ?>
@@ -140,13 +140,6 @@
 
   function resetForm()
   {
-    // var param = $('.modal').attr('class');
-    //   if(param == 'modal fade'){
-    //     $('.formTambahDivisi').trigger('reset');
-    //     $('.namaDivisi_err').html('');
-    //     $('#namaDivisi').removeClass('err_border');
-    //   }
-
     $('[data-dismiss]').click(function(){
       $('.formTambahDivisi').trigger('reset');
       $('.namaDivisi_err').html('');
@@ -183,13 +176,13 @@
   {
     $.ajax({
       method  : "POST",
-      url     : "<?= base_url('HRD/getDivisi/') ?>" + param,
+      url     : "<?= base_url('HRD/getDivisi/') ?>",
       dataType: "JSON",
       data    : {'id' : param},
       success : function(res) {
         if(res != 'false') {
           console.log(res);
-          $('#ubahIdDivisi').val(res[0].id);
+          $('#ubahIdDivisi').val(res[0].id_divisi);
           $('#ubahNamaDivisi').val(res[0].nama_divisi);
         }else{
           // location.reload(true);
@@ -214,7 +207,8 @@
               $('#ubahNamaDivisi').addClass('err_border');
               $('.ubahNamaDivisi_err').html(res);
           } else {
-            location.reload(true);
+            console.log(res);
+            // location.reload(true);
           }
         }
       });
