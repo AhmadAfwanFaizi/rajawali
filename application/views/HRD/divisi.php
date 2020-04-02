@@ -4,7 +4,6 @@
     <div class="box-header">
       <!-- <h3 class="box-title">Data Table With Full Features</h3> -->
       <button class="btn btn-primary" data-toggle="modal" data-target="#tambahDivisiModal">Tambah</button>
-      <button data-toggle="modal" id="alert" >Alert</button>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -13,20 +12,10 @@
         <tr>
           <th>#</th>
           <th>Nama Divisi</th>
-          <th>Aksi</th>
+          <th width="130px">Aksi</th>
         </tr>
         </thead>
         <tbody>
-          <?php $no = 1; foreach($data->result() as $d) { ?>
-            <tr>
-              <td><?= $no++ ?></td>
-              <td><?= $d->nama_divisi ?></td>
-              <td width="130px">
-                <button class="btn btn-sm btn-danger" onclick="modalHapus('<?= $d->id_divisi ?>')">Hapus</button>
-                <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#ubahDivisiModal" onclick="modalUbahDivisi('<?= $d->id_divisi ?>')">Ubah</button>
-              </td>
-            </tr>
-          <?php } ?>
         </tbody>
       </table>
     </div>
@@ -118,10 +107,10 @@
 <div class="modal fade alertModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document" style="margin: 4% 33%">
     <div class="modal-content" style="border-radius: 3px; width: 500px; text-align: center;">
-      <div class="alert alert-success alert-dismissible">
+      <div id="warnaAlert" class="alert alert-dismissible "> <!--  alert-success -->
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4><i class="icon fa fa-check"></i> Alert!</h4>
-        Success alert preview. This alert is dismissable.
+        <h4><i id="iconAlert" class=""></i> <span id="judulAlert"></span></h4> <!-- icon fa fa-check -->
+        <div id="isiAlert"></div>
       </div>
     </div>
   </div>
@@ -130,22 +119,48 @@
 
 <script>
   $(document).ready(function () {
+
+    $('#tableDivisi').DataTable({
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        url: "<?php echo base_url('HRD/getDivisi') ?>",
+        type:'POST',
+      },
+      "columnDefs" : [{
+        "targets" : 2,
+        "orderable" : false,
+      }]
+
+    });
+
+    reloadTable();
+    ButtonResetForm();
     resetForm();
     tambahDivisi();
     modalUbahDivisi();
     ubahDivisi();
-    modalAlert();
   });
 
+  function reloadTable()
+  {
+    $('#tableDivisi').DataTable().ajax.reload();
+  }
 
-  function resetForm()
+  function ButtonResetForm()
   {
     $('[data-dismiss]').click(function(){
       $('.formTambahDivisi').trigger('reset');
       $('.namaDivisi_err').html('');
       $('#namaDivisi').removeClass('err_border');
-    })
+    });
+  }
 
+  function resetForm()
+  {
+      $('.formTambahDivisi').trigger('reset');
+      $('.namaDivisi_err').html('');
+      $('#namaDivisi').removeClass('err_border');
   }
 
   function tambahDivisi()
@@ -159,12 +174,13 @@
           dataType: "JSON",
           data    : data,
           success : function(res) {
-            console.log(res);
             if(res != 'true') {
               $('#namaDivisi').addClass('err_border');
               $('.namaDivisi_err').html(res);
             }else{
-              location.reload();
+              resetForm();
+              modalAlert('success', 'Data berhasil ditambah!');
+              reloadTable();
             }
            
           }
@@ -176,12 +192,11 @@
   {
     $.ajax({
       method  : "POST",
-      url     : "<?= base_url('HRD/getDivisi/') ?>",
+      url     : "<?= base_url('HRD/getDivisiById/') ?>",
       dataType: "JSON",
       data    : {'id' : param},
       success : function(res) {
         if(res != 'false') {
-          console.log(res);
           $('#ubahIdDivisi').val(res[0].id_divisi);
           $('#ubahNamaDivisi').val(res[0].nama_divisi);
         }else{
@@ -196,7 +211,6 @@
   {
     $('.tombolUbahDivisi').click(function(){
       var data = $('.formUbahDivisi').serialize();
-
       $.ajax({
         url     : "<?= base_url('HRD/ubahDivisi') ?>",
         method  : "POST",
@@ -207,8 +221,9 @@
               $('#ubahNamaDivisi').addClass('err_border');
               $('.ubahNamaDivisi_err').html(res);
           } else {
-            console.log(res);
-            // location.reload(true);
+            resetForm();
+            modalAlert('success', 'Data berhasil diubah!');
+            reloadTable();
           }
         }
       });
@@ -225,24 +240,59 @@
         url    : "<?= base_url('HRD/hapusDivisi') ?>",
         data   : {"idDivisi" : param},
         success: function(res) {
-          location.reload();
+          if(res == 'true') {
+            $('.hapusModal').modal('hide');
+            modalAlert('success', 'Data berhasil dihapus!');
+            reloadTable();
+          }else{
+            $('.hapusModal').modal('hide');
+            modalAlert('warning', 'Data gagal dihapus!');
+          }
         }
       });
 
     });
   }
 
-  function modalAlert()
+  function modalAlert(res, content)
   {
-    $('#alert').click(function(){
+    var warnaAlert, iconAlert, judulAlert, isiAlert;
+    if(res == "success") {
+      warnaAlert = " alert-success";
+      iconAlert  = " icon fa fa-check";
+      judulAlert = "BERHASIL";
+      isiAlert   = content;
+    } else if(res == "danger") {
+      warnaAlert = " alert-danger";
+      iconAlert  = " icon fa fa-ban";
+      judulAlert = "PERHATIAN";
+      isiAlert   = content;
+    } else if(res == "warning") {
+      warnaAlert = " alert-warning";
+      iconAlert  = " icon fa fa-warning";
+      judulAlert = "PERHATIAN";
+      isiAlert   = content;
+    } else if(res == "info") {
+      warnaAlert = " alert-info";
+      iconAlert  = " icon fa fa-info";
+      judulAlert = "PEMBERITAHUAN";
+      isiAlert   = content;
+    } else {
+      warnaAlert = " alert-danger";
+      iconAlert  = " icon fa fa-ban";
+      judulAlert = "PERHATIAN";
+      isiAlert   = " PERHATIKAN PARAMETER SCRIPT";
+    }
+
+      $('#warnaAlert').addClass(warnaAlert);
+      $('#iconAlert').addClass(iconAlert);
+      $('#judulAlert').text(judulAlert);
+      $('#isiAlert').html(isiAlert);
 
       $('.alertModal').modal('show');
       setTimeout(function(){
         $('.alertModal').modal('hide');
       }, 2000)
-
-
-    })
   }
 
 

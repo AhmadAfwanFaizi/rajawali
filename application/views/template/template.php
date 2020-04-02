@@ -39,6 +39,9 @@
     .err_border {
       border-color: red;
     }
+    .h-in {
+      height: 90px;
+    }
   </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -153,7 +156,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?= base_url('HRD/absen') ?>"><i class="fa fa-circle-o"></i> Berdaasarka divisi</a></li>
+            <?php $divisi = $this->db->select('id_divisi, nama_divisi')->get('tb_divisi'); foreach($divisi->result() as $d) { ?>
+              <li><a href="<?= base_url('HRD/absensi/'. $d->id_divisi) ?>"><i class="fa fa-circle-o"></i><?= $d->nama_divisi ?></a></li>
+            <?php } ?>
           </ul>
         </li>
 

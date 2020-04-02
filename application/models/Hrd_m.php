@@ -48,7 +48,7 @@ class Hrd_m extends CI_model {
         } else {
             $idKaryawan = "";
         }
-        if($paramDivisi) {
+        if($paramDivisi != '') {
             $idDivisi = "tb_divisi.id_divisi = '$paramDivisi' and";
         } else {
             $idDivisi = "";
@@ -75,6 +75,27 @@ class Hrd_m extends CI_model {
             
         ];
         $this->db->insert('tb_karyawan', $data);
+    }
+
+    public function ubahKaryawan($post)
+    {
+        $data = [
+            'nik'           => htmlspecialchars($post['uNik']),
+            'nip'           => htmlspecialchars($post['uNip']),
+            'nama'          => htmlspecialchars($post['uNama']),
+            'jenis_kelamin' => htmlspecialchars($post['uJenisKelamin']),
+            'agama'         => htmlspecialchars($post['uAgama']),
+            'tempat_lahir'  => htmlspecialchars($post['uTempatLahir']),
+            'tanggal_lahir' => htmlspecialchars($post['uTanggalLahir']),
+            'alamat'        => htmlspecialchars($post['uAlamat']),
+            'email'         => htmlspecialchars($post['uEmail']),
+            'nomor_telepon' => htmlspecialchars($post['uNomorTelepon']),
+            'jabatan'       => htmlspecialchars($post['uJabatan']),
+            'id_divisi'     => htmlspecialchars($post['uIdDivisi']),
+            'diubah'        => waktu_sekarang()
+            
+        ];
+        $this->db->update('tb_karyawan', $data, ['id_karyawan' => $post['uIdKaryawan']]);
     }
 
     public function hapusKaryawan($idKaryawan)

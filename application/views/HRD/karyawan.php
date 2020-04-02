@@ -8,7 +8,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <table id="tableDivisi" class="table table-bordered table-striped table-hover" role="grid">
+      <table id="tableKaryawan" class="table table-bordered table-striped table-hover" role="grid">
         <thead>
         <tr>
           <th>#</th>
@@ -19,26 +19,10 @@
           <th>Tanggal Lahir</th>
           <th>Email</th>
           <th>Nomor telepon</th>
-          <th>Aksi</th>
+          <th width="130px">Aksi</th>
         </tr>
         </thead>
         <tbody>
-          <?php $no = 1; foreach($data->result() as $d) { ?>
-            <tr>
-              <td><?= $no++ ?></td>
-              <td><?= $d->nip ?></td>
-              <td><?= $d->nama ?></td>
-              <td><?= $d->jenis_kelamin == 'L' ? 'LAKI-LAKI' : 'PERMPUAN' ?></td>
-              <td><?= $d->tempat_lahir ?></td>
-              <td><?= $d->tanggal_lahir ?></td>
-              <td><?= $d->email ?></td>
-              <td><?= $d->nomor_telepon ?></td>
-              <td width="130px">
-                <button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('<?= $d->id_karyawan ?>')">Hapus</button>
-                <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('<?= $d->id_karyawan ?>')">Ubah</button>
-              </td>
-            </tr>
-          <?php } ?>
         </tbody>
       </table>
     </div>
@@ -60,17 +44,17 @@
         <div class="modal-body">
             <input type="hidden" name="idDivisi" id="idDivisi" value="<?= $idDivisi ?>">
         <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="nik">NIK</label>
               <input type="text" class="form-control" id="nik" name="nik">
               <p class="err nik_err"></p>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="nip">NIP</label>
               <input type="text" class="form-control" id="nip" name="nip">
               <p class="err nip_err"></p>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="nama">Nama</label>
               <input type="text" class="form-control" id="nama" name="nama">
               <p class="err nama_err"></p>
@@ -78,7 +62,7 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="jenisKelamin">Jenis Kelamin</label>
                 <select name="jenisKelamin" id="jenisKelamin" class="form-control">
                   <option value="" hidden>Pilih terlebih dahulu</option>
@@ -87,7 +71,7 @@
                 </select>
               <p class="err jenisKelamin_err"></p>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="agama">Agama</label>
                 <select name="agama" id="agama" class="form-control">
                   <option value="" hidden>Pilih terlebih dahulu</option>
@@ -100,7 +84,7 @@
                 </select>
               <p class="err agama_err"></p>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="tempatLahir">Tempta Lahir</label>
               <input type="text" class="form-control" id="tempatLahir" name="tempatLahir">
               <p class="err tempatLahir_err"></p>
@@ -108,12 +92,12 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 h-in">
               <label for="tanggalLahir">Tanggal Lahir</label>
               <input type="date" class="form-control" id="tanggalLahir" name="tanggalLahir">
               <p class="err tanggalLahir_err"></p>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 h-in">
             <label for="jabatan">Jabatan</label>
                 <select name="jabatan" id="jabatan" class="form-control">
                   <option value="" hidden>Pilih terlebih dahulu</option>
@@ -125,12 +109,12 @@
         </div>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6 h-in">
               <label for="nomorTelepon">Nomor Telepon</label>
               <input type="text" class="form-control" id="nomorTelepon" name="nomorTelepon">
               <p class="err nomorTelepon_err"></p>
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6 h-in">
               <label for="email">Email</label>
               <input type="text" class="form-control" id="email" name="email">
               <p class="err email_err"></p>
@@ -138,7 +122,7 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-12 h-in">
               <label for="alamat">Alamat</label>
               <textarea name="alamat" id="alamat" class="form-control" cols="" rows="3">
               
@@ -169,20 +153,20 @@
           </button>
         </div>
         <div class="modal-body">
-            <input type="text" name="uIdKaryawan" id="uIdKaryawan">
-            <input type="text" name="uIdDivisi" id="uIdDivisi">
+            <input type="hidden" name="uIdKaryawan" id="uIdKaryawan">
+            <input type="hidden" name="uIdDivisi" id="uIdDivisi">
         <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="uNik">NIK</label>
               <input type="text" class="form-control" id="uNik" name="uNik">
               <p class="err uNik_err"></p>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="uNip">NIP</label>
               <input type="text" class="form-control" id="uNip" name="uNip">
               <p class="err uNip_err"></p>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="uNama">Nama</label>
               <input type="text" class="form-control" id="uNama" name="uNama">
               <p class="err uNama_err"></p>
@@ -190,7 +174,7 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="uJenisKelamin">Jenis Kelamin</label>
                 <select name="uJenisKelamin" id="uJenisKelamin" class="form-control">
                   <option value="" hidden>Pilih terlebih dahulu</option>
@@ -199,7 +183,7 @@
                 </select>
               <p class="err uJenisKelamin_err"></p>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="uAgama">uAgama</label>
                 <select name="uAgama" id="uAgama" class="form-control">
                   <option value="" hidden>Pilih terlebih dahulu</option>
@@ -212,7 +196,7 @@
                 </select>
               <p class="err uAgama_err"></p>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 h-in">
               <label for="uTempatLahir">Tempta Lahir</label>
               <input type="text" class="form-control" id="uTempatLahir" name="uTempatLahir">
               <p class="err uTempatLahir_err"></p>
@@ -220,12 +204,12 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 h-in">
               <label for="uTanggalLahir">Tanggal Lahir</label>
               <input type="date" class="form-control" id="uTanggalLahir" name="uTanggalLahir">
               <p class="err uTanggalLahir_err"></p>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 h-in">
             <label for="uJabatan">Jabatan</label>
                 <select name="uJabatan" id="uJabatan" class="form-control">
                   <option value="" hidden>Pilih terlebih dahulu</option>
@@ -237,12 +221,12 @@
         </div>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6 h-in">
               <label for="uNomorTelepon">Nomor Telepon</label>
               <input type="text" class="form-control" id="uNomorTelepon" name="uNomorTelepon">
               <p class="err uNomorTelepon_err"></p>
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6 h-in">
               <label for="uEmail">uEmail</label>
               <input type="text" class="form-control" id="uEmail" name="uEmail">
               <p class="err uEmail_err"></p>
@@ -250,7 +234,7 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-12 h-in">
               <label for="uAlamat">uAlamat</label>
               <textarea name="uAlamat" id="uAlamat" class="form-control" cols="" rows="3">
               
@@ -261,7 +245,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-          <button type="button" class="btn btn-primary ubahhKaryawan">Simpan</button>
+          <button type="button" class="btn btn-primary ubahKaryawan">Ubah</button>
         </div>
         
       </form>
@@ -305,18 +289,80 @@
 
 <script>
   $(document).ready(function () {
+
+    $('#tableKaryawan').DataTable({
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        url: "<?php echo base_url('HRD/getKaryawan') ?>",
+        type:'POST',
+        data: {'idDivisi' : "<?= $idDivisi ?>"},
+      },
+      "columnDefs" : [{
+        "targets" : 8,
+        "orderable" : false,
+      }]
+
+    });
+
     resetForm();
     tambahKaryawan();
+    ubahKaryawan();
     modalAlert();
+   
   });
-
 
   function resetForm()
   {
     $('[data-dismiss]').click(function(){
+
       $('.formTambahKaryawan').trigger('reset');
-      $('.namaKaryawan_err').html('');
-      $('#namaKaryawan').removeClass('err_border');
+      $('#nik').removeClass('err_border');
+      $('.nik_err').html('');
+      $('#nip').removeClass('err_border');
+      $('.nip_err').html('');
+      $('#nama').removeClass('err_border');
+      $('.nama_err').html('');
+      $('#jenisKelamin').removeClass('err_border');
+      $('.jenisKelamin_err').html('');
+      $('#agama').removeClass('err_border');
+      $('.agama_err').html('');
+      $('#tempatLahir').removeClass('err_border');
+      $('.tempatLahir_err').html('');
+      $('#tanggalLahir').removeClass('err_border');
+      $('.tanggalLahir_err').html('');
+      $('#jabatan').removeClass('err_border');
+      $('.jabatan_err').html('');
+      $('#nomorTelepon').removeClass('err_border');
+      $('.nomorTelepon_err').html('');
+      $('#email').removeClass('err_border');
+      $('.email_err').html('');
+      $('#alamat').removeClass('err_border');
+      $('.alamat_err').html('');
+
+      $('.formUbahKaryawan').trigger('reset');
+      $('#uNik').removeClass('err_border');
+      $('.uNik_err').html('');
+      $('#uNip').removeClass('err_border');
+      $('.uNip_err').html('');
+      $('#uNama').removeClass('err_border');
+      $('.uNama_err').html('');
+      $('#uJenisKelamin').removeClass('err_border');
+      $('.uJenisKelamin_err').html('');
+      $('#uAgama').removeClass('err_border');
+      $('.uAgama_err').html('');
+      $('#uTempatLahir').removeClass('err_border');
+      $('.uTempatLahir_err').html('');
+      $('#uTanggalLahir').removeClass('err_border');
+      $('.uTanggalLahir_err').html('');
+      $('#uJabatan').removeClass('err_border');
+      $('.uJabatan_err').html('');
+      $('#uNomorTelepon').removeClass('err_border');
+      $('.uNomorTelepon_err').html('');
+      $('#uEmail').removeClass('err_border');
+      $('.uEmail_err').html('');
+      $('#uAlamat').removeClass('err_border');
+      $('.uAlamat_err').html('');
     })
   }
 
@@ -393,7 +439,7 @@
                 $('.nomorTelepon_err').html(res.nomorTelepon);
               } else {
                 $('#nomorTelepon').removeClass('err_border');
-              $('.nomorTelepon_err').html('');
+                $('.nomorTelepon_err').html('');
               }
               if (res.email) {
                 $('#email').addClass('err_border');
@@ -422,13 +468,12 @@
       $('#ubahKaryawanModal').modal('show');
         $.ajax({
         method  : "POST",
-        url     : "<?= base_url('HRD/getKaryawan') ?>",
+        url     : "<?= base_url('HRD/getKaryawanById') ?>",
         dataType: "JSON",
         data    : {'id_karyawan' : param},
         success : function(res) {
           if(res.res == 'true') {
             var data = res.data[0];
-            console.log(data);
             $('#uIdKaryawan').val(data.id_karyawan);
             $('#uIdDivisi').val(data.id_divisi);
             $('#uNik').val(data.nik);
@@ -436,8 +481,8 @@
             $('#uNama').val(data.nama);
             $('#uJenisKelamin').val(data.jenis_kelamin);
             $('#uAgama').val(data.agama);
-            $('#uTempatLahir').val(data.tempat_Lahir);
-            $('#uTanggalLahir').val(data.tanggaL_Lahir);
+            $('#uTempatLahir').val(data.tempat_lahir);
+            $('#uTanggalLahir').val(data.tanggal_lahir);
             $('#uJabatan').val(data.jabatan);
             $('#uNomorTelepon').val(data.nomor_telepon);
             $('#uEmail').val(data.email);
@@ -452,24 +497,100 @@
 
   function ubahKaryawan()
   {
-    $('.tombolUbahDivisi').click(function(){
-      var data = $('.formUbahDivisi').serialize();
+    $('.ubahKaryawan').click(function(){
+      var data = $('.formUbahKaryawan').serialize();
 
-      $.ajax({
-        url     : "<?= base_url('HRD/ubahDivisi') ?>",
-        method  : "POST",
-        dataType: "JSON",
-        data    : data,
-        success : function(res) {
-          if(res != "true") {
-              $('#ubahNamaDivisi').addClass('err_border');
-              $('.ubahNamaDivisi_err').html(res);
-          } else {
-            location.reload(true);
+        $.ajax({
+          method  : "POST",
+          url     : "<?= base_url('HRD/ubahKaryawan') ?>",
+          dataType: "JSON",
+          data    : data,
+          success : function(res) {
+            console.log(res);
+            if(res.res != 'true') {
+              if (res.nik){
+                $('#uNik').addClass('err_border');
+                $('.nik_err').html(res.nik);
+              } else {
+                $('#uNik').removeClass('err_border');
+                $('.uNik_err').html('');
+              }
+              if (res.nip){
+                $('#uNip').addClass('err_border');
+                $('.uNip_err').html(res.nip);
+              }else{
+                $('#uNip').removeClass('err_border');
+                $('.uNip_err').html('');
+              }
+              if (res.nama) {
+                $('#uNama').addClass('err_border');
+                $('.uNama_err').html(res.nama);
+              } else {
+                $('#uNama').removeClass('err_border');
+                $('.uNama_err').html('');
+              }
+              if (res.jenisKelamin) {
+                $('#uJenisKelamin').addClass('err_border');
+                $('.uJenisKelamin_err').html(res.jenisKelamin);  
+              } else {
+                $('#uJenisKelamin').removeClass('err_border');
+                $('.uJenisKelamin_err').html('');
+              }
+              if (res.agama) {
+                $('#uAgama').addClass('err_border');
+                $('.uAgama_err').html(res.agama);
+              } else {
+                $('#uAgama').removeClass('err_border');
+                $('.uAgama_err').html('');                
+              }
+              if (res.tempatLahir) {
+                $('#uTempatLahir').addClass('err_border');
+                $('.uTempatLahir_err').html(res.tempatLahir);
+              } else {
+                $('#uTempatLahir').removeClass('err_border');
+                $('.uTempatLahir_err').html('');
+              }
+              if (res.tanggalLahir) {
+                $('#uTanggalLahir').addClass('err_border');
+                $('.uTanggalLahir_err').html(res.tanggalLahir);
+              } else {
+                $('#uTanggalLahir').removeClass('err_border');
+                $('.uTanggalLahir_err').html('');
+              }
+              if (res.jabatan) {
+                $('#uJabatan').addClass('err_border');
+                $('.uJabatan_err').html(res.jabatan);
+              } else {
+                $('#uJabatan').removeClass('err_border');
+                $('.uJabatan_err').html('');
+              }
+              if (res.nomorTelepon) {
+                $('#uNomorTelepon').addClass('err_border');
+                $('.uNomorTelepon_err').html(res.nomorTelepon);
+              } else {
+                $('#uNomorTelepon').removeClass('err_border');
+                $('.uNomorTelepon_err').html('');
+              }
+              if (res.email) {
+                $('#uEmail').addClass('err_border');
+                $('.uEmail_err').html(res.email);
+              } else {
+                $('#uEmail').removeClass('err_border');
+                $('.uEmail_err').html('');
+              }
+              if (res.alamat) {
+                $('#uAlamat').addClass('err_border');
+                $('.uAlamat_err').html(res.alamat);
+              } else {
+                $('#uAlamat').removeClass('err_border');
+                $('.uAlamat_err').html('');
+              }
+            }else{
+              location.reload();
+            }
           }
-        }
-      });
-    })
+        });
+    });
   }
 
   function modalHapusKaryawan(param)
@@ -482,8 +603,7 @@
         url    : "<?= base_url('HRD/hapusKaryawan') ?>",
         data   : {"id_karyawan" : param},
         success: function(res) {
-          alert(res)
-          // location.reload();
+          location.reload();
         }
       });
 
