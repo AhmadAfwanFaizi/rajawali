@@ -137,6 +137,13 @@ class Hrd_m extends CI_model {
             
         ];
         $this->db->insert('tb_karyawan', $data);
+
+        // BARCODE
+        $barcode = [
+            'nip'    => htmlspecialchars($post['nip']),
+            'gambar' => $post['barcode'],
+        ];
+        $this->db->insert('tb_barcode', $barcode);
     }
 
     public function ubahKaryawan($post)

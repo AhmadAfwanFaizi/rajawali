@@ -337,6 +337,8 @@ class HRD extends CI_Controller {
 
     public function tambahKaryawan()
     {
+        var_dump($_REQUEST);
+        die;
         $config = [
             [
                 'field' => 'nik',
@@ -516,8 +518,9 @@ class HRD extends CI_Controller {
             echo json_encode($data);
 
         } else {
-        // TAMBAH DATA KARYAWAN
+        // UBAH DATA KARYAWAN
             $post = $this->input->post(null, TRUE);
+
             $this->hrd_m->ubahKaryawan($post);
             if($this->db->affected_rows() > 0) {
                 echo json_encode(['res'=>'true']);
