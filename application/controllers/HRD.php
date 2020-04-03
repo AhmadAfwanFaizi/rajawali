@@ -213,66 +213,101 @@ class HRD extends CI_Controller {
 
 // CONTROLLER KARYAWAN =================================================================================================
 
+    public function getDatatablesKaryawan()
+    {
+        $idDivisi = $this->input->post('idDivisi', true);
+        $data = $this->hrd_m->getDatatablesKaryawan($idDivisi);
+        echo $data;
+    }
 
     public function getKaryawan()
     {
-        $valid_columns = array(
-            0=>'nip',
-            1=>'nama',
-            2=>'jenis_kelamin',
-            3=>'tempat_lahir',
-            4=>'tanggal_lahir',
-            5=>'email',
-            6=>'nomor_telepon',
 
-        );
-
-        $post = $this->input->post(null, true);
-        $this->serverSide($valid_columns, $post);
-
-        $draw = intval($post["draw"]);
-        $start = intval($post["start"]);
-        $length = intval($post["length"]);
-
-        $this->db->limit($length,$start);
-        // nama table
-        
-        $idDivisi = $post['idDivisi'];
-        $employees = $this->db->query("SELECT * FROM tb_karyawan WHERE id_divisi = '$idDivisi' and dihapus is null");
-        // $employees = $this->hrd_m->getKaryawan($idKaryawan = null, $idDivisi);
+        $list = $this->hrd_m->getDataTableKaryawan();
         $data = array();
-        $no = 1;
-        foreach($employees->result() as $rows)
-        {
-            // render data
-            $data[]= array(
-                $no++,
-                $rows->nip,
-                $rows->nama,
-                $rows->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan',
-                $rows->tempat_lahir,
-                $rows->tanggal_lahir,
-                $rows->email,
-                $rows->nomor_telepon,
-                '<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('.$rows->id_karyawan.')">Hapus</button>
-                <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('.$rows->id_karyawan.')">Ubah</button>'
-            );     
+        $no = @$_POST['start'];
+        foreach ($list as $l) {
+            $no++;
+            $row = array();
+            $row[] = $no.".";
+            $row[] = $l->nip;
+            $row[] = $l->nama;
+            $row[] = $l->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan';
+            $row[] = $l->tempat_lahir;
+            $row[] = $l->tanggal_lahir;
+            $row[] = $l->email;
+            $row[] = $l->nomor_telepon;
+            // add html for action
+            $row[] = '<button class="btn btn-danger">Hapus</button>
+            <button class="btn btn-warning">Ubah</button>';
+            $data[] = $row;
         }
-
-        // $total_data = $this->totalDivisi();
-
-        $query = $this->db->query("SELECT COUNT(*) as num FROM tb_karyawan where id_divisi = '$idDivisi' and dihapus is null");
-        $result = $query->row();
-        if(isset($result)) { $total_data = $result->num; } else { $total_data = 0 ;}
-
         $output = array(
-            "draw" => $draw,
-            "recordsTotal" => $total_data,
-            "recordsFiltered" => $total_data,
-            "data" => $data
-        );
+                    "draw" => @$_POST['draw'],
+                    "recordsTotal" => $this->hrd_m->count_all(),
+                    "recordsFiltered" => $this->hrd_m->count_filtered(),
+                    "data" => $data,
+                );
+        // output to json format
         echo json_encode($output);
-        exit();
+
+        // $valid_columns = array(
+        //     0=>'nip',
+        //     1=>'nama',
+        //     2=>'jenis_kelamin',
+        //     3=>'tempat_lahir',
+        //     4=>'tanggal_lahir',
+        //     5=>'email',
+        //     6=>'nomor_telepon',
+
+        // );
+
+        // $post = $this->input->post(null, true);
+        // $this->serverSide($valid_columns, $post);
+
+        // $draw = intval($post["draw"]);
+        // $start = intval($post["start"]);
+        // $length = intval($post["length"]);
+
+        // $this->db->limit($length,$start);
+        // // nama table
+        
+        // $idDivisi = $post['idDivisi'];
+        // $employees = $this->db->query("SELECT * FROM tb_karyawan WHERE id_divisi = '$idDivisi' and dihapus is null");
+        // // $employees = $this->hrd_m->getKaryawan($idKaryawan = null, $idDivisi);
+        // $data = array();
+        // $no = 1;
+        // foreach($employees->result() as $rows)
+        // {
+        //     // render data
+        //     $data[]= array(
+        //         $no++,
+        //         $rows->nip,
+        //         $rows->nama,
+        //         $rows->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan',
+        //         $rows->tempat_lahir,
+        //         $rows->tanggal_lahir,
+        //         $rows->email,
+        //         $rows->nomor_telepon,
+        //         '<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('.$rows->id_karyawan.')">Hapus</button>
+        //         <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('.$rows->id_karyawan.')">Ubah</button>'
+        //     );     
+        // }
+
+        // // $total_data = $this->totalDivisi();
+
+        // $query = $this->db->query("SELECT COUNT(*) as num FROM tb_karyawan where id_divisi = '$idDivisi' and dihapus is null");
+        // $result = $query->row();
+        // if(isset($result)) { $total_data = $result->num; } else { $total_data = 0 ;}
+
+        // $output = array(
+        //     "draw" => $draw,
+        //     "recordsTotal" => $total_data,
+        //     "recordsFiltered" => $total_data,
+        //     "data" => $data
+        // );
+        // echo json_encode($output);
+        // exit();
     }
 
     public function getKaryawanById()
@@ -535,18 +570,7 @@ class HRD extends CI_Controller {
 
     public function getAbsensi()
     {
-        // $idKaryawan = $this->input->post('id_absensi', true);
-        // $model = $this->hrd_m->getKaryawan($idKaryawan)->result();
-        // if($this->db->affected_rows() > 0) {
-        //     $data = [
-        //         'res'  => 'true',
-        //         'data' => $model,
-        //     ];
-        //     echo json_encode($data);
-        // } else {
-        //     echo "false";
-        // }
-    
+        
     }
 
     public function absensi($idDivisi = null) 

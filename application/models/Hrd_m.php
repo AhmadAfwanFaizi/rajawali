@@ -41,6 +41,67 @@ class Hrd_m extends CI_model {
 
 // MODEL KARYAWAN ================================================================================================================
 
+
+   
+
+    var $column_order = array(null, 'nip', 'nama', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'email', 'nomor_telepon'); //set column field database for datatable orderable
+    var $column_search = array('nip', 'nama'); //set column field database for datatable searchable
+    var $order = array('nip' => 'asc'); // default order
+ 
+    private function _get_datatables_query() {
+        $this->db->select('*');
+        $this->db->from('tb_karyawan');
+        // $this->db->join('p_category', 'p_item.category_id = p_category.category_id');
+        // $this->db->join('p_unit', 'p_item.unit_id = p_unit.unit_id');
+        // $this->db->query("SELECT * from tb_karyawan where dihapus is not null");
+        $i = 0;
+        foreach ($this->column_search as $item) { // loop column
+            if(@$_POST['search']['value']) { // if datatable send POST for search
+                if($i===0) { // first loop
+                    $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+                    $this->getDatatablesKaryawan();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like($item, $_POST['search']['value']);
+                }
+                if(count($this->column_search) - 1 == $i) //last loop
+                    $this->db->group_end(); //close bracket
+            }
+            $i++;
+        }
+         
+        if(isset($_POST['order'])) { // here order processing
+            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        }  else if(isset($this->order)) {
+            $order = $this->order;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
+    function getDataTableKaryawan() {
+        $this->_get_datatables_query();
+        if(@$_POST['length'] != -1)
+        $this->db->limit(@$_POST['length'], @$_POST['start']);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function count_filtered() {
+        $this->_get_datatables_query();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+    function count_all() {
+        $this->db->from('tb_karyawan');
+        return $this->db->count_all_results();
+    }
+    // end datatables
+
+    public function getDatatablesKaryawan($idDivisi = null)
+    {
+        $this->datatables->select("id_karyawan, nip, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, email, nomor_telepon, dibuat")->from('tb_karyawan');
+        $this->datatables->where("dihapus IS NULL AND id_divisi = ", $idDivisi);
+        return $this->datatables->generate();
+    }
+
     public function getKaryawan($paramKaryawan = null, $paramDivisi = null)
     {
         if($paramKaryawan) {

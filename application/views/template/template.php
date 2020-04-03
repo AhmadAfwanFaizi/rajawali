@@ -400,6 +400,22 @@
 </div>
 <!-- ./wrapper -->
 
+<!-- MODAL ALERT -->
+
+
+<div class="modal fade alertModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document" style="margin: 4% 33%">
+    <div class="modal-content" style="border-radius: 3px; width: 500px; text-align: center;">
+      <div id="warnaAlert" class="alert alert-dismissible "> <!--  alert-success -->
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4><i id="iconAlert" class=""></i> <span id="judulAlert"></span></h4> <!-- icon fa fa-check -->
+        <div id="isiAlert"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- jQuery 3 -->
 <script src="<?= base_url('assets/') ?>bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -421,7 +437,48 @@
   $(document).ready(function () {
     $('.sidebar-menu').tree();
     $('#tableDivisi').dataTable();
-  })
+  });
+
+  function modalAlert(res, content)
+  {
+    var warnaAlert, iconAlert, judulAlert, isiAlert;
+    if(res == "success") {
+      warnaAlert = " alert-success";
+      iconAlert  = " icon fa fa-check";
+      judulAlert = "BERHASIL";
+      isiAlert   = content;
+    } else if(res == "danger") {
+      warnaAlert = " alert-danger";
+      iconAlert  = " icon fa fa-ban";
+      judulAlert = "PERHATIAN";
+      isiAlert   = content;
+    } else if(res == "warning") {
+      warnaAlert = " alert-warning";
+      iconAlert  = " icon fa fa-warning";
+      judulAlert = "PERHATIAN";
+      isiAlert   = content;
+    } else if(res == "info") {
+      warnaAlert = " alert-info";
+      iconAlert  = " icon fa fa-info";
+      judulAlert = "PEMBERITAHUAN";
+      isiAlert   = content;
+    } else {
+      warnaAlert = " alert-danger";
+      iconAlert  = " icon fa fa-ban";
+      judulAlert = "PERHATIAN";
+      isiAlert   = " PERHATIKAN PARAMETER SCRIPT";
+    }
+
+      $('#warnaAlert').addClass(warnaAlert);
+      $('#iconAlert').addClass(iconAlert);
+      $('#judulAlert').text(judulAlert);
+      $('#isiAlert').html(isiAlert);
+
+      $('.alertModal').modal('show');
+      setTimeout(function(){
+        $('.alertModal').modal('hide');
+      }, 2000)
+  }
 </script>
 </body>
 </html>

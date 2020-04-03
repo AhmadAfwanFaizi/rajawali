@@ -4,7 +4,7 @@
     <div class="box-header">
       <!-- <h3 class="box-title">Data Table With Full Features</h3> -->
       <button class="btn btn-primary" data-toggle="modal" data-target="#tambahKaryawanModal">Tambah</button>
-      <!-- <button data-toggle="modal" id="alert" >Alert</button> -->
+      <!-- <button data-toggle="modal" id="reload" >Reload</button> -->
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -22,8 +22,8 @@
           <th width="130px">Aksi</th>
         </tr>
         </thead>
-        <tbody>
-        </tbody>
+        <!-- <tbody>
+        </tbody> -->
       </table>
     </div>
   </div>
@@ -293,24 +293,51 @@
     $('#tableKaryawan').DataTable({
       "processing": true,
       "serverSide": true,
+      "searching": true,
       "ajax": {
-        url: "<?php echo base_url('HRD/getKaryawan') ?>",
-        type:'POST',
-        data: {'idDivisi' : "<?= $idDivisi ?>"},
+        "url": "<?= base_url('HRD/getDatatablesKaryawan') ?>",
+        "type":'POST',
+        "data" : {'idDivisi' : "<?= $idDivisi ?>"},
       },
-      "columnDefs" : [{
-        "targets" : 8,
-        "orderable" : false,
-      }]
-
+      "columns" : [
+        {'aadata' : 'id_karyawan'},
+        {'aadata' : 'nip'},
+        {'aadata' : 'nama'},
+        {'aadata' : 'jenis_kelamin'},
+        {'aadata' : 'tempat_lahir'},
+        {'aadata' : 'tanggal_lahir'},
+        {'aadata' : 'email'},
+        {'aadata' : 'nomor_telepon'},
+        {'aadata' : 'id_karyawan'},
+      ],
+      "rowCallback":function(row, data, displayNum){
+        console.log(displayNum);
+        var no = displayNum;
+						$("td:eq(0)",row).html(no+1);
+        if(data[3] == 'L') {
+          $("td:eq(3)",row).html("Laki-Laki");
+        } else {
+          $("td:eq(3)",row).html("Perempuan");
+        }
+        $("td:eq(8)",row).html('<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('+data[0]+')">Hapus</button> '+
+        '<button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('+data[0]+')">Ubah</button>');
+      }
     });
 
+// WAJIBE =========
+    reloadTable();
     resetForm();
+// =============
     tambahKaryawan();
     ubahKaryawan();
-    modalAlert();
    
   });
+
+  function reloadTable()
+  {
+      $('#tableKaryawan').DataTable().ajax.reload();
+
+  }
 
   function resetForm()
   {
@@ -456,7 +483,9 @@
                 $('.alamat_err').html('');
               }
             }else{
-              location.reload();
+              resetForm();
+              modalAlert('success', 'Data berhasil ditambah');
+              reloadTable();
             }
           }
         });
@@ -488,7 +517,7 @@
             $('#uEmail').val(data.email);
             $('#uAlamat').val(data.alamat);
           }else{
-            alert('kosong');
+            modalAlert('warning', 'Data tidak ditemukan');
           }
         }
       })
@@ -506,11 +535,10 @@
           dataType: "JSON",
           data    : data,
           success : function(res) {
-            console.log(res);
             if(res.res != 'true') {
               if (res.nik){
                 $('#uNik').addClass('err_border');
-                $('.nik_err').html(res.nik);
+                $('.uNik_err').html(res.nik);
               } else {
                 $('#uNik').removeClass('err_border');
                 $('.uNik_err').html('');
@@ -586,7 +614,10 @@
                 $('.uAlamat_err').html('');
               }
             }else{
-              location.reload();
+              $('#ubahKaryawanModal').modal('hide');
+              resetForm();
+              modalAlert('success', 'Data berhasil diubah');
+              reloadTable();
             }
           }
         });
@@ -603,25 +634,18 @@
         url    : "<?= base_url('HRD/hapusKaryawan') ?>",
         data   : {"id_karyawan" : param},
         success: function(res) {
-          location.reload();
+          if(res == 'true') {
+            modalAlert('success', 'Data berhasil dihapus');
+            reloadTable();
+          } else {
+            modalAlert('danger', 'Data gagal dihapus');
+            reloadTable();
+          }
         }
       });
 
     });
   }
-
-  function modalAlert()
-  {
-    $('#alert').click(function(){
-
-      $('.alertModal').modal('show');
-      setTimeout(function(){
-        $('.alertModal').modal('hide');
-      }, 2000)
-
-    })
-  }
-
 
 
 </script>
