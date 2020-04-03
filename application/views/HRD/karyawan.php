@@ -184,7 +184,7 @@
               <p class="err uJenisKelamin_err"></p>
             </div>
             <div class="form-group col-md-4 h-in">
-              <label for="uAgama">uAgama</label>
+              <label for="uAgama">Agama</label>
                 <select name="uAgama" id="uAgama" class="form-control">
                   <option value="" hidden>Pilih terlebih dahulu</option>
                   <option value="ISLAM">ISLAM</option>
@@ -227,7 +227,7 @@
               <p class="err uNomorTelepon_err"></p>
           </div>
           <div class="form-group col-md-6 h-in">
-              <label for="uEmail">uEmail</label>
+              <label for="uEmail">Email</label>
               <input type="text" class="form-control" id="uEmail" name="uEmail">
               <p class="err uEmail_err"></p>
           </div>
@@ -235,7 +235,7 @@
 
         <div class="form-row">
             <div class="form-group col-md-12 h-in">
-              <label for="uAlamat">uAlamat</label>
+              <label for="uAlamat"> Alamat</label>
               <textarea name="uAlamat" id="uAlamat" class="form-control" cols="" rows="3">
               
               </textarea>
@@ -274,26 +274,12 @@
   </div>
 </div>
 
-<div class="modal fade alertModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document" style="margin: 4% 33%">
-    <div class="modal-content" style="border-radius: 3px; width: 500px; text-align: center;">
-      <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4><i class="icon fa fa-check"></i> Alert!</h4>
-        Success alert preview. This alert is dismissable.
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <script>
   $(document).ready(function () {
 
     $('#tableKaryawan').DataTable({
       "processing": true,
       "serverSide": true,
-      "searching": true,
       "ajax": {
         "url": "<?= base_url('HRD/getDatatablesKaryawan') ?>",
         "type":'POST',
@@ -311,7 +297,7 @@
         {'aadata' : 'id_karyawan'},
       ],
       "rowCallback":function(row, data, displayNum){
-        console.log(displayNum);
+        // console.log(displayNum);
         var no = displayNum;
 						$("td:eq(0)",row).html(no+1);
         if(data[3] == 'L') {
@@ -617,7 +603,7 @@
               $('#ubahKaryawanModal').modal('hide');
               resetForm();
               modalAlert('success', 'Data berhasil diubah');
-              reloadTable();
+              // reloadTable();
             }
           }
         });
@@ -635,6 +621,7 @@
         data   : {"id_karyawan" : param},
         success: function(res) {
           if(res == 'true') {
+            $('.hapusModal').modal('hide');
             modalAlert('success', 'Data berhasil dihapus');
             reloadTable();
           } else {

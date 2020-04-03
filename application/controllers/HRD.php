@@ -576,12 +576,19 @@ class HRD extends CI_Controller {
     public function absensi($idDivisi = null) 
     {
         $data = [
-            'judul'    => 'data ',
+            'judul'    => 'data absensi',
             'subJudul' => $this->db->select('nama_divisi')->get_where('tb_divisi', ['id_divisi' => $idDivisi])->row()->nama_divisi,
-            'data'     => $this->hrd_m->getKaryawan($id = null, $idDivisi),
-            'idDivisi' => $idDivisi
+            'idDivisi' => $idDivisi,
+            // 'data' => 
         ];
-        $this->template->load('template/template','HRD/karyawan', $data);
+        $this->template->load('template/template','HRD/absensi', $data);
+    }
+
+    public function cobaAbsen()
+    {
+        echo waktu_sekarang();
+    //    $data = $this->db->query("SELECT count(nip) as nip from tb_absen")->result();
+    //    print_r($data);
     }
 
 // TUTUP CLASS

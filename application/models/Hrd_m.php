@@ -95,6 +95,7 @@ class Hrd_m extends CI_model {
     }
     // end datatables
 
+    //DATA TABLE UNTUK KARYAWAN
     public function getDatatablesKaryawan($idDivisi = null)
     {
         $this->datatables->select("id_karyawan, nip, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, email, nomor_telepon, dibuat")->from('tb_karyawan');
@@ -163,6 +164,21 @@ class Hrd_m extends CI_model {
     {
         $this->db->set('dihapus', waktu_sekarang())->where('id_karyawan', $idKaryawan)->update('tb_karyawan');
     }
+
+
+// MODEL ABSENSI ================================================================================================================
+
+    public function getAbsensi($idDivisi = null)
+    {
+        // $this->db->select("*");
+        // $this->db->from("tb_absensi A");
+        // $this->db->join("tb_karyawan K", "K.nip = A.nip");
+        // $this->db->where("K.dihapus IS NULL AND K.id_divisi =", $idDivisi);
+
+        $this->db->query("SELECT count(nip) as nip");
+    }
+
+
 
 // TUTUP CLASS
 }
