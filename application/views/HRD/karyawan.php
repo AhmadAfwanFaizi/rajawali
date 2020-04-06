@@ -281,33 +281,14 @@
       "processing": true,
       "serverSide": true,
       "ajax": {
-        "url": "<?= base_url('HRD/getDatatablesKaryawan') ?>",
+        "url": "<?= base_url('HRD/dataTableKaryawan') ?>",
         "type":'POST',
         "data" : {'idDivisi' : "<?= $idDivisi ?>"},
       },
-      "columns" : [
-        {'aadata' : 'id_karyawan'},
-        {'aadata' : 'nip'},
-        {'aadata' : 'nama'},
-        {'aadata' : 'jenis_kelamin'},
-        {'aadata' : 'tempat_lahir'},
-        {'aadata' : 'tanggal_lahir'},
-        {'aadata' : 'email'},
-        {'aadata' : 'nomor_telepon'},
-        {'aadata' : 'id_karyawan'},
-      ],
-      "rowCallback":function(row, data, displayNum){
-        // console.log(displayNum);
-        var no = displayNum;
-						$("td:eq(0)",row).html(no+1);
-        if(data[3] == 'L') {
-          $("td:eq(3)",row).html("Laki-Laki");
-        } else {
-          $("td:eq(3)",row).html("Perempuan");
-        }
-        $("td:eq(8)",row).html('<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('+data[0]+')">Hapus</button> '+
-        '<button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('+data[0]+')">Ubah</button>');
-      }
+      "columnDefs" : [{
+        "targets"   : [0, 8],
+        "orderable": false
+      }],
     });
 
 // WAJIBE =========

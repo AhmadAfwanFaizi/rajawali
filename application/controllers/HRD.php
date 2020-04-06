@@ -19,110 +19,33 @@ class HRD extends CI_Controller {
         $this->template->load('template/template', 'HRD/dashboard', $data);
     }
 
-    public function serverSide($valid_columns, $post){
-        // isi valid columns
-
-            // $valid_columns = array(
-            //     0=>'id_divisi',
-            //     1=>'nama_divisi',
-            // );
-        $order = $post["order"];
-        $search= $post["search"];
-        $search = $search['value'];
-        $col = 0;
-        $dir = "";
-        if(!empty($order))
-        {
-            foreach($order as $o)
-            {
-                $col = $o['column'];
-                $dir = $o['dir'];
-            }
-        }
-
-        if($dir != "asc" && $dir != "desc")
-        {
-            $dir = "desc";
-        }
-       
-        if(!isset($valid_columns[$col]))
-        {
-            $order = null;
-        }
-        else
-        {
-            $order = $valid_columns[$col];
-        }
-        if($order !=null)
-        {
-            $this->db->order_by($order, $dir);
-        }
-        
-        if(!empty($search))
-        {
-            $x=0;
-            foreach($valid_columns as $sterm)
-            {
-                if($x==0)
-                {
-                    $this->db->like($sterm,$search);
-                }
-                else
-                {
-                    $this->db->or_like($sterm,$search);
-                }
-                $x++;
-            }                 
-        }
+    function getSubmenu()
+    {
+        echo json_encode($this->db->get('tb_divisi')->result());
     }
 
 // CONTROLLER DIVISI =================================================================================================
-    public function getDivisi()
+    public function dataTableDivisi()
     {
-        $valid_columns = array(
-            0=>'id_divisi',
-            1=>'nama_divisi',
-        );
-        $post = $this->input->post(null, true);
-
-        $this->serverSide($valid_columns, $post);
-
-        $draw = intval($post["draw"]);
-        $start = intval($post["start"]);
-        $length = intval($post["length"]);
-
-        $this->db->limit($length,$start);
-        // nama table
-        $employees = $this->db->get("tb_divisi");
+        $list = $this->hrd_m->get_datatables_divisi();
         $data = array();
-        $no = 1;
-        foreach($employees->result() as $rows)
-        {
-            // render data
-            
-            $data[]= array(
-                // $rows->id_divisi,
-                $no++,
-                $rows->nama_divisi,
-                '<button type="button" class="btn btn-sm btn-danger mr-1" onclick="modalHapus('.$rows->id_divisi.')">Hapus</button>
-                 <button type="button" class="btn btn-sm btn-warning mr-1" data-toggle="modal" data-target="#ubahDivisiModal" onclick="modalUbahDivisi('.$rows->id_divisi.')">Uah</button>'
-            );     
+        $no = @$_POST['start'];
+        foreach ($list as $item) {
+            $no++;
+            $row = array();
+            $row[] = $no.".";
+            $row[] = $item->nama_divisi;
+            $row[] = '<button type="button" class="btn btn-sm btn-danger mr-1" onclick="modalHapus('.$item->id_divisi.')">Hapus</button>
+            <button type="button" class="btn btn-sm btn-warning mr-1" data-toggle="modal" data-target="#ubahDivisiModal" onclick="modalUbahDivisi('.$item->id_divisi.')">Uah</button>';
+            $data[] = $row;
         }
-
-        // $total_data = $this->totalDivisi();
-
-        $query = $this->db->select("COUNT(*) as num")->get("tb_divisi");
-        $result = $query->row();
-        if(isset($result)) { $total_data = $result->num; } else { $total_data = 0 ;}
-
         $output = array(
-            "draw" => $draw,
-            "recordsTotal" => $total_data,
-            "recordsFiltered" => $total_data,
-            "data" => $data
-        );
+                    "draw" => @$_POST['draw'],
+                    "recordsTotal" => $this->hrd_m->count_all_divisi(),
+                    "recordsFiltered" => $this->hrd_m->count_filtered_divisi(),
+                    "data" => $data,
+                );
         echo json_encode($output);
-        exit();
     }
 
 
@@ -220,10 +143,10 @@ class HRD extends CI_Controller {
         echo $data;
     }
 
-    public function getKaryawan()
+    public function dataTableKaryawan()
     {
-
-        $list = $this->hrd_m->getDataTableKaryawan();
+        $idDivisi = $this->input->post('idDivisi', true);
+        $list = $this->hrd_m->get_datatable_karyawan($idDivisi);
         $data = array();
         $no = @$_POST['start'];
         foreach ($list as $l) {
@@ -238,76 +161,17 @@ class HRD extends CI_Controller {
             $row[] = $l->email;
             $row[] = $l->nomor_telepon;
             // add html for action
-            $row[] = '<button class="btn btn-danger">Hapus</button>
-            <button class="btn btn-warning">Ubah</button>';
+            $row[] = '<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('.$l->id_karyawan.')">Hapus</button> <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('.$l->id_karyawan.')">Ubah</button>';
             $data[] = $row;
         }
         $output = array(
                     "draw" => @$_POST['draw'],
-                    "recordsTotal" => $this->hrd_m->count_all(),
-                    "recordsFiltered" => $this->hrd_m->count_filtered(),
+                    "recordsTotal" => $this->hrd_m->count_all_karyawan($idDivisi),
+                    "recordsFiltered" => $this->hrd_m->count_filtered_karyawan($idDivisi),
                     "data" => $data,
                 );
         // output to json format
         echo json_encode($output);
-
-        // $valid_columns = array(
-        //     0=>'nip',
-        //     1=>'nama',
-        //     2=>'jenis_kelamin',
-        //     3=>'tempat_lahir',
-        //     4=>'tanggal_lahir',
-        //     5=>'email',
-        //     6=>'nomor_telepon',
-
-        // );
-
-        // $post = $this->input->post(null, true);
-        // $this->serverSide($valid_columns, $post);
-
-        // $draw = intval($post["draw"]);
-        // $start = intval($post["start"]);
-        // $length = intval($post["length"]);
-
-        // $this->db->limit($length,$start);
-        // // nama table
-        
-        // $idDivisi = $post['idDivisi'];
-        // $employees = $this->db->query("SELECT * FROM tb_karyawan WHERE id_divisi = '$idDivisi' and dihapus is null");
-        // // $employees = $this->hrd_m->getKaryawan($idKaryawan = null, $idDivisi);
-        // $data = array();
-        // $no = 1;
-        // foreach($employees->result() as $rows)
-        // {
-        //     // render data
-        //     $data[]= array(
-        //         $no++,
-        //         $rows->nip,
-        //         $rows->nama,
-        //         $rows->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan',
-        //         $rows->tempat_lahir,
-        //         $rows->tanggal_lahir,
-        //         $rows->email,
-        //         $rows->nomor_telepon,
-        //         '<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('.$rows->id_karyawan.')">Hapus</button>
-        //         <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('.$rows->id_karyawan.')">Ubah</button>'
-        //     );     
-        // }
-
-        // // $total_data = $this->totalDivisi();
-
-        // $query = $this->db->query("SELECT COUNT(*) as num FROM tb_karyawan where id_divisi = '$idDivisi' and dihapus is null");
-        // $result = $query->row();
-        // if(isset($result)) { $total_data = $result->num; } else { $total_data = 0 ;}
-
-        // $output = array(
-        //     "draw" => $draw,
-        //     "recordsTotal" => $total_data,
-        //     "recordsFiltered" => $total_data,
-        //     "data" => $data
-        // );
-        // echo json_encode($output);
-        // exit();
     }
 
     public function getKaryawanById()

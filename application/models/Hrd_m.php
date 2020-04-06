@@ -4,6 +4,54 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Hrd_m extends CI_model {
 
 // MODEL DIVISI ================================================================================================================
+      
+    var $kolom_order_divisi  = array(null, 'nama_divisi', 'dibuat'); 
+    var $search_divisi = array('nama_divisi');
+    var $order_d       = array('nama_divisi' => 'asc');
+
+    private function _get_datatables_divisi() {
+        $this->db->select("*");
+        $this->db->from('tb_divisi');
+        $i = 0;
+        foreach ($this->search_divisi as $item) { 
+            if(@$_POST['search']['value']) {
+                if($i===0) {
+                    $this->db->group_start(); 
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like($item, $_POST['search']['value']);
+                }
+                if(count($this->search_divisi) - 1 == $i) 
+                    $this->db->group_end(); 
+            }
+            $i++;
+        }
+        
+        if(isset($_POST['order'])) {
+            $this->db->order_by($this->kolom_order_divisi[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        }  else if(isset($this->order_d)) {
+            $order_d = $this->order_d;
+            $this->db->order_by(key($order_d), $order_d[key($order_d)]);
+        }
+    }
+    function get_datatables_divisi() {
+        $this->_get_datatables_divisi();
+        if(@$_POST['length'] != -1)
+        $this->db->limit(@$_POST['length'], @$_POST['start']);
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function count_filtered_divisi() {
+        $this->_get_datatables_divisi();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+    function count_all_divisi() {
+        $this->db->from('tb_divisi');
+        return $this->db->count_all_results();
+    }
+
 
     public function getDivisi($idDivisi = null)
     {
@@ -38,15 +86,14 @@ class Hrd_m extends CI_model {
         $this->db->delete('tb_divisi', ['id_divisi' => $idDivisi]);
     }
 
-
 // MODEL KARYAWAN ================================================================================================================
 
 
    
 
-    var $column_order = array(null, 'nip', 'nama', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'email', 'nomor_telepon'); //set column field database for datatable orderable
-    var $column_search = array('nip', 'nama'); //set column field database for datatable searchable
-    var $order = array('nip' => 'asc'); // default order
+    var $column_order_karyawan = array(null, 'nip', 'nama', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'email', 'nomor_telepon'); //set column field database for datatable orderable
+    var $column_search_karyawna = array('nip', 'nama', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'email', 'nomor_telepon'); //set column field database for datatable searchable
+    var $order_karyawan = array('nip' => 'asc'); // default order
  
     private function _get_datatables_query() {
         $this->db->select('*');
@@ -55,53 +102,55 @@ class Hrd_m extends CI_model {
         // $this->db->join('p_unit', 'p_item.unit_id = p_unit.unit_id');
         // $this->db->query("SELECT * from tb_karyawan where dihapus is not null");
         $i = 0;
-        foreach ($this->column_search as $item) { // loop column
+        foreach ($this->column_search_karyawna as $item) { // loop column
             if(@$_POST['search']['value']) { // if datatable send POST for search
                 if($i===0) { // first loop
                     $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-                    $this->getDatatablesKaryawan();
                     $this->db->like($item, $_POST['search']['value']);
                 } else {
                     $this->db->or_like($item, $_POST['search']['value']);
                 }
-                if(count($this->column_search) - 1 == $i) //last loop
+                if(count($this->column_search_karyawna) - 1 == $i) //last loop
                     $this->db->group_end(); //close bracket
             }
             $i++;
         }
          
         if(isset($_POST['order'])) { // here order processing
-            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        }  else if(isset($this->order)) {
-            $order = $this->order;
-            $this->db->order_by(key($order), $order[key($order)]);
+            $this->db->order_by($this->column_order_karyawan[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        }  else if(isset($this->order_karyawan)) {
+            $order_karyawan = $this->order_karyawan;
+            $this->db->order_by(key($order_karyawan), $order_karyawan[key($order_karyawan)]);
         }
     }
-    function getDataTableKaryawan() {
+    function get_datatable_karyawan($idDivisi) {
         $this->_get_datatables_query();
         if(@$_POST['length'] != -1)
         $this->db->limit(@$_POST['length'], @$_POST['start']);
+        $this->db->where('dihapus IS NULL AND id_divisi =', $idDivisi);
         $query = $this->db->get();
         return $query->result();
     }
-    function count_filtered() {
+    function count_filtered_karyawan($idDivisi) {
         $this->_get_datatables_query();
+        $this->db->where('dihapus IS NULL AND id_divisi =', $idDivisi);
         $query = $this->db->get();
         return $query->num_rows();
     }
-    function count_all() {
+    function count_all_karyawan($idDivisi) {
         $this->db->from('tb_karyawan');
+        $this->db->where('dihapus IS NULL AND id_divisi =', $idDivisi);
         return $this->db->count_all_results();
     }
     // end datatables
 
-    //DATA TABLE UNTUK KARYAWAN
-    public function getDatatablesKaryawan($idDivisi = null)
-    {
-        $this->datatables->select("id_karyawan, nip, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, email, nomor_telepon, dibuat")->from('tb_karyawan');
-        $this->datatables->where("dihapus IS NULL AND id_divisi = ", $idDivisi);
-        return $this->datatables->generate();
-    }
+    // DATA TABLE UNTUK KARYAWAN
+    // public function getDatatablesKaryawan($idDivisi = null)
+    // {
+    //     $this->datatables->select("id_karyawan, nip, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, email, nomor_telepon, dibuat")->from('tb_karyawan');
+    //     $this->datatables->where("dihapus IS NULL AND id_divisi = ", $idDivisi);
+    //     return $this->datatables->generate();
+    // }
 
     public function getKaryawan($paramKaryawan = null, $paramDivisi = null)
     {

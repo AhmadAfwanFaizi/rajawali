@@ -122,7 +122,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">NAVIGASI</li>
-
+<!-- MENU HRD -->
         <li>
           <a href="<?= base_url('HRD/dashboard') ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -134,7 +134,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="#" id="subMenuKaryawan">
             <i class="fa fa-users"></i>
             <span>Karyawan</span>
             <span class="pull-right-container">
@@ -142,9 +142,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <?php $divisi = $this->db->select('id_divisi, nama_divisi')->get('tb_divisi'); foreach($divisi->result() as $d) { ?>
+            <!-- <?php $divisi = $this->db->select('id_divisi, nama_divisi')->get('tb_divisi'); foreach($divisi->result() as $d) { ?>
               <li><a href="<?= base_url('HRD/karyawan/'. $d->id_divisi) ?>"><i class="fa fa-circle-o"></i><?= $d->nama_divisi ?></a></li>
-            <?php } ?>
+            <?php } ?> -->
           </ul>
         </li>
         <li class="treeview">
@@ -160,6 +160,13 @@
               <li><a href="<?= base_url('HRD/absensi/'. $d->id_divisi) ?>"><i class="fa fa-circle-o"></i><?= $d->nama_divisi ?></a></li>
             <?php } ?>
           </ul>
+        </li>
+
+<!-- MENU KEPALA DIVISI -->
+      <li>
+          <a href="<?= base_url('kepala_divisi') ?>">
+            <i class="fa fa-table"></i> <span>Absen</span>
+          </a>
         </li>
 
       </ul>
@@ -432,12 +439,22 @@
 <!-- AdminLTE App -->
 <script src="<?= base_url('assets/') ?>dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<?= base_url('assets/') ?>dist/js/demo.js"></script>
+<scr src="<?= base_url('assets/') ?>dist/js/demo.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
     $('#tableDivisi').dataTable();
   });
+
+  $('#subMenuKaryawan').click(function(){
+    $.ajax({
+      url    : "<?= base_url('HRD/getSubmenu') ?>",
+      method : "POST",
+      success: function(res) {
+        
+      }
+    });
+  })
 
   function modalAlert(res, content)
   {

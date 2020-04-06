@@ -112,7 +112,7 @@
       "processing": true,
       "serverSide": true,
       "ajax": {
-        url: "<?php echo base_url('HRD/getDivisi') ?>",
+        url: "<?php echo base_url('HRD/dataTableDivisi') ?>",
         type:'POST',
       },
       "columnDefs" : [{
