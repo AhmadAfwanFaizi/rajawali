@@ -141,7 +141,7 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
+          <ul class="treeview-menu listSubMenu">
             <!-- <?php $divisi = $this->db->select('id_divisi, nama_divisi')->get('tb_divisi'); foreach($divisi->result() as $d) { ?>
               <li><a href="<?= base_url('HRD/karyawan/'. $d->id_divisi) ?>"><i class="fa fa-circle-o"></i><?= $d->nama_divisi ?></a></li>
             <?php } ?> -->
@@ -450,11 +450,18 @@
     $.ajax({
       url    : "<?= base_url('HRD/getSubmenu') ?>",
       method : "POST",
+      dataType: "JSON",
       success: function(res) {
-        
+        console.log(res.length);
+        var html = '';
+        var i;
+        for(i=0; i<res.length; i++){
+            html += '<li><a href="<?= base_url() ?>HRD/karyawan/'+res[i].id_divisi+'"><i class="fa fa-circle-o"></i>'+res[i].nama_divisi+'</a></li>';
+        }
+        $('.listSubMenu').html(html);
       }
     });
-  })
+  });
 
   function modalAlert(res, content)
   {

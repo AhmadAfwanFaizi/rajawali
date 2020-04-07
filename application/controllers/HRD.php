@@ -21,7 +21,8 @@ class HRD extends CI_Controller {
 
     function getSubmenu()
     {
-        echo json_encode($this->db->get('tb_divisi')->result());
+        $data = $this->db->get('tb_divisi')->result();
+        echo json_encode($data);
     }
 
 // CONTROLLER DIVISI =================================================================================================
@@ -136,6 +137,17 @@ class HRD extends CI_Controller {
 
 // CONTROLLER KARYAWAN =================================================================================================
 
+
+    public function karyawan($idDivisi = null) 
+    {
+        $data = [
+            'judul'    => 'data karyawan',
+            'subJudul' => $this->db->select('nama_divisi')->get_where('tb_divisi', ['id_divisi' => $idDivisi])->row()->nama_divisi,
+            'idDivisi' => $idDivisi
+        ];
+        $this->template->load('template/template','HRD/karyawan', $data);
+    }
+    
     public function getDatatablesKaryawan()
     {
         $idDivisi = $this->input->post('idDivisi', true);
@@ -187,16 +199,6 @@ class HRD extends CI_Controller {
         } else {
             echo "false";
         }
-    }
-
-    public function karyawan($idDivisi = null) 
-    {
-        $data = [
-            'judul'    => 'data karyawan',
-            'subJudul' => $this->db->select('nama_divisi')->get_where('tb_divisi', ['id_divisi' => $idDivisi])->row()->nama_divisi,
-            'idDivisi' => $idDivisi
-        ];
-        $this->template->load('template/template','HRD/karyawan', $data);
     }
 
     public function tambahKaryawan()
