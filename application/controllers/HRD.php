@@ -25,6 +25,12 @@ class HRD extends CI_Controller {
         echo json_encode($data);
     }
 
+    public function barcode($param)
+    {
+        $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+        return $generator->getBarcode($param, $generator::TYPE_CODE_128);
+    }
+
 // CONTROLLER DIVISI =================================================================================================
     public function dataTableDivisi()
     {
@@ -147,7 +153,7 @@ class HRD extends CI_Controller {
         ];
         $this->template->load('template/template','HRD/karyawan', $data);
     }
-    
+
     public function getDatatablesKaryawan()
     {
         $idDivisi = $this->input->post('idDivisi', true);
@@ -437,12 +443,7 @@ class HRD extends CI_Controller {
 
 // CONTROLLER ABSENSI =================================================================================================
 
-    public function getAbsensi()
-    {
-        
-    }
-
-    public function absensi($idDivisi = null) 
+    public function absen($idDivisi = null) 
     {
         $data = [
             'judul'    => 'data absensi',
@@ -450,15 +451,36 @@ class HRD extends CI_Controller {
             'idDivisi' => $idDivisi,
             // 'data' => 
         ];
-        $this->template->load('template/template','HRD/absensi', $data);
+        $this->template->load('template/template','HRD/data_absen', $data);
     }
 
-    public function cobaAbsen()
+    public function getDataAbsen()
     {
-        echo waktu_sekarang();
-    //    $data = $this->db->query("SELECT count(nip) as nip from tb_absen")->result();
-    //    print_r($data);
+        $id_divisi = $this->input->post('id_divisi', true);
+        $list      = $this->hrd_m->get_datatables_data_absen($id_divisi);
+        $data      = array();
+        $no        = @$_POST['start'];
+        foreach ($list as $item) {
+            $no++;
+            $row = array();
+            $row[] = $no.".";
+            $row[] = $item->nip;
+            $row[] = $item->nama;
+            $row[] = substr($item->dibuat, 0, 10);
+            $row[] = substr($item->dibuat, 11, 19);
+            $data[] = $row;
+        }
+        $output = array(
+                    "draw" => @$_POST['draw'],
+                    "recordsTotal" => $this->hrd_m->count_all_data_absen($id_divisi),
+                    "recordsFiltered" => $this->hrd_m->count_filtered_data_absen($id_divisi),
+                    "data" => $data,
+                );
+        echo json_encode($output);
     }
+
+    
+
 
 // TUTUP CLASS
 }

@@ -122,7 +122,7 @@
 
     });
 
-    reloadTable();
+    reloadTableDivisi();
     ButtonResetForm();
     resetForm();
     tambahDivisi();
@@ -130,7 +130,7 @@
     ubahDivisi();
   });
 
-  function reloadTable()
+  function reloadTableDivisi()
   {
     $('#tableDivisi').DataTable().ajax.reload();
   }
@@ -168,7 +168,7 @@
             }else{
               resetForm();
               modalAlert('success', 'Data berhasil ditambah!');
-              reloadTable();
+              reloadTableDivisi();
             }
            
           }
@@ -211,7 +211,7 @@
           } else {
             resetForm();
             modalAlert('success', 'Data berhasil diubah!');
-            reloadTable();
+            reloadTableDivisi();
           }
         }
       });
@@ -231,7 +231,7 @@
           if(res == 'true') {
             $('.hapusModal').modal('hide');
             modalAlert('success', 'Data berhasil dihapus!');
-            reloadTable();
+            reloadTableDivisi();
           }else{
             $('.hapusModal').modal('hide');
             modalAlert('warning', 'Data gagal dihapus!');

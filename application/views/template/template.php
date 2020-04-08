@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!-- data table css -->
   <link rel="stylesheet" href="<?= base_url('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.css') ?>">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<?= base_url('assets/') ?>bower_components/select2/dist/css/select2.min.css">
 <!-- jquery dipindah -->
   <script src="<?= base_url('assets/') ?>bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -141,31 +143,43 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu listSubMenu">
-            <!-- <?php $divisi = $this->db->select('id_divisi, nama_divisi')->get('tb_divisi'); foreach($divisi->result() as $d) { ?>
-              <li><a href="<?= base_url('HRD/karyawan/'. $d->id_divisi) ?>"><i class="fa fa-circle-o"></i><?= $d->nama_divisi ?></a></li>
-            <?php } ?> -->
+          <ul class="treeview-menu listSubMenuKaryawan">
           </ul>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="#" id="subMenuAbsen">
             <i class="fa fa-table"></i>
             <span>Absen</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <?php $divisi = $this->db->select('id_divisi, nama_divisi')->get('tb_divisi'); foreach($divisi->result() as $d) { ?>
+          <ul class="treeview-menu listSubMenuAbsen">
+            <!-- <?php $divisi = $this->db->select('id_divisi, nama_divisi')->get('tb_divisi'); foreach($divisi->result() as $d) { ?>
               <li><a href="<?= base_url('HRD/absensi/'. $d->id_divisi) ?>"><i class="fa fa-circle-o"></i><?= $d->nama_divisi ?></a></li>
-            <?php } ?>
+            <?php } ?> -->
           </ul>
         </li>
 
+<li class="header">KEPALA DIVISI</li>
 <!-- MENU KEPALA DIVISI -->
-      <li>
+
+        <li>
           <a href="<?= base_url('kepala_divisi') ?>">
             <i class="fa fa-table"></i> <span>Absen</span>
+          </a>
+        </li>
+        <li>
+          <a href="<?= base_url('kepala_divisi/dataAbsen') ?>">
+            <i class="fa fa-file-text"></i> <span>Data Absen</span>
+          </a>
+        </li>
+
+<li class="header">MONITOR</li>
+<!-- MENU MONITOR -->
+      <li>
+          <a href="<?= base_url('monitor') ?>">
+            <i class="fa fa-table"></i> <span>Monitor Absen</span>
           </a>
         </li>
 
@@ -407,9 +421,8 @@
 </div>
 <!-- ./wrapper -->
 
+
 <!-- MODAL ALERT -->
-
-
 <div class="modal fade alertModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document" style="margin: 4% 33%">
     <div class="modal-content" style="border-radius: 3px; width: 500px; text-align: center;">
@@ -440,13 +453,33 @@
 <script src="<?= base_url('assets/') ?>dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <scr src="<?= base_url('assets/') ?>dist/js/demo.js"></script>
+<!-- Select2 -->
+<script src="<?= base_url('assets/') ?>bower_components/select2/dist/js/select2.full.min.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
     $('#tableDivisi').dataTable();
+    
   });
 
-  $('#subMenuKaryawan').click(function(){
+// SUB MENU HRD
+  $('#subMenuKaryawan').mouseenter(function(){
+    $.ajax({
+      url    : "<?= base_url('HRD/getSubmenu') ?>",
+      method : "POST",
+      dataType: "JSON",
+      success: function(res) {
+        var html = '';
+        var i;
+        for(i=0; i<res.length; i++){
+            html += '<li><a href="<?= base_url() ?>HRD/karyawan/'+res[i].id_divisi+'"><i class="fa fa-circle-o"></i>'+res[i].nama_divisi+'</a></li>';
+        }
+        $('.listSubMenuKaryawan').html(html);
+      }
+    });
+  });
+
+  $('#subMenuAbsen').mouseenter(function(){
     $.ajax({
       url    : "<?= base_url('HRD/getSubmenu') ?>",
       method : "POST",
@@ -455,10 +488,10 @@
         console.log(res.length);
         var html = '';
         var i;
-        for(i=0; i<res.length; i++){
-            html += '<li><a href="<?= base_url() ?>HRD/karyawan/'+res[i].id_divisi+'"><i class="fa fa-circle-o"></i>'+res[i].nama_divisi+'</a></li>';
+        for(i=0; i< res.length; i++){
+            html += '<li><a href="<?= base_url() ?>HRD/absen/'+res[i].id_divisi+'"><i class="fa fa-circle-o"></i>'+res[i].nama_divisi+'</a></li>';
         }
-        $('.listSubMenu').html(html);
+        $('.listSubMenuAbsen').html(html);
       }
     });
   });

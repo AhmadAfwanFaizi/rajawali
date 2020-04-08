@@ -8,7 +8,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <table id="tableAbsenTempKepalaDivisi" class="table table-bordered table-striped table-hover">
+      <table id="tableDataAbsenKepalaDivisi" class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
           <th>#</th>
@@ -16,7 +16,6 @@
           <th>Nama</th>
           <th>Tanggal</th>
           <th>Waktu</th>
-          <th width="130px">Aksi</th>
         </tr>
         </thead>
         <tbody>
@@ -50,15 +49,15 @@
 
 <script>
 $(document).ready(function(){
-        $('#tableAbsenTempKepalaDivisi').DataTable({
+        $('#tableDataAbsenKepalaDivisi').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax": {
-                url: "<?php echo base_url('kepala_divisi/getAbsen') ?>",
+                url: "<?php echo base_url('kepala_divisi/getDataAbsen') ?>",
                 type:'POST',
             },
             "columnDefs" : [{
-                "targets" : [0, 5],
+                "targets" : [0],
                 "orderable" : false,
             }],
         });
@@ -69,7 +68,7 @@ $(document).ready(function(){
 
  function reloadTableAbsen()
   {
-    $('#tableAbsenTempKepalaDivisi').DataTable().ajax.reload();
+    $('#tableDataAbsenKepalaDivisi').DataTable().ajax.reload();
   }
 
   function absenMasuk(id)
