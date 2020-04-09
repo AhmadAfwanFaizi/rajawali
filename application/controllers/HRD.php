@@ -11,10 +11,24 @@ class HRD extends CI_Controller {
 
     public function dashboard()
     {
+        $tanggalSekarang = date("Y-m-d");
+        $totalKaryawan   = $this->db->select("COUNT(nip) as jumlah_karyawan")
+            ->from('tb_karyawan')
+            ->where('dihapus IS NULL')
+            ->get()->row();
+        $karyawanMasuk   = $this->db->select("COUNT(nip) as jumlah_karyawan_masuk")
+            ->from('tb_absen')
+            ->where("DATE_FORMAT(dibuat ,'%Y-%m-%d') = '$tanggalSekarang' AND status =", "MASUK")
+            ->get()->row();
+
+        // RUMUS (bagian / total) x 100;
+        $presentaseKaryawanMasuk = ($karyawanMasuk->jumlah_karyawan_masuk / $totalKaryawan->jumlah_karyawan) * 100;
+            
         $data = [
-            'judul'        => 'dashboard',
-            'menu_pegawai' => count($this->hrd_m->getKaryawan()->result()),
-            'menu_divisi'  => count($this->hrd_m->getDivisi()->result()),
+            'judul'          => 'dashboard',
+            'menu_pegawai'   => count($this->hrd_m->getKaryawan()->result()),
+            'menu_divisi'    => count($this->hrd_m->getDivisi()->result()),
+            'karyawan_masuk' => substr($presentaseKaryawanMasuk, 0, 4)
         ];
         $this->template->load('template/template', 'HRD/dashboard', $data);
     }
@@ -179,7 +193,7 @@ class HRD extends CI_Controller {
             $row[] = $l->email;
             $row[] = $l->nomor_telepon;
             // add html for action
-            $row[] = '<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('.$l->id_karyawan.')">Hapus</button> <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('.$l->id_karyawan.')">Ubah</button>';
+            $row[] = '<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('.$l->id_karyawan.')">Hapus</button> <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('.$l->id_karyawan.')">Ubah</button> <a href="'.base_url('HRD/kartu/'.$l->id_karyawan).'" class="btn btn-sm btn-info">Kartu</a>';
             $data[] = $row;
         }
         $output = array(
@@ -479,8 +493,24 @@ class HRD extends CI_Controller {
         echo json_encode($output);
     }
 
-    
+    public function kartu($idKaryawan = null)
+    {
+        $dataKaryawan = $this->hrd_m->getKaryawan($idKaryawan, $param = null)->row();
+        $data = [
+            'judul'   => 'kartu',
+            'data'    => $dataKaryawan,
+            'barcode' => $this->barcode($dataKaryawan->nip),
+        ];
+        // var_dump($dataKaryawan);
+        // die;
+        $this->template->load('template/template', 'HRD/kartu', $data);
+    }
 
+    public function coba()
+    {
+        $data = $this->hrd_m->getKaryawan(5, $param = null)->row();
+        echo $this->barcode($data->nip);
+    }
 
 // TUTUP CLASS
 }

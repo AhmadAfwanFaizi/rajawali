@@ -4,14 +4,14 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Responsive Hover Table</h3>
+              <h3 class="box-title">Barcode scann</h3>
 
                     <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
                         </div>
                     </div>
                     <div class="box-body table-responsive no-padding">
-                        <input type="text" id="inputScann" autofocus>
+                        <input type="text" class="form-control" id="inputScann" autofocus>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Responsive Hover Table</h3>
+              <h3 class="box-title">Data absen karyawan masuk</h3>
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -40,9 +40,6 @@
                     </tr>
               </thead>
               <tbody></tbody>
-              <tbody>
-
-              </tbody>
             </table>
             </div>
             <!-- /.box-body -->
@@ -69,24 +66,32 @@
                 if(res != 'false') {
 
                     $.ajax({
-                        url    : "<?= base_url('monitor/inputAbsen') ?>",
-                        type   : "POST",
-                        data   : {'nip' : nip},
-                        success: function(res) {
-                            if(res == 'true') {
-                                alert('masuk pak eko');
-
-                                
-
-                            } else if (res == 'ada') {
-                                alert('data sudah ada');
+                        url     : "<?= base_url('monitor/inputAbsen') ?>",
+                        type    : "POST",
+                        data    : {'nip' : nip},
+                        dataType:  "JSON",
+                        success : function(response) {
+                          console.log(response);
+                            if(response.res === 'ada') {
+                              modalAlert('warning', "Data sudah ada");
+                            } else if (response.res === 'true') {
+                              loadDataAbsenTemp();
+                              modalAlert('success', "<h1>Selamat datang <b>"+response.data.nama+"<b></h1>");
                             } else {
-                                alert('gagal pak eko');
+                              modalAlert('danger', "Data gagal di input");
                             }
+                            $('#inputScann').val('');
+                            setTimeout(function(){
+                              $('#inputScann').focus();
+                            }, 2000);
+                            
                         }
-                    })
+                    });
 
-                }
+                } 
+                // else {
+                //   modalAlert('danger', "Kode tidak terdaftar");
+                // }
             }
             });
     
@@ -101,22 +106,22 @@
     {
       $.ajax({
         url    : "<?= base_url('monitor/getDataAbsenTemp') ?>",
-        type   : "POST",
+        method   : "POST",
+        dataType: "JSON",
         success: function(res) {
           var html = '';
           var i;
-           console.log(res);
-          // for(i = 0; i < res.length; i++) {
-          //   html += '<tr>'+
-          //     '<td>'+nip[i]+'</td>'+
-          //     '<td>'+nama[i]+'</td>'+
-          //     '<td>'+waktu[i]+'</td>'+
-          //   '</tr>'
-          // }
+          for(i = 0; i < res.length; i++) {
+            html += '<tr>'+
+              '<td>'+res[i].nip+'</td>'+
+              '<td>'+res[i].nama+'</td>'+
+              '<td>'+res[i].waktu+'</td>'+
+            '</tr>';
+          }
           $('.dataMonitorAbsen > tbody').html(html);
-          console.log(html);
         }
       });
+
     }
 
     

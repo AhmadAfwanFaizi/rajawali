@@ -11,7 +11,7 @@ class Kepala_divisi_m extends CI_model {
     var $order_absen = array('A.nip' => 'asc'); // default order
  
     private function _get_datatables_query_absen() {
-        $this->db->select("A.*, K.nama, DATE_FORMAT('A.dibuat' ,'%Y-%m-%d') as tanggal_absen, TIME_FORMAT(A.dibuat, '%H:%i:%s') as waktu_absen");
+        $this->db->select("A.*, K.nama, DATE_FORMAT(A.dibuat,'%Y-%m-%d') as tanggal_absen, TIME_FORMAT(A.dibuat, '%H:%i:%s') as waktu_absen");
         $this->db->from('tb_absen A');
         $this->db->join('tb_karyawan K', 'K.nip = A.nip');
         $i = 0;
@@ -42,6 +42,7 @@ class Kepala_divisi_m extends CI_model {
         $this->db->limit(@$_POST['length'], @$_POST['start']);
         // where
         $this->db->where('status IS NULL');
+        $this->db->order_by('A.dibuat', 'DESC');
         $query = $this->db->get();
         return $query->result();
     }
@@ -75,7 +76,7 @@ class Kepala_divisi_m extends CI_model {
     var $where_data_absen         = "status IS NOT NULL";
 
     private function _get_datatables_query_data_absen() {
-    $this->db->select("A.*, K.nama, DATE_FORMAT('A.dibuat' ,'%Y-%m-%d') as tanggal_absen, TIME_FORMAT(A.dibuat, '%H:%i:%s') as waktu_absen");
+    $this->db->select("A.*, K.nama, DATE_FORMAT(A.dibuat, '%Y-%m-%d') as tanggal_absen, TIME_FORMAT(A.dibuat, '%H:%i:%s') as waktu_absen");
     $this->db->from('tb_absen A');
     $this->db->join('tb_karyawan K', 'K.nip = A.nip');
     $i = 0;

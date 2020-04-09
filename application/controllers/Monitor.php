@@ -6,7 +6,7 @@ class Monitor extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('hrd_m');
+        $this->load->model('monitor_m');
     }
 
     public function index()
@@ -33,30 +33,28 @@ class Monitor extends CI_Controller {
     public function inputAbsen()
     {
         $nip = $this->input->post('nip', true);
-        $tanggal_sekarang = date('Y-m-d');
-        $cek = $this->db->select('nip')->from('tb_absen')->where("DATE_FORMAT(dibuat, '%-Y-%m-%d') = $tanggal_sekarang AND nip =", $nip);
-
-        if($cek) {
-            echo 'ada';
+        $cek = $this->monitor_m->cekPraInputAbsen($nip)->row();
+        if($cek != null) {
+            echo json_encode(['res' => 'ada']);
         } else {
             $data = [
-                'nip' => $nip,
-            ];
+                        'nip' => $nip,
+                    ];
             $this->db->insert('tb_absen', $data);
             if($this->db->affected_rows() > 0) {
-                echo "true";
+                $namaKaryawan = $this->db->select('nama')->from('tb_karyawan')->where('nip', $nip)->get()->row();
+                echo json_encode(['res' => 'true', 'data' => $namaKaryawan]);
             } else {
-                echo "false";
+                echo json_encode(['res' => 'false']);
             }
         }
+
     }
 
     public function getDataAbsenTemp()
     {
-        $this->db->select("A.nip, nama, TIME_FORMAT(A.dibuat, '%H:%i:%s') as waktu");
-        $this->db->from('tb_absen A');
-        $this->db->join('tb_karyawan K', 'K.nip = A.nip');
-        echo json_encode($this->db->get()->result_array());
+        $data = $this->monitor_m->getDataAbsenTemp()->result();
+        echo json_encode($data);
     }
 
 // TUTUP CLASS
