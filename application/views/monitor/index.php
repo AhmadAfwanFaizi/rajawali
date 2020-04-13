@@ -71,10 +71,10 @@
                         data    : {'nip' : nip},
                         dataType:  "JSON",
                         success : function(response) {
-                          console.log(response);
-                            if(response.res === 'ada') {
+                          // console.log(response);
+                            if(response.res == 'ada') {
                               modalAlert('warning', "Data sudah ada");
-                            } else if (response.res === 'true') {
+                            } else if(response.res == 'true') {
                               loadDataAbsenTemp();
                               modalAlert('success', "<h1>Selamat datang <b>"+response.data.nama+"<b></h1>");
                             } else {

@@ -276,7 +276,17 @@ class Hrd_m extends CI_model {
         return $this->db->count_all_results();
     }
 
-
+    function getDataAbsen($param = null)
+    {
+        $this->db->select("A.nip as a_nip, nama, DATE_FORMAT(A.dibuat, '%Y-%m-%d') as tanggal, TIME_FORMAT(A.dibuat, '%H:%i:%s') as waktu")
+                    ->from('tb_absen A')
+                    ->join('tb_karyawan K', 'K.nip = A.nip');
+        if($param) {
+            $this->db->where("K.id_divisi", $param);
+        }
+        $this->db->order_by('A.dibuat', 'ASC');
+        return $this->db->get();
+    }
 
 // TUTUP CLASS
 }

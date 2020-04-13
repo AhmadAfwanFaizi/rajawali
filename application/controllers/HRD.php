@@ -463,14 +463,13 @@ class HRD extends CI_Controller {
             'judul'    => 'data absensi',
             'subJudul' => $this->db->select('nama_divisi')->get_where('tb_divisi', ['id_divisi' => $idDivisi])->row()->nama_divisi,
             'idDivisi' => $idDivisi,
-            // 'data' => 
         ];
         $this->template->load('template/template','HRD/data_absen', $data);
     }
 
     public function getDataAbsen()
     {
-        $id_divisi = $this->input->post('id_divisi', true);
+        $id_divisi = $this->input->post('idDivisi', true);
         $list      = $this->hrd_m->get_datatables_data_absen($id_divisi);
         $data      = array();
         $no        = @$_POST['start'];
@@ -506,11 +505,7 @@ class HRD extends CI_Controller {
         $this->template->load('template/template', 'HRD/kartu', $data);
     }
 
-    public function coba()
-    {
-        $data = $this->hrd_m->getKaryawan(5, $param = null)->row();
-        echo $this->barcode($data->nip);
-    }
+
 
 // TUTUP CLASS
 }
