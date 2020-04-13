@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 08, 2020 at 04:51 PM
+-- Generation Time: Apr 13, 2020 at 04:55 PM
 -- Server version: 5.7.29-0ubuntu0.16.04.1
 -- PHP Version: 7.1.32-1+ubuntu16.04.1+deb.sury.org+1
 
@@ -40,14 +40,9 @@ CREATE TABLE `tb_absen` (
 --
 
 INSERT INTO `tb_absen` (`id_absen`, `nip`, `status`, `keterangan`, `dibuat`, `diubah`) VALUES
-(1, '111', NULL, NULL, '2020-04-03 15:00:01', NULL),
-(2, '111', 'MASUK', '', '2020-04-03 15:00:01', NULL),
-(3, '222', 'ALPA', '', '2020-04-03 15:01:10', NULL),
-(4, '222', 'MASUK', '', '2020-04-03 15:01:10', NULL),
-(5, '333', 'ALPA', NULL, '2020-04-03 15:01:10', NULL),
-(6, '333', 'MASUK', '', '2020-04-03 15:01:10', NULL),
-(7, '111', NULL, NULL, '2020-04-08 15:17:52', NULL),
-(8, '111', NULL, NULL, '2020-04-08 15:19:52', NULL);
+(12, '111', NULL, NULL, '2020-04-13 15:15:59', NULL),
+(13, '222', NULL, NULL, '2020-04-13 15:19:00', NULL),
+(14, '333', 'MASUK', NULL, '2020-04-13 15:19:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -68,8 +63,8 @@ CREATE TABLE `tb_divisi` (
 --
 
 INSERT INTO `tb_divisi` (`id_divisi`, `nama_divisi`, `dibuat`, `diubah`, `dihapus`) VALUES
-(24, 'MARKETING', '2020-03-31 15:50:23', '2020-03-31 20:26:27', NULL),
-(25, 'PAJAK', '2020-03-31 15:50:56', '2020-03-31 20:26:30', NULL),
+(24, 'MARKETING', '2020-03-31 15:50:23', '2020-04-13 14:52:21', NULL),
+(25, 'PAJAK', '2020-03-31 15:50:56', '2020-04-13 14:53:01', NULL),
 (28, 'IT', '2020-04-03 14:13:33', '2020-04-03 14:43:35', NULL);
 
 -- --------------------------------------------------------
@@ -106,7 +101,7 @@ INSERT INTO `tb_karyawan` (`id_karyawan`, `nik`, `nip`, `nama`, `jenis_kelamin`,
 (3, '333', '333', 'aisyah wanita solekah', 'P', 'ISLAM', 'borneo', '2020-04-03', 'alamat', 'email@gm.com', 'nomorTelepon', 'PEGAWAI', '24', '2020-03-31 22:22:45', '2020-04-06 16:28:56', NULL),
 (4, '111', '111', 'ali', 'L', 'ISLAM', 'tangerang', '1997-11-23', 'bnz              \r\n              ', 'faiz@gmial.com', '098', 'KETUA_DIVISI', '25', '2020-03-31 22:29:02', NULL, NULL),
 (5, '222', '222', 'faiz', 'L', 'ISLAM', 'tangerang', '1997-11-23', 'banze              \r\n              ', 'ahmadafwanfaizi@gmail.com', '078', 'KETUA_DIVISI', '25', '2020-03-31 22:30:00', NULL, NULL),
-(6, 'aa', 'aa', 'aauu', 'L', 'ISLAM', 'asd', '2020-04-03', 'aa              \r\n              ', 'email@gm.com', '098', 'PEGAWAI', '26', '2020-04-02 08:29:05', '2020-04-02 09:17:45', NULL),
+(6, 'aa', 'aa', 'aauu', 'L', 'ISLAM', 'asd', '2020-04-03', 'aa              \r\n              ', 'email@gm.com', '098', 'PEGAWAI', '25', '2020-04-02 08:29:05', '2020-04-02 09:17:45', NULL),
 (12, '360', '270', 'yazid', 'L', 'ISLAM', 'tangerang', '1998-23-11', 'rajwg', 'yazid@gmail.com', '021', 'PEGAWAI', '26', '2020-03-31 18:41:46', NULL, NULL),
 (13, '444', '444', 'olay', 'L', 'ISLAM', 'tangerang', '2020-04-01', '              \r\n              bnz', 'olay@gamil.com', '09889', 'PEGAWAI', '28', '2020-04-03 16:14:31', NULL, NULL);
 
@@ -118,13 +113,20 @@ INSERT INTO `tb_karyawan` (`id_karyawan`, `nik`, `nip`, `nama`, `jenis_kelamin`,
 
 CREATE TABLE `tb_user` (
   `id_user` int(11) NOT NULL,
-  `nomor_karyawan` varchar(20) NOT NULL,
-  `username` varchar(50) NOT NULL,
+  `nip` varchar(30) NOT NULL,
   `password` varchar(50) NOT NULL,
   `gambar` varchar(50) NOT NULL,
+  `role` enum('GM','SV') NOT NULL,
   `dibuat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `diubah` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_user`
+--
+
+INSERT INTO `tb_user` (`id_user`, `nip`, `password`, `gambar`, `role`, `dibuat`, `diubah`) VALUES
+(1, '1234', '1234', 'default.jpg', 'GM', '2020-04-13 15:46:21', NULL);
 
 --
 -- Indexes for dumped tables
@@ -162,12 +164,12 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_absen`
 --
 ALTER TABLE `tb_absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tb_divisi`
 --
 ALTER TABLE `tb_divisi`
-  MODIFY `id_divisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_divisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `tb_karyawan`
 --
@@ -177,7 +179,7 @@ ALTER TABLE `tb_karyawan`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
