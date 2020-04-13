@@ -28,7 +28,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!-- data table css -->
-  <link rel="stylesheet" href="<?= base_url('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/bower_components/DataTables/datatables.min.css') ?>">
   <!-- Select2 -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>bower_components/select2/dist/css/select2.min.css">
 <!-- jquery dipindah -->
@@ -443,8 +443,8 @@
 <script src="<?= base_url('assets/') ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- data tables -->
-<script src="<?= base_url('assets/') ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?= base_url('assets/') ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- <script src="<?= base_url('assets/') ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script> -->
+<script src="<?= base_url('assets/') ?>bower_components/DataTables/datatables.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?= base_url('assets/') ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -498,10 +498,17 @@
 
   function modalAlert(res, content)
   {
+<<<<<<< HEAD
     $('#warnaAlert').attr('class', '');
     $('#iconAlert').attr('class', '');
     $('#judulAlert').text('');
     $('#isiAlert').html('');
+=======
+    $('#warnaAlert').removeClass('alert-success');
+    $('#warnaAlert').removeClass('alert-warning');
+    $('#warnaAlert').removeClass('alert-danger');
+    $('#warnaAlert').removeClass('alert-info');
+>>>>>>> 23777a166188963ce3b954c67a0ddf70758b1454
 
     var warnaAlert, iconAlert, judulAlert, isiAlert;
     if(res == "success") {
