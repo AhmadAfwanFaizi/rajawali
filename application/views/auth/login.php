@@ -35,21 +35,23 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Masuk untuk memulai sebuah sesi</p>
+    <p class="login-box-msg alertMsg">Masuk untuk memulai sebuah sesi</p>
 
-    <form action="<?= base_url('assets/') ?>index2.html" method="post">
+    <form action="" id="formLogin" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <input type="text" name="nip" id="nip" class="form-control" placeholder="NIP">
+        <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
+        <div class="nip_err">sf</div>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" name="password" id="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <div class="password_err"></div>
       </div>
       <div class="row">
         <hr>
         <div class="col-xs-12">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
+          <button type="button" id="btnLogin"  class="btn btn-primary btn-block btn-flat">Masuk</button>
         </div>
         <!-- /.col -->
       </div>
@@ -74,7 +76,32 @@
       radioClass: 'iradio_square-blue',
       increaseArea: '20%' /* optional */
     });
+
+    login();
   });
+
+  function login()
+  {
+    $('#btnLogin').click(function(){
+      var data     = $('#formLogins').serialize();
+
+        $.ajax({
+        url     : "<?= base_url('auth/login') ?>",
+        method  : "POST",
+        dataType: "JSON",
+        data    : data,
+        success : function(res) {
+          if(res.res == 'false') {
+            $('.alertMsg').css('color', 'red').text('')
+            $('#nip').parent('div').addClass('has-error');
+            $('#password').parent('div').addClass('has-error');
+            }
+          }
+        });
+
+    });
+  }
+
 </script>
 </body>
 </html>
