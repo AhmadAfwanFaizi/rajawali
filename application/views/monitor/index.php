@@ -71,7 +71,7 @@
                         data    : {'nip' : nip},
                         dataType:  "JSON",
                         success : function(response) {
-                          // console.log(response);
+                          console.log(response);
                             if(response.res == 'ada') {
                               modalAlert('warning', "Data sudah ada");
                             } else if(response.res == 'true') {
@@ -96,7 +96,6 @@
             });
     
         });
-    
 
 
 

@@ -18,6 +18,15 @@ class Monitor extends CI_Controller {
         $this->template->load('template/template', 'monitor/index', $data);
     }
 
+    public function monitor_absen()
+    {
+        $data = [
+            'judul' => 'monitor',
+            'data' => $this->db->get('tb_karyawan'),
+        ];
+        $this->load->view('monitor/full_screen', $data);
+    }
+
     public function getDataKaryawan()
     {
         $nip = $this->input->post('nip', true);
@@ -34,13 +43,14 @@ class Monitor extends CI_Controller {
     {
         $nip = $this->input->post('nip', true);
         $cek = $this->monitor_m->cekPraInputAbsen($nip)->row();
-        if($cek != null) {
+        if($cek != NULL) {
             echo json_encode(['res' => 'ada']);
         } else {
             $data = [
                         'nip' => $nip,
                     ];
             $this->db->insert('tb_absen', $data);
+
             if($this->db->affected_rows() > 0) {
                 $namaKaryawan = $this->db->select('nama')->from('tb_karyawan')->where('nip', $nip)->get()->row();
                 echo json_encode(['res' => 'true', 'data' => $namaKaryawan]);
