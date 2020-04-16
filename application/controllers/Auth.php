@@ -23,14 +23,17 @@ class Auth extends CI_Controller {
     {
         $this->form_validation->set_rules('nip', 'NIP', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
-        $this->form_validation->set_message('require', '{field} harus diisi');
+        // $this->form_validation->set_message('required', 'nip & password tidak boleh kosong');
 
-		if($this->form_validation->run() == false) {
-            $data = [
-                'res'      => 'false',
-                'nip'      => form_error('nip'),
-                'password' => form_error('password'),
-            ];
+		if($this->form_validation->run() == FALSE) {
+
+			$data = [
+				'res'  => 'false',
+				'nip'  => form_error('nip'),
+				'pass' => form_error('password'),
+				'msg' => 'nip & password tidak boleh kosong',
+			];
+			
             echo json_encode($data);
 		} else {
 			// validasi success
@@ -46,9 +49,9 @@ class Auth extends CI_Controller {
 		$pass  = $post['password'];
 		$login = $this->db->select('*')
                         ->from('tb_user')
-                        ->where("nip = '$nip' AND password =", '$pass')
-                        ->get()->row();
-
+                        ->where("nip = '$nip' AND password =", "$pass")
+						->get()->row();
+		
 		if($login) {
             echo json_encode(['res' => 'masuk']);
             die;

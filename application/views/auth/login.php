@@ -83,21 +83,33 @@
   function login()
   {
     $('#btnLogin').click(function(){
-      var data     = $('#formLogins').serialize();
+      var data     = $('#formLogin').serialize();
 
-        $.ajax({
+      $.ajax({
         url     : "<?= base_url('auth/login') ?>",
         method  : "POST",
         dataType: "JSON",
         data    : data,
         success : function(res) {
+          // console.log(res)
+          
           if(res.res == 'false') {
-            $('.alertMsg').css('color', 'red').text('')
-            $('#nip').parent('div').addClass('has-error');
-            $('#password').parent('div').addClass('has-error');
+
+            $('.alertMsg').css('color', 'red').text(res.msg);
+            if(res.nip) {
+              $('#nip').parent('div').addClass('has-error'); 
+            } else {
+              $('#nip').parent('div').removeClass('has-error'); 
+            }
+            if(res.pass) {
+              $('#password').parent('div').addClass('has-error');
+            } else {
+              $('#password').parent('div').removeClass('has-error');
             }
           }
-        });
+
+        }
+      });
 
     });
   }

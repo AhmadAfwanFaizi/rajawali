@@ -223,8 +223,6 @@ class HRD extends CI_Controller {
 
     public function tambahKaryawan()
     {
-        var_dump($_REQUEST);
-        die;
         $config = [
             [
                 'field' => 'nik',
@@ -315,6 +313,13 @@ class HRD extends CI_Controller {
                 echo json_encode(['res'=>'true']);
             }
         }
+    }
+
+    public function coba()
+    {
+        $param = "saya";
+        $h = str_replace('a', '', $param);
+        echo $h;
     }
 
 // UBAH DATA KARYAWAN

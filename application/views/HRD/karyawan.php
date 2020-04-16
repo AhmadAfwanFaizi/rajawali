@@ -45,17 +45,17 @@
             <input type="hidden" name="idDivisi" id="idDivisi" value="<?= $idDivisi ?>">
         <div class="form-row">
             <div class="form-group col-md-4 h-in">
-              <label for="nik">NIK</label>
+              <label for="nik">NIK*</label>
               <input type="text" class="form-control" id="nik" name="nik">
               <p class="err nik_err"></p>
             </div>
             <div class="form-group col-md-4 h-in">
-              <label for="nip">NIP</label>
+              <label for="nip">NIP*</label>
               <input type="text" class="form-control" id="nip" name="nip">
               <p class="err nip_err"></p>
             </div>
             <div class="form-group col-md-4 h-in">
-              <label for="nama">Nama</label>
+              <label for="nama">Nama*</label>
               <input type="text" class="form-control" id="nama" name="nama">
               <p class="err nama_err"></p>
             </div>
@@ -63,7 +63,7 @@
 
         <div class="form-row">
             <div class="form-group col-md-4 h-in">
-              <label for="jenisKelamin">Jenis Kelamin</label>
+              <label for="jenisKelamin">Jenis Kelamin*</label>
                 <select name="jenisKelamin" id="jenisKelamin" class="form-control">
                   <option value="" hidden>Pilih terlebih dahulu</option>
                   <option value="L">Laki-Laki</option>
@@ -72,7 +72,7 @@
               <p class="err jenisKelamin_err"></p>
             </div>
             <div class="form-group col-md-4 h-in">
-              <label for="agama">Agama</label>
+              <label for="agama">Agama*</label>
                 <select name="agama" id="agama" class="form-control">
                   <option value="" hidden>Pilih terlebih dahulu</option>
                   <option value="ISLAM">ISLAM</option>
@@ -85,19 +85,32 @@
               <p class="err agama_err"></p>
             </div>
             <div class="form-group col-md-4 h-in">
-              <label for="tempatLahir">Tempta Lahir</label>
+              <label for="tempatLahir">Tempta Lahir*</label>
               <input type="text" class="form-control" id="tempatLahir" name="tempatLahir">
               <p class="err tempatLahir_err"></p>
             </div>
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-6 h-in">
-              <label for="tanggalLahir">Tanggal Lahir</label>
+            <div class="form-group col-md-4 h-in">
+              <label for="tanggalLahir">Tanggal Lahir*</label>
               <input type="date" class="form-control" id="tanggalLahir" name="tanggalLahir">
               <p class="err tanggalLahir_err"></p>
             </div>
-            <div class="form-group col-md-6 h-in">
+          <div class="form-group col-md-4 h-in">
+              <label for="nomorTelepon">Nomor Telepon*</label>
+              <input type="text" class="form-control" id="nomorTelepon" name="nomorTelepon">
+              <p class="err nomorTelepon_err"></p>
+          </div>
+          <div class="form-group col-md-4 h-in">
+              <label for="email">Email*</label>
+              <input type="text" class="form-control" id="email" name="email">
+              <p class="err email_err"></p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6 h-in">
             <label for="jabatan">Jabatan</label>
                 <select name="jabatan" id="jabatan" class="form-control">
                   <option value="" hidden>Pilih terlebih dahulu</option>
@@ -106,24 +119,18 @@
                 </select>
               <p class="err jabatan_err"></p>
           </div>
-        </div>
-
-        <div class="form-row">
           <div class="form-group col-md-6 h-in">
-              <label for="nomorTelepon">Nomor Telepon</label>
-              <input type="text" class="form-control" id="nomorTelepon" name="nomorTelepon">
-              <p class="err nomorTelepon_err"></p>
-          </div>
-          <div class="form-group col-md-6 h-in">
-              <label for="email">Email</label>
-              <input type="text" class="form-control" id="email" name="email">
-              <p class="err email_err"></p>
+            <div class="hidden">
+              <label for="gambar">File input</label>
+              <input type="file" id="gambar" name="gambar">
+              <!-- <p class="help-block">Example block-level help text here.</p> -->
+            </div>
           </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-12 h-in">
-              <label for="alamat">Alamat</label>
+              <label for="alamat">Alamat*</label>
               <textarea name="alamat" id="alamat" class="form-control" cols="" rows="3">
               
               </textarea>
@@ -232,7 +239,6 @@
               <p class="err uEmail_err"></p>
           </div>
         </div>
-
         <div class="form-row">
             <div class="form-group col-md-12 h-in">
               <label for="uAlamat"> Alamat</label>
@@ -291,9 +297,20 @@
       }],
     });
 
+    $('#jabatan').change(function(){
+      var param = $('#jabatan').val();
+      if(param == "KETUA_DIVISI") {
+        $('#gambar').parent('div').removeClass('hidden');
+      } else {
+        $('#gambar').parent('div').addClass('hidden');
+      }
+    });
+
+
 // WAJIBE =========
     reloadTable();
     resetForm();
+    resetFormClick();
 // =============
     tambahKaryawan();
     ubahKaryawan();
@@ -306,10 +323,15 @@
 
   }
 
-  function resetForm()
+  function resetFormClick()
   {
     $('[data-dismiss]').click(function(){
+      resetForm();
+    });
+  }
 
+  function resetForm()
+  {
       $('.formTambahKaryawan').trigger('reset');
       $('#nik').removeClass('err_border');
       $('.nik_err').html('');
@@ -357,7 +379,6 @@
       $('.uEmail_err').html('');
       $('#uAlamat').removeClass('err_border');
       $('.uAlamat_err').html('');
-    })
   }
 
   function tambahKaryawan()
@@ -371,6 +392,7 @@
           dataType: "JSON",
           data    : data,
           success : function(res) {
+
             if(res.res != 'true') {
               if (res.nik){
                 $('#nik').addClass('err_border');
@@ -451,13 +473,15 @@
               }
             }else{
               resetForm();
-              modalAlert('success', 'Data berhasil ditambah');
               reloadTable();
+              modalAlert('success', 'Data berhasil ditambah');
+              
             }
           }
         });
     });
   }
+
 
   function ubahKaryawanModal(param)
   {
@@ -581,10 +605,11 @@
                 $('.uAlamat_err').html('');
               }
             }else{
+              // resetForm();
+              reloadTable();
               $('#ubahKaryawanModal').modal('hide');
-              resetForm();
               modalAlert('success', 'Data berhasil diubah');
-              // reloadTable();
+              
             }
           }
         });

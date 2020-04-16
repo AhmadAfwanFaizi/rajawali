@@ -187,11 +187,15 @@ class Hrd_m extends CI_model {
         ];
         $this->db->insert('tb_karyawan', $data);
 
-        // BARCODE
-        $barcode = [
-            'nip'    => htmlspecialchars($post['nip']),
-        ];
-        $this->db->insert('tb_barcode', $barcode);
+        if($post['jabatan'] == 'KETUA_DIVISI') {
+            $dataUser = [
+                'nip'      => $post['nip'],
+                'password' => str_replace('-', '', $post['tanggalLahir']),
+                'role'     => 'SV',
+            ];
+            $this->db->insert('tb_user', $dataUser);
+        }
+
     }
 
     public function ubahKaryawan($post)
