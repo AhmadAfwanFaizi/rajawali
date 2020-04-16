@@ -28,8 +28,11 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!-- data table css -->
-  <!-- <link rel="stylesheet" href="<?= base_url('assets/bower_components/DataTables/datatables.min.css') ?>"> -->
-  <link rel="stylesheet" href="<?=base_url('assets/')?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <?php if($this->uri->segment(1) == 'HRD' && $this->uri->segment(2) == 'absen') { ?>
+    <link rel="stylesheet" href="<?= base_url('assets/bower_components/DataTables/datatables.min.css') ?>">
+  <?php } else { ?>
+    <link rel="stylesheet" href="<?=base_url('assets/')?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <?php } ?>
   <!-- Select2 -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>bower_components/select2/dist/css/select2.min.css">
 <!-- jquery dipindah -->
@@ -75,7 +78,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?= base_url('assets/') ?>dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs"><?= $this->session->userdata('username')?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -83,14 +86,14 @@
                 <img src="<?= base_url('assets/') ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                  <?= $this->session->userdata('username')?> - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?= base_url('auth/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -116,7 +119,7 @@
           <img src="<?= base_url('assets/') ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p><?= $this->session->userdata('username'); ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -125,7 +128,9 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">NAVIGASI</li>
-<!-- MENU HRD -->
+        <li class="header">GM</li>
+<!-- MENU GM -->
+<?php //if($this->session->userdata('role') == 'GM') { ?>
         <li>
           <a href="<?= base_url('HRD/dashboard') ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -147,7 +152,7 @@
           <ul class="treeview-menu listSubMenuKaryawan">
           </ul>
         </li>
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#" id="subMenuAbsen">
             <i class="fa fa-table"></i>
             <span>Absen</span>
@@ -156,14 +161,18 @@
             </span>
           </a>
           <ul class="treeview-menu listSubMenuAbsen">
-            <!-- <?php $divisi = $this->db->select('id_divisi, nama_divisi')->get('tb_divisi'); foreach($divisi->result() as $d) { ?>
               <li><a href="<?= base_url('HRD/absensi/'. $d->id_divisi) ?>"><i class="fa fa-circle-o"></i><?= $d->nama_divisi ?></a></li>
-            <?php } ?> -->
           </ul>
+        </li> -->
+        <li>
+          <a href="<?= base_url('HRD/absen') ?>">
+            <i class="fa fa-table"></i> <span>Absensi</span>
+          </a>
         </li>
 
-<li class="header">KEPALA DIVISI</li>
-<!-- MENU KEPALA DIVISI -->
+<!-- MENU SV -->
+<li class="header">SV</li>
+<?php //} else if($this->session->userdata('role') == 'SV') {?>
 
         <li>
           <a href="<?= base_url('kepala_divisi') ?>">
@@ -175,9 +184,11 @@
             <i class="fa fa-file-text"></i> <span>Data Absen</span>
           </a>
         </li>
+<?php //} ?>
 
 <li class="header">MONITOR</li>
 <!-- MENU MONITOR -->
+
       <li>
           <a href="<?= base_url('monitor') ?>">
             <i class="fa fa-table"></i> <span>Monitor Absen</span>
@@ -444,11 +455,14 @@
 <script src="<?= base_url('assets/') ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- data tables -->
-<!-- <script src="<?= base_url('assets/') ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script> -->
-<!-- <script src="<?= base_url('assets/') ?>bower_components/DataTables/datatables.min.js"></script> -->
+<?php if($this->uri->segment(1) == 'HRD' && $this->uri->segment(2) == 'absen') { ?>
+  <script src="<?= base_url('assets/') ?>bower_components/DataTables/datatables.min.js"></script>
 
+<?php } else { ?>
 <script src="<?= base_url('assets/') ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?= base_url('assets/') ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<?php } ?>
 
 <!-- SlimScroll -->
 <script src="<?= base_url('assets/') ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>

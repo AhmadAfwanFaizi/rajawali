@@ -13,13 +13,13 @@ class HRD extends CI_Controller {
     {
         $tanggalSekarang = date("Y-m-d");
         $totalKaryawan   = $this->db->select("COUNT(nip) as jumlah_karyawan")
-            ->from('tb_karyawan')
-            ->where('dihapus IS NULL')
-            ->get()->row();
+                            ->from('tb_karyawan')
+                            ->where('dihapus IS NULL')
+                            ->get()->row();
         $karyawanMasuk   = $this->db->select("COUNT(nip) as jumlah_karyawan_masuk")
-            ->from('tb_absen')
-            ->where("DATE_FORMAT(dibuat ,'%Y-%m-%d') = '$tanggalSekarang' AND status =", "MASUK")
-            ->get()->row();
+                            ->from('tb_absen')
+                            ->where("DATE_FORMAT(dibuat ,'%Y-%m-%d') = '$tanggalSekarang' AND status =", "MASUK")
+                            ->get()->row();
 
         // RUMUS (bagian / total) x 100;
         $presentaseKaryawanMasuk = ($karyawanMasuk->jumlah_karyawan_masuk / $totalKaryawan->jumlah_karyawan) * 100;
@@ -308,18 +308,13 @@ class HRD extends CI_Controller {
 // TAMBAH DATA KARYAWAN
 
             $post = $this->input->post(null, TRUE);
-            $this->hrd_m->tambahKaryawan($post);
+
+            $a = $this->hrd_m->tambahKaryawan($post);
+
             if($this->db->affected_rows() > 0) {
                 echo json_encode(['res'=>'true']);
             }
         }
-    }
-
-    public function coba()
-    {
-        $param = "saya";
-        $h = str_replace('a', '', $param);
-        echo $h;
     }
 
 // UBAH DATA KARYAWAN
@@ -462,14 +457,14 @@ class HRD extends CI_Controller {
 
 // CONTROLLER ABSENSI =================================================================================================
 
-    public function absen($idDivisi = null) 
+    public function absen() 
     {
         $data = [
             'judul'    => 'data absensi',
-            'subJudul' => $this->db->select('nama_divisi')->get_where('tb_divisi', ['id_divisi' => $idDivisi])->row()->nama_divisi,
-            'idDivisi' => $idDivisi,
+            // 'subJudul' => 'absen',
         ];
         $this->template->load('template/template','HRD/data_absen', $data);
+        
     }
 
     public function getDataAbsen()

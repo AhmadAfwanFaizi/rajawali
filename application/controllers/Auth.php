@@ -15,8 +15,8 @@ class Auth extends CI_Controller {
 		// } elseif ($this->session->userdata('user_role') == 'SISWA') {
 		// 	redirect('user/dashboard');
 		// }
-
-        $this->load->view('auth/login');
+		var_dump($_SESSION);
+		$this->load->view('auth/login');
     }
     
     public function login()
@@ -51,15 +51,29 @@ class Auth extends CI_Controller {
                         ->from('tb_user')
                         ->where("nip = '$nip' AND password =", "$pass")
 						->get()->row();
-		
+		$nama = $this->db->select('nama')->from('tb_karyawan')->where('nip', $nip)->get()->row();
+
 		if($login) {
-            echo json_encode(['res' => 'masuk']);
-            die;
             $data = [
-                'nip'  => $nip,
-                'role' => $login->role,
-            ];
+                'nip'      => $nip,
+                'role'     => $login->role,
+                'username' => $nama->nama,
+			];
+
 			$this->session->set_userdata($data);
+
+			if($data['role'] == 'GM') {
+				$red = 'HRD/dashboard';
+			}else if($data['role'] == 'SV') {
+				$red = 'Kepala_divisi';
+			}
+
+			echo json_encode([
+                'res'      => 'true',
+                'msg'      => 'true',
+                'redirect' => $red,
+            ]);
+
         } else {
             echo json_encode([
                 'res' => 'false',
@@ -70,9 +84,10 @@ class Auth extends CI_Controller {
 
 	public function logout()
 	{
-		$this->session->unset_userdata('user_id');
-		$this->session->unset_userdata('user_role');
-		notif('S', 'Kamu berhasil keluar');
+		$this->session->unset_userdata('nip');
+		$this->session->unset_userdata('role');
+		$this->session->unset_userdata('nama');
+		// notif('S', 'Kamu berhasil keluar');
 		redirect('auth');
 	}
 

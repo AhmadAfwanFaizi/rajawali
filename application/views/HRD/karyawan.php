@@ -140,7 +140,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-          <button type="button" class="btn btn-primary tambahKaryawan">Simpan</button>
+          <button type="button" class="btn btn-primary" onclick="tambahKaryawan()">Simpan</button>
         </div>
         
       </form>
@@ -312,7 +312,6 @@
     resetForm();
     resetFormClick();
 // =============
-    tambahKaryawan();
     ubahKaryawan();
    
   });
@@ -383,7 +382,6 @@
 
   function tambahKaryawan()
   {
-    $('.tambahKaryawan').click(function(){
       var data = $('.formTambahKaryawan').serialize();
 
         $.ajax({
@@ -479,7 +477,6 @@
             }
           }
         });
-    });
   }
 
 

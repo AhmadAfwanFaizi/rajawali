@@ -41,7 +41,7 @@
       <div class="form-group has-feedback">
         <input type="text" name="nip" id="nip" class="form-control" placeholder="NIP">
         <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
-        <div class="nip_err">sf</div>
+        <div class="nip_err"></div>
       </div>
       <div class="form-group has-feedback">
         <input type="password" name="password" id="password" class="form-control" placeholder="Password">
@@ -91,13 +91,14 @@
         dataType: "JSON",
         data    : data,
         success : function(res) {
-          // console.log(res)
+          console.log(res)
           
           if(res.res == 'false') {
 
             $('.alertMsg').css('color', 'red').text(res.msg);
+
             if(res.nip) {
-              $('#nip').parent('div').addClass('has-error'); 
+              $('#nip').parent('div').addClass('has-error');
             } else {
               $('#nip').parent('div').removeClass('has-error'); 
             }
@@ -106,6 +107,10 @@
             } else {
               $('#password').parent('div').removeClass('has-error');
             }
+
+            $('#password').val('');
+          } else {
+            location=res.redirect;
           }
 
         }

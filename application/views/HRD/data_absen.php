@@ -29,7 +29,7 @@ $(document).ready(function(){
       "ajax": {
         "url": "<?= base_url('HRD/getDataAbsen') ?>",
         "type":'POST',
-        "data" : {'idDivisi' : "<?= $idDivisi ?>"},
+        // "data" : {'idDivisi' : "<?php //$idDivisi ?>"},
       },
       "columnDefs" : [{
         "targets"   : [0],

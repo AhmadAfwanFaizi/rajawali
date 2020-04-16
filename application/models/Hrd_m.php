@@ -169,6 +169,22 @@ class Hrd_m extends CI_model {
 
     public function tambahKaryawan($post)
     {
+        if($post['jabatan'] == 'KETUA_DIVISI') {
+            $tanggalLahir = str_replace('-', '', $post['tanggalLahir']);
+            $tanggal = substr($tanggalLahir , 6, 2);
+            $bulan   = substr($tanggalLahir , 5, 2);
+            $tahun   = substr($tanggalLahir , 0, 4);
+            $hasil   = $tanggal.$bulan.$tahun;
+
+            $dataUser     = [
+                'nip'      => $post['nip'],
+                'password' => $hasil,
+                'gambar'   => 'default.jpg',
+                'role'     => 'SV',
+            ];
+            $this->db->insert('tb_user', $dataUser);
+        }
+
         $data = [
             'nik'           => htmlspecialchars($post['nik']),
             'nip'           => htmlspecialchars($post['nip']),
@@ -186,15 +202,6 @@ class Hrd_m extends CI_model {
             
         ];
         $this->db->insert('tb_karyawan', $data);
-
-        if($post['jabatan'] == 'KETUA_DIVISI') {
-            $dataUser = [
-                'nip'      => $post['nip'],
-                'password' => str_replace('-', '', $post['tanggalLahir']),
-                'role'     => 'SV',
-            ];
-            $this->db->insert('tb_user', $dataUser);
-        }
 
     }
 
@@ -258,25 +265,25 @@ class Hrd_m extends CI_model {
             $this->db->order_by(key($order_data_absen), $order_data_absen[key($order_data_absen)]);
         }
     }
-    function get_datatables_data_absen($id_divisi) {
+    function get_datatables_data_absen($id_divisi = null) {
         $this->_get_datatables_query_data_absen();
         if(@$_POST['length'] != -1)
         $this->db->limit(@$_POST['length'], @$_POST['start']);
         // where
-        $this->db->where("status IS NOT NULL AND K.id_divisi = ", $id_divisi);
+        // $this->db->where("status IS NOT NULL AND K.id_divisi = ", $id_divisi);
         $query = $this->db->get();
         return $query->result();
     }
-    function count_filtered_data_absen($id_divisi) {
+    function count_filtered_data_absen($id_divisi = null) {
         $this->_get_datatables_query_data_absen();
-        $this->db->where("status IS NOT NULL AND K.id_divisi = ", $id_divisi);
+        // $this->db->where("status IS NOT NULL AND K.id_divisi = ", $id_divisi);
         $query = $this->db->get();
         return $query->num_rows();
     }
-    function count_all_data_absen($id_divisi) {
+    function count_all_data_absen($id_divisi = null) {
         $this->db->from('tb_absen A');
         $this->db->join('tb_karyawan K', 'K.nip = A.nip');
-        $this->db->where("A.status IS NOT NULL AND K.id_divisi = ", $id_divisi);
+        // $this->db->where("A.status IS NOT NULL AND K.id_divisi = ", $id_divisi);
         return $this->db->count_all_results();
     }
 
