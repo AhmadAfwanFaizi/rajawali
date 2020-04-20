@@ -484,7 +484,7 @@
 // SUB MENU HRD
   $('#subMenuKaryawan').mouseenter(function(){
     $.ajax({
-      url    : "<?= base_url('HRD/getSubmenu') ?>",
+      url    : "<?= base_url('HRD/getDivisi') ?>",
       method : "POST",
       dataType: "JSON",
       success: function(res) {
@@ -500,7 +500,7 @@
 
   $('#subMenuAbsen').mouseenter(function(){
     $.ajax({
-      url    : "<?= base_url('HRD/getSubmenu') ?>",
+      url    : "<?= base_url('HRD/getDivisi') ?>",
       method : "POST",
       dataType: "JSON",
       success: function(res) {

@@ -33,7 +33,7 @@ class HRD extends CI_Controller {
         $this->template->load('template/template', 'HRD/dashboard', $data);
     }
 
-    function getSubmenu()
+    function getDivisi()
     {
         $data = $this->db->get('tb_divisi')->result();
         echo json_encode($data);
@@ -460,8 +460,8 @@ class HRD extends CI_Controller {
     public function absen() 
     {
         $data = [
-            'judul'    => 'data absensi',
-            // 'subJudul' => 'absen',
+            'judul'  => 'data absensi',
+            'divisi' => $this->db->get('tb_divisi'),
         ];
         $this->template->load('template/template','HRD/data_absen', $data);
         
@@ -469,27 +469,68 @@ class HRD extends CI_Controller {
 
     public function getDataAbsen()
     {
-        $id_divisi = $this->input->post('idDivisi', true);
-        $list      = $this->hrd_m->get_datatables_data_absen($id_divisi);
-        $data      = array();
-        $no        = @$_POST['start'];
-        foreach ($list as $item) {
-            $no++;
-            $row = array();
-            $row[] = $no.".";
-            $row[] = $item->nip;
-            $row[] = $item->nama;
-            $row[] = substr($item->dibuat, 0, 10);
-            $row[] = substr($item->dibuat, 11, 19);
-            $data[] = $row;
-        }
-        $output = array(
-                    "draw" => @$_POST['draw'],
-                    "recordsTotal" => $this->hrd_m->count_all_data_absen($id_divisi),
-                    "recordsFiltered" => $this->hrd_m->count_filtered_data_absen($id_divisi),
-                    "data" => $data,
-                );
-        echo json_encode($output);
+            $post = $this->input->post(null, true);
+            $data = [
+                'tanggalMulai'    => $post['tanggalMulai'],
+                'tanggalBerakhir' => $post['tanggalBerakhir'],
+                'idDivisi'        => $post['idDivisi'],
+            ];
+            var_dump($data);
+            // die;
+            $list = $this->hrd_m->get_datatables_data_absen();
+            $data = array();
+            $no   = @$_POST['start'];
+            foreach ($list as $item) {
+                $no++;
+                $row = array();
+                $row[] = $no.".";
+                $row[] = $item->nip;
+                $row[] = $item->nama;
+                $row[] = substr($item->dibuat, 0, 10);
+                $row[] = substr($item->dibuat, 11, 19);
+                $data[] = $row;
+            }
+            $output = array(
+                        "draw" => @$_POST['draw'],
+                        "recordsTotal" => $this->hrd_m->count_all_data_absen(),
+                        "recordsFiltered" => $this->hrd_m->count_filtered_data_absen(),
+                        "data" => $data,
+                    );
+            echo json_encode($output);
+    }
+
+    public function dataAbsenBiasa()
+    {
+        // $this->form_validation->set_rules('tanggalMulai', 'Tanggal mulai', 'required');
+        // $this->form_validation->set_rules('tanggalBerakhir', 'Tanggal Berakhir', 'required');
+        // $this->form_validation->set_rules('idDivisi', 'Divisi', 'required');
+
+        // $this->form_validation->set_message('required', '{field} Tidak boleh kosong');
+
+        // if($this->form_validation->run() == false) {
+        //     $data = [
+        //         'tanggalMulai'    => form_error('tanggalMulai'),
+        //         'tanggalBerakhir' => form_error('tanggalBerakhir'),
+        //         'idDivisi'        => form_error('idDivisi'),
+        //     ];
+
+        //     echo json_encode($data);
+        // } else {
+
+        // }
+        
+        $post            = $this->input->post(null, true);
+        $idDivisi        = $post['idDivisi'];
+        $tanggalMulai    = $post['tanggalMulai'];
+        $tanggalBerakhir = $post['tanggalBerakhir'];
+        
+        $data = $this->db->select('*')
+                    ->from('tb_absen A')
+                    ->join('tb_karyawan K', 'K.nip = A.nip')
+                    ->where("DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN  '$tanggalMulai' AND '$tanggalBerakhir' AND K.id_divisi =", "$idDivisi")
+                    ->get()->result();
+
+        var_dump($data);
     }
 
     public function kartu($idKaryawan = null)
