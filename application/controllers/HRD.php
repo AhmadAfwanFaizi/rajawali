@@ -330,6 +330,10 @@ class HRD extends CI_Controller {
 // UBAH DATA KARYAWAN
     public function ubahKaryawan()
     {
+        // var_dump($_POST);
+        // echo json_encode(['res'=>'true', 'uNip' => $_POST['uNip']]);
+        // die;
+
         $config = [
             [
                 'field' => 'uNik',
@@ -416,10 +420,13 @@ class HRD extends CI_Controller {
         } else {
         // UBAH DATA KARYAWAN
             $post = $this->input->post(null, TRUE);
-
+        
+            if($post['gambarLama'] != "Default.jpg") {
+                unlink("./assets/img/".$post['gambarLama']);
+            }
             $this->hrd_m->ubahKaryawan($post);
             if($this->db->affected_rows() > 0) {
-                echo json_encode(['res'=>'true']);
+                echo json_encode(['res'=>'true', 'uNip' => $post['uNip']]);
             }
         }
     }
@@ -460,7 +467,7 @@ class HRD extends CI_Controller {
 
         $file = $this->db->select('gambar')
                         ->from('tb_karyawan')
-                        ->where('id_karyawan', 22)
+                        ->where('id_karyawan', $id)
                         ->get()->row();
         
         if($file->gambar != "Default.jpg") {
@@ -478,6 +485,8 @@ class HRD extends CI_Controller {
 
     function uploadGambar()
     {
+        // var_dump($_FILES['gambarBaru']);
+        // die;
         $config['upload_path']   = "./assets/img"; 
         $config['allowed_types'] = 'gif|jpg|png';  
         $config['max_size']      = '1024';
@@ -486,6 +495,26 @@ class HRD extends CI_Controller {
         $this->load->library('upload',$config); 
 
         if ( ! $this->upload->do_upload('gambar')){
+            $error = array('error' => $this->upload->display_errors());
+            echo json_encode(['res' => 'false', 'msg' => $error]);
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+            echo json_encode(['res' => 'true', 'msg' => $data]);
+        }
+    }
+
+    function ubahGambar()
+    {
+        // var_dump($_FILES['gambarBaru']);
+        // die;
+        $config['upload_path']   = "./assets/img"; 
+        $config['allowed_types'] = 'gif|jpg|png';  
+        $config['max_size']      = '1024';
+        $config['file_name']     = $this->input->post('namaGambar', true);
+         
+        $this->load->library('upload',$config); 
+
+        if ( ! $this->upload->do_upload('gambarBaru')){
             $error = array('error' => $this->upload->display_errors());
             echo json_encode(['res' => 'false', 'msg' => $error]);
         } else {

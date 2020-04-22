@@ -179,7 +179,6 @@ class Hrd_m extends CI_model {
             $dataUser     = [
                 'nip'      => $post['nip'],
                 'password' => $hasil,
-                'gambar'   => 'default.jpg',
                 'role'     => 'SV',
             ];
             $this->db->insert('tb_user', $dataUser);
@@ -209,6 +208,7 @@ class Hrd_m extends CI_model {
 
     public function ubahKaryawan($post)
     {
+        $ext = substr($post['gambarBaru'], -4);
         $data = [
             'nik'           => htmlspecialchars($post['uNik']),
             'nip'           => htmlspecialchars($post['uNip']),
@@ -222,6 +222,7 @@ class Hrd_m extends CI_model {
             'nomor_telepon' => htmlspecialchars($post['uNomorTelepon']),
             'jabatan'       => htmlspecialchars($post['uJabatan']),
             'id_divisi'     => htmlspecialchars($post['uIdDivisi']),
+            'gambar'        => $post['gambarBaru'] ? $post['uNip'].$ext : $post['gambarLama'],
             'diubah'        => waktu_sekarang()
             
         ];

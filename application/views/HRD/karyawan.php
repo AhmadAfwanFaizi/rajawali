@@ -32,7 +32,7 @@
 
 <!-- MODAL TAMBAH -->
 <div class="modal fade bd-example-modal-lg" id="tambahKaryawanModal" tabindex="-1" role="dialog" aria-labelledby="tambahKaryawanModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <form action="" method="post" class="formTambahKaryawan">
         <div class="modal-header">
@@ -123,7 +123,6 @@
             <div class="">
               <label for="gambar">File input</label>
               <input type="file" id="gambar" name="gambar">
-              <!-- <p class="help-block">Example block-level help text here.</p> -->
             </div>
           </div>
         </div>
@@ -211,12 +210,25 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-6 h-in">
+            <div class="form-group col-md-4 h-in">
               <label for="uTanggalLahir">Tanggal Lahir</label>
               <input type="date" class="form-control" id="uTanggalLahir" name="uTanggalLahir">
               <p class="err uTanggalLahir_err"></p>
             </div>
-            <div class="form-group col-md-6 h-in">
+            <div class="form-group col-md-4 h-in">
+              <label for="uNomorTelepon">Nomor Telepon</label>
+              <input type="text" class="form-control" id="uNomorTelepon" name="uNomorTelepon">
+              <p class="err uNomorTelepon_err"></p>
+          </div>
+          <div class="form-group col-md-4 h-in">
+              <label for="uEmail">Email</label>
+              <input type="text" class="form-control" id="uEmail" name="uEmail">
+              <p class="err uEmail_err"></p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6 h-in">
             <label for="uJabatan">Jabatan</label>
                 <select name="uJabatan" id="uJabatan" class="form-control">
                   <option value="" hidden>Pilih terlebih dahulu</option>
@@ -224,20 +236,21 @@
                   <option value="KETUA_DIVISI">KETUA DIVISI</option>
                 </select>
               <p class="err uJabatan_err"></p>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6 h-in">
-              <label for="uNomorTelepon">Nomor Telepon</label>
-              <input type="text" class="form-control" id="uNomorTelepon" name="uNomorTelepon">
-              <p class="err uNomorTelepon_err"></p>
-          </div>
-          <div class="form-group col-md-6 h-in">
-              <label for="uEmail">Email</label>
-              <input type="text" class="form-control" id="uEmail" name="uEmail">
-              <p class="err uEmail_err"></p>
-          </div>
+            </div>
+            <div class="form-group col-md-6 h-in">
+              <div class="form-row">
+                <div class="col-md-3">
+                  <img id="tampilUbahGambar" alt="" width="90px" height="auto">
+                </div>
+                <div class="col-md-3">
+                  <div class="float-right">
+                    <label for="gambar">File input</label>
+                    <input type="hidden" id="gambarLama">
+                    <input type="file" id="uGambar" name="uGambar">
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-12 h-in">
@@ -478,7 +491,7 @@
                 formData.append("gambar", $("#gambar")[0].files[0]);
                 formData.append("namaGambar", res.nip);
                 
-                console.log(formData);
+                // console.log(formData);
 
                 $.ajax({
                   type : "POST",
@@ -488,7 +501,7 @@
                   dataType : "JSON",
                   data : formData,
                   success : function(response){
-                    console.log(response);
+                    // console.log(response);
                   }
                 });
 
@@ -496,8 +509,8 @@
 
               resetForm();
               reloadTable();
-              $('#tambahKaryawanModal').modal('show');
               modalAlert('success', 'Data berhasil ditambah');
+              $('#tambahKaryawanModal').modal('hide');
               
             }
           }
@@ -514,6 +527,7 @@
         dataType: "JSON",
         data    : {'id_karyawan' : param},
         success : function(res) {
+          
           if(res.res == 'true') {
             var data = res.data[0];
             $('#uIdKaryawan').val(data.id_karyawan);
@@ -529,6 +543,9 @@
             $('#uNomorTelepon').val(data.nomor_telepon);
             $('#uEmail').val(data.email);
             $('#uAlamat').val(data.alamat);
+
+            $('#gambarLama').val(data.gambar);
+            $('#tampilUbahGambar').attr('src', "<?= base_url('assets/img/') ?>" + data.gambar);
           }else{
             modalAlert('warning', 'Data tidak ditemukan');
           }
@@ -540,7 +557,9 @@
   function ubahKaryawan()
   {
     $('.ubahKaryawan').click(function(){
-      var data = $('.formUbahKaryawan').serialize();
+      var gambarLama = $('#gambarLama').val();
+      var gambarBaru = $('#uGambar').val().replace(/.*(\/|\\)/, '');
+      var data = $('.formUbahKaryawan').serialize() + "&gambarLama="+gambarLama+"&gambarBaru="+gambarBaru;
 
         $.ajax({
           method  : "POST",
@@ -548,6 +567,9 @@
           dataType: "JSON",
           data    : data,
           success : function(res) {
+            
+            console.log(res);
+
             if(res.res != 'true') {
               if (res.nik){
                 $('#uNik').addClass('err_border');
@@ -627,8 +649,31 @@
                 $('.uAlamat_err').html('');
               }
             }else{
-              // resetForm();
+              
+              if(gambarBaru != "") {
+
+                var formData = new FormData();
+                formData.append("gambarBaru", $("#uGambar")[0].files[0]);
+                formData.append("namaGambar", res.uNip);
+
+                console.log(formData);
+
+                $.ajax({
+                  type : "POST",
+                  url : "<?php echo base_url(); ?>HRD/ubahGambar",
+                  contentType : false,
+                  processData : false,
+                  dataType : "JSON",
+                  data : formData,
+                  success : function(response){
+                    console.log(response);
+                  }
+                });
+
+              }
+              $('#tampilUbahGambar').removeAttr('src');
               reloadTable();
+              $('#uGambar').val('');
               $('#ubahKaryawanModal').modal('hide');
               modalAlert('success', 'Data berhasil diubah');
               
