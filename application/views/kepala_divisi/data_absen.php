@@ -2,9 +2,28 @@
 
   <div class="box">
     <div class="box-header">
-      <!-- <h3 class="box-title">Data Table With Full Features</h3> -->
-      <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#tambahDivisiModal">Tambah</button> -->
-      <!-- <button onclick="reloadTableAbsen()">reload</button> -->
+      <form action="" method="post" id="formAbsen">
+          <div class="form-row">
+            <div class="form-group col-sm-3">
+              <input type="date" class="form-control" name="tanggalMulai" id="tanggalMulai" required>
+            </div>
+            <div class="form-group col-sm-3">
+              <input type="date" class="form-control" name="tanggalBerakhir" id="tanggalBerakhir" required>
+            </div>
+            <div class="form-group col-sm-3">
+              <select name="idDivisi" class="form-control" id="idDivisi" required>
+                <option value="" hidden>Pilih Divisi</option>
+                <?php foreach($divisi->result() as $d) { ?>
+                  <option value="<?= $d->id_divisi ?>"><?= $d->nama_divisi ?></option>
+                <?php } ?>
+              </select>
+            </div>
+            <div class="form-group col-sm-3">
+              <button type="button" class="btn btn-secondary pilihAbsen">Pilih</button>
+            </div>
+          </div>
+          
+        </form>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -49,61 +68,39 @@
 
 <script>
 $(document).ready(function(){
-        $('#tableDataAbsenKepalaDivisi').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax": {
-                url: "<?php echo base_url('kepala_divisi/getDataAbsen') ?>",
-                type:'POST',
-            },
-            "columnDefs" : [{
-                "targets" : [0],
-                "orderable" : false,
-            }],
-        });
 
-  reloadTableAbsen()
-
+  tampilDataAbsen();
 });
 
- function reloadTableAbsen()
+  function tampilDataAbsen()
   {
-    $('#tableDataAbsenKepalaDivisi').DataTable().ajax.reload();
+    $('.pilihAbsen').click(function(){
+
+        var tanggalMulai    = $('#tanggalMulai').val();
+        var tanggalBerakhir = $('#tanggalBerakhir').val();
+        var idDivisi        = $('#idDivisi  ').val();
+        // console.log(tanggalMulai);
+
+        $('#tableDataAbsenKepalaDivisi').dataTable().fnDestroy();
+        $('#tableDataAbsenKepalaDivisi').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+            "url" : "<?= base_url('kepala_divisi/getDataAbsen') ?>",
+            "type": 'POST',
+            "data": {
+              'tanggalMulai'   : tanggalMulai,
+              'tanggalBerakhir': tanggalBerakhir,
+              'idDivisi'       : idDivisi,
+            },
+          },
+          "columnDefs" : [{
+            "targets"  : [0],
+            "orderable": false
+          }],
+        });
+
+        });
   }
-
-  function absenMasuk(id)
-    {
-      $.ajax({
-        url    : "<?= base_url('kepala_divisi/koreksiAbsen') ?>",
-        method : "POST",
-        data   : {'id' : id, 'res' : 'MASUK'},
-        success: function(res) {
-          if(res == 'true') {
-            reloadTableAbsen()
-            modalAlert('success', 'Berhaisl!');
-          }
-        }
-      });
-    }
-
-    function absenOpsi(id)
-    {
-      $('#opsiModal').modal('show');
-    }
-
-    function absenAlpa(id)
-    {
-      $.ajax({
-        url    : "<?= base_url('kepala_divisi/koreksiAbsen') ?>",
-        method : "POST",
-        data   : {'id' : id, 'res' : 'ALPA'},
-        success: function(res) {
-          if(res == 'true') {
-            reloadTableAbsen()
-            modalAlert('success', 'Berhaisl!');
-          }
-        }
-      });
-    }
 
 </script>

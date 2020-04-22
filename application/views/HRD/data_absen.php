@@ -1,7 +1,7 @@
 <section class="content">
   <div class="box">
     <div class="box-header">
-      <form action="<?= base_url('HRD/dataAbsenBiasa') ?>" method="post" id="formAbsen">
+      <form action="" method="post" id="formAbsen">
         <div class="form-row">
           <div class="form-group col-sm-3">
             <input type="date" class="form-control" name="tanggalMulai" id="tanggalMulai" required>
@@ -18,7 +18,7 @@
             </select>
           </div>
           <div class="form-group col-sm-3">
-            <button type="submit" class="btn btn-secondary pilihAbsen">Pilih</button>
+            <button type="button" class="btn btn-secondary pilihAbsen">Pilih</button>
           </div>
         </div>
         
@@ -26,7 +26,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <table id="tableDataAbsenKepalaDivisi" class="table table-bordered table-striped table-hover">
+      <table id="tableDataAbsenGM" class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
           <th>#</th>
@@ -46,40 +46,42 @@
 <script>
 $(document).ready(function(){
 
-  // $('.pilihAbsen').click(function(){
+  $('.pilihAbsen').click(function(){
 
-  //   var tanggalMulai   = $('#tanggalMulai').val();
-  //   var tanggaBerakhir = $('#tanggaBerakhir').val();
-  //   var idDivisi       = $('#idDivisi').val();
-  //   // console.log(data);
+    var tanggalMulai    = $('#tanggalMulai').val();
+    var tanggalBerakhir = $('#tanggalBerakhir').val();
+    var idDivisi        = $('#idDivisi').val();
+    // console.log(tanggalMulai);
     
-  //   $('#tableDataAbsenKepalaDivisi').DataTable({
-  //     "processing": true,
-  //     "serverSide": true,
-  //     "ajax": {
-  //       "url" : "<?= base_url('HRD/getDataAbsen/') ?>",
-  //       "type": 'POST',
-  //       "data": {
-  //         'tanggalMulai'   : tanggalMulai,
-  //         'tanggalBerakhir': tanggalBerakhir,
-  //         'idDivisi'       : idDivisi,
-  //       },
-  //     },
-  //     "columnDefs" : [{
-  //       "targets"  : [0],
-  //       "orderable": false
-  //     }],
-  //     dom: 'Bfrtip',
-  //     buttons: [
-  //           {
-  //             extend: 'print',
-  //             messageTop: 'Print data absensi karyawan'
-  //           }
-  //       ]
-  //   });  
-  //   $('.buttons-print').addClass('btn btn-primary');
+    $('#tableDataAbsenGM').dataTable().fnDestroy();
+    $('#tableDataAbsenGM').DataTable({
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        "url" : "<?= base_url('HRD/getDataAbsen') ?>",
+        "type": 'POST',
+        "data": {
+          'tanggalMulai'   : tanggalMulai,
+          'tanggalBerakhir': tanggalBerakhir,
+          'idDivisi'       : idDivisi,
+        },
+      },
+      "columnDefs" : [{
+        "targets"  : [0],
+        "orderable": false
+      }],
+      dom: 'Bfrtip',
+      buttons: [
+            {
+              extend: 'print',
+              messageTop: 'Print data absensi karyawan'
+            }
+        ]
+    });  
 
-  // });
+    $('.buttons-print').addClass('btn btn-primary');
+
+  });
 
 });
 </script>

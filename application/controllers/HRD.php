@@ -470,14 +470,15 @@ class HRD extends CI_Controller {
     public function getDataAbsen()
     {
             $post = $this->input->post(null, true);
-            $data = [
+            $param = [
                 'tanggalMulai'    => $post['tanggalMulai'],
                 'tanggalBerakhir' => $post['tanggalBerakhir'],
                 'idDivisi'        => $post['idDivisi'],
             ];
-            var_dump($data);
+
+            // var_dump($data);
             // die;
-            $list = $this->hrd_m->get_datatables_data_absen();
+            $list = $this->hrd_m->get_datatables_data_absen($param);
             $data = array();
             $no   = @$_POST['start'];
             foreach ($list as $item) {
@@ -492,8 +493,8 @@ class HRD extends CI_Controller {
             }
             $output = array(
                         "draw" => @$_POST['draw'],
-                        "recordsTotal" => $this->hrd_m->count_all_data_absen(),
-                        "recordsFiltered" => $this->hrd_m->count_filtered_data_absen(),
+                        "recordsTotal" => $this->hrd_m->count_all_data_absen($param),
+                        "recordsFiltered" => $this->hrd_m->count_filtered_data_absen($param),
                         "data" => $data,
                     );
             echo json_encode($output);

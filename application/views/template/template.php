@@ -152,21 +152,9 @@
           <ul class="treeview-menu listSubMenuKaryawan">
           </ul>
         </li>
-        <!-- <li class="treeview">
-          <a href="#" id="subMenuAbsen">
-            <i class="fa fa-table"></i>
-            <span>Absen</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu listSubMenuAbsen">
-              <li><a href="<?= base_url('HRD/absensi/'. $d->id_divisi) ?>"><i class="fa fa-circle-o"></i><?= $d->nama_divisi ?></a></li>
-          </ul>
-        </li> -->
         <li>
           <a href="<?= base_url('HRD/absen') ?>">
-            <i class="fa fa-table"></i> <span>Absensi</span>
+            <i class="fa fa-file-text"></i> <span>Data absensi</span>
           </a>
         </li>
 

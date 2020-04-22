@@ -73,7 +73,6 @@ class Kepala_divisi_m extends CI_model {
     var $column_order_data_absen  = array(null, 'A.nip', 'nama', 'tanggal_absen', 'waktu_absen');
     var $column_search_data_absen = array('A.nip','nama', 'A.dibuat');
     var $order_data_absen         = array('A.nip' => 'asc');
-    var $where_data_absen         = "status IS NOT NULL";
 
     private function _get_datatables_query_data_absen() {
     $this->db->select("A.*, K.nama, DATE_FORMAT(A.dibuat, '%Y-%m-%d') as tanggal_absen, TIME_FORMAT(A.dibuat, '%H:%i:%s') as waktu_absen");
@@ -101,24 +100,28 @@ class Kepala_divisi_m extends CI_model {
             $this->db->order_by(key($order_data_absen), $order_data_absen[key($order_data_absen)]);
         }
     }
-    function get_datatables_data_absen() {
+    function get_datatables_data_absen($param) {
         $this->_get_datatables_query_data_absen();
         if(@$_POST['length'] != -1)
         $this->db->limit(@$_POST['length'], @$_POST['start']);
         // where
-        $this->db->where($this->where_data_absen);
+        $this->db->where("A.status IS NOT NULL AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$param[tanggalMulai]' AND '$param[tanggalBerakhir]' AND K.id_divisi = ", $param['idDivisi']);
+
         $query = $this->db->get();
         return $query->result();
     }
-    function count_filtered_data_absen() {
+    function count_filtered_data_absen($param) {
         $this->_get_datatables_query_data_absen();
-        $this->db->where($this->where_data_absen);
+        $this->db->where("A.status IS NOT NULL AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$param[tanggalMulai]' AND '$param[tanggalBerakhir]' AND K.id_divisi = ", $param['idDivisi']);
+
         $query = $this->db->get();
         return $query->num_rows();
     }
-    function count_all_data_absen() {
-        $this->db->from('tb_absen');
-        $this->db->where($this->where_data_absen);
+    function count_all_data_absen($param) {
+        $this->db->from('tb_absen A');
+        $this->db->join('tb_karyawan K', 'K.nip = A.nip');
+        $this->db->where("A.status IS NOT NULL AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$param[tanggalMulai]' AND '$param[tanggalBerakhir]' AND K.id_divisi = ", $param['idDivisi']);
+
         return $this->db->count_all_results();
     }
 

@@ -60,14 +60,25 @@ class Kepala_divisi extends CI_Controller {
     public function dataAbsen()
     {
         $data = [
-            'judul' => 'data absen'
+            'judul' => 'data absen',
+            'divisi' => $this->db->get('tb_divisi'),
         ];
         $this->template->load('template/template', 'kepala_divisi/data_absen', $data);
     }
 
     public function getDataAbsen()
     {
-        $list = $this->kepala_divisi_m->get_datatables_data_absen();
+        $post = $this->input->post(null, true);
+        $param = [
+            'tanggalMulai'    => $post['tanggalMulai'],
+            'tanggalBerakhir' => $post['tanggalBerakhir'],
+            'idDivisi'        => $post['idDivisi'],
+        ];
+
+        // var_dump($param);
+        // die;
+
+        $list = $this->kepala_divisi_m->get_datatables_data_absen($param);
         $data = array();
         $no = @$_POST['start'];
         foreach ($list as $item) {
@@ -82,8 +93,8 @@ class Kepala_divisi extends CI_Controller {
         }
         $output = array(
                     "draw" => @$_POST['draw'],
-                    "recordsTotal" => $this->kepala_divisi_m->count_all_data_absen(),
-                    "recordsFiltered" => $this->kepala_divisi_m->count_filtered_data_absen(),
+                    "recordsTotal" => $this->kepala_divisi_m->count_all_data_absen($param),
+                    "recordsFiltered" => $this->kepala_divisi_m->count_filtered_data_absen($param),
                     "data" => $data,
                 );
         echo json_encode($output);

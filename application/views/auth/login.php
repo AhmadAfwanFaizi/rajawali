@@ -107,7 +107,6 @@
             } else {
               $('#password').parent('div').removeClass('has-error');
             }
-
             $('#password').val('');
           } else {
             location=res.redirect;
