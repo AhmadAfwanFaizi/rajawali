@@ -185,6 +185,7 @@ class Hrd_m extends CI_model {
             $this->db->insert('tb_user', $dataUser);
         }
 
+        $ext = substr($post['gambar'], -4);
         $data = [
             'nik'           => htmlspecialchars($post['nik']),
             'nip'           => htmlspecialchars($post['nip']),
@@ -198,7 +199,7 @@ class Hrd_m extends CI_model {
             'nomor_telepon' => htmlspecialchars($post['nomorTelepon']),
             'jabatan'       => htmlspecialchars($post['jabatan']),
             'id_divisi'     => htmlspecialchars($post['idDivisi']),
-            'gambar'        => $post['gambar'] ? htmlspecialchars($post['nip']) : "Default.jpg",
+            'gambar'        => $post['gambar'] ? $post['nip'].$ext : "Default.jpg",
             'dibuat'        => waktu_sekarang()
             
         ];

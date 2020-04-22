@@ -15,7 +15,7 @@ class Auth extends CI_Controller {
 		// } elseif ($this->session->userdata('user_role') == 'SISWA') {
 		// 	redirect('user/dashboard');
 		// }
-		var_dump($_SESSION);
+		// var_dump($_SESSION);
 		$this->load->view('auth/login');
     }
     

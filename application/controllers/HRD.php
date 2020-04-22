@@ -221,10 +221,18 @@ class HRD extends CI_Controller {
         }
     }
 
+    public function coba()
+    {
+        $file = 'erroryaumar.png';
+        $ext = substr($file, -4);
+        echo $ext;
+    }
+
     public function tambahKaryawan()
     {
         // echo json_encode(['res'=>'true', 'nip' => $this->input->post('nip')]);
-        // var_dump($_REQUEST);
+        // $post = $this->input->post(null, TRUE);
+        // var_dump($post);
         // die;
         $config = [
             [
@@ -449,6 +457,17 @@ class HRD extends CI_Controller {
     public function hapusKaryawan()
     {
         $id = $this->input->post("id_karyawan", true);
+
+        $file = $this->db->select('gambar')
+                        ->from('tb_karyawan')
+                        ->where('id_karyawan', 22)
+                        ->get()->row();
+        
+        if($file->gambar != "Default.jpg") {
+            unlink("./assets/img/".$file->gambar);
+        }
+            
+
         $this->hrd_m->hapusKaryawan($id);
         if($this->db->affected_rows() > 0) {
             echo "true";
@@ -521,25 +540,7 @@ class HRD extends CI_Controller {
     }
 
     public function dataAbsenBiasa()
-    {
-        // $this->form_validation->set_rules('tanggalMulai', 'Tanggal mulai', 'required');
-        // $this->form_validation->set_rules('tanggalBerakhir', 'Tanggal Berakhir', 'required');
-        // $this->form_validation->set_rules('idDivisi', 'Divisi', 'required');
-
-        // $this->form_validation->set_message('required', '{field} Tidak boleh kosong');
-
-        // if($this->form_validation->run() == false) {
-        //     $data = [
-        //         'tanggalMulai'    => form_error('tanggalMulai'),
-        //         'tanggalBerakhir' => form_error('tanggalBerakhir'),
-        //         'idDivisi'        => form_error('idDivisi'),
-        //     ];
-
-        //     echo json_encode($data);
-        // } else {
-
-        // }
-        
+    {   
         $post            = $this->input->post(null, true);
         $idDivisi        = $post['idDivisi'];
         $tanggalMulai    = $post['tanggalMulai'];

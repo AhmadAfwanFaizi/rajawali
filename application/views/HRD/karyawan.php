@@ -32,7 +32,7 @@
 
 <!-- MODAL TAMBAH -->
 <div class="modal fade bd-example-modal-lg" id="tambahKaryawanModal" tabindex="-1" role="dialog" aria-labelledby="tambahKaryawanModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog  modal-lg" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <form action="" method="post" class="formTambahKaryawan">
         <div class="modal-header">
@@ -384,7 +384,7 @@
   {
       var gambar = $("#gambar").val().replace(/.*(\/|\\)/, '');
       var data = $('.formTambahKaryawan').serialize() + "&gambar="+gambar;
-console.log(data)
+
         $.ajax({
           method  : "POST",
           url     : "<?= base_url('HRD/tambahKaryawan') ?>",
@@ -496,6 +496,7 @@ console.log(data)
 
               resetForm();
               reloadTable();
+              $('#tambahKaryawanModal').modal('show');
               modalAlert('success', 'Data berhasil ditambah');
               
             }
