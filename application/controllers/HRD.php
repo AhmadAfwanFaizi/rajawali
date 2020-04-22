@@ -544,7 +544,9 @@ class HRD extends CI_Controller {
         ];
         // var_dump($dataKaryawan);
         // die;
-        $this->template->load('template/template', 'HRD/kartu', $data);
+        // $this->template->load('template/template', 'HRD/kartu', $data);
+
+        $this->load->view('HRD/cetak_kartu', $data);
     }
 
 
