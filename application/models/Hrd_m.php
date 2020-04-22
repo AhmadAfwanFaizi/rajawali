@@ -198,6 +198,7 @@ class Hrd_m extends CI_model {
             'nomor_telepon' => htmlspecialchars($post['nomorTelepon']),
             'jabatan'       => htmlspecialchars($post['jabatan']),
             'id_divisi'     => htmlspecialchars($post['idDivisi']),
+            'gambar'        => $post['gambar'] ? htmlspecialchars($post['nip']) : "Default.jpg",
             'dibuat'        => waktu_sekarang()
             
         ];

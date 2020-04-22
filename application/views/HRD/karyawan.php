@@ -120,7 +120,7 @@
               <p class="err jabatan_err"></p>
           </div>
           <div class="form-group col-md-6 h-in">
-            <div class="hidden">
+            <div class="">
               <label for="gambar">File input</label>
               <input type="file" id="gambar" name="gambar">
               <!-- <p class="help-block">Example block-level help text here.</p> -->
@@ -297,14 +297,14 @@
       }],
     });
 
-    $('#jabatan').change(function(){
-      var param = $('#jabatan').val();
-      if(param == "KETUA_DIVISI") {
-        $('#gambar').parent('div').removeClass('hidden');
-      } else {
-        $('#gambar').parent('div').addClass('hidden');
-      }
-    });
+    // $('#jabatan').change(function(){
+    //   var param = $('#jabatan').val();
+    //   if(param == "KETUA_DIVISI") {
+    //     $('#gambar').parent('div').removeClass('hidden');
+    //   } else {
+    //     $('#gambar').parent('div').addClass('hidden');
+    //   }
+    // });
 
 
 // WAJIBE =========
@@ -382,8 +382,9 @@
 
   function tambahKaryawan()
   {
-      var data = $('.formTambahKaryawan').serialize();
-
+      var gambar = $("#gambar").val().replace(/.*(\/|\\)/, '');
+      var data = $('.formTambahKaryawan').serialize() + "&gambar="+gambar;
+console.log(data)
         $.ajax({
           method  : "POST",
           url     : "<?= base_url('HRD/tambahKaryawan') ?>",
@@ -470,6 +471,29 @@
                 $('.alamat_err').html('');
               }
             }else{
+
+              if(gambar != "") {
+
+                var formData = new FormData();
+                formData.append("gambar", $("#gambar")[0].files[0]);
+                formData.append("namaGambar", res.nip);
+                
+                console.log(formData);
+
+                $.ajax({
+                  type : "POST",
+                  url : "<?php echo base_url(); ?>HRD/uploadGambar",
+                  contentType : false,
+                  processData : false,
+                  dataType : "JSON",
+                  data : formData,
+                  success : function(response){
+                    console.log(response);
+                  }
+                });
+
+              }
+
               resetForm();
               reloadTable();
               modalAlert('success', 'Data berhasil ditambah');

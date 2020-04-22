@@ -223,6 +223,9 @@ class HRD extends CI_Controller {
 
     public function tambahKaryawan()
     {
+        // echo json_encode(['res'=>'true', 'nip' => $this->input->post('nip')]);
+        // var_dump($_REQUEST);
+        // die;
         $config = [
             [
                 'field' => 'nik',
@@ -307,12 +310,11 @@ class HRD extends CI_Controller {
         } else {
 // TAMBAH DATA KARYAWAN
 
+
             $post = $this->input->post(null, TRUE);
-
-            $a = $this->hrd_m->tambahKaryawan($post);
-
+            $this->hrd_m->tambahKaryawan($post);
             if($this->db->affected_rows() > 0) {
-                echo json_encode(['res'=>'true']);
+                echo json_encode(['res'=>'true', 'nip' => $post['nip']]);
             }
         }
     }
@@ -452,6 +454,24 @@ class HRD extends CI_Controller {
             echo "true";
         } else {
             echo "false";
+        }
+    }
+
+    function uploadGambar()
+    {
+        $config['upload_path']   = "./assets/img"; 
+        $config['allowed_types'] = 'gif|jpg|png';  
+        $config['max_size']      = '1024';
+        $config['file_name']     = $this->input->post('namaGambar', true);
+         
+        $this->load->library('upload',$config); 
+
+        if ( ! $this->upload->do_upload('gambar')){
+            $error = array('error' => $this->upload->display_errors());
+            echo json_encode(['res' => 'false', 'msg' => $error]);
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+            echo json_encode(['res' => 'true', 'msg' => $data]);
         }
     }
 
