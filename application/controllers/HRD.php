@@ -39,12 +39,6 @@ class HRD extends CI_Controller {
         echo json_encode($data);
     }
 
-    public function barcode($param)
-    {
-        $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
-        return $generator->getBarcode($param, $generator::TYPE_CODE_128);
-    }
-
 // CONTROLLER DIVISI =================================================================================================
     public function dataTableDivisi()
     {
@@ -219,13 +213,6 @@ class HRD extends CI_Controller {
         } else {
             echo "false";
         }
-    }
-
-    public function coba()
-    {
-        $file = 'erroryaumar.png';
-        $ext = substr($file, -4);
-        echo $ext;
     }
 
     public function tambahKaryawan()
@@ -616,7 +603,7 @@ class HRD extends CI_Controller {
                     ->where("DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN  '$tanggalMulai' AND '$tanggalBerakhir' AND K.id_divisi =", "$idDivisi")
                     ->get()->result();
 
-        var_dump($data);
+        // var_dump($data);
     }
 
     public function kartu($idKaryawan = null)
@@ -625,15 +612,13 @@ class HRD extends CI_Controller {
         $data = [
             'judul'   => 'kartu',
             'data'    => $dataKaryawan,
-            'barcode' => $this->barcode($dataKaryawan->nip),
+            'barcode' => barcode($dataKaryawan->nip),
         ];
-        // var_dump($dataKaryawan);
-        // die;
-        // $this->template->load('template/template', 'HRD/kartu', $data);
 
-        $this->load->view('HRD/cetak_kartu', $data);
+        $html = $this->load->view('HRD/cetak_kartu', $data, true);
+        $file = 'ceetak kartu '.$dataKaryawan->nip;
+        pdfGenerator($html, $file, 'A4','landscape');
     }
-
 
 
 // TUTUP CLASS

@@ -27,17 +27,6 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <!-- data table css -->
-    <?php if($this->uri->segment(1) == 'HRD' && $this->uri->segment(2) == 'absen') { ?>
-        <link rel="stylesheet" href="<?= base_url('assets/bower_components/DataTables/datatables.min.css') ?>">
-    <?php } else { ?>
-        <link rel="stylesheet" href="<?=base_url('assets/')?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-    <?php } ?>
-    <!-- Select2 -->
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>bower_components/select2/dist/css/select2.min.css">
-    <!-- jquery dipindah -->
-    <script src="<?= base_url('assets/') ?>bower_components/jquery/dist/jquery.min.js"></script>
-
 </head>
 <body>
 
@@ -103,31 +92,9 @@
 
     
 
-    <!-- jQuery 3 -->
-    <script src="<?= base_url('assets/') ?>bower_components/jquery/dist/jquery.min.js"></script>
 
-    <!-- Bootstrap 3.3.7 -->
     <script src="<?= base_url('assets/') ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!-- data tables -->
-    <?php if($this->uri->segment(1) == 'HRD' && $this->uri->segment(2) == 'absen') { ?>
-    <script src="<?= base_url('assets/') ?>bower_components/DataTables/datatables.min.js"></script>
-
-    <?php } else { ?>
-    <script src="<?= base_url('assets/') ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url('assets/') ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-
-    <?php } ?>
-
-    <!-- SlimScroll -->
-    <script src="<?= base_url('assets/') ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="<?= base_url('assets/') ?>bower_components/fastclick/lib/fastclick.js"></script>
-    <!-- AdminLTE App -->
     <script src="<?= base_url('assets/') ?>dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <scr src="<?= base_url('assets/') ?>dist/js/demo.js"></script>
-    <!-- Select2 -->
-    <script src="<?= base_url('assets/') ?>bower_components/select2/dist/js/select2.full.min.js"></script>
+
 </body>
 </html>
