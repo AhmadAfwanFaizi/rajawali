@@ -4,21 +4,13 @@
     <div class="box-header">
       <form action="" method="post" id="formAbsen">
           <div class="form-row">
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-4">
               <input type="date" class="form-control" name="tanggalMulai" id="tanggalMulai" required>
             </div>
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-4">
               <input type="date" class="form-control" name="tanggalBerakhir" id="tanggalBerakhir" required>
             </div>
-            <div class="form-group col-sm-3">
-              <select name="idDivisi" class="form-control" id="idDivisi" required>
-                <option value="" hidden>Pilih Divisi</option>
-                <?php foreach($divisi->result() as $d) { ?>
-                  <option value="<?= $d->id_divisi ?>"><?= $d->nama_divisi ?></option>
-                <?php } ?>
-              </select>
-            </div>
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-4">
               <button type="button" class="btn btn-secondary pilihAbsen">Pilih</button>
             </div>
           </div>
@@ -78,8 +70,8 @@ $(document).ready(function(){
 
         var tanggalMulai    = $('#tanggalMulai').val();
         var tanggalBerakhir = $('#tanggalBerakhir').val();
-        var idDivisi        = $('#idDivisi  ').val();
-        // console.log(tanggalMulai);
+        var idDivisi        = "<?= $idDivisi ?>";
+        console.log(idDivisi);
 
         $('#tableDataAbsenKepalaDivisi').dataTable().fnDestroy();
         $('#tableDataAbsenKepalaDivisi').DataTable({

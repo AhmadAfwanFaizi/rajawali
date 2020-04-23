@@ -29,7 +29,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!-- data table css -->
-  <?php if($this->uri->segment(1) == 'HRD' && $this->uri->segment(2) == 'absen') { ?>
+  <?php if($this->uri->segment(1) == 'HRD' && $this->uri->segment(2) == 'dataAbsen') { ?>
     <link rel="stylesheet" href="<?= base_url('assets/bower_components/DataTables/datatables.min.css') ?>">
   <?php } else { ?>
     <link rel="stylesheet" href="<?=base_url('assets/')?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
@@ -132,17 +132,17 @@
         <li class="header">GM</li>
 <!-- MENU GM -->
 <?php //if($this->session->userdata('role') == 'GM') { ?>
-        <li>
+        <li <?= menu('HRD', 'dashboard') ?>>
           <a href="<?= base_url('HRD/dashboard') ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li>
+        <li <?= menu('HRD', 'divisi') ?>>
           <a href="<?= base_url('HRD/divisi') ?>">
             <i class="fa fa-pie-chart"></i> <span>Divisi</span>
           </a>
         </li>
-        <li class="treeview">
+        <li class="treeview <?= $this->uri->segment(2) == 'karyawan' && $this->uri->segment(3) != '' ? ' active' : '' ; ?>">
           <a href="#" id="subMenuKaryawan">
             <i class="fa fa-users"></i>
             <span>Karyawan</span>
@@ -153,8 +153,13 @@
           <ul class="treeview-menu listSubMenuKaryawan">
           </ul>
         </li>
-        <li>
+        <li <?= menu('HRD', 'absen') ?>>
           <a href="<?= base_url('HRD/absen') ?>">
+            <i class="fa fa-table"></i> <span>Absen</span>
+          </a>
+        </li>
+        <li <?= menu('HRD', 'dataAbsen') ?>>
+          <a href="<?= base_url('HRD/dataAbsen') ?>">
             <i class="fa fa-file-text"></i> <span>Data absensi</span>
           </a>
         </li>
@@ -163,14 +168,14 @@
 <li class="header">SV</li>
 <?php //} else if($this->session->userdata('role') == 'SV') {?>
 
-        <li>
+        <li  <?= menu('kepala_divisi', '') ?>>
           <a href="<?= base_url('kepala_divisi') ?>">
             <i class="fa fa-table"></i> <span>Absen</span>
           </a>
         </li>
-        <li>
+        <li  <?= menu('kepala_divisi', 'dataAbsen') ?>>
           <a href="<?= base_url('kepala_divisi/dataAbsen') ?>">
-            <i class="fa fa-file-text"></i> <span>Data Absen</span>
+            <i class="fa fa-file-text"></i> <span>Data Absensi</span>
           </a>
         </li>
 <?php //} ?>
@@ -178,7 +183,7 @@
 <li class="header">MONITOR</li>
 <!-- MENU MONITOR -->
 
-      <li>
+      <li  <?= menu('monitor', '') ?>>
           <a href="<?= base_url('monitor') ?>">
             <i class="fa fa-table"></i> <span>Monitor Absen</span>
           </a>
@@ -444,7 +449,7 @@
 <script src="<?= base_url('assets/') ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!-- data tables -->
-<?php if($this->uri->segment(1) == 'HRD' && $this->uri->segment(2) == 'absen') { ?>
+<?php if($this->uri->segment(1) == 'HRD' && $this->uri->segment(2) == 'dataAbsen') { ?>
   <script src="<?= base_url('assets/') ?>bower_components/DataTables/datatables.min.js"></script>
 
 <?php } else { ?>
@@ -467,6 +472,8 @@
   $(document).ready(function () {
     $('.sidebar-menu').tree();
     $('#tableDivisi').dataTable();
+
+
     
   });
 

@@ -525,7 +525,42 @@ class HRD extends CI_Controller {
 
 // CONTROLLER ABSENSI =================================================================================================
 
-    public function absen() 
+    public function absen()
+    {
+        $data = [
+            'judul'    => 'Absen',
+        ];
+        $this->template->load('template/template', 'HRD/absen', $data);
+    }
+
+    public function getAbsen()
+    {
+        $list = $this->hrd_m->get_datatables_absen();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($list as $item) {
+            $no++;
+            $row = array();
+            $row[] = $no.".";
+            $row[] = $item->nip;
+            $row[] = $item->nama;
+            $row[] = substr($item->dibuat, 0, 10);
+            $row[] = substr($item->dibuat, 11, 19);
+            $row[] = '<button type="button" class="btn btn-sm btn-primary" onclick="absenMasuk('.$item->id_absen.')">Masuk</button> 
+            <button class="btn btn-sm btn-danger"  onclick="absenAlpa('.$item->id_absen.')">Alpa</button>'; /*absenOpsi*/
+            $data[] = $row;
+        }
+        $output = array(
+                    "draw" => @$_POST['draw'],
+                    "recordsTotal" => $this->hrd_m->count_all_absen(),
+                    "recordsFiltered" => $this->hrd_m->count_filtered_absen(),
+                    "data" => $data,
+                );
+        // output to json format
+        echo json_encode($output);
+    }
+
+    public function dataAbsen() 
     {
         $data = [
             'judul'  => 'data absensi',

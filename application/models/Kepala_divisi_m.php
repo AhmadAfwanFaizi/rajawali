@@ -41,20 +41,21 @@ class Kepala_divisi_m extends CI_model {
         if(@$_POST['length'] != -1)
         $this->db->limit(@$_POST['length'], @$_POST['start']);
         // where
-        $this->db->where('status IS NULL');
+        $this->db->where('A.status IS NULL AND K.jabatan =', "PEGAWAI");
         $this->db->order_by('A.dibuat', 'DESC');
         $query = $this->db->get();
         return $query->result();
     }
     function count_filtered_absen() {
         $this->_get_datatables_query_absen();
-        $this->db->where('status IS NULL');
+        $this->db->where('A.status IS NULL AND K.jabatan =', "PEGAWAI");
         $query = $this->db->get();
         return $query->num_rows();
     }
     function count_all_absen() {
-        $this->db->from('tb_absen');
-        $this->db->where('status IS NULL');
+        $this->db->from('tb_absen A');
+        $this->db->join('tb_karyawan K', 'K.nip = A.nip');
+        $this->db->where('A.status IS NULL AND K.jabatan =', "PEGAWAI");
         return $this->db->count_all_results();
     }
     // end datatables

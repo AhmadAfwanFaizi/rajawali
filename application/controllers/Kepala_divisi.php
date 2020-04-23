@@ -59,9 +59,13 @@ class Kepala_divisi extends CI_Controller {
 
     public function dataAbsen()
     {
+        $divisi = $this->db->select('id_divisi')
+                            ->from('tb_karyawan')
+                            ->where('nip', "$_SESSION[nip]")
+                            ->get()->row();
         $data = [
             'judul' => 'data absen',
-            'divisi' => $this->db->get('tb_divisi'),
+            'idDivisi' => $divisi->id_divisi,
         ];
         $this->template->load('template/template', 'kepala_divisi/data_absen', $data);
     }
