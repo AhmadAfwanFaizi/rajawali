@@ -243,7 +243,8 @@ class Hrd_m extends CI_model {
     // var $where_data_absen         = "status IS NOT NULL";
 
     private function _get_datatables_query_data_absen() {
-    $this->db->select("A.*, K.nama, DATE_FORMAT(A.dibuat, '%Y-%m-%d') as tanggal_absen, TIME_FORMAT(A.dibuat, '%H:%i:%s') as waktu_absen");
+    // $this->db->select("A.*, K.nama, DATE_FORMAT(A.dibuat, '%Y-%m-%d') as tanggal_absen, TIME_FORMAT(A.dibuat, '%H:%i:%s') as waktu_absen");
+    $this->db->select("DISTINCT(A.nip) as absenNip, nama");
     $this->db->from('tb_absen A');
     $this->db->join('tb_karyawan K', 'K.nip = A.nip');
     $i = 0;

@@ -27,6 +27,20 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        .list {
+            border-right: solid lightgrey 1px;
+            border-left: solid lightgrey 1px;
+            border-bottom: solid lightgray;
+        }
+
+        img {
+            width: 151px;
+            height: auto;
+            margin-left: 20%;
+            margin-top: 5%;
+        }
+    </style>
 </head>
 <body>
 
@@ -36,15 +50,17 @@
     <div class="row">
     <div class="col-md-3" style="width: 315px">
 
-
         <!-- About Me Box -->
-        <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-user"></i> Nama</h3>
-            <p class="text-muted">
-                <?= $data->nama ?>
-            </p>
-        </div>
+        <div class="box box-primary list">
+            <div class="box-header with-border">
+                <img src="assets/img/<?=$gambar?>" class="rounded float-left">
+            </div>
+            <div class="box-header with-border">
+                <h3 class="box-title"><i class="fa fa-user"></i> Nama</h3>
+                <p class="text-muted">
+                    <?= $data->nama ?>
+                </p>
+            </div>
         <!-- /.box-header -->
         <div class="box-body">
             <strong><i class="fa fa-barcode margin-r-5"></i> Barcode</strong>

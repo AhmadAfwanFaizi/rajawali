@@ -64,9 +64,10 @@ class Kepala_divisi_m extends CI_model {
     public function koreksiAbsen($post)
     {
         $data = [
-            'status' => $post['res']
+            'status'     => htmlspecialchars($post['status']),
+            'keterangan' => htmlspecialchars($post['keterangan']),
         ];
-        $this->db->update('tb_absen', $data, ['id_absen' => $post['id']]);
+        $this->db->update('tb_absen', $data, ['id_absen' => $post['idAbsen']]);
     }
 
 // DATA ABSEN

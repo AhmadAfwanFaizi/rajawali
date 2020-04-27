@@ -1,3 +1,8 @@
+<style>
+  th {
+    text-align: center;
+  }
+</style>
 <section class="content">
   <div class="box">
     <div class="box-header">
@@ -32,9 +37,9 @@
           <th>#</th>
           <th>Nip</th>
           <th>Nama</th>
-          <th>Tanggal</th>
-          <th>Waktu</th>
-        </tr>
+          <th>Masuk</th>
+          <th>Izin</th>
+          <th>Alpa</th>
         </thead>
         <tbody>
         </tbody>
@@ -67,7 +72,7 @@ $(document).ready(function(){
         },
       },
       "columnDefs" : [{
-        "targets"  : [0],
+        "targets"  : [0, 3, 4, 5],
         "orderable": false
       }],
       dom: 'Bfrtip',

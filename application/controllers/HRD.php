@@ -566,8 +566,6 @@ class HRD extends CI_Controller {
                 'idDivisi'        => $post['idDivisi'],
             ];
 
-            // var_dump($data);
-            // die;
             $list = $this->hrd_m->get_datatables_data_absen($param);
             $data = array();
             $no   = @$_POST['start'];
@@ -575,10 +573,25 @@ class HRD extends CI_Controller {
                 $no++;
                 $row = array();
                 $row[] = $no.".";
-                $row[] = $item->nip;
+                $row[] = $item->absenNip;
                 $row[] = $item->nama;
-                $row[] = substr($item->dibuat, 0, 10);
-                $row[] = substr($item->dibuat, 11, 19);
+                $row[] = $this->db->select("COUNT(nip) as masuk")
+                                    ->from('tb_absen A')
+                                    ->where("A.status = 'MASUK' AND nip =", $item->absenNip)
+                                    ->get()->result()[0]->masuk;
+
+                $row[] = $this->db->select("COUNT(nip) as izin")
+                                    ->from('tb_absen A')
+                                    ->where("A.status = 'IZIN' AND nip=", $item->absenNip)
+                                    ->get()->result()[0]->izin;
+
+                $row[] = $this->db->select("COUNT(nip) as alpa")
+                                    ->from('tb_absen A')
+                                    ->where("A.status = 'ALPA' AND nip=", $item->absenNip)
+                                    ->get()->result()[0]->alpa;
+
+                // $row[] = '<button class="btn btn-sm btn-info">Rincian</button>';
+
                 $data[] = $row;
             }
             $output = array(
@@ -613,7 +626,11 @@ class HRD extends CI_Controller {
             'judul'   => 'kartu',
             'data'    => $dataKaryawan,
             'barcode' => barcode($dataKaryawan->nip),
+            'gambar'  => $dataKaryawan->gambar,
         ];
+
+
+        // $this->load->view('HRD/cetak_kartu', $data);
 
         $html = $this->load->view('HRD/cetak_kartu', $data, true);
         $file = 'ceetak kartu '.$dataKaryawan->nip;
