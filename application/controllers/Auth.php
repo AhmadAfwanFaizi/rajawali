@@ -10,11 +10,11 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{
-		// if($this->session->userdata('user_role') == 'ADMIN' || $this->session->userdata('user_role') == 'ROOT') {
-		// 	redirect('admin/dashboard');
-		// } elseif ($this->session->userdata('user_role') == 'SISWA') {
-		// 	redirect('user/dashboard');
-		// }
+		if($this->session->userdata('role') == 'GM') {
+			redirect('HRD');
+		} elseif ($this->session->userdata('role') == 'SV') {
+			redirect('kepala_divisi');
+		}
 		// var_dump($_SESSION);
 		$this->load->view('auth/login');
     }
@@ -84,10 +84,7 @@ class Auth extends CI_Controller {
 
 	public function logout()
 	{
-		$this->session->unset_userdata('nip');
-		$this->session->unset_userdata('role');
-		$this->session->unset_userdata('nama');
-		// notif('S', 'Kamu berhasil keluar');
+		$this->session->unset_userdata(['username', 'nip', 'role']);
 		redirect('auth');
 	}
 

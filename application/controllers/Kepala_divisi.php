@@ -6,6 +6,7 @@ class Kepala_divisi extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        login();
         $this->load->model('kepala_divisi_m');
     }
 // ABSEN

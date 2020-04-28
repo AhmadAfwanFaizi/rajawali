@@ -6,7 +6,13 @@ class HRD extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        login();
         $this->load->model('hrd_m');
+    }
+
+    public function index()
+    {
+        $this->dashboard();
     }
 
     public function dashboard()
@@ -534,7 +540,7 @@ class HRD extends CI_Controller {
             $row[] = substr($item->dibuat, 0, 10);
             $row[] = substr($item->dibuat, 11, 19);
             $row[] = '<button type="button" class="btn btn-sm btn-primary" onclick="absenMasuk('.$item->id_absen.')">Masuk</button> 
-            <button class="btn btn-sm btn-danger"  onclick="absenAlpa('.$item->id_absen.')">Alpa</button>'; /*absenOpsi*/
+            <button class="btn btn-sm btn-danger" onclick="opsiModal('.$item->id_absen.')">Opsi</button>'; /*absenOpsi*/
             $data[] = $row;
         }
         $output = array(

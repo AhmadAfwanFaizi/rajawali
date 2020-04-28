@@ -129,9 +129,9 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">NAVIGASI</li>
-        <li class="header">GM</li>
+        <!-- <li class="header">GM</li> -->
 <!-- MENU GM -->
-<?php //if($this->session->userdata('role') == 'GM') { ?>
+<?php if($this->session->userdata('role') == 'GM') { ?>
         <li <?= menu('HRD', 'dashboard') ?>>
           <a href="<?= base_url('HRD/dashboard') ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -165,8 +165,8 @@
         </li>
 
 <!-- MENU SV -->
-<li class="header">SV</li>
-<?php //} else if($this->session->userdata('role') == 'SV') {?>
+<!-- <li class="header">SV</li> -->
+<?php } else if($this->session->userdata('role') == 'SV') {?>
 
         <li  <?= menu('kepala_divisi', '') ?>>
           <a href="<?= base_url('kepala_divisi') ?>">
@@ -178,16 +178,16 @@
             <i class="fa fa-file-text"></i> <span>Data Absensi</span>
           </a>
         </li>
-<?php //} ?>
+<?php } ?>
 
-<li class="header">MONITOR</li>
+<!-- <li class="header">MONITOR</li> -->
 <!-- MENU MONITOR -->
 
-      <li  <?= menu('monitor', '') ?>>
+        <!-- <li  <?= menu('monitor', '') ?>>
           <a href="<?= base_url('monitor') ?>">
             <i class="fa fa-table"></i> <span>Monitor Absen</span>
           </a>
-        </li>
+        </li> -->
 
       </ul>
     </section>

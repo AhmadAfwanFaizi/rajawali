@@ -1,5 +1,14 @@
 <?php
 
+    function login()
+    {
+        $ci =& get_instance();
+
+        if(!$ci->session->userdata('role')) {
+            redirect('auth');
+        }
+    }
+
     function waktu_sekarang()
     {
         return date('Y-m-d H:i:s');
