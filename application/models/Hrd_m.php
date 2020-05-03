@@ -178,7 +178,7 @@ class Hrd_m extends CI_model {
 
             $dataUser     = [
                 'nip'      => $post['nip'],
-                'password' => $tanggalLahir,
+                'password' => $tanggalLahirs,
                 'role'     => 'SV',
             ];
             $this->db->insert('tb_user', $dataUser);
