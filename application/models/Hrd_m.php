@@ -171,14 +171,14 @@ class Hrd_m extends CI_model {
     {
         if($post['jabatan'] == 'KETUA_DIVISI') {
             $tanggalLahir = str_replace('-', '', $post['tanggalLahir']);
-            $tanggal = substr($tanggalLahir , 6, 2);
-            $bulan   = substr($tanggalLahir , 5, 2);
-            $tahun   = substr($tanggalLahir , 0, 4);
-            $hasil   = $tanggal.$bulan.$tahun;
+            // $tanggal = substr($tanggalLahir , 6, 2);
+            // $bulan   = substr($tanggalLahir , 5, 2);
+            // $tahun   = substr($tanggalLahir , 0, 4);
+            // $hasil   = $tanggal.$bulan.$tahun;
 
             $dataUser     = [
                 'nip'      => $post['nip'],
-                'password' => $hasil,
+                'password' => $tanggalLahir,
                 'role'     => 'SV',
             ];
             $this->db->insert('tb_user', $dataUser);
