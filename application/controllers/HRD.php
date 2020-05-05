@@ -168,6 +168,26 @@ class HRD extends CI_Controller {
         $this->template->load('template/template','HRD/karyawan', $data);
     }
 
+    public function generateNIP()
+    {
+        $maxNIP = $this->db->select('MAX(nip) as maxCode')
+        ->from("tb_karyawan")
+        ->get()->row();
+
+        if($maxNIP->maxCode == "" || $maxNIP->maxCode == null) {
+            $noUrut = "001";
+        } else {
+            $noUrut = substr($maxNIP->maxCode, 5, 3);
+            $noUrut++;
+        }
+        
+        $tahun = substr(date('Y'), 2,2);
+        $bulan = date('m');
+        $empatDigit = $tahun.$bulan;
+        $nip = $empatDigit . sprintf("%03s", $noUrut);
+        echo json_encode([$nip]);
+    }
+
     public function getDatatablesKaryawan()
     {
         $idDivisi = $this->input->post('idDivisi', true);

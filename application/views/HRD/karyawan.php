@@ -3,7 +3,7 @@
   <div class="box">
     <div class="box-header">
       <!-- <h3 class="box-title">Data Table With Full Features</h3> -->
-      <button class="btn btn-primary" data-toggle="modal" data-target="#tambahKaryawanModal">Tambah</button>
+      <button class="btn btn-primary" onclick="tambahKaryawanModal()">Tambah</button>
       <!-- <button data-toggle="modal" id="reload" >Reload</button> -->
     </div>
     <!-- /.box-header -->
@@ -391,6 +391,20 @@
       $('.uEmail_err').html('');
       $('#uAlamat').removeClass('err_border');
       $('.uAlamat_err').html('');
+  }
+
+  function tambahKaryawanModal()
+  {
+    $.ajax({
+          method  : "POST",
+          url     : "<?= base_url('HRD/generateNIP') ?>",
+          dataType: "JSON",
+          success : function(res) {
+            $('#nip').val(res);
+            $('#tambahKaryawanModal').modal('show');
+          }
+
+    });
   }
 
   function tambahKaryawan()
