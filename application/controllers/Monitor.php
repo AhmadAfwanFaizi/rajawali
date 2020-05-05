@@ -30,7 +30,11 @@ class Monitor extends CI_Controller {
     public function getDataKaryawan()
     {
         $nip = $this->input->post('nip', true);
-        $res = $this->db->get_where('tb_karyawan', ['nip' => $nip])->result();
+        // $res = $this->db->get_where('tb_karyawan', ['nip' => $nip])->result();
+        $res = $this->db->select("*")
+                        ->from("tb_karyawan")
+                        ->where("dihapus is null AND nip =", $nip)
+                        ->get()->result();
 
         if($res) {
             echo json_encode($res);

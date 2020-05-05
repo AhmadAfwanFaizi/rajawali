@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cetak karty</title>
+    <title>Cetak kartu</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -34,76 +34,73 @@
             border-bottom: solid lightgray;
         }
 
+        .kop {
+            margin: 3%;
+        }
+
         img {
-            width: 151px;
-            height: auto;
-            margin-left: 20%;
-            margin-top: 5%;
+            width: 150px;
+            height: 150px;
+            margin-left: 14px;
+        }
+
+        .data-diri {
+            margin-left: 35px;
+        }
+
+        .barcode {
+            margin: 5%;
         }
     </style>
 </head>
 <body>
 
+<?php 
 
-    <section class="content" id="section-to-print">
+    $tanggalLahir = str_replace('-', '', $data->tanggal_lahir);
+    $tanggal      = substr($tanggalLahir , 6, 2);
+    $bulan        = substr($tanggalLahir , 4, 2);
+    $tahun        = substr($tanggalLahir , 0, 4);
+    $ttl          = $data->tempat_lahir.', '.$tanggal.'-'.$bulan.'-'.$tahun;
 
+?>
+<section class="content" id="section-to-print">
     <div class="row">
-    <div class="col-md-3" style="width: 315px">
+        <div class="col-md-12" style="width: 500px; height: 250px;">
+            <div class="box box-primary list">
 
-        <!-- About Me Box -->
-        <div class="box box-primary list">
-            <div class="box-header with-border">
-                <img src="assets/img/<?=$gambar?>" class="rounded float-left">
+            <div class="kop">
+                <h4><b>PT.makmur jaya</b></h4>
+                <div class="garis"></div>
             </div>
-            <div class="box-header with-border">
-                <h3 class="box-title"><i class="fa fa-user"></i> Nama</h3>
-                <p class="text-muted">
-                    <?= $data->nama ?>
-                </p>
+            
+            <div class="gambar">
+                <table>
+                    <tr>
+                        <td>
+                            <img src="assets/img/<?=$gambar?>" class="rounded float-left">
+                        </td>
+                        <td>
+                            <div class="data-diri">
+                                <?= $data->nip ?><br>
+                                <b><?= $data->nama ?></b><br>
+                                <?= ucwords($ttl) ?><br>
+                                <?= $data->nama_divisi ?><br>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <strong><i class="fa fa-barcode margin-r-5"></i> Barcode</strong>
+                       
 
-            <p class="text-muted">
-                <div>
-                    <?= $barcode; ?>
+                <div class="barcode">
+                    <?= $barcode ?>
                 </div>
-            </p>
 
-            <hr>
-
-            <strong><i class="fa fa-cubes margin-r-5"></i> Divisi</strong>
-
-            <p class="text-muted"><?= $data->nama_divisi ?></p>
-
-            <!-- <hr> -->
-
-            <!-- <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-            <p>
-            <span class="label label-danger">UI Design</span>
-            <span class="label label-success">Coding</span>
-            <span class="label label-info">Javascript</span>
-            <span class="label label-warning">PHP</span>
-            <span class="label label-primary">Node.js</span>
-            </p>
-
-            <hr>
-
-            <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p> -->
+            </div>
         </div>
-        <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
     </div>
-
-    </div>
-    <!-- /.row -->
-
-    </section>
+</section>
 
 
     

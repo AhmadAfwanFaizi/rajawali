@@ -223,10 +223,13 @@ class HRD extends CI_Controller {
 
     public function tambahKaryawan()
     {
-        // echo json_encode(['res'=>'true', 'nip' => $this->input->post('nip')]);
-        // $post = $this->input->post(null, TRUE);
-        // var_dump($post);
-        // die;
+        // $post = $this->input->post(null, true);
+        // $tanggalLahir = str_replace('-', '', $post['tanggalLahir']);
+        // $tanggal = substr($tanggalLahir , 6, 2);
+        // $bulan   = substr($tanggalLahir , 4, 2);
+        // $tahun   = substr($tanggalLahir , 0, 4);
+        // $hasil   = $tanggal.$bulan.$tahun;
+
         $config = [
             [
                 'field' => 'nik',
