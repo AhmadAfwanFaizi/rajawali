@@ -164,12 +164,12 @@
         <div class="form-row">
             <div class="form-group col-md-4 h-in">
               <label for="uNik">NIK</label>
-              <input type="text" class="form-control" id="uNik" name="uNik">
+              <input type="text" class="form-control" id="uNik" name="uNik" readonly>
               <p class="err uNik_err"></p>
             </div>
             <div class="form-group col-md-4 h-in">
               <label for="uNip">NIP</label>
-              <input type="text" class="form-control" id="uNip" name="uNip">
+              <input type="text" class="form-control" id="uNip" name="uNip" readonly>
               <p class="err uNip_err"></p>
             </div>
             <div class="form-group col-md-4 h-in">

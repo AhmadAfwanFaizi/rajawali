@@ -170,21 +170,23 @@ class HRD extends CI_Controller {
 
     public function generateNIP()
     {
-        $maxNIP = $this->db->select('MAX(nip) as maxCode')
+        $karyawan = $this->db->select('MAX(nip) as maxCode')
         ->from("tb_karyawan")
+        ->where("jabatan !=", "HRD")
         ->get()->row();
 
-        if($maxNIP->maxCode == "" || $maxNIP->maxCode == null) {
+        if($karyawan->maxCode == "" || $karyawan->maxCode == null) {
             $noUrut = "001";
         } else {
-            $noUrut = substr($maxNIP->maxCode, 5, 3);
+            $noUrut = substr($karyawan->maxCode, 5, 3);
             $noUrut++;
-        }
+        }  
         
         $tahun = substr(date('Y'), 2,2);
         $bulan = date('m');
         $empatDigit = $tahun.$bulan;
         $nip = $empatDigit . sprintf("%03s", $noUrut);
+
         echo json_encode([$nip]);
     }
 
@@ -213,7 +215,7 @@ class HRD extends CI_Controller {
             $row[] = $l->email;
             $row[] = $l->nomor_telepon;
             // add html for action
-            $row[] = '<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('.$l->id_karyawan.')">Hapus</button> <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('.$l->id_karyawan.')">Ubah</button> <a href="'.base_url('HRD/kartu/'.$l->id_karyawan).'" class="btn btn-sm btn-info">Kartu</a>';
+            $row[] = '<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('.$l->id_karyawan.')">Hapus</button> <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('.$l->id_karyawan.')">Ubah</button> <a target="_blank" href="'.base_url('HRD/kartu/'.$l->id_karyawan).'" class="btn btn-sm btn-info">Kartu</a>';
             $data[] = $row;
         }
         $output = array(
@@ -563,7 +565,8 @@ class HRD extends CI_Controller {
             $row[] = substr($item->dibuat, 0, 10);
             $row[] = substr($item->dibuat, 11, 19);
             $row[] = '<button type="button" class="btn btn-sm btn-primary" onclick="absenMasuk('.$item->id_absen.')">Masuk</button> 
-            <button class="btn btn-sm btn-danger" onclick="opsiModal('.$item->id_absen.')">Opsi</button>'; /*absenOpsi*/
+            <button class="btn btn-sm btn-warning" onclick="opsiModal('.$item->id_absen.')">Opsi</button> 
+            <button class="btn btn-sm btn-danger" onclick="hapusAbsen('.$item->id_absen.')">Hapus</button>'; /*absenOpsi*/
             $data[] = $row;
         }
         $output = array(
@@ -664,6 +667,15 @@ class HRD extends CI_Controller {
         $html = $this->load->view('HRD/cetak_kartu', $data, true);
         $file = 'ceetak kartu '.$dataKaryawan->nip;
         pdfGenerator($html, $file, 'A4','landscape');
+    }
+
+    public function hapusAbsen()
+    {
+        $id = $this->input->post('id', true);
+        $this->db->delete('tb_absen', ['id_absen' => $id]);
+        if($this->db->affected_rows() > 0) {
+            echo json_encode(['res'=>'true']);
+        }
     }
 
 

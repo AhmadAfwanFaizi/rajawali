@@ -226,6 +226,18 @@ class Hrd_m extends CI_model {
             'diubah'        => waktu_sekarang()
             
         ];
+
+        $tanggalLahir = str_replace('-', '', $post['uTanggalLahir']);
+        $tanggal      = substr($tanggalLahir , 6, 2);
+        $bulan        = substr($tanggalLahir , 4, 2);
+        $tahun        = substr($tanggalLahir , 0, 4);
+        $hasil        = $tanggal.$bulan.$tahun;
+
+        $dataUser = [
+            'password' => $hasil,
+        ];
+
+        $this->db->update('tb_user', $dataUser, ['nip' => $post['uNip']]);
         $this->db->update('tb_karyawan', $data, ['id_karyawan' => $post['uIdKaryawan']]);
     }
 
