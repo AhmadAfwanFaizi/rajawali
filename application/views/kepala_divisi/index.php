@@ -16,7 +16,7 @@
           <th>Nama</th>
           <th>Tanggal</th>
           <th>Waktu</th>
-          <th width="130px">Aksi</th>
+          <th width="180px">Aksi</th>
         </tr>
         </thead>
         <tbody>
@@ -136,6 +136,23 @@ $(document).ready(function(){
             
           }
 
+        }
+      });
+    }
+
+    function hapusAbsen(id)
+    { 
+      $.ajax({
+        url    : "<?= base_url('kepala_divisi/hapusAbsen') ?>",
+        method : "POST",
+        dataType: "JSON",
+        data   : {'id' : id},
+        success: function(res) {
+          if(res.res == 'true') {
+            reloadTableAbsen();
+            $('#opsiModal').modal('hide');
+            modalAlert('success', 'Data berhasil dihapus!');
+          }
         }
       });
     }

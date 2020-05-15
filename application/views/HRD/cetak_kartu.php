@@ -70,7 +70,7 @@
             <div class="box box-primary list">
 
             <div class="kop">
-                <h4><b>PT.makmur jaya</b></h4>
+                <h4><b>Cengkareng transit hotel</b></h4>
                 <div class="garis"></div>
             </div>
             

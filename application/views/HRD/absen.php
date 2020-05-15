@@ -16,7 +16,7 @@
           <th>Nama</th>
           <th>Tanggal</th>
           <th>Waktu</th>
-          <th width="160px">Aksi</th>
+          <th width="180px">Aksi</th>
         </tr>
         </thead>
         <tbody>
@@ -91,9 +91,10 @@ $(document).ready(function(){
       $.ajax({
         url    : "<?= base_url('kepala_divisi/koreksiAbsen') ?>",
         method : "POST",
-        data   : {'id' : id, 'res' : 'MASUK'},
+        dataType: "JSON",
+        data   : {'idAbsen' : id, 'status' : 'MASUK', 'keterangan': '-'},
         success: function(res) {
-          if(res == 'true') {
+          if(res.res == 'true') {
             reloadTableAbsen()
             modalAlert('success', 'Berhaisl!');
           }

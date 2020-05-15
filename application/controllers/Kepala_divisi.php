@@ -34,7 +34,8 @@ class Kepala_divisi extends CI_Controller {
             $row[] = substr($item->dibuat, 0, 10);
             $row[] = substr($item->dibuat, 11, 19);
             $row[] = '<button type="button" class="btn btn-sm btn-primary" onclick="absenMasuk('.$item->id_absen.')">Masuk</button> 
-            <button class="btn btn-sm btn-danger" onclick="opsiModal('.$item->id_absen.')">Opsi</button>'; /*absenOpsi*/
+            <button class="btn btn-sm btn-warning" onclick="opsiModal('.$item->id_absen.')">Opsi</button>
+            <button class="btn btn-sm btn-danger" onclick="hapusAbsen('.$item->id_absen.')">Hapus</button>'; /*absenOpsi*/
             $data[] = $row;
         }
         $output = array(
@@ -67,6 +68,8 @@ class Kepala_divisi extends CI_Controller {
             }
         }
     }
+
+    
 
 // DATA ABSEN
 
