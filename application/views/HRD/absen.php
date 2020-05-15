@@ -150,7 +150,7 @@ $(document).ready(function(){
           if(res.res == 'true') {
             reloadTableAbsen();
             $('#opsiModal').modal('hide');
-            modalAlert('success', 'Data berhaisl hapus!');
+            modalAlert('success', 'Data berhasil dihapus!');
           }
         }
       });

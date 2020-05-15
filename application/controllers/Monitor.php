@@ -11,11 +11,13 @@ class Monitor extends CI_Controller {
 
     public function index()
     {
-        $data = [
-            'judul' => 'monitor',
-            'data' => $this->db->get('tb_karyawan'),
-        ];
-        $this->template->load('template/template', 'monitor/index', $data);
+        // $data = [
+        //     'judul' => 'monitor',
+        //     'data' => $this->db->get('tb_karyawan'),
+        // ];
+        // $this->template->load('template/template', 'monitor/index', $data);
+
+        $this->monitor_absen();
     }
 
     public function monitor_absen()
