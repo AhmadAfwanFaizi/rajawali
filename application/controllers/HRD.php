@@ -557,6 +557,19 @@ class HRD extends CI_Controller {
         $data = array();
         $no = @$_POST['start'];
         foreach ($list as $item) {
+
+            $tanggal_sekarang = date('Y-m-d');
+            $cekAbsen = $this->db->select('nip')
+            ->from('tb_absen')
+            ->where("DATE_FORMAT(dibuat, '%Y-%m-%d') = '$tanggal_sekarang' AND status IS NOT NULL AND keterangan IS NOT NULL AND nip =", $item->nip)
+            ->get()->row();
+
+            if($cekAbsen) {
+                $tombol = '<button type="button" class="btn btn-sm btn-info" onclick="absenKeluar('.$item->id_absen.')">Keluar</button>';
+            } else {
+                $tombol = '<button type="button" class="btn btn-sm btn-primary" onclick="absenMasuk('.$item->id_absen.')">Masuk</button>';
+            }
+
             $no++;
             $row = array();
             $row[] = $no.".";
@@ -564,8 +577,8 @@ class HRD extends CI_Controller {
             $row[] = $item->nama;
             $row[] = substr($item->dibuat, 0, 10);
             $row[] = substr($item->dibuat, 11, 19);
-            $row[] = '<button type="button" class="btn btn-sm btn-primary" onclick="absenMasuk('.$item->id_absen.')">Masuk</button> 
-            <button class="btn btn-sm btn-warning" onclick="opsiModal('.$item->id_absen.')">Opsi</button> 
+            $row[] = $tombol. 
+            ' <button class="btn btn-sm btn-warning" onclick="opsiModal('.$item->id_absen.')">Opsi</button> 
             <button class="btn btn-sm btn-danger" onclick="hapusAbsen('.$item->id_absen.')">Hapus</button>'; /*absenOpsi*/
             $data[] = $row;
         }
@@ -609,17 +622,17 @@ class HRD extends CI_Controller {
                 $row[] = $item->nama;
                 $row[] = $this->db->select("COUNT(nip) as masuk")
                                     ->from('tb_absen A')
-                                    ->where("A.status = 'MASUK' AND nip =", $item->absenNip)
+                                    ->where("A.status = 'MASUK' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$post[tanggalMulai]' AND '$post[tanggalBerakhir]' AND nip =", $item->absenNip)
                                     ->get()->result()[0]->masuk;
 
                 $row[] = $this->db->select("COUNT(nip) as izin")
                                     ->from('tb_absen A')
-                                    ->where("A.status = 'IZIN' AND nip=", $item->absenNip)
+                                    ->where("A.status = 'IZIN' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$post[tanggalMulai]' AND '$post[tanggalBerakhir]' AND nip =", $item->absenNip)
                                     ->get()->result()[0]->izin;
 
                 $row[] = $this->db->select("COUNT(nip) as alpa")
                                     ->from('tb_absen A')
-                                    ->where("A.status = 'ALPA' AND nip=", $item->absenNip)
+                                    ->where("A.status = 'ALPA' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$post[tanggalMulai]' AND '$post[tanggalBerakhir]' AND nip =", $item->absenNip)
                                     ->get()->result()[0]->alpa;
 
                 // $row[] = '<button class="btn btn-sm btn-info">Rincian</button>';

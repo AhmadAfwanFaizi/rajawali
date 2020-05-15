@@ -26,6 +26,7 @@
           <th>Nip</th>
           <th>Nama</th>
           <th>Tanggal</th>
+          <th>Absen</th>
           <th>Waktu</th>
         </tr>
         </thead>

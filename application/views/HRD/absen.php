@@ -96,7 +96,23 @@ $(document).ready(function(){
         success: function(res) {
           if(res.res == 'true') {
             reloadTableAbsen()
-            modalAlert('success', 'Berhaisl!');
+            modalAlert('success', 'Data berhasil disimpan!');
+          }
+        }
+      });
+    }
+
+    function absenKeluar(id)
+    {
+      $.ajax({
+        url    : "<?= base_url('kepala_divisi/koreksiAbsen') ?>",
+        method : "POST",
+        dataType: "JSON",
+        data   : {'idAbsen' : id, 'status' : 'KELUAR', 'keterangan': '-'},
+        success: function(res) {
+          if(res.res == 'true') {
+            reloadTableAbsen()
+            modalAlert('success', 'Data berhasil disimpan!');
           }
         }
       });

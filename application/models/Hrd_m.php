@@ -286,14 +286,14 @@ class Hrd_m extends CI_model {
         if(@$_POST['length'] != -1)
         $this->db->limit(@$_POST['length'], @$_POST['start']);
         // where
-            $this->db->where("A.status IS NOT NULL AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$param[tanggalMulai]' AND '$param[tanggalBerakhir]' AND K.id_divisi = ", $param['idDivisi']);
+            $this->db->where("A.status = 'MASUK' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$param[tanggalMulai]' AND '$param[tanggalBerakhir]' AND K.id_divisi = ", $param['idDivisi']);
 
         $query = $this->db->get();
         return $query->result();
     }
     function count_filtered_data_absen($param = null) {
         $this->_get_datatables_query_data_absen();
-            $this->db->where("A.status IS NOT NULL AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$param[tanggalMulai]' AND '$param[tanggalBerakhir]' AND K.id_divisi = ", $param['idDivisi']);
+            $this->db->where("A.status = 'MASUK' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$param[tanggalMulai]' AND '$param[tanggalBerakhir]' AND K.id_divisi = ", $param['idDivisi']);
 
         $query = $this->db->get();
         return $query->num_rows();
@@ -301,7 +301,7 @@ class Hrd_m extends CI_model {
     function count_all_data_absen($param = null) {
         $this->db->from('tb_absen A');
         $this->db->join('tb_karyawan K', 'K.nip = A.nip');
-            $this->db->where("A.status IS NOT NULL AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$param[tanggalMulai]' AND '$param[tanggalBerakhir]' AND K.id_divisi = ", $param['idDivisi']);
+            $this->db->where("A.status = 'MASUK' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$param[tanggalMulai]' AND '$param[tanggalBerakhir]' AND K.id_divisi = ", $param['idDivisi']);
 
         return $this->db->count_all_results();
     }

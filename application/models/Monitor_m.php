@@ -16,10 +16,10 @@ class Monitor_m extends CI_model {
 
     public function cekPraInputAbsen($nip)
     {
-        $tanggal_sekarang = date('Y-m-d');
+        // $tanggal_sekarang = date('Y-m-d');
         $this->db->select('nip');
         $this->db->from('tb_absen');
-        $this->db->where("DATE_FORMAT(dibuat, '%Y-%m-%d') = '$tanggal_sekarang' AND nip =", $nip);
+        $this->db->where("status IS NULL AND keterangan is null AND nip =", $nip);
         return $this->db->get();
     }
 

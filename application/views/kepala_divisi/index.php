@@ -102,6 +102,22 @@ $(document).ready(function(){
       });
     }
 
+    function absenKeluar(id)
+    {
+      $.ajax({
+        url    : "<?= base_url('kepala_divisi/koreksiAbsen') ?>",
+        method : "POST",
+        dataType: "JSON",
+        data   : {'idAbsen' : id, 'status' : 'KELUAR', 'keterangan': '-'},
+        success: function(res) {
+          if(res.res == 'true') {
+            reloadTableAbsen()
+            modalAlert('success', 'Berhaisl!');
+          }
+        }
+      });
+    }
+
     function simpanOpsi(id)
     {
       var data = $('#formOpsiAbsen').serialize();
