@@ -36,13 +36,13 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-      <p class="login-box-msg alertMsg">Masuk untuk memulai sebuah sesi</p>
+      <p class="login-box-msg alertMsg">Log in to start a session</p>
 
       <?php
 
-      if (form_error('username') || form_error('username')) {
-        notif("W", "Username & Password tidak boleh kosong");
-      }
+      // if (form_error('username') || form_error('username')) {
+      //   notif("W", "Username & Password tidak boleh kosong");
+      // }
 
       $this->load->view('auth/notif');
 
@@ -50,17 +50,19 @@
 
       <form action="" id="formLogin" method="post">
         <div class="form-group has-feedback">
-          <input type="text" name="username" id="username" class="form-control" placeholder="Username">
+          <input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          <?= form_error('username'); ?>
         </div>
         <div class="form-group has-feedback">
-          <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          <?= form_error('password'); ?>
         </div>
         <hr>
         <div class="row">
           <div class="col-xs-12">
-            <button type="submit" id="btnLogin" class="btn btn-primary btn-block btn-flat">Masuk</button>
+            <button type="submit" id="btnLogin" class="btn btn-primary btn-block btn-flat">Log In</button>
           </div>
         </div>
       </form>

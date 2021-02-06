@@ -13,8 +13,8 @@ class Auth extends CI_Controller
 	{
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
-		$this->form_validation->set_message('required', '{field} Tidak Boleh Kosong');
-		// $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
+		// $this->form_validation->set_message('required', '{field} Tidak Boleh Kosong');
+		$this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 
 		if ($this->form_validation->run() == false) {
 			$this->load->view('auth/login');
@@ -55,7 +55,7 @@ class Auth extends CI_Controller
 		} else {
 			// echo "salah";
 			// var_dump($this->session);
-			notif("W", "Username / Password salah");
+			notif("W", "Wrong username or password");
 			redirect('auth');
 		}
 	}

@@ -23,9 +23,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label>
-                                    <textarea name="address" id="address" cols="0" rows="5" class="form-control">
-                                        <?= $data->address ?>
-                                    </textarea>
+                                    <textarea name="address" id="address" cols="0" rows="5" class="form-control"><?= $data->address ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="remark">Remark</label>
@@ -43,9 +41,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="billTo">Bill To</label>
-                                    <textarea name="billTo" id="billTo" cols="0" rows="5" class="form-control">
-                                        <?= $data->bill_to ?>
-                                    </textarea>
+                                    <textarea name="billTo" id="billTo" cols="0" rows="5" class="form-control"><?= $data->bill_to ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="enable">Enable</label>
