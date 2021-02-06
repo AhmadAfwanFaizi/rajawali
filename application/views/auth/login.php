@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,96 +28,55 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+
 <body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="<?= base_url('assets/') ?>index2.html"><b>Admin</b>LTE</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg alertMsg">Masuk untuk memulai sebuah sesi</p>
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="<?= base_url('assets/') ?>index2.html"><b>Admin</b>LTE</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg alertMsg">Masuk untuk memulai sebuah sesi</p>
 
-    <form action="" id="formLogin" method="post">
-      <div class="form-group has-feedback">
-        <input type="text" name="nip" id="nip" class="form-control" placeholder="NIP">
-        <span class="glyphicon glyphicon-barcode form-control-feedback"></span>
-        <div class="nip_err"></div>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" name="password" id="password" class="form-control" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        <div class="password_err"></div>
-      </div>
-      <div class="row">
-        <hr>
-        <div class="col-xs-12">
-          <button type="button" id="btnLogin"  class="btn btn-primary btn-block btn-flat">Masuk</button>
+      <?php
+
+      if (form_error('username') || form_error('username')) {
+        notif("W", "Username & Password tidak boleh kosong");
+      }
+
+      $this->load->view('auth/notif');
+
+      ?>
+
+      <form action="" id="formLogin" method="post">
+        <div class="form-group has-feedback">
+          <input type="text" name="username" id="username" class="form-control" placeholder="Username">
+          <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
-        <!-- /.col -->
-      </div>
-    </form>
+        <div class="form-group has-feedback">
+          <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" id="btnLogin" class="btn btn-primary btn-block btn-flat">Masuk</button>
+          </div>
+        </div>
+      </form>
 
 
+    </div>
+    <!-- /.login-box-body -->
   </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
+  <!-- /.login-box -->
 
-<!-- jQuery 3 -->
-<script src="<?= base_url('assets/') ?>bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?= base_url('assets/') ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="<?= base_url('assets/') ?>plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-
-    login();
-  });
-
-  function login()
-  {
-    $('#btnLogin').click(function(){
-      var data     = $('#formLogin').serialize();
-
-      $.ajax({
-        url     : "<?= base_url('auth/login') ?>",
-        method  : "POST",
-        dataType: "JSON",
-        data    : data,
-        success : function(res) {
-          console.log(res)
-          
-          if(res.res == 'false') {
-
-            $('.alertMsg').css('color', 'red').text(res.msg);
-
-            if(res.nip) {
-              $('#nip').parent('div').addClass('has-error');
-            } else {
-              $('#nip').parent('div').removeClass('has-error'); 
-            }
-            if(res.pass) {
-              $('#password').parent('div').addClass('has-error');
-            } else {
-              $('#password').parent('div').removeClass('has-error');
-            }
-            $('#password').val('');
-          } else {
-            location=res.redirect;
-          }
-
-        }
-      });
-
-    });
-  }
-
-</script>
+  <!-- jQuery 3 -->
+  <script src="<?= base_url('assets/') ?>bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="<?= base_url('assets/') ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- iCheck -->
+  <script src="<?= base_url('assets/') ?>plugins/iCheck/icheck.min.js"></script>
 </body>
+
 </html>

@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends CI_Controller {
+class Auth extends CI_Controller
+{
 
 	public function __construct()
 	{
@@ -10,81 +11,58 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{
-		if($this->session->userdata('role') == 'GM') {
-			redirect('HRD');
-		} elseif ($this->session->userdata('role') == 'SV') {
-			redirect('kepala_divisi');
-		}
-		// var_dump($_SESSION);
-		$this->load->view('auth/login');
-    }
-    
-    public function login()
-    {
-        $this->form_validation->set_rules('nip', 'NIP', 'trim|required');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required');
-        // $this->form_validation->set_message('required', 'nip & password tidak boleh kosong');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required');
+		$this->form_validation->set_message('required', '{field} Tidak Boleh Kosong');
+		// $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 
-		if($this->form_validation->run() == FALSE) {
-
-			$data = [
-				'res'  => 'false',
-				'nip'  => form_error('nip'),
-				'pass' => form_error('password'),
-				'msg' => 'nip & password tidak boleh kosong',
-			];
-			
-            echo json_encode($data);
+		if ($this->form_validation->run() == false) {
+			$this->load->view('auth/login');
 		} else {
-			// validasi success
+			// valid
 			$this->_login();
 		}
-    }
-
+	}
 
 	private function _login()
 	{
-		$post  = $this->input->post(null, TRUE);
-		$nip   = $post['nip'];
-		$pass  = $post['password'];
-		$login = $this->db->select('*')
-                        ->from('tb_user')
-                        ->where("nip = '$nip' AND password =", "$pass")
-						->get()->row();
-		$nama = $this->db->select('nama')->from('tb_karyawan')->where('nip', $nip)->get()->row();
+		$post     = $this->input->post(null, TRUE);
+		$username = $post['username'];
+		$password = $post['password'];
+		$login    = $this->db->select('*')
+			->from('user')
+			->where(["username" => $username, "password" => $password])
+			->get()->row();
 
-		if($login) {
-            $data = [
-                'nip'      => $nip,
-                'role'     => $login->role,
-                'username' => $nama->nama,
+		if ($login) {
+			$data = [
+				'username' => $login->username,
+				'role'     => $login->role,
 			];
-
 			$this->session->set_userdata($data);
 
-			if($data['role'] == 'GM') {
-				$red = 'HRD/dashboard';
-			}else if($data['role'] == 'SV') {
+			if ($data['role'] == 'ADMIN') {
+				redirect('Label');
+			} else if ($data['role'] == 'A') {
+				redirect('Label');
+			} else if ($data['role'] == 'B') {
 				$red = 'Kepala_divisi';
+			} else if ($data['role'] == 'C') {
+				$red = 'Kepala_divisi';
+			} else {
+				redirect('auth');
 			}
-
-			echo json_encode([
-                'res'      => 'true',
-                'msg'      => 'true',
-                'redirect' => $red,
-            ]);
-
-        } else {
-            echo json_encode([
-                'res' => 'false',
-                'msg' => 'NIP atau password salah',
-            ]);
-        }
-    }
+		} else {
+			// echo "salah";
+			// var_dump($this->session);
+			notif("W", "Username / Password salah");
+			redirect('auth');
+		}
+	}
 
 	public function logout()
 	{
-		$this->session->unset_userdata(['username', 'nip', 'role']);
+		$this->session->unset_userdata(['username', 'role']);
 		redirect('auth');
 	}
 
@@ -92,6 +70,4 @@ class Auth extends CI_Controller {
 	{
 		$this->load->view('auth/blocked');
 	}
-
-
 }

@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class HRD extends CI_Controller {
+class HRD extends CI_Controller
+{
 
     public function __construct()
     {
@@ -19,17 +20,17 @@ class HRD extends CI_Controller {
     {
         $tanggalSekarang = date("Y-m-d");
         $totalKaryawan   = $this->db->select("COUNT(nip) as jumlah_karyawan")
-                            ->from('tb_karyawan')
-                            ->where('dihapus IS NULL')
-                            ->get()->row();
+            ->from('tb_karyawan')
+            ->where('dihapus IS NULL')
+            ->get()->row();
         $karyawanMasuk   = $this->db->select("COUNT(nip) as jumlah_karyawan_masuk")
-                            ->from('tb_absen')
-                            ->where("DATE_FORMAT(dibuat ,'%Y-%m-%d') = '$tanggalSekarang' AND status =", "MASUK")
-                            ->get()->row();
+            ->from('tb_absen')
+            ->where("DATE_FORMAT(dibuat ,'%Y-%m-%d') = '$tanggalSekarang' AND status =", "MASUK")
+            ->get()->row();
 
         // RUMUS (bagian / total) x 100;
         $presentaseKaryawanMasuk = ($karyawanMasuk->jumlah_karyawan_masuk / $totalKaryawan->jumlah_karyawan) * 100;
-            
+
         $data = [
             'judul'          => 'dashboard',
             'menu_pegawai'   => count($this->hrd_m->getKaryawan()->result()),
@@ -45,7 +46,7 @@ class HRD extends CI_Controller {
         echo json_encode($data);
     }
 
-// CONTROLLER DIVISI =================================================================================================
+    // CONTROLLER DIVISI =================================================================================================
     public function dataTableDivisi()
     {
         $list = $this->hrd_m->get_datatables_divisi();
@@ -54,18 +55,18 @@ class HRD extends CI_Controller {
         foreach ($list as $item) {
             $no++;
             $row = array();
-            $row[] = $no.".";
+            $row[] = $no . ".";
             $row[] = $item->nama_divisi;
-            $row[] = '<button type="button" class="btn btn-sm btn-danger mr-1" onclick="modalHapus('.$item->id_divisi.')">Hapus</button>
-            <button type="button" class="btn btn-sm btn-warning mr-1" data-toggle="modal" data-target="#ubahDivisiModal" onclick="modalUbahDivisi('.$item->id_divisi.')">Uah</button>';
+            $row[] = '<button type="button" class="btn btn-sm btn-danger mr-1" onclick="modalHapus(' . $item->id_divisi . ')">Hapus</button>
+            <button type="button" class="btn btn-sm btn-warning mr-1" data-toggle="modal" data-target="#ubahDivisiModal" onclick="modalUbahDivisi(' . $item->id_divisi . ')">Uah</button>';
             $data[] = $row;
         }
         $output = array(
-                    "draw" => @$_POST['draw'],
-                    "recordsTotal" => $this->hrd_m->count_all_divisi(),
-                    "recordsFiltered" => $this->hrd_m->count_filtered_divisi(),
-                    "data" => $data,
-                );
+            "draw" => @$_POST['draw'],
+            "recordsTotal" => $this->hrd_m->count_all_divisi(),
+            "recordsFiltered" => $this->hrd_m->count_filtered_divisi(),
+            "data" => $data,
+        );
         echo json_encode($output);
     }
 
@@ -75,7 +76,7 @@ class HRD extends CI_Controller {
         // var_dump($param); 
         $param = $this->input->post('id', true);
         $data = $this->hrd_m->getDivisi($param)->result();
-        if($this->db->affected_rows() > 0) {
+        if ($this->db->affected_rows() > 0) {
             echo json_encode($data);
         } else {
             return "false";
@@ -83,7 +84,7 @@ class HRD extends CI_Controller {
     }
 
     public function divisi()
-    {   
+    {
         $data = [
             'judul' => 'data divisi',
             'data'  => $this->hrd_m->getDivisi()
@@ -97,14 +98,13 @@ class HRD extends CI_Controller {
         $this->form_validation->set_message('required', '{field} Tidak boleh kosong');
         $this->form_validation->set_message('is_unique', '{field} Data ini sudah ada');
 
-        if($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == FALSE) {
             echo json_encode(form_error('namaDivisi'));
-
         } else {
-// TAMBAH DATA DIVISI
+            // TAMBAH DATA DIVISI
             $post = $this->input->post(null, TRUE);
             $this->hrd_m->tambahDivisi($post);
-            if($this->db->affected_rows() > 0) {
+            if ($this->db->affected_rows() > 0) {
                 echo json_encode('true');
             }
         }
@@ -116,75 +116,74 @@ class HRD extends CI_Controller {
         $this->form_validation->set_message('required', '{field} Tidak boleh kosong');
         $this->form_validation->set_message('cek_divisi', '{field} ini sudah ada');
 
-        if($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == FALSE) {
             echo json_encode(form_error('ubahNamaDivisi'));
-
         } else {
-// UBAH DATA DIVISI
+            // UBAH DATA DIVISI
             $post = $this->input->post(null, TRUE);
             $this->hrd_m->ubahDivisi($post);
-            if($this->db->affected_rows() > 0) {
+            if ($this->db->affected_rows() > 0) {
                 echo json_encode('true');
             }
         }
     }
 
-// HAPUS DATA DIVISI
+    // HAPUS DATA DIVISI
     public function hapusDivisi()
     {
         $idDivisi = $this->input->post("idDivisi", true);
         $this->hrd_m->hapusDivisi($idDivisi);
-        if($this->db->affected_rows() > 0) {
+        if ($this->db->affected_rows() > 0) {
             echo "true";
         } else {
             echo "false";
         }
     }
 
-// FUNGSI CALLBACK UNTUK NAMA DIVISI
+    // FUNGSI CALLBACK UNTUK NAMA DIVISI
     public function cek_divisi()
-	{
-		$post = $this->input->post(null, TRUE);
-		$query = $this->db->query("SELECT * from tb_divisi where nama_divisi = '$post[ubahNamaDivisi]' and id_divisi != '$post[ubahIdDivisi]'");
-		
-		if($query->num_rows() > 0) {
-			// $this->form_validation->set_message('ubahNamaDivisi', '{field} Ini sudah dipakai');
-			return false;
-		}else{
-			return true;
-		}
-	}
+    {
+        $post = $this->input->post(null, TRUE);
+        $query = $this->db->query("SELECT * from tb_divisi where nama_divisi = '$post[ubahNamaDivisi]' and id_divisi != '$post[ubahIdDivisi]'");
 
-// CONTROLLER KARYAWAN =================================================================================================
+        if ($query->num_rows() > 0) {
+            // $this->form_validation->set_message('ubahNamaDivisi', '{field} Ini sudah dipakai');
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    // CONTROLLER KARYAWAN =================================================================================================
 
 
-    public function karyawan($idDivisi = null) 
+    public function karyawan($idDivisi = null)
     {
         $data = [
             'judul'    => 'data karyawan',
             'subJudul' => $this->db->select('nama_divisi')->get_where('tb_divisi', ['id_divisi' => $idDivisi])->row()->nama_divisi,
             'idDivisi' => $idDivisi
         ];
-        $this->template->load('template/template','HRD/karyawan', $data);
+        $this->template->load('template/template', 'HRD/karyawan', $data);
     }
 
     public function generateNIP()
     {
         $karyawan = $this->db->select('MAX(nip) as maxCode')
-        ->from("tb_karyawan")
-        ->where("jabatan !=", "HRD")
-        ->get()->row();
+            ->from("tb_karyawan")
+            ->where("jabatan !=", "HRD")
+            ->get()->row();
 
-        if($karyawan->maxCode == "" || $karyawan->maxCode == null) {
+        if ($karyawan->maxCode == "" || $karyawan->maxCode == null) {
             $noUrut = "001";
         } else {
             $noUrut = substr($karyawan->maxCode, 5, 3);
             $noUrut++;
-        }  
-        
-        $tahun = substr(date('Y'), 2,2);
+        }
+
+        $tahun = substr(date('Y'), 2, 2);
         $bulan = date('m');
-        $empatDigit = $tahun.$bulan;
+        $empatDigit = $tahun . $bulan;
         $nip = $empatDigit . sprintf("%03s", $noUrut);
 
         echo json_encode([$nip]);
@@ -206,7 +205,7 @@ class HRD extends CI_Controller {
         foreach ($list as $l) {
             $no++;
             $row = array();
-            $row[] = $no.".";
+            $row[] = $no . ".";
             $row[] = $l->nip;
             $row[] = $l->nama;
             $row[] = $l->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan';
@@ -215,15 +214,15 @@ class HRD extends CI_Controller {
             $row[] = $l->email;
             $row[] = $l->nomor_telepon;
             // add html for action
-            $row[] = '<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan('.$l->id_karyawan.')">Hapus</button> <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal('.$l->id_karyawan.')">Ubah</button> <a target="_blank" href="'.base_url('HRD/kartu/'.$l->id_karyawan).'" class="btn btn-sm btn-info">Kartu</a>';
+            $row[] = '<button type="button" class="btn btn-sm btn-danger" onclick="modalHapusKaryawan(' . $l->id_karyawan . ')">Hapus</button> <button type="button" class="btn btn-sm btn-warning" onclick="ubahKaryawanModal(' . $l->id_karyawan . ')">Ubah</button> <a target="_blank" href="' . base_url('HRD/kartu/' . $l->id_karyawan) . '" class="btn btn-sm btn-info">Kartu</a>';
             $data[] = $row;
         }
         $output = array(
-                    "draw" => @$_POST['draw'],
-                    "recordsTotal" => $this->hrd_m->count_all_karyawan($idDivisi),
-                    "recordsFiltered" => $this->hrd_m->count_filtered_karyawan($idDivisi),
-                    "data" => $data,
-                );
+            "draw" => @$_POST['draw'],
+            "recordsTotal" => $this->hrd_m->count_all_karyawan($idDivisi),
+            "recordsFiltered" => $this->hrd_m->count_filtered_karyawan($idDivisi),
+            "data" => $data,
+        );
         // output to json format
         echo json_encode($output);
     }
@@ -232,7 +231,7 @@ class HRD extends CI_Controller {
     {
         $idKaryawan = $this->input->post('id_karyawan', true);
         $model = $this->hrd_m->getKaryawan($idKaryawan)->result();
-        if($this->db->affected_rows() > 0) {
+        if ($this->db->affected_rows() > 0) {
             $data = [
                 'res'  => 'true',
                 'data' => $model,
@@ -314,7 +313,7 @@ class HRD extends CI_Controller {
         $this->form_validation->set_message('is_unique', '{field} Ini sudah ada');
         $this->form_validation->set_message('valid_email', '{field} yang di input tidak valid');
 
-        if($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == FALSE) {
 
             $data = [
                 'res'          => 'false',
@@ -330,22 +329,21 @@ class HRD extends CI_Controller {
                 'email'        => form_error('email'),
                 'alamat'       => form_error('alamat'),
             ];
-            
-            echo json_encode($data);
 
+            echo json_encode($data);
         } else {
-// TAMBAH DATA KARYAWAN
+            // TAMBAH DATA KARYAWAN
 
 
             $post = $this->input->post(null, TRUE);
             $this->hrd_m->tambahKaryawan($post);
-            if($this->db->affected_rows() > 0) {
-                echo json_encode(['res'=>'true', 'nip' => $post['nip']]);
+            if ($this->db->affected_rows() > 0) {
+                echo json_encode(['res' => 'true', 'nip' => $post['nip']]);
             }
         }
     }
 
-// UBAH DATA KARYAWAN
+    // UBAH DATA KARYAWAN
     public function ubahKaryawan()
     {
         // var_dump($_POST);
@@ -416,7 +414,7 @@ class HRD extends CI_Controller {
         $this->form_validation->set_message('cek_nik', '{field} ini sudah ada');
         $this->form_validation->set_message('cek_nip', '{field} ini sudah ada');
 
-        if($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == FALSE) {
 
             $data = [
                 'res'          => 'false',
@@ -432,69 +430,68 @@ class HRD extends CI_Controller {
                 'email'        => form_error('uEmail'),
                 'alamat'       => form_error('uAlamat'),
             ];
-            
-            echo json_encode($data);
 
+            echo json_encode($data);
         } else {
-        // UBAH DATA KARYAWAN
+            // UBAH DATA KARYAWAN
             $post = $this->input->post(null, TRUE);
-        
-            if($post['gambarLama'] != "Default.jpg") {
-                unlink("./assets/img/".$post['gambarLama']);
+
+            if ($post['gambarLama'] != "Default.jpg") {
+                unlink("./assets/img/" . $post['gambarLama']);
             }
             $this->hrd_m->ubahKaryawan($post);
-            if($this->db->affected_rows() > 0) {
-                echo json_encode(['res'=>'true', 'uNip' => $post['uNip']]);
+            if ($this->db->affected_rows() > 0) {
+                echo json_encode(['res' => 'true', 'uNip' => $post['uNip']]);
             }
         }
     }
 
-// CEK NIK
+    // CEK NIK
     public function cek_nik()
     {
         $post = $this->input->post(null, TRUE);
         $query = $this->db->query("SELECT * from tb_karyawan where nik = '$post[uNik]' and id_karyawan != '$post[uIdKaryawan]'");
-        
-        if($query->num_rows() > 0) {
+
+        if ($query->num_rows() > 0) {
             // $this->form_validation->set_message('uNik', '{field} Ini sudah dipakai');
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-//CEK NIP
+    //CEK NIP
 
     public function cek_nip()
     {
         $post = $this->input->post(null, TRUE);
         $query = $this->db->query("SELECT * from tb_karyawan where nip = '$post[uNip]' and id_karyawan != '$post[uIdKaryawan]'");
-        
-        if($query->num_rows() > 0) {
+
+        if ($query->num_rows() > 0) {
             // $this->form_validation->set_message('uNip', '{field} Ini sudah dipakai');
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-// HAPUS DATA
+    // HAPUS DATA
     public function hapusKaryawan()
     {
         $id = $this->input->post("id_karyawan", true);
 
         $file = $this->db->select('gambar')
-                        ->from('tb_karyawan')
-                        ->where('id_karyawan', $id)
-                        ->get()->row();
-        
-        if($file->gambar != "Default.jpg") {
-            unlink("./assets/img/".$file->gambar);
+            ->from('tb_karyawan')
+            ->where('id_karyawan', $id)
+            ->get()->row();
+
+        if ($file->gambar != "Default.jpg") {
+            unlink("./assets/img/" . $file->gambar);
         }
-            
+
 
         $this->hrd_m->hapusKaryawan($id);
-        if($this->db->affected_rows() > 0) {
+        if ($this->db->affected_rows() > 0) {
             echo "true";
         } else {
             echo "false";
@@ -505,14 +502,14 @@ class HRD extends CI_Controller {
     {
         // var_dump($_FILES['gambarBaru']);
         // die;
-        $config['upload_path']   = "./assets/img"; 
-        $config['allowed_types'] = 'gif|jpg|png';  
+        $config['upload_path']   = "./assets/img";
+        $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size']      = '1024';
         $config['file_name']     = $this->input->post('namaGambar', true);
-         
-        $this->load->library('upload',$config); 
 
-        if ( ! $this->upload->do_upload('gambar')){
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('gambar')) {
             $error = array('error' => $this->upload->display_errors());
             echo json_encode(['res' => 'false', 'msg' => $error]);
         } else {
@@ -525,14 +522,14 @@ class HRD extends CI_Controller {
     {
         // var_dump($_FILES['gambarBaru']);
         // die;
-        $config['upload_path']   = "./assets/img"; 
-        $config['allowed_types'] = 'gif|jpg|png';  
+        $config['upload_path']   = "./assets/img";
+        $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size']      = '1024';
         $config['file_name']     = $this->input->post('namaGambar', true);
-         
-        $this->load->library('upload',$config); 
 
-        if ( ! $this->upload->do_upload('gambarBaru')){
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('gambarBaru')) {
             $error = array('error' => $this->upload->display_errors());
             echo json_encode(['res' => 'false', 'msg' => $error]);
         } else {
@@ -541,7 +538,7 @@ class HRD extends CI_Controller {
         }
     }
 
-// CONTROLLER ABSENSI =================================================================================================
+    // CONTROLLER ABSENSI =================================================================================================
 
     public function absen()
     {
@@ -560,106 +557,105 @@ class HRD extends CI_Controller {
 
             $tanggal_sekarang = date('Y-m-d');
             $cekAbsen = $this->db->select('nip')
-            ->from('tb_absen')
-            ->where("DATE_FORMAT(dibuat, '%Y-%m-%d') = '$tanggal_sekarang' AND status IS NOT NULL AND keterangan IS NOT NULL AND nip =", $item->nip)
-            ->get()->row();
+                ->from('tb_absen')
+                ->where("DATE_FORMAT(dibuat, '%Y-%m-%d') = '$tanggal_sekarang' AND status IS NOT NULL AND keterangan IS NOT NULL AND nip =", $item->nip)
+                ->get()->row();
 
-            if($cekAbsen) {
-                $tombol = '<button type="button" class="btn btn-sm btn-info" onclick="absenKeluar('.$item->id_absen.')">Keluar</button>';
+            if ($cekAbsen) {
+                $tombol = '<button type="button" class="btn btn-sm btn-info" onclick="absenKeluar(' . $item->id_absen . ')">Keluar</button>';
             } else {
-                $tombol = '<button type="button" class="btn btn-sm btn-primary" onclick="absenMasuk('.$item->id_absen.')">Masuk</button>';
+                $tombol = '<button type="button" class="btn btn-sm btn-primary" onclick="absenMasuk(' . $item->id_absen . ')">Masuk</button>';
             }
 
             $no++;
             $row = array();
-            $row[] = $no.".";
+            $row[] = $no . ".";
             $row[] = $item->nip;
             $row[] = $item->nama;
             $row[] = substr($item->dibuat, 0, 10);
             $row[] = substr($item->dibuat, 11, 19);
-            $row[] = $tombol. 
-            ' <button class="btn btn-sm btn-warning" onclick="opsiModal('.$item->id_absen.')">Opsi</button> 
-            <button class="btn btn-sm btn-danger" onclick="hapusAbsen('.$item->id_absen.')">Hapus</button>'; /*absenOpsi*/
+            $row[] = $tombol .
+                ' <button class="btn btn-sm btn-warning" onclick="opsiModal(' . $item->id_absen . ')">Opsi</button> 
+            <button class="btn btn-sm btn-danger" onclick="hapusAbsen(' . $item->id_absen . ')">Hapus</button>'; /*absenOpsi*/
             $data[] = $row;
         }
         $output = array(
-                    "draw" => @$_POST['draw'],
-                    "recordsTotal" => $this->hrd_m->count_all_absen(),
-                    "recordsFiltered" => $this->hrd_m->count_filtered_absen(),
-                    "data" => $data,
-                );
+            "draw" => @$_POST['draw'],
+            "recordsTotal" => $this->hrd_m->count_all_absen(),
+            "recordsFiltered" => $this->hrd_m->count_filtered_absen(),
+            "data" => $data,
+        );
         // output to json format
         echo json_encode($output);
     }
 
-    public function dataAbsen() 
+    public function dataAbsen()
     {
         $data = [
             'judul'  => 'data absensi',
             'divisi' => $this->db->get('tb_divisi'),
         ];
-        $this->template->load('template/template','HRD/data_absen', $data);
-        
+        $this->template->load('template/template', 'HRD/data_absen', $data);
     }
 
     public function getDataAbsen()
     {
-            $post = $this->input->post(null, true);
-            $param = [
-                'tanggalMulai'    => $post['tanggalMulai'],
-                'tanggalBerakhir' => $post['tanggalBerakhir'],
-                'idDivisi'        => $post['idDivisi'],
-            ];
+        $post = $this->input->post(null, true);
+        $param = [
+            'tanggalMulai'    => $post['tanggalMulai'],
+            'tanggalBerakhir' => $post['tanggalBerakhir'],
+            'idDivisi'        => $post['idDivisi'],
+        ];
 
-            $list = $this->hrd_m->get_datatables_data_absen($param);
-            $data = array();
-            $no   = @$_POST['start'];
-            foreach ($list as $item) {
-                $no++;
-                $row = array();
-                $row[] = $no.".";
-                $row[] = $item->absenNip;
-                $row[] = $item->nama;
-                $row[] = $this->db->select("COUNT(nip) as masuk")
-                                    ->from('tb_absen A')
-                                    ->where("A.status = 'MASUK' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$post[tanggalMulai]' AND '$post[tanggalBerakhir]' AND nip =", $item->absenNip)
-                                    ->get()->result()[0]->masuk;
+        $list = $this->hrd_m->get_datatables_data_absen($param);
+        $data = array();
+        $no   = @$_POST['start'];
+        foreach ($list as $item) {
+            $no++;
+            $row = array();
+            $row[] = $no . ".";
+            $row[] = $item->absenNip;
+            $row[] = $item->nama;
+            $row[] = $this->db->select("COUNT(nip) as masuk")
+                ->from('tb_absen A')
+                ->where("A.status = 'MASUK' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$post[tanggalMulai]' AND '$post[tanggalBerakhir]' AND nip =", $item->absenNip)
+                ->get()->result()[0]->masuk;
 
-                $row[] = $this->db->select("COUNT(nip) as izin")
-                                    ->from('tb_absen A')
-                                    ->where("A.status = 'IZIN' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$post[tanggalMulai]' AND '$post[tanggalBerakhir]' AND nip =", $item->absenNip)
-                                    ->get()->result()[0]->izin;
+            $row[] = $this->db->select("COUNT(nip) as izin")
+                ->from('tb_absen A')
+                ->where("A.status = 'IZIN' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$post[tanggalMulai]' AND '$post[tanggalBerakhir]' AND nip =", $item->absenNip)
+                ->get()->result()[0]->izin;
 
-                $row[] = $this->db->select("COUNT(nip) as alpa")
-                                    ->from('tb_absen A')
-                                    ->where("A.status = 'ALPA' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$post[tanggalMulai]' AND '$post[tanggalBerakhir]' AND nip =", $item->absenNip)
-                                    ->get()->result()[0]->alpa;
+            $row[] = $this->db->select("COUNT(nip) as alpa")
+                ->from('tb_absen A')
+                ->where("A.status = 'ALPA' AND DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN '$post[tanggalMulai]' AND '$post[tanggalBerakhir]' AND nip =", $item->absenNip)
+                ->get()->result()[0]->alpa;
 
-                // $row[] = '<button class="btn btn-sm btn-info">Rincian</button>';
+            // $row[] = '<button class="btn btn-sm btn-info">Rincian</button>';
 
-                $data[] = $row;
-            }
-            $output = array(
-                        "draw" => @$_POST['draw'],
-                        "recordsTotal" => $this->hrd_m->count_all_data_absen($param),
-                        "recordsFiltered" => $this->hrd_m->count_filtered_data_absen($param),
-                        "data" => $data,
-                    );
-            echo json_encode($output);
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => @$_POST['draw'],
+            "recordsTotal" => $this->hrd_m->count_all_data_absen($param),
+            "recordsFiltered" => $this->hrd_m->count_filtered_data_absen($param),
+            "data" => $data,
+        );
+        echo json_encode($output);
     }
 
     public function dataAbsenBiasa()
-    {   
+    {
         $post            = $this->input->post(null, true);
         $idDivisi        = $post['idDivisi'];
         $tanggalMulai    = $post['tanggalMulai'];
         $tanggalBerakhir = $post['tanggalBerakhir'];
-        
+
         $data = $this->db->select('*')
-                    ->from('tb_absen A')
-                    ->join('tb_karyawan K', 'K.nip = A.nip')
-                    ->where("DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN  '$tanggalMulai' AND '$tanggalBerakhir' AND K.id_divisi =", "$idDivisi")
-                    ->get()->result();
+            ->from('tb_absen A')
+            ->join('tb_karyawan K', 'K.nip = A.nip')
+            ->where("DATE_FORMAT(A.dibuat, '%Y-%m-%d') BETWEEN  '$tanggalMulai' AND '$tanggalBerakhir' AND K.id_divisi =", "$idDivisi")
+            ->get()->result();
 
         // var_dump($data);
     }
@@ -678,19 +674,19 @@ class HRD extends CI_Controller {
         // $this->load->view('HRD/cetak_kartu', $data);
 
         $html = $this->load->view('HRD/cetak_kartu', $data, true);
-        $file = 'ceetak kartu '.$dataKaryawan->nip;
-        pdfGenerator($html, $file, 'A4','landscape');
+        $file = 'ceetak kartu ' . $dataKaryawan->nip;
+        pdfGenerator($html, $file, 'A4', 'landscape');
     }
 
     public function hapusAbsen()
     {
         $id = $this->input->post('id', true);
         $this->db->delete('tb_absen', ['id_absen' => $id]);
-        if($this->db->affected_rows() > 0) {
-            echo json_encode(['res'=>'true']);
+        if ($this->db->affected_rows() > 0) {
+            echo json_encode(['res' => 'true']);
         }
     }
 
 
-// TUTUP CLASS
+    // TUTUP CLASS
 }
