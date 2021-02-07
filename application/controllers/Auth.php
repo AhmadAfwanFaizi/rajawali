@@ -42,9 +42,9 @@ class Auth extends CI_Controller
 			$this->session->set_userdata($data);
 
 			if ($data['role'] == 'ADMIN') {
-				redirect('Label');
+				redirect('Master/customer');
 			} else if ($data['role'] == 'A') {
-				redirect('Label');
+				redirect('Sample');
 			} else if ($data['role'] == 'B') {
 				$red = 'Kepala_divisi';
 			} else if ($data['role'] == 'C') {

@@ -13,14 +13,14 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/Ionicons/css/ionicons.min.css">
-  <!--
-     Theme style -->
+  <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
+  <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/skins/_all-skins.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/select2/dist/css/select2.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,6 +37,8 @@
 
   <!-- jQuery 3 -->
   <script src="<?= base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Select2 -->
+  <script src="<?= base_url() ?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
 
   <!-- Site wrapper -->
   <div class="wrapper">
@@ -359,9 +361,11 @@
   <script src="<?= base_url() ?>assets/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="<?= base_url() ?>assets/dist/js/demo.js"></script>
+
   <script>
     $(document).ready(function() {
-      $('.sidebar-menu').tree()
+      $('.sidebar-menu').tree();
+      $(".select2-selection").attr("style", "height:35px");
     })
   </script>
 </body>

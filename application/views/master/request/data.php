@@ -15,7 +15,7 @@
                                 <th>Category</th>
                                 <th>Remark</th>
                                 <th>Enable</th>
-                                <th>Action</th>
+                                <th style="width: 85px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,6 +58,11 @@
 
 <script>
     $(function() {
-        $('#tableRequest').DataTable();
+        $('#tableRequest').DataTable({
+            "columnDefs": [{
+                "targets": [0, 1, 2, 3, 4],
+                "orderable": false,
+            }],
+        });
     })
 </script>

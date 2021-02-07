@@ -40,8 +40,8 @@
             if ($role == 'ADMIN' || $role == 'C' || $role == 'A') { ?>
                 <!-- Role A -->
                 <li>
-                    <a href="#">
-                        <i class="fa fa-th"></i> <span>Label</span>
+                    <a href="<?= base_url() ?>Sample ">
+                        <i class="fa fa-th"></i> <span>Sample</span>
                     </a>
                 </li>
             <?php }
