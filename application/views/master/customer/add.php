@@ -35,8 +35,19 @@
                                     <input type="text" class="form-control" name="contactPerson" placeholder="Contact Person">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="text" class="form-control" name="email" placeholder="Email">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label for="email">Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10" id="divEmail">
+                                            <input type="text" class="form-control" name="email[]" placeholder="Email">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary" onclick="addInputEmail()"><i class="fas fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="billTo">Bill To</label>
@@ -64,3 +75,10 @@
         </div>
     </div>
 </section>
+
+<script>
+    function addInputEmail() {
+        let element = '<br/><input type="text" class="form-control" name="email[]" placeholder="Email">';
+        $("#divEmail").append(element);
+    }
+</script>

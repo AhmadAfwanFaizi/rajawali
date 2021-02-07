@@ -29,7 +29,14 @@
                                     <td><?= $row->address ?></td>
                                     <td><?= $row->contact_person ?></td>
                                     <td><?= $row->phone_number ?></td>
-                                    <td><?= $row->email ?></td>
+                                    <td>
+                                        <?php
+                                        $query = $this->db->query("SELECT email from customer_detail where id_customer = '$row->id_customer'")->result();
+                                        // var_dump($query);
+                                        foreach ($query as $subRow) {
+                                            echo $subRow->email . "<br/>";
+                                        } ?>
+                                    </td>
                                     <td><?= $row->bill_to ?></td>
                                     <td><?= $row->remark ?></td>
                                     <td><?= $row->enable == 'Y' ? 'YES' : 'NO' ?></td>

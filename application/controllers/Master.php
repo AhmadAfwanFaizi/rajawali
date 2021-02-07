@@ -12,9 +12,7 @@ class Master extends CI_Controller
 
     public function customer()
     {
-        $data = [
-            "data" => $this->customer_m->getData()->result(),
-        ];
+        $data["data"] = $this->customer_m->getData()->result();
         $this->template->load('template/template', 'master/customer/data', $data);
     }
 
@@ -25,7 +23,7 @@ class Master extends CI_Controller
         $this->form_validation->set_rules('address', 'Address', 'required');
         $this->form_validation->set_rules('remark', 'Remark', 'required');
         $this->form_validation->set_rules('contactPerson', 'Contact Person', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('email[]', 'Email', 'required');
         $this->form_validation->set_rules('billTo', 'Bill To', 'required');
         $this->form_validation->set_rules('enable', 'Enable', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
@@ -58,22 +56,22 @@ class Master extends CI_Controller
         $this->form_validation->set_rules('address', 'Address', 'required');
         $this->form_validation->set_rules('remark', 'Remark', 'required');
         $this->form_validation->set_rules('contactPerson', 'Contact Person', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
+        // $this->form_validation->set_rules('email[]', 'Email', 'required');
         $this->form_validation->set_rules('billTo', 'Bill To', 'required');
         $this->form_validation->set_rules('enable', 'Enable', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 
+        // var_dump($_POST);
+        // die;
         if ($this->form_validation->run() == false) {
             $data = [
                 'data' => $this->customer_m->getData($idCustomer)->row(),
             ];
-            // var_dump($data);
-            // die;
             $this->template->load('template/template', 'master/customer/edit', $data);
         } else {
             $post = $this->input->post(null, true);
-            // var_dump($post);
+            // var_dump($_POST);
             // die;
             $this->customer_m->edit($post);
             if ($this->db->affected_rows() > 0) {

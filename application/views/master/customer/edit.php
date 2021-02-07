@@ -36,8 +36,26 @@
                                     <input type="text" class="form-control" name="contactPerson" placeholder="Contact Person" value="<?= $data->contact_person ?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="text" class="form-control" name="email" placeholder="Email" value="<?= $data->email ?>">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label for="email">Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10" id="divEmail">
+                                            <?php
+                                            $query = $this->db->query("SELECT id,email from customer_detail where id_customer = '$data->id_customer'")->result();
+                                            // var_dump($query);
+                                            foreach ($query as $subRow) { ?>
+                                                <input type="hidden" name="idSub[]" value="<?= $subRow->id ?>">
+                                                <input type="text" class="form-control" name="email[]" placeholder="Email" value="<?= $subRow->email ?>"> <br />
+                                            <?php } ?>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary" onclick="addInputEmail()"><i class="fas fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="billTo">Bill To</label>
@@ -65,3 +83,10 @@
         </div>
     </div>
 </section>
+
+<script>
+    function addInputEmail() {
+        let element = '<br/><input type="text" class="form-control" name="emailPlus[]" placeholder="Email">';
+        $("#divEmail").append(element);
+    }
+</script>
