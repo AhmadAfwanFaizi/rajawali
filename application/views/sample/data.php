@@ -14,14 +14,7 @@
                                 <th>Quotation</th>
                                 <th>Customer</th>
                                 <th>Brand</th>
-                                <th>Sample Code</th>
-                                <th>Sample Description</th>
-                                <th>Quantity</th>
-                                <th>BAPC</th>
-                                <th>Received</th>
-                                <th>Testing</th>
-                                <th>Age Grading</th>
-                                <th style="width: 85px;">Action</th>
+                                <th style="width: 130px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,14 +23,10 @@
                                     <td><?= $row->quotation_no ?></td>
                                     <td><?= $row->customer_name ?></td>
                                     <td><?= $row->brand ?></td>
-                                    <td><?= $row->sample_code ?></td>
-                                    <td><?= $row->sample_description ?></td>
-                                    <td><?= $row->quantity ?></td>
-                                    <td><?= $row->bapc_no ?></td>
-                                    <td><?= $row->date_received ?></td>
-                                    <td><?= $row->date_testing ?></td>
-                                    <td><?= $row->age_grading ?></td>
                                     <td>
+                                        <a href="<?= base_url('Sample/addDetail/') . $row->id_sample ?>" class="btn btn-primary">
+                                            <i class="fas fa fa-plus"></i>
+                                        </a>
                                         <a href="<?= base_url('Sample/edit/') . $row->id_sample ?>" class="btn btn-warning">
                                             <i class="fas fa fa-edit"></i>
                                         </a>
@@ -53,14 +42,7 @@
                                 <th>Quotation</th>
                                 <th>Customer</th>
                                 <th>Brand</th>
-                                <th>Sample Code</th>
-                                <th>Sample Description</th>
-                                <th>Quantity</th>
-                                <th>BAPC</th>
-                                <th>Received</th>
-                                <th>Testing</th>
-                                <th>Age Grading</th>
-                                <th>Action</th>
+                                <th style="width: 85px;">Action</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -78,7 +60,7 @@
     $(function() {
         $('#tableSample').DataTable({
             "columnDefs": [{
-                "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                "targets": [0, 1, 2, 3],
                 "orderable": false,
             }],
         });
