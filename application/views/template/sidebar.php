@@ -48,7 +48,7 @@
             if ($role == 'ADMIN' || $role == 'C' || $role == 'B') { ?>
                 <!-- Role B -->
                 <li>
-                    <a href="#">
+                    <a href="<?= base_url() ?>submition">
                         <i class="fa fa-th"></i> <span>Submition</span>
                     </a>
                 </li>

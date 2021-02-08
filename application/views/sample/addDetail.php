@@ -156,6 +156,11 @@
         $("#idCustomer").select2();
         $("#idBrand").select2();
 
-        $("#tableSampleDetail").DataTable();
+        $("#tableSampleDetail").DataTable({
+            "columnDefs": [{
+                "targets": [0, 1, 2, 3, 4, 5, 6],
+                "orderable": false,
+            }],
+        });
     });
 </script>
