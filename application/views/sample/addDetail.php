@@ -131,7 +131,7 @@
                                     <td><?= $row->date_testing ?></td>
                                     <td><?= $row->age_grading ?></td>
                                     <td>
-                                        <a href="<?= base_url('Sample/printDetail/') . $row->id ?>" class="btn btn-success">
+                                        <a href="<?= base_url('Sample/printDetail/') . $row->id ?>" target="_blank" class="btn btn-success">
                                             <i class="fas fa fa-print"></i>
                                         </a>
                                         <a href="<?= base_url('Sample/editDetail/') . $row->id ?>" class="btn btn-warning">

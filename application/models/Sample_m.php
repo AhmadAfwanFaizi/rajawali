@@ -41,7 +41,7 @@ class Sample_m extends CI_model
             'id_brand'     => $post['idBrand'],
             'created_at'         => waktu_sekarang()
         ];
-        $this->db->insert('sample_detail', $data);
+        $this->db->insert('sample', $data);
     }
 
     public function addDetail($post)

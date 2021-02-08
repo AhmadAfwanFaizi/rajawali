@@ -70,7 +70,18 @@
             </table>
         </div>
     </div>
+    <!-- jQuery 3 -->
+    <script src="<?= base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+        window.print();
+        setTimeout(window.close, 1000);
 
+        $(function() {
+            let body = $("body").prop("style");
+            console.log(body);
+
+        })
+    </script>
 </body>
 
 </html>
