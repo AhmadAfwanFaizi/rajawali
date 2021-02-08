@@ -118,7 +118,7 @@
                                 <th>Date Received</th>
                                 <th>Date Testing</th>
                                 <th>Age Grading</th>
-                                <th style="width: 120px;">Action</th>
+                                <th style="width: 130px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -12,33 +12,27 @@
                         <thead>
                             <tr>
                                 <th>Sample Code</th>
-                                <!-- <th>Term Of Service</th>
-                                <th>Enable</th> -->
                                 <th style="width: 85px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <?php foreach ($data as $row) { ?>
+                            <?php foreach ($data as $row) { ?>
                                 <tr>
-                                    <td><?= $row->brand ?></td>
-                                    <td><?= $row->remark ?></td>
-                                    <td><?= $row->enable == 'Y' ? 'YES' : 'NO' ?></td>
+                                    <td><?= $row->sample_code ?></td>
                                     <td>
-                                        <a href="<?= base_url('Master/editBrand/') . $row->id ?>" class="btn btn-warning">
+                                        <a href="<?= base_url('Submition/edit/') . $row->id ?>" class="btn btn-warning">
                                             <i class="fas fa fa-edit"></i>
                                         </a>
-                                        <a href="<?= base_url('Master/deleteBrand/') . $row->id ?>" class="btn btn-danger">
+                                        <!-- <a href="<?= base_url('Master/deleteBrand/') . $row->id ?>" class="btn btn-danger">
                                             <i class="fas fa fa-trash"></i>
-                                        </a>
+                                        </a> -->
                                     </td>
                                 </tr>
-                            <?php } ?> -->
+                            <?php } ?>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Brand</th>
-                                <th>Remark</th>
-                                <th>Enable</th>
+                                <th>Sample Code</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
