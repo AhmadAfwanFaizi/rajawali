@@ -13,7 +13,12 @@ class Sample extends CI_Controller
 
     public function index()
     {
-        $data["data"] = $this->sample_m->getData()->result();
+        $getData   = $this->sample_m->getData()->result();
+        $getDetail = $this->sample_m->getDetail()->result();
+        $data      = [
+            'data'   => $getData,
+            // 'detail' => $getDetail
+        ];
         $this->template->load('template/template', 'sample/data', $data);
         // echo "ok masuk";
     }

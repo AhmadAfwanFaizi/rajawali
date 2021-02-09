@@ -32,11 +32,12 @@ class Submition extends CI_Controller
             $data = [
                 'sample_code' => $this->submition_m->getSampleCode()->result(),
 
-                'include'     => $this->submition_m->getIso('include')->result(),
-                'baby_wear'   => $this->submition_m->getIso('baby_wear')->result(),
-                'others'      => $this->submition_m->getIso('others')->result(),
-                'based'       => $this->submition_m->getIso('based')->result(),
-                'other'       => $this->submition_m->getIso('other')->result(),
+                'include'   => $this->submition_m->getIso('include')->result(),
+                'baby_wear' => $this->submition_m->getIso('baby_wear')->result(),
+                'bicycle'   => $this->submition_m->getIso('bicycle')->result(),
+                'others'    => $this->submition_m->getIso('others')->result(),
+                'based'     => $this->submition_m->getIso('based')->result(),
+                'other'     => $this->submition_m->getIso('other')->result(),
             ];
             // var_dump($data['data']);
             // die;
@@ -71,6 +72,7 @@ class Submition extends CI_Controller
                 'detail'    => $getDetail,
                 'include'   => $this->submition_m->getIso('include')->result(),
                 'baby_wear' => $this->submition_m->getIso('baby_wear')->result(),
+                'bicycle'   => $this->submition_m->getIso('bicycle')->result(),
                 'others'    => $this->submition_m->getIso('others')->result(),
                 'based'     => $this->submition_m->getIso('based')->result(),
                 'other'     => $this->submition_m->getIso('other')->result(),
@@ -93,10 +95,32 @@ class Submition extends CI_Controller
 
     public function deleteRequest($id)
     {
-        $this->request_m->delete($id);
+        $this->submition_m->delete($id);
         if ($this->db->affected_rows() > 0) {
             notif('S', 'Successfully deleted');
         }
         redirect('Master/request');
+    }
+
+    public function print($id)
+    {
+        $getData        = $this->submition_m->getData($id)->row();
+        $getDetail      = $this->submition_m->getDetailData($getData->iso_submition)->result();
+        // $getDetailPrint = $this->submition_m->getDetailPrint($id)->row();
+
+        $data = [
+            // 'sample_code' => $this->submition_m->getSampleCode()->result(),
+            'data'      => $getData,
+            'detail'    => $getDetail,
+            'include'   => $this->submition_m->getIso('include')->result(),
+            'baby_wear' => $this->submition_m->getIso('baby_wear')->result(),
+            'bicycle'   => $this->submition_m->getIso('bicycle')->result(),
+            'others'    => $this->submition_m->getIso('others')->result(),
+            'based'     => $this->submition_m->getIso('based')->result(),
+            'other'     => $this->submition_m->getIso('other')->result(),
+        ];
+        var_dump($getDetail);
+        die;
+        $this->load->view('submition/print', $data);
     }
 }

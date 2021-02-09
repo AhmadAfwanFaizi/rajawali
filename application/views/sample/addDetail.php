@@ -131,15 +131,19 @@
                                     <td><?= $row->date_testing ?></td>
                                     <td><?= $row->age_grading ?></td>
                                     <td>
-                                        <a href="<?= base_url('Sample/printDetail/') . $row->id ?>" target="_blank" class="btn btn-success">
-                                            <i class="fas fa fa-print"></i>
-                                        </a>
-                                        <a href="<?= base_url('Sample/editDetail/') . $row->id ?>" class="btn btn-warning">
-                                            <i class="fas fa fa-edit"></i>
-                                        </a>
-                                        <a href="<?= base_url('Sample/deleteDetail/') . $row->id . '/' . $row->id_sample ?>" class="btn btn-danger">
-                                            <i class="fas fa fa-trash"></i>
-                                        </a>
+                                        <?php if ($row->status_sample == 'PENDING') { ?>
+                                            <a href="<?= base_url('Sample/printDetail/') . $row->id ?>" target="_blank" class="btn btn-success">
+                                                <i class="fas fa fa-print"></i>
+                                            </a>
+                                            <a href="<?= base_url('Sample/editDetail/') . $row->id ?>" class="btn btn-warning">
+                                                <i class="fas fa fa-edit"></i>
+                                            </a>
+                                            <a href="<?= base_url('Sample/deleteDetail/') . $row->id . '/' . $row->id_sample ?>" class="btn btn-danger">
+                                                <i class="fas fa fa-trash"></i>
+                                            </a>
+                                        <?php } else { ?>
+                                            <div class="btn btn-info disabled"> PROGRESS</div>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>

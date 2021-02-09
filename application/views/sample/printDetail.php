@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Print</title>
+    <title>Print Sample</title>
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <style>
@@ -70,17 +70,10 @@
             </table>
         </div>
     </div>
-    <!-- jQuery 3 -->
-    <script src="<?= base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+
     <script>
         window.print();
         setTimeout(window.close, 1000);
-
-        $(function() {
-            let body = $("body").prop("style");
-            console.log(body);
-
-        })
     </script>
 </body>
 

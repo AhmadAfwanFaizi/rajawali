@@ -109,6 +109,17 @@
                                     <?php } ?>
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Bicycle</label>
+                                    <?php foreach ($bicycle as $row) { ?>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="iso[]" value="<?= $row->id ?>">
+                                                <?= $row->iso ?>
+                                            </label>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                                <div class="form-group">
                                     <label for="">Others</label>
                                     <?php foreach ($others as $row) { ?>
                                         <div class="checkbox">
