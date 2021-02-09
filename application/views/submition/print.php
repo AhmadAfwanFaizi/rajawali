@@ -82,7 +82,7 @@
                         </tr>
                         <tr>
                             <th id="rtl" style="font-size: larger; background-color: lightgrey">
-                                RTL-SMPL-01/21/0001
+                                <?= $dataPrint->sample_code ?>
                             </th>
                         </tr>
                     </table>
@@ -99,7 +99,7 @@
                     </td>
                     <td colspan="2">TOYS/ BABY WEAR/OTHERS</td>
                     <td colspan="2">CHILDREN BICYCLE</td>
-                    <td>Date received:</td>
+                    <td>Date received : <?= $dataPrint->date_received ?></td>
                 </tr>
                 <tr>
                     <td class="term">
@@ -161,16 +161,16 @@
 
                 <tr>
                     <td>
-                        Appliicant
+                        Applicant
                     </td>
                     <td colspan="2">
-                        : CV. Kharisma Mitra Semesta
+                        : <?= $dataPrint->customer_name ?>
                     </td>
                     <td>
                         Sample Description
                     </td>
                     <td colspan="2">
-                        : R/C Sport Car
+                        : <?= $dataPrint->sample_description ?>
                     </td>
                 </tr>
                 <tr>
@@ -178,14 +178,13 @@
                         Address
                     </td>
                     <td colspan="2">
-                        : Jl. Tanjung Batu No.21 Stand 10, Kel. Perak Barat, Kec.
-                        Krembangan, Surabaya
+                        : <?= $dataPrint->address ?>
                     </td>
                     <td>
                         Product End Use
                     </td>
                     <td colspan="2">
-                        : Mainan
+                        : <?= $dataPrint->age_grading ?>
                     </td>
                 </tr>
                 <tr>
@@ -199,7 +198,7 @@
                         Brand
                     </td>
                     <td colspan="2">
-                        : BOOM BOOM
+                        : <?= $dataPrint->brand ?>
                     </td>
                 </tr>
                 <tr>
@@ -213,7 +212,7 @@
                         Quantity
                     </td>
                     <td colspan="2">
-                        : 7 Pcs
+                        : <?= $dataPrint->quantity ?>
                     </td>
                 </tr>
                 <tr>
@@ -221,7 +220,7 @@
                         Contact Person
                     </td>
                     <td colspan="2">
-                        Ibu Wenny
+                        <?= $dataPrint->contact_person ?>
                     </td>
                     <td>
                         Country of Origin:
@@ -236,13 +235,15 @@
                         distribution
                     </td>
                     <td colspan="2">
-                        : cso@alammulya.com
+                        : <?php foreach ($email as $row) {
+                                echo $row->email . '<br/>';
+                            } ?>
                     </td>
                     <td>
                         BAPC No.
                     </td>
                     <td colspan="2">
-                        : 0611/ST/IGS/MT/XI/20/BAPC/01
+                        : <?= $dataPrint->bapc_no ?>
                     </td>
                 </tr>
                 <tr>
@@ -256,7 +257,7 @@
                         Item No
                     </td>
                     <td colspan="2">
-                        : RD516-1/2
+                        : <?= $data->item_no ?>
                     </td>
                 </tr>
                 <tr>
@@ -264,7 +265,7 @@
                         Bill to
                     </td>
                     <td colspan="2">
-                        : Ibu Wenny
+                        : <?= $dataPrint->bill_to ?>
                     </td>
                     <td>
                         Family Product *

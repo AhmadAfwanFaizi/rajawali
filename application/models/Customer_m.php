@@ -15,6 +15,17 @@ class Customer_m extends CI_model
         return $this->db->get();
     }
 
+    public function getDataDetail($idCustomer = null)
+    {
+        $this->db->select('email')
+            ->from('customer_detail CD');
+        if ($idCustomer) {
+            $this->db->where("CD.id_customer", $idCustomer);
+        }
+        // $this->db->where("CD.deleted_at", NULL);
+        return $this->db->get();
+    }
+
     public function add($post)
     {
         // var_dump($post['email']);

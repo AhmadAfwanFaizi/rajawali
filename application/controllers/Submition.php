@@ -8,7 +8,7 @@ class Submition extends CI_Controller
     {
         parent::__construct();
         login();
-        $this->load->model(['submition_m']);
+        $this->load->model(['submition_m', 'customer_m']);
     }
 
     public function index()
@@ -104,14 +104,17 @@ class Submition extends CI_Controller
 
     public function print($id)
     {
-        $getData        = $this->submition_m->getData($id)->row();
-        $getDetail      = $this->submition_m->getDetailData($getData->iso_submition)->result();
-        // $getDetailPrint = $this->submition_m->getDetailPrint($id)->row();
+        $getData      = $this->submition_m->getData($id)->row();
+        $getDetail    = $this->submition_m->getDetailData($getData->iso_submition)->result();
+        $getDataPrint = $this->submition_m->getDataPrint($getData->sample_code)->row();
+        $getEmail     = $this->customer_m->getDataDetail($getDataPrint->id_customer)->result();
 
         $data = [
             // 'sample_code' => $this->submition_m->getSampleCode()->result(),
             'data'      => $getData,
             'detail'    => $getDetail,
+            'dataPrint' => $getDataPrint,
+            'email'     => $getEmail,
             'include'   => $this->submition_m->getIso('include')->result(),
             'baby_wear' => $this->submition_m->getIso('baby_wear')->result(),
             'bicycle'   => $this->submition_m->getIso('bicycle')->result(),
@@ -119,8 +122,8 @@ class Submition extends CI_Controller
             'based'     => $this->submition_m->getIso('based')->result(),
             'other'     => $this->submition_m->getIso('other')->result(),
         ];
-        var_dump($getDetail);
-        die;
+        // var_dump($getDataPrint);
+        // die;
         $this->load->view('submition/print', $data);
     }
 }

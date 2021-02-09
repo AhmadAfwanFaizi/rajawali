@@ -37,14 +37,15 @@ class Submition_m extends CI_model
         return $this->db->get();
     }
 
-    public function getDetailPrint($id = null)
+    public function getDataPrint($sampleCode = null)
     {
         $this->db->select('*')
             ->from('sample_detail SD')
             ->join('sample S', 'S.id_sample = SD.id_sample')
-            ->join('customer C', 'C.id_customer = S.id_customer');
-        if ($id) {
-            $this->db->where("SD.id", $id);
+            ->join('customer C', 'C.id_customer = S.id_customer')
+            ->join('brand B', 'B.id = S.id_brand');
+        if ($sampleCode) {
+            $this->db->where("SD.sample_code", $sampleCode);
         }
         return $this->db->get();
     }
