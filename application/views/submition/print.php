@@ -458,8 +458,8 @@
                     <td colspan="2">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="otherMethod" <?= $data->other_method == 'TRUE' ? 'checked' : null ?>>
-                                Others ( Please Specify Method):
+                                <!-- <input type="checkbox" name="otherMethod" <?= $data->other_method == 'TRUE' ? 'checked' : null ?>> -->
+                                Others ( Please Specify Method): <?= $data->other_method ?>
                             </label>
                         </div>
                     </td>

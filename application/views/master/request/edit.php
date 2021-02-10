@@ -13,12 +13,12 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="item">Item</label>
-                            <input type="text" class="form-control" name="item" placeholder="Item" value="<?= $data->item ?>">
+                            <input type="text" class="form-control" name="item" placeholder="Item" value="<?= $data->item ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
                             <!-- <input type="text" class="form-control" name="category" placeholder="Category"> -->
-                            <select name="category" id="category" class="form-control">
+                            <select name="category" id="category" class="form-control" required>
                                 <option value="TOYS" <?= $data->category == 'TOYS' ? 'selected' : '' ?>>TOYS</option>
                                 <option value="BABY_WEAR" <?= $data->category == 'BABY_WEAR' ? 'selected' : '' ?>>BABY WEAR</option>
                                 <option value="BICYCLE" <?= $data->category == 'BICYCLE' ? 'selected' : '' ?>>BICYCLE</option>
@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label for="enable">Enable</label>
                             <!-- <input type="text" class="form-control" name="enable" placeholder="Enable"> -->
-                            <select name="enable" id="enable" class="form-control">
+                            <select name="enable" id="enable" class="form-control" required>
                                 <option value="Y" <?= $data->category == 'Y' ? 'selected' : '' ?>>YES</option>
                                 <option value="N" <?= $data->category == 'N' ? 'selected' : '' ?>>NO</option>
                             </select>

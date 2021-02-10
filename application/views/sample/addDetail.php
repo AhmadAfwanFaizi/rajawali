@@ -59,21 +59,21 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="quantity">Quantity</label>
-                                    <input type="text" class="form-control" name="quantity" placeholder="Quantity">
+                                    <input type="text" class="form-control" name="quantity" placeholder="Quantity" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="bapcNo">BAPC</label>
-                                    <textarea name="bapcNo" id="bapcNo" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="bapcNo" id="bapcNo" cols="30" rows="5" class="form-control" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="ageGrading">Age Grading</label>
-                                    <input type="text" class="form-control" name="ageGrading" placeholder="Age Grading">
+                                    <input type="text" class="form-control" name="ageGrading" placeholder="Age Grading" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="sampleCode">Sample Code</label>
-                                    <input type="text" class="form-control" name="sampleCode" placeholder="Sample Code" value="<?= $sample_code ?>" readonly>
+                                    <input type="text" class="form-control" name="sampleCode" placeholder="Sample Code" value="<?= $sample_code ?>" readonly required>
                                 </div>
                                 <div class="form-group">
                                     <label for="sampleDescription">Sample Description</label>
@@ -81,11 +81,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="dateReceived">Date Received</label>
-                                    <input type="date" class="form-control" name="dateReceived" placeholder="Date Received">
+                                    <input type="date" class="form-control" name="dateReceived" placeholder="Date Received" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="dateTesting">Date Testing</label>
-                                    <input type="date" class="form-control" name="dateTesting" placeholder="Date Testing">
+                                    <input type="date" class="form-control" name="dateTesting" placeholder="Date Testing" required>
                                 </div>
                             </div>
                         </div>

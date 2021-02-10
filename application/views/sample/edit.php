@@ -13,7 +13,7 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="quotationNo">Quotation</label>
-                            <input type="text" class="form-control" name="quotationNo" placeholder="Quotation" value="<?= $data->quotation_no ?>">
+                            <input type="text" class="form-control" name="quotationNo" placeholder="Quotation" value="<?= $data->quotation_no ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="idCustomer">Customer</label>

@@ -24,7 +24,7 @@
                                     <label for="termOfService">Term Of Service</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="termOfService" id="termOfService1" value="1">
+                                            <input type="radio" name="termOfService" id="termOfService1" value="1" checked>
                                             (TOYS/ BABY WEAR/OTHERS) REGULAR
                                         </label>
                                     </div>
@@ -50,23 +50,23 @@
 
                                 <div class="form-group">
                                     <label for="familyProduct">Family Product</label>
-                                    <input type="text" class="form-control" name="familyProduct" placeholder="Family Product">
+                                    <input type="text" class="form-control" name="familyProduct" placeholder="Family Product" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="productEndUse">Product End Use</label>
-                                    <input type="text" class="form-control" name="productEndUse" placeholder="Product End Use">
+                                    <input type="text" class="form-control" name="productEndUse" placeholder="Product End Use" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="ageGroup">Age Group</label>
-                                    <input type="text" class="form-control" name="ageGroup" placeholder="Age Group">
+                                    <input type="text" class="form-control" name="ageGroup" placeholder="Age Group" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="country">Country</label>
-                                    <input type="text" class="form-control" name="country" placeholder="Country">
+                                    <input type="text" class="form-control" name="country" placeholder="Country" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="labSubcont">Lab Subcont</label>
-                                    <input type="text" class="form-control" name="labSubcont" placeholder="Family Product">
+                                    <input type="text" class="form-control" name="labSubcont" placeholder="Family Product" required>
                                 </div>
 
                                 <div class="checkbox">
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="ItemNo">Item No</label>
-                                    <input type="text" class="form-control" name="ItemNo" placeholder="Item No">
+                                    <input type="text" class="form-control" name="ItemNo" placeholder="Item No" required>
                                 </div>
                             </div>
                             <div class="col-md-6">

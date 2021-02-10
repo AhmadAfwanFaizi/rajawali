@@ -13,7 +13,7 @@
 
                         <div class="form-group">
                             <label for="quotationNo">Quotation</label>
-                            <input type="text" class="form-control" name="quotationNo" placeholder="Quotation">
+                            <input type="text" class="form-control" name="quotationNo" placeholder="Quotation" required>
                         </div>
                         <div class="form-group">
                             <label for="idCustomer">Customer</label>

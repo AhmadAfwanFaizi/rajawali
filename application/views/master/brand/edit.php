@@ -13,16 +13,16 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="brand">Brand</label>
-                            <input type="text" class="form-control" name="brand" placeholder="Brand" value="<?= $data->brand ?>">
+                            <input type="text" class="form-control" name="brand" placeholder="Brand" value="<?= $data->brand ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="remark">Remark</label>
-                            <textarea name="remark" id="remark" cols="0" rows="5" class="form-control"><?= $data->remark ?></textarea>
+                            <textarea name="remark" id="remark" cols="0" rows="5" class="form-control" required><?= $data->remark ?></textarea>
                         </div>
                         <div class="form-group">
                             <label for="enable">Enable</label>
                             <!-- <input type="text" class="form-control" name="enable" placeholder="Enable"> -->
-                            <select name="enable" id="enable" class="form-control">
+                            <select name="enable" id="enable" class="form-control" required>
                                 <option value="Y" <?= $data->enable == 'Y' ? 'selected' : '' ?>>YES</option>
                                 <option value="N" <?= $data->enable == 'N' ? 'selected' : '' ?>>NO</option>
                             </select>

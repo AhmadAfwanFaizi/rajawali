@@ -27,7 +27,7 @@ class Master extends CI_Controller
         $this->form_validation->set_rules('address', 'Address', 'required');
         $this->form_validation->set_rules('remark', 'Remark', 'required');
         $this->form_validation->set_rules('contactPerson', 'Contact Person', 'required');
-        $this->form_validation->set_rules('email[]', 'Email', 'required');
+        // $this->form_validation->set_rules('email[]', 'Email', 'required');
         $this->form_validation->set_rules('billTo', 'Bill To', 'required');
         $this->form_validation->set_rules('enable', 'Enable', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');

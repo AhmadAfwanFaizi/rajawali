@@ -12,16 +12,16 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="brand">Brand</label>
-                            <input type="text" class="form-control" name="brand" placeholder="Brand">
+                            <input type="text" class="form-control" name="brand" placeholder="Brand" required>
                         </div>
                         <div class="form-group">
                             <label for="remark">Remark</label>
-                            <textarea name="remark" id="remark" cols="0" rows="5" class="form-control"></textarea>
+                            <textarea name="remark" id="remark" cols="0" rows="5" class="form-control" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="enable">Enable</label>
                             <!-- <input type="text" class="form-control" name="enable" placeholder="Enable"> -->
-                            <select name="enable" id="enable" class="form-control">
+                            <select name="enable" id="enable" class="form-control" required>
                                 <option value="Y">YES</option>
                                 <option value="N">NO</option>
                             </select>

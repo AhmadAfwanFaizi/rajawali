@@ -14,25 +14,25 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="customerName">Customer Name</label>
-                                    <input type="text" class="form-control" name="customerName" placeholder="Customer Name">
+                                    <input type="text" class="form-control" name="customerName" placeholder="Customer Name" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="phoneNumber">Phone Number</label>
-                                    <input type="text" class="form-control" name="phoneNumber" placeholder="Phone Number">
+                                    <input type="text" class="form-control" name="phoneNumber" placeholder="Phone Number" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label>
-                                    <textarea name="address" id="address" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="address" id="address" cols="30" rows="5" class="form-control"></textarea required>
                                 </div>
                                 <div class="form-group">
                                     <label for="remark">Remark</label>
-                                    <input type="text" class="form-control" name="remark" placeholder="Remark">
+                                    <input type="text" class="form-control" name="remark" placeholder="Remark" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="contactPerson">Contect Person</label>
-                                    <input type="text" class="form-control" name="contactPerson" placeholder="Contact Person">
+                                    <input type="text" class="form-control" name="contactPerson" placeholder="Contact Person" required>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
@@ -51,12 +51,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="billTo">Bill To</label>
-                                    <textarea name="billTo" id="billTo" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="billTo" id="billTo" cols="30" rows="5" class="form-control" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="enable">Enable</label>
                                     <!-- <input type="text" class="form-control" name="enable" placeholder="Enable"> -->
-                                    <select name="enable" id="enable" class="form-control">
+                                    <select name="enable" id="enable" class="form-control" required>
                                         <option value="Y">YES</option>
                                         <option value="N">NO</option>
                                     </select>

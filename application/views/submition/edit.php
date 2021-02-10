@@ -52,23 +52,23 @@
 
                                 <div class="form-group">
                                     <label for="familyProduct">Family Product</label>
-                                    <input type="text" class="form-control" name="familyProduct" placeholder="Family Product" value=<?= $data->family_product ?>>
+                                    <input type="text" class="form-control" name="familyProduct" placeholder="Family Product" value=<?= $data->family_product ?> required>
                                 </div>
                                 <div class="form-group">
                                     <label for="productEndUse">Product End Use</label>
-                                    <input type="text" class="form-control" name="productEndUse" placeholder="Product End Use" value=<?= $data->product_end_use ?>>
+                                    <input type="text" class="form-control" name="productEndUse" placeholder="Product End Use" value=<?= $data->product_end_use ?> required>
                                 </div>
                                 <div class="form-group">
                                     <label for="ageGroup">Age Group</label>
-                                    <input type="text" class="form-control" name="ageGroup" placeholder="Age Group" value=<?= $data->age_group ?>>
+                                    <input type="text" class="form-control" name="ageGroup" placeholder="Age Group" value=<?= $data->age_group ?> required>
                                 </div>
                                 <div class="form-group">
                                     <label for="country">Country</label>
-                                    <input type="text" class="form-control" name="country" placeholder="Country" value=<?= $data->country ?>>
+                                    <input type="text" class="form-control" name="country" placeholder="Country" value=<?= $data->country ?> required>
                                 </div>
                                 <div class="form-group">
                                     <label for="labSubcont">Lab Subcont</label>
-                                    <input type="text" class="form-control" name="labSubcont" placeholder="Family Product" value=<?= $data->lab_subcont ?>>
+                                    <input type="text" class="form-control" name="labSubcont" placeholder="Family Product" value=<?= $data->lab_subcont ?> required>
                                 </div>
 
                                 <div class="checkbox">
