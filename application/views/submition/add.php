@@ -48,6 +48,27 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="familyProduct">Family Product</label>
+                                    <input type="text" class="form-control" name="familyProduct" placeholder="Family Product">
+                                </div>
+                                <div class="form-group">
+                                    <label for="productEndUse">Product End Use</label>
+                                    <input type="text" class="form-control" name="productEndUse" placeholder="Product End Use">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ageGroup">Age Group</label>
+                                    <input type="text" class="form-control" name="ageGroup" placeholder="Age Group">
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <input type="text" class="form-control" name="country" placeholder="Country">
+                                </div>
+                                <div class="form-group">
+                                    <label for="labSubcont">Lab Subcont</label>
+                                    <input type="text" class="form-control" name="labSubcont" placeholder="Family Product">
+                                </div>
+
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="doNotShowPass" value="TRUE">

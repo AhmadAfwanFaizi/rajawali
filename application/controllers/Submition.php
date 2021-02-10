@@ -122,7 +122,7 @@ class Submition extends CI_Controller
             'based'     => $this->submition_m->getIso('based')->result(),
             'other'     => $this->submition_m->getIso('other')->result(),
         ];
-        // var_dump($getDataPrint);
+        // var_dump($getDetail);
         // die;
         $this->load->view('submition/print', $data);
     }

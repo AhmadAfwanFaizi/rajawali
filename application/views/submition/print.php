@@ -19,11 +19,12 @@
 
         table {
             width: 100%;
-            border: 1px solid black;
+            border: 1px solid;
         }
 
         td {
             padding: 2px;
+            border: 1px solid;
         }
 
         .term {
@@ -45,6 +46,16 @@
                 background-color: lightgrey !important;
             }
         }
+
+        .checkbox {
+            margin: 5px 0px;
+        }
+
+        img {
+            width: 70px;
+            margin-left: 20px;
+            margin-top: -5px;
+        }
     </style>
 </head>
 
@@ -54,7 +65,7 @@
 
         <div class="row">
             <div class="col-xs-2">
-                gambar
+                <img src="<?= base_url() ?>assets/img/rajawali.png" alt="">
             </div>
             <div class="col-xs-5">
                 PT Rajawali Baskara Perkasa <br />
@@ -92,13 +103,17 @@
 
         <div class="row">
             <h3><u>Submission Testing Request Form</u></h3>
-            <table border="1px">
+            <table>
                 <tr>
                     <td rowspan="2">
                         <b>TERM OF SERVICE:</b>
                     </td>
-                    <td colspan="2">TOYS/ BABY WEAR/OTHERS</td>
-                    <td colspan="2">CHILDREN BICYCLE</td>
+                    <td colspan="2">
+                        <b>TOYS/ BABY WEAR/OTHERS</b>
+                    </td>
+                    <td colspan="2">
+                        <b>CHILDREN BICYCLE</b>
+                    </td>
                     <td>Date received : <?= $dataPrint->date_received ?></td>
                 </tr>
                 <tr>
@@ -226,7 +241,7 @@
                         Country of Origin:
                     </td>
                     <td colspan="2">
-                        : 7 Pcs
+                        : <?= $data->country ?>
                     </td>
                 </tr>
                 <tr>
@@ -271,7 +286,7 @@
                         Family Product *
                     </td>
                     <td colspan="2">
-                        : Toys
+                        : <?= $data->family_product ?>
                     </td>
                 </tr>
                 <tr>
@@ -279,7 +294,12 @@
 
                     </td>
                     <td colspan="3">
-                        For SNI certification sample, all information based on BAPC
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="" <?= $data->sni_certification == 'TRUE' ? 'checked' : null ?>>
+                                <b>For SNI certification sample, all information based on BAPC</b>
+                            </label>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -439,7 +459,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        Date :
+                        Date : <?= $dataPrint->date_testing ?>
                     </td>
                 </tr>
             </table>

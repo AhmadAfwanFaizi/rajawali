@@ -75,6 +75,11 @@ class Submition_m extends CI_model
             'do_not_show_pass'   => $post['doNotShowPass'],
             'retain_sample'      => $post['retainSample'],
             'other_method'       => $post['otherMethod'],
+            'family_product'     => $post['familyProduct'],
+            'product_end_use'    => $post['productEndUse'],
+            'age_group'          => $post['ageGroup'],
+            'country'            => $post['country'],
+            'lab_subcont'        => $post['labSubcont'],
             'created_at'         => waktu_sekarang(),
         ];
         $this->db->insert('submition', $data);
@@ -120,6 +125,11 @@ class Submition_m extends CI_model
             'do_not_show_pass'   => $doNotShowPass,
             'retain_sample'      => $retainSample,
             'other_method'       => $post['otherMethod'],
+            'family_product'     => $post['familyProduct'],
+            'product_end_use'    => $post['productEndUse'],
+            'age_group'          => $post['ageGroup'],
+            'country'            => $post['country'],
+            'lab_subcont'        => $post['labSubcont'],
             'updated_at'         => waktu_sekarang(),
         ];
         $this->db->where('id', $post['idSubmition']);
