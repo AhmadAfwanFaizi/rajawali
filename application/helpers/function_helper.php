@@ -9,6 +9,33 @@ function login()
     }
 }
 
+function Admin()
+{
+    $ci = &get_instance();
+
+    if ($ci->session->userdata('role') !== "ADMIN") {
+        redirect('auth');
+    }
+}
+
+function A()
+{
+    $ci = &get_instance();
+
+    if ($ci->session->userdata('role') == "B") {
+        redirect('auth');
+    }
+}
+
+function B()
+{
+    $ci = &get_instance();
+
+    if ($ci->session->userdata('role') == "A") {
+        redirect('auth');
+    }
+}
+
 function waktu_sekarang()
 {
     return date('Y-m-d H:i:s');

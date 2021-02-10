@@ -8,6 +8,7 @@ class Sample extends CI_Controller
     {
         parent::__construct();
         login();
+        A();
         $this->load->model(['sample_m', 'customer_m', 'brand_m']);
     }
 

@@ -11,6 +11,11 @@ class Auth extends CI_Controller
 
 	public function index()
 	{
+		$role = $this->session->userdata('role');
+		if ($role) {
+			$this->location($role);
+		}
+
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		// $this->form_validation->set_message('required', '{field} Tidak Boleh Kosong');
@@ -41,21 +46,26 @@ class Auth extends CI_Controller
 			];
 			$this->session->set_userdata($data);
 
-			if ($data['role'] == 'ADMIN') {
-				redirect('Master/customer');
-			} else if ($data['role'] == 'A') {
-				redirect('Sample');
-			} else if ($data['role'] == 'B') {
-				$red = 'Kepala_divisi';
-			} else if ($data['role'] == 'C') {
-				$red = 'Kepala_divisi';
-			} else {
-				redirect('auth');
-			}
+			$this->location($data['role']);
 		} else {
 			// echo "salah";
 			// var_dump($this->session);
 			notif("W", "Wrong username or password");
+			redirect('auth');
+		}
+	}
+
+	public function location($role)
+	{
+		if ($role == 'ADMIN') {
+			redirect('Master/customer');
+		} else if ($role == 'A') {
+			redirect('Sample');
+		} else if ($role == 'B') {
+			redirect('Submition');
+		} else if ($role == 'C') {
+			redirect('Sample');
+		} else {
 			redirect('auth');
 		}
 	}

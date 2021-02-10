@@ -8,6 +8,7 @@ class Submition extends CI_Controller
     {
         parent::__construct();
         login();
+        B();
         $this->load->model(['submition_m', 'customer_m']);
     }
 
