@@ -112,6 +112,7 @@
                     <table id="tableSampleDetail" class="table table-bordered table-hover">
                         <thead>
                             <tr>
+                                <th>Sample Code</th>
                                 <th>Sample Description</th>
                                 <th>Quantity</th>
                                 <th>BAPC</th>
@@ -124,6 +125,7 @@
                         <tbody>
                             <?php foreach ($detail as $row) { ?>
                                 <tr>
+                                    <td><?= $row->sample_code ?></td>
                                     <td><?= $row->sample_description ?></td>
                                     <td><?= $row->quantity ?></td>
                                     <td><?= $row->bapc_no ?></td>

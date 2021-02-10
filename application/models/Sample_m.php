@@ -57,7 +57,7 @@ class Sample_m extends CI_model
             'date_received'      => $post['dateReceived'],
             'date_testing'       => $post['dateTesting'],
             'age_grading'        => $post['ageGrading'],
-            'status'             => 'PENDING',
+            'status_sample'      => 'PENDING',
             'created_at'         => waktu_sekarang()
         ];
         $this->db->insert('sample_detail', $data);
