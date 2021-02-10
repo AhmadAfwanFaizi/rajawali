@@ -24,7 +24,18 @@
 
         td {
             padding: 2px;
+        }
+
+        .kotak {
             border: 1px solid;
+        }
+
+        .bawah {
+            border-bottom: 1px solid;
+        }
+
+        .kanan {
+            border-right: 1px solid;
         }
 
         .term {
@@ -105,19 +116,19 @@
             <h3><u>Submission Testing Request Form</u></h3>
             <table>
                 <tr>
-                    <td rowspan="2">
+                    <td class="kotak" rowspan="2">
                         <b>TERM OF SERVICE:</b>
                     </td>
-                    <td colspan="2">
+                    <td class="kotak" colspan="2">
                         <b>TOYS/ BABY WEAR/OTHERS</b>
                     </td>
-                    <td colspan="2">
+                    <td class="kotak" colspan="2">
                         <b>CHILDREN BICYCLE</b>
                     </td>
-                    <td>Date received : <?= $dataPrint->date_received ?></td>
+                    <td class="kotak">Date received : <?= $dataPrint->date_received ?></td>
                 </tr>
                 <tr>
-                    <td class="term">
+                    <td class="kotak" class="term">
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="" <?= $data->id_term_of_service == '1' ? 'checked' : null ?>>
@@ -127,7 +138,7 @@
                         </div>
 
                     </td>
-                    <td class="term">
+                    <td class="kotak" class="term">
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="" <?= $data->id_term_of_service == '2' ? 'checked' : null ?>>
@@ -138,7 +149,7 @@
                         </div>
 
                     </td>
-                    <td class="term">
+                    <td class="kotak" class="term">
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="" <?= $data->id_term_of_service == '3' ? 'checked' : null ?>>
@@ -148,7 +159,7 @@
                         </div>
 
                     </td>
-                    <td class="term">
+                    <td class="kotak" class="term">
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="" <?= $data->id_term_of_service == '4' ? 'checked' : null ?>>
@@ -158,18 +169,18 @@
                             </label>
                         </div>
                     </td>
-                    <td>21 Desember 2020</td>
+                    <td class="kotak">21 Desember 2020</td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td colspan="5">*Note: NO testing will be proceeded until applicant (submitter) confirmed the quotation.</td>
+                    <td class="kotak"></td>
+                    <td class="kotak" colspan="5">*Note: NO testing will be proceeded until applicant (submitter) confirmed the quotation.</td>
                 </tr>
 
                 <tr>
-                    <td colspan="3">
+                    <td class="kotak" colspan="3">
                         <b>APPLICANT INFORMATION *</b> mark refers to mandate information needed for test start *
                     </td>
-                    <td colspan="3">
+                    <td class="kotak" colspan="3">
                         <b>SAMPLE INFORMATION</b> (Below information will state in report unless specified)
                     </td>
                 </tr>
@@ -178,13 +189,13 @@
                     <td>
                         Applicant
                     </td>
-                    <td colspan="2">
+                    <td class="bawah kanan" colspan="2">
                         : <?= $dataPrint->customer_name ?>
                     </td>
                     <td>
                         Sample Description
                     </td>
-                    <td colspan="2">
+                    <td class="bawah" colspan="2">
                         : <?= $dataPrint->sample_description ?>
                     </td>
                 </tr>
@@ -192,13 +203,13 @@
                     <td>
                         Address
                     </td>
-                    <td colspan="2">
+                    <td class="kanan" colspan="2">
                         : <?= $dataPrint->address ?>
                     </td>
                     <td>
                         Product End Use
                     </td>
-                    <td colspan="2">
+                    <td class="bawah" colspan="2">
                         : <?= $dataPrint->age_grading ?>
                     </td>
                 </tr>
@@ -206,13 +217,13 @@
                     <td>
 
                     </td>
-                    <td colspan="2">
+                    <td class="kanan" colspan="2">
 
                     </td>
                     <td>
                         Brand
                     </td>
-                    <td colspan="2">
+                    <td class="bawah" colspan="2">
                         : <?= $dataPrint->brand ?>
                     </td>
                 </tr>
@@ -220,13 +231,13 @@
                     <td>
 
                     </td>
-                    <td colspan="2">
+                    <td class="bawah kanan" colspan="2">
 
                     </td>
                     <td>
                         Quantity
                     </td>
-                    <td colspan="2">
+                    <td class="bawah" colspan="2">
                         : <?= $dataPrint->quantity ?>
                     </td>
                 </tr>
@@ -234,13 +245,13 @@
                     <td>
                         Contact Person
                     </td>
-                    <td colspan="2">
-                        <?= $dataPrint->contact_person ?>
+                    <td class="bawah kanan" colspan="2">
+                        : <?= $dataPrint->contact_person ?>
                     </td>
                     <td>
                         Country of Origin:
                     </td>
-                    <td colspan="2">
+                    <td class="bawah" colspan="2">
                         : <?= $data->country ?>
                     </td>
                 </tr>
@@ -249,7 +260,7 @@
                         Email report
                         distribution
                     </td>
-                    <td colspan="2">
+                    <td class="bawah kanan" colspan="2">
                         : <?php foreach ($email as $row) {
                                 echo $row->email . '<br/>';
                             } ?>
@@ -257,7 +268,7 @@
                     <td>
                         BAPC No.
                     </td>
-                    <td colspan="2">
+                    <td class="bawah" colspan="2">
                         : <?= $dataPrint->bapc_no ?>
                     </td>
                 </tr>
@@ -265,13 +276,13 @@
                     <td>
 
                     </td>
-                    <td colspan="2">
+                    <td class="kanan" colspan="2">
 
                     </td>
                     <td>
                         Item No
                     </td>
-                    <td colspan="2">
+                    <td class="bawah" colspan="2">
                         : <?= $data->item_no ?>
                     </td>
                 </tr>
@@ -279,21 +290,21 @@
                     <td>
                         Bill to
                     </td>
-                    <td colspan="2">
+                    <td class="bawah kanan" colspan="2">
                         : <?= $dataPrint->bill_to ?>
                     </td>
-                    <td>
+                    <td class="bawah">
                         Family Product *
                     </td>
-                    <td colspan="2">
+                    <td class="bawah" colspan="2">
                         : <?= $data->family_product ?>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
+                    <td class="kanan" colspan="3">
 
                     </td>
-                    <td colspan="3">
+                    <td class="bawah" colspan="3">
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="" <?= $data->sni_certification == 'TRUE' ? 'checked' : null ?>>
@@ -303,7 +314,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
+                    <td class="kanan" colspan="3">
 
                     </td>
                     <td colspan="3">
