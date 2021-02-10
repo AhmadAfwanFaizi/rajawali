@@ -12,7 +12,10 @@ class Master extends CI_Controller
 
     public function customer()
     {
-        $data["data"] = $this->customer_m->getData()->result();
+        $data = [
+            "page" => "customer",
+            "data" => $this->customer_m->getData()->result(),
+        ];
         $this->template->load('template/template', 'master/customer/data', $data);
     }
 
@@ -30,13 +33,10 @@ class Master extends CI_Controller
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 
         if ($this->form_validation->run() == false) {
-            // $data = [
-            //     'title' => 'Tambah data guru',
-            //     'session' => $this->session_m->get(),
-            //     'row' => $this->guru_m->get()
-            // ];
-            // $this->template->load('template', 'admin/guru/tambah', $data);
-            $this->template->load('template/template', 'master/customer/add');
+            $data = [
+                "page" => "add customer",
+            ];
+            $this->template->load('template/template', 'master/customer/add', $data);
         } else {
             $post = $this->input->post(null, true);
             // var_dump($post);
@@ -66,6 +66,7 @@ class Master extends CI_Controller
         // die;
         if ($this->form_validation->run() == false) {
             $data = [
+                "page" => "edit customer",
                 'data' => $this->customer_m->getData($idCustomer)->row(),
             ];
             $this->template->load('template/template', 'master/customer/edit', $data);
@@ -92,6 +93,7 @@ class Master extends CI_Controller
     public function brand()
     {
         $data = [
+            "page" => "brand",
             "data" => $this->brand_m->getData()->result(),
         ];
         // var_dump($data);
@@ -108,13 +110,10 @@ class Master extends CI_Controller
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 
         if ($this->form_validation->run() == false) {
-            // $data = [
-            //     'title' => 'Tambah data guru',
-            //     'session' => $this->session_m->get(),
-            //     'row' => $this->guru_m->get()
-            // ];
-            // $this->template->load('template', 'admin/guru/tambah', $data);
-            $this->template->load('template/template', 'master/brand/add');
+            $data = [
+                "page" => "add brand",
+            ];
+            $this->template->load('template/template', 'master/brand/add', $data);
         } else {
             $post = $this->input->post(null, true);
             // var_dump($post);
@@ -137,6 +136,7 @@ class Master extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data = [
+                "page" => "edit brand",
                 'data' => $this->brand_m->getData($id)->row(),
             ];
             // var_dump($data);
@@ -166,6 +166,7 @@ class Master extends CI_Controller
     public function Request()
     {
         $data = [
+            "page" => "request",
             "data" => $this->request_m->getData()->result(),
         ];
         // var_dump($data);
@@ -183,13 +184,11 @@ class Master extends CI_Controller
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 
         if ($this->form_validation->run() == false) {
-            // $data = [
-            //     'title' => 'Tambah data guru',
-            //     'session' => $this->session_m->get(),
-            //     'row' => $this->guru_m->get()
-            // ];
-            // $this->template->load('template', 'admin/guru/tambah', $data);
-            $this->template->load('template/template', 'master/request/add');
+            $data = [
+                "page" => "add request",
+            ];
+
+            $this->template->load('template/template', 'master/request/add', $data);
         } else {
             $post = $this->input->post(null, true);
             // var_dump($post);
@@ -213,6 +212,7 @@ class Master extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data = [
+                "page" => "edit request",
                 'data' => $this->request_m->getData($id)->row(),
             ];
             // var_dump($data);

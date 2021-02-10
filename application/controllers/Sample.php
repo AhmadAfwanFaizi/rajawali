@@ -16,7 +16,8 @@ class Sample extends CI_Controller
         $getData   = $this->sample_m->getData()->result();
         $getDetail = $this->sample_m->getDetail()->result();
         $data      = [
-            'data'   => $getData,
+            "page" => "sample",
+            'data' => $getData,
             // 'detail' => $getDetail
         ];
         $this->template->load('template/template', 'sample/data', $data);
@@ -47,9 +48,9 @@ class Sample extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data = [
-                // 'title' => 'Tambah data guru',
-                'customer'    => $this->customer_m->getData()->result(),
-                'brand'       => $this->brand_m->getData()->result(),
+                "page"     => "add sample",
+                'customer' => $this->customer_m->getData()->result(),
+                'brand'    => $this->brand_m->getData()->result(),
             ];
             // var_dump($data);
             // die;
@@ -83,7 +84,7 @@ class Sample extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data = [
-                // 'title' => 'Tambah data guru',
+                "page"        => "add detail sample",
                 'customer'    => $this->customer_m->getData()->result(),
                 'brand'       => $this->brand_m->getData()->result(),
                 'sample_code' => $this->sampleCode(),
@@ -116,9 +117,10 @@ class Sample extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data = [
-                'data' => $this->sample_m->getData($idSample)->row(),
-                'customer'    => $this->customer_m->getData()->result(),
-                'brand'       => $this->brand_m->getData()->result(),
+                "page"     => "edit sample",
+                'data'     => $this->sample_m->getData($idSample)->row(),
+                'customer' => $this->customer_m->getData()->result(),
+                'brand'    => $this->brand_m->getData()->result(),
             ];
             // var_dump($data);
             // die;
@@ -150,7 +152,7 @@ class Sample extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data = [
-                // 'title' => 'Tambah data guru',
+                "page"   => "edit detail sample",
                 'detail' => $this->sample_m->getDetail(null, $id)->row(),
             ];
             // var_dump($data['detail']);

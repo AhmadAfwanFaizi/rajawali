@@ -20,7 +20,7 @@
                                 <tr>
                                     <td><?= $row->sample_code ?></td>
                                     <td>
-                                        <a href="<?= base_url('Submition/print/') . $row->id ?>" class="btn btn-success">
+                                        <a target="_blank" href="<?= base_url('Submition/print/') . $row->id ?>" class="btn btn-success">
                                             <i class="fas fa fa-print"></i>
                                         </a>
                                         <a href="<?= base_url('Submition/edit/') . $row->id ?>" class="btn btn-warning">

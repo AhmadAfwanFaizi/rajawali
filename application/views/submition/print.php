@@ -38,6 +38,10 @@
             border-right: 1px solid;
         }
 
+        .borderAll td {
+            border: 1px solid;
+        }
+
         .term {
             vertical-align: top;
         }
@@ -325,7 +329,7 @@
             <br />
 
             <b>TEST REQUEST :</b>
-            <table border="1">
+            <table border="1" class="borderAll">
                 <tr>
                     <td style="vertical-align: baseline;">
                         <div class="iso-data">
@@ -431,7 +435,7 @@
                     </td>
                 </tr>
             </table>
-            <table border="1">
+            <table border="1" class="borderAll">
                 <tr>
                     <td colspan="">
                         <div class="checkbox">
@@ -476,6 +480,11 @@
             </table>
         </div>
     </div>
+
+    <script>
+        window.print();
+        setTimeout(window.close, 1000);
+    </script>
 
 </body>
 

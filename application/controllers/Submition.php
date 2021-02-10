@@ -14,7 +14,8 @@ class Submition extends CI_Controller
     public function index()
     {
         $data = [
-            'data'   => $this->submition_m->getData()->result(),
+            "page" => "submition",
+            'data' => $this->submition_m->getData()->result(),
         ];
         // var_dump($data);
         // die;
@@ -30,14 +31,14 @@ class Submition extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data = [
+                "page"        => "add submition",
                 'sample_code' => $this->submition_m->getSampleCode()->result(),
-
-                'include'   => $this->submition_m->getIso('include')->result(),
-                'baby_wear' => $this->submition_m->getIso('baby_wear')->result(),
-                'bicycle'   => $this->submition_m->getIso('bicycle')->result(),
-                'others'    => $this->submition_m->getIso('others')->result(),
-                'based'     => $this->submition_m->getIso('based')->result(),
-                'other'     => $this->submition_m->getIso('other')->result(),
+                'include'     => $this->submition_m->getIso('include')->result(),
+                'baby_wear'   => $this->submition_m->getIso('baby_wear')->result(),
+                'bicycle'     => $this->submition_m->getIso('bicycle')->result(),
+                'others'      => $this->submition_m->getIso('others')->result(),
+                'based'       => $this->submition_m->getIso('based')->result(),
+                'other'       => $this->submition_m->getIso('other')->result(),
             ];
             // var_dump($data['data']);
             // die;
@@ -67,7 +68,7 @@ class Submition extends CI_Controller
             $getDetail = $this->submition_m->getDetailData($getData->iso_submition)->result();
 
             $data = [
-                // 'sample_code' => $this->submition_m->getSampleCode()->result(),
+                "page"      => "edit submition",
                 'data'      => $getData,
                 'detail'    => $getDetail,
                 'include'   => $this->submition_m->getIso('include')->result(),
