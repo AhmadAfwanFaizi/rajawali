@@ -30,9 +30,12 @@
                                         <a href="<?= base_url('Sample/edit/') . $row->id_sample ?>" class="btn btn-warning">
                                             <i class="fas fa fa-edit"></i>
                                         </a>
-                                        <a href="<?= base_url('Sample/delete/') . $row->id_sample ?>" class="btn btn-danger">
+                                        <!-- <a href="<?= base_url('Sample/delete/') . $row->id_sample ?>" class="btn btn-danger">
                                             <i class="fas fa fa-trash"></i>
-                                        </a>
+                                        </a> -->
+                                        <button onclick="hapus('<?= $row->id_sample ?>')" class="btn btn-danger">
+                                            <i class="fas fa fa-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -65,4 +68,11 @@
             }],
         });
     });
+
+    function hapus(id) {
+        let conf = confirm('Are you sure?');
+        if (conf) {
+            location.replace("<?= base_url('Sample/delete/') ?>" + id)
+        }
+    }
 </script>

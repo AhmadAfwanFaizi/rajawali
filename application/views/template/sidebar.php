@@ -19,9 +19,36 @@
 
             <!-- Role Admin  -->
 
-
             <?php $role = $this->session->userdata('role');
-            if ($role == 'ADMIN' || $role == 'C' || $role == 'A') { ?>
+            if ($role == 'ADMIN') { ?>
+                <li class="treeview <?= segment(1) == 'Master' ? 'active menu-open' : null ?>">
+                    <a href="#">
+                        <i class="fa fa-file"></i> <span>Master Data</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="<?= segment(2) == 'customer' ? 'active' : null ?>">
+                            <a href="<?= base_url() ?>Master/customer">
+                                <i class="fa fa-circle-o"></i> <span>Customer</span>
+                            </a>
+                        </li>
+                        <li class="<?= segment(2) == 'brand' ? 'active' : null ?>">
+                            <a href="<?= base_url() ?>Master/brand">
+                                <i class="fa fa-circle-o"></i> <span>Brand</span>
+                            </a>
+                        </li>
+                        <li class="<?= segment(2) == 'request' ? 'active' : null ?>">
+                            <a href="<?= base_url() ?>Master/request">
+                                <i class="fa fa-circle-o"></i> <span>Request</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            <?php } ?>
+
+            <?php if ($role == 'ADMIN' || $role == 'C' || $role == 'A') { ?>
                 <!-- Role A -->
                 <li class="treeview <?= segment(1) == 'Sample' ? 'active menu-open' : null ?>">
                     <a href="#">
@@ -54,33 +81,7 @@
                 </li>
             <?php } ?>
 
-            <?php
-            if ($role == 'ADMIN') { ?>
-                <li class="treeview <?= segment(1) == 'Master' ? 'active menu-open' : null ?>">
-                    <a href="#">
-                        <i class="fa fa-file"></i> <span>Master Data</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="<?= segment(2) == 'customer' ? 'active' : null ?>">
-                            <a href="<?= base_url() ?>Master/customer">
-                                <i class="fa fa-circle-o"></i> <span>Customer</span>
-                            </a>
-                        </li>
-                        <li class="<?= segment(2) == 'brand' ? 'active' : null ?>">
-                            <a href="<?= base_url() ?>Master/brand">
-                                <i class="fa fa-circle-o"></i> <span>Brand</span>
-                            </a>
-                        </li>
-                        <li class="<?= segment(2) == 'request' ? 'active' : null ?>">
-                            <a href="<?= base_url() ?>Master/request">
-                                <i class="fa fa-circle-o"></i> <span>Request</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+            <?php if ($role == 'ADMIN') { ?>
                 <li class="<?= segment(1) == 'User' ? 'active' : null ?>">
                     <a href="<?= base_url() ?>User">
                         <i class="fa fa-user"></i> <span>User</span>

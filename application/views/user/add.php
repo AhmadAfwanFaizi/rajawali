@@ -1,3 +1,7 @@
+<?php
+
+use Sabberworm\CSS\Value\Value;
+?>
 <section class="content">
     <div class="row">
         <div class="col-md-6">
@@ -8,7 +12,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="<?= base_url() ?>User/add" method="post">
+                <form role="form" enctype="multipart/form-data" action="<?= base_url() ?>User/add" method="post">
                     <div class="box-body">
 
                         <div class="form-group">
@@ -44,7 +48,7 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Image</label>
-                            <input type="file" id="image">
+                            <input type="file" id="image" name="image">
                             <p class="help-block">blank the image if you don't want to fill it</p>
                         </div>
                     </div>

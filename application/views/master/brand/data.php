@@ -27,9 +27,9 @@
                                         <a href="<?= base_url('Master/editBrand/') . $row->id ?>" class="btn btn-warning">
                                             <i class="fas fa fa-edit"></i>
                                         </a>
-                                        <a href="<?= base_url('Master/deleteBrand/') . $row->id ?>" class="btn btn-danger">
+                                        <button onclick="hapus('<?= $row->id ?>')" class="btn btn-danger">
                                             <i class="fas fa fa-trash"></i>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -62,4 +62,11 @@
             }],
         });
     });
+
+    function hapus(id) {
+        let conf = confirm('Are you sure?');
+        if (conf) {
+            location.replace("<?= base_url('Master/deleteBrand/') ?>" + id)
+        }
+    }
 </script>

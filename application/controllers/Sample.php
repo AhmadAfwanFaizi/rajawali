@@ -197,19 +197,23 @@ class Sample extends CI_Controller
 
     public function delete($idCustomer)
     {
+        // var_dump($idCustomer);
+        // die;
         $this->sample_m->delete($idCustomer);
         if ($this->db->affected_rows() > 0) {
             notif('S', 'Successfully Deleted');
         }
-        redirect('Master/customer');
+        redirect('Sample/head');
     }
 
-    public function deleteDetail($id, $idSample)
+    public function deleteDetail($id)
     {
+        // var_dump($id, $idSample);
+        // die;
         $this->sample_m->deleteDetail($id);
         if ($this->db->affected_rows() > 0) {
             notif('S', 'Successfully Deleted');
         }
-        redirect('Sample/addDetail/' . $idSample);
+        redirect('Sample/dataDetail/');
     }
 }

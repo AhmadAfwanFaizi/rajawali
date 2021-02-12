@@ -44,9 +44,9 @@
                                         <a href="<?= base_url('Master/editCustomer/') . $row->id_customer ?>" class="btn btn-warning">
                                             <i class="fas fa fa-edit"></i>
                                         </a>
-                                        <a href="<?= base_url('Master/deleteCustomer/') . $row->id_customer ?>" class="btn btn-danger">
+                                        <button onclick="hapus('<?= $row->id_customer ?>')" class="btn btn-danger">
                                             <i class="fas fa fa-trash"></i>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -83,5 +83,12 @@
                 "orderable": false,
             }],
         });
-    })
+    });
+
+    function hapus(id) {
+        let conf = confirm('Are you sure?');
+        if (conf) {
+            location.replace("<?= base_url('Master/deleteCustomer/') ?>" + id)
+        }
+    }
 </script>

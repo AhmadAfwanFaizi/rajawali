@@ -100,12 +100,16 @@ class Sample_m extends CI_model
 
     public function delete($id)
     {
-        $this->db->where('id', $id);
-        $this->db->update('brand', ["deleted_at" => waktu_sekarang()]);
+        // var_dump($id);
+        // die;
+        $this->db->where('id_sample', $id);
+        $this->db->update('sample', ["deleted_at" => waktu_sekarang()]);
     }
 
     public function deleteDetail($id)
     {
+        // var_dump($id);
+        // die;
         $this->db->where('id', $id);
         $this->db->update('sample_detail', ["deleted_at" => waktu_sekarang()]);
     }

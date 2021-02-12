@@ -11,6 +11,7 @@
                     <table id="tableUser" class="table table-bordered table-hover">
                         <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>username</th>
                                 <th>Role</th>
                                 <th>Status</th>
@@ -20,6 +21,9 @@
                         <tbody>
                             <?php foreach ($data as $row) { ?>
                                 <tr>
+                                    <td>
+                                        <img src="<?= base_url('assets/img/user/' . $row->image) ?>" alt="image user" style="width: 60px; height: auto; border-radius: 50%;">
+                                    </td>
                                     <td><?= $row->username ?></td>
                                     <td><?= $row->role ?></td>
                                     <td>

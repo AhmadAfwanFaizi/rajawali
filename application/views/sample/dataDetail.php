@@ -45,9 +45,9 @@
                                             <a href="<?= base_url('Sample/editDetail/') . $row->id ?>" class="btn btn-warning">
                                                 <i class="fas fa fa-edit"></i>
                                             </a>
-                                            <a href="<?= base_url('Sample/deleteDetail/') . $row->id . '/' . $row->id_sample ?>" class="btn btn-danger">
+                                            <button onclick="hapus('<?= $row->id_detail ?>')" class="btn btn-danger">
                                                 <i class="fas fa fa-trash"></i>
-                                            </a>
+                                            </button>
                                         <?php } else { ?>
                                             <div class="btn btn-info disabled"> PROGRESS</div>
                                         <?php } ?>
@@ -71,5 +71,12 @@
                 "orderable": false,
             }],
         });
-    })
+    });
+
+    function hapus(id) {
+        let conf = confirm('Are you sure?');
+        if (conf) {
+            location.replace("<?= base_url('Sample/deleteDetail/') ?>" + id)
+        }
+    }
 </script>

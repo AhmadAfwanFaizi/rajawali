@@ -20,7 +20,7 @@ class User_m extends CI_model
             'username'   => $post['username'],
             'password'   => $post['password'],
             'role'       => $post['role'],
-            'image'      => $this->_uploadImage(),
+            'image'      => $post['image    '],
             'created_at' => waktu_sekarang()
         ];
         $this->db->insert('user', $data);
@@ -49,24 +49,5 @@ class User_m extends CI_model
     {
         $this->db->where('id', $id);
         $this->db->update('user', ["deleted_at" => waktu_sekarang()]);
-    }
-
-    private function _uploadImage()
-    {
-        $config['upload_path']          = './assets/product/';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['file_name']            = uniqid();
-        $config['overwrite']            = true;
-        $config['max_size']             = 1024; // 1MB
-        // $config['max_width']            = 1024;
-        // $config['max_height']           = 768;
-
-        $this->load->library('upload', $config);
-
-        if ($this->upload->do_upload('image')) {
-            return $this->upload->data("image");
-        }
-
-        return "default.jpg";
     }
 }

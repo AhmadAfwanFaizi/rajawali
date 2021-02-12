@@ -40,10 +40,6 @@
 
       <?php
 
-      // if (form_error('username') || form_error('username')) {
-      //   notif("W", "Username & Password tidak boleh kosong");
-      // }
-
       $this->load->view('auth/notif');
 
       ?>
