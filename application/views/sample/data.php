@@ -60,7 +60,7 @@
     $(function() {
         $('#tableSample').DataTable({
             "columnDefs": [{
-                "targets": [0, 1, 2, 3],
+                "targets": [3],
                 "orderable": false,
             }],
         });

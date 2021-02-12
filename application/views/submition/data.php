@@ -12,7 +12,7 @@
                         <thead>
                             <tr>
                                 <th>Sample Code</th>
-                                <th style="width: 85px;">Action</th>
+                                <th style="width: 130px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,6 +25,9 @@
                                         </a>
                                         <a href="<?= base_url('Submition/edit/') . $row->id ?>" class="btn btn-warning">
                                             <i class="fas fa fa-edit"></i>
+                                        </a>
+                                        <a href="<?= base_url('Submition/delete/') . $row->id ?>" class="btn btn-danger">
+                                            <i class="fas fa fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>

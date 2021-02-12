@@ -95,13 +95,15 @@ class Submition extends CI_Controller
         }
     }
 
-    public function deleteRequest($id)
+    public function delete($id)
     {
+        // var_dump($id);
+        // die;
         $this->submition_m->delete($id);
         if ($this->db->affected_rows() > 0) {
             notif('S', 'Successfully deleted');
         }
-        redirect('Master/request');
+        redirect('Submition');
     }
 
     public function print($id)

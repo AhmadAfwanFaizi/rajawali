@@ -18,8 +18,11 @@ class Sample_m extends CI_model
 
     public function getDetail($idSample = null, $id = null)
     {
-        $this->db->select('*')
-            ->from('sample_detail SD');
+        $this->db->select('*, SD.id as id_detail')
+            ->from('sample_detail SD')
+            ->join('sample S', 'S.id_sample = SD.id_sample')
+            ->join('customer C', 'C.id_customer = S.id_customer')
+            ->join('brand B', 'B.id = S.id_brand');
         if ($idSample) {
             $this->db->where("SD.id_sample", $idSample);
         }

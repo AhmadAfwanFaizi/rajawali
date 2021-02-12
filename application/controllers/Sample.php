@@ -14,15 +14,18 @@ class Sample extends CI_Controller
 
     public function index()
     {
+        $this->head();
+    }
+
+    public function head()
+    {
         $getData   = $this->sample_m->getData()->result();
-        $getDetail = $this->sample_m->getDetail()->result();
         $data      = [
             "page" => "sample",
             'data' => $getData,
             // 'detail' => $getDetail
         ];
         $this->template->load('template/template', 'sample/data', $data);
-        // echo "ok masuk";
     }
 
     public function sampleCode()
@@ -68,6 +71,19 @@ class Sample extends CI_Controller
             }
             redirect('Sample/addDetail/' . $post['idSample']);
         }
+    }
+
+    public function DataDetail()
+    {
+        $getDetail = $this->sample_m->getDetail()->result();
+        $data      = [
+            "page" => "sample detail",
+            'detail' => $getDetail
+        ];
+        // var_dump($data);
+        // die;
+        $this->template->load('template/template', 'sample/dataDetail', $data);
+        // echo "ok masuk";
     }
 
     public function addDetail($idSample = null)

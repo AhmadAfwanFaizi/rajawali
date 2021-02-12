@@ -1,9 +1,10 @@
 <?php
 
+$ci = &get_instance();
+
 function login()
 {
     $ci = &get_instance();
-
     if (!$ci->session->userdata('role')) {
         redirect('auth');
     }
@@ -12,7 +13,6 @@ function login()
 function Admin()
 {
     $ci = &get_instance();
-
     if ($ci->session->userdata('role') !== "ADMIN") {
         redirect('auth');
     }
@@ -21,7 +21,6 @@ function Admin()
 function A()
 {
     $ci = &get_instance();
-
     if ($ci->session->userdata('role') == "B") {
         redirect('auth');
     }
@@ -30,10 +29,16 @@ function A()
 function B()
 {
     $ci = &get_instance();
-
     if ($ci->session->userdata('role') == "A") {
         redirect('auth');
     }
+}
+
+function segment($url)
+{
+    $ci = get_instance();
+    $segment =  $ci->uri->segment($url);
+    return $segment;
 }
 
 function waktu_sekarang()

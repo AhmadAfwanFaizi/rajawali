@@ -36,13 +36,19 @@ class Auth extends CI_Controller
 		$password = $post['password'];
 		$login    = $this->db->select('*')
 			->from('user')
-			->where(["username" => $username, "password" => $password])
+			->where([
+				"username" => $username,
+				"password" => $password,
+				"status" => 'Y',
+				"deleted_at" => NULL
+			])
 			->get()->row();
 
 		if ($login) {
 			$data = [
 				'username' => $login->username,
 				'role'     => $login->role,
+				'img'      => $login->image,
 			];
 			$this->session->set_userdata($data);
 
@@ -72,7 +78,7 @@ class Auth extends CI_Controller
 
 	public function logout()
 	{
-		$this->session->unset_userdata(['username', 'role']);
+		$this->session->unset_userdata(['username', 'role', 'img']);
 		redirect('auth');
 	}
 
