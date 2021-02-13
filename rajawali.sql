@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Feb 2021 pada 15.56
+-- Waktu pembuatan: 13 Feb 2021 pada 16.05
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -293,7 +293,8 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`, `image`, `status`, `cr
 (1, 'admin', 'admin', 'ADMIN', 'user_default.png', 'Y', '2021-02-06 22:03:31', NULL, NULL),
 (2, 'aa', '123', 'A', 'user_default.png', 'Y', '2021-02-06 19:07:35', NULL, NULL),
 (4, 'bb', '123', 'B', 'user_default.png', 'Y', '2021-02-10 15:30:10', NULL, NULL),
-(5, 'cc', '123', 'C', 'user_default.png', 'Y', '2021-02-10 15:30:10', NULL, NULL);
+(5, 'cc', '123', 'C', 'user_default.png', 'Y', '2021-02-10 15:30:10', NULL, NULL),
+(16, 'coba 1', '', 'A', '6027e8f0c703a.jpg', 'Y', '2021-02-13 21:57:38', '2021-02-13 21:57:52', NULL);
 
 --
 -- Indexes for dumped tables
@@ -433,7 +434,7 @@ ALTER TABLE `term_of_service`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
