@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 10, 2021 at 04:34 PM
--- Server version: 8.0.23-0ubuntu0.20.04.1
--- PHP Version: 7.4.3
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 13 Feb 2021 pada 15.56
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,39 +25,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `brand`
+-- Struktur dari tabel `brand`
 --
 
 CREATE TABLE `brand` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `brand` varchar(225) NOT NULL,
   `remark` text NOT NULL,
   `enable` enum('Y','N') NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
-
---
--- Dumping data for table `brand`
---
-
-INSERT INTO `brand` (`id`, `brand`, `remark`, `enable`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'hotweels', 'remaek hotweels', 'Y', '2021-02-07 20:27:27', NULL, NULL),
-(2, 'bear bare', 'remake bear', 'Y', '2021-02-07 20:27:47', NULL, NULL),
-(3, 'mcd', 'remark mcd', 'Y', '2021-02-07 20:27:58', NULL, NULL),
-(4, 'siomay', 'remark dong ah', 'Y', '2021-02-10 15:42:33', '2021-02-10 15:42:42', '2021-02-10 15:42:44'),
-(5, 'coba ', 'yahaha hayulk', 'Y', '2021-02-10 15:43:44', '2021-02-10 15:43:55', '2021-02-10 15:43:58'),
-(6, 'lagitek', 'mos', 'Y', '2021-02-10 15:44:47', NULL, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Struktur dari tabel `customer`
 --
 
 CREATE TABLE `customer` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `id_customer` varchar(225) NOT NULL,
   `customer_name` varchar(225) NOT NULL,
   `contact_person` varchar(225) NOT NULL,
@@ -66,133 +54,93 @@ CREATE TABLE `customer` (
   `bill_to` text NOT NULL,
   `remark` text NOT NULL,
   `enable` enum('Y','N') NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
-
---
--- Dumping data for table `customer`
---
-
-INSERT INTO `customer` (`id`, `id_customer`, `customer_name`, `contact_person`, `phone_number`, `address`, `bill_to`, `remark`, `enable`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(8, '60239c09c668a', 'ahmad afwan faiz', '@ahmad', '085', 'bnz', 'ahmad lah', 'remark ahmad', 'Y', '2021-02-10 15:40:41', '2021-02-10 15:43:05', '2021-02-10 15:43:11'),
-(9, '60239c2b3ca6e', 'afwan', '@afwan', '087', 'benyawakan', 'afwan lah', 'afwan remarkz', 'Y', '2021-02-10 15:41:15', '2021-02-10 15:42:04', NULL),
-(10, '60239c528987b', 'faizi', '@fayzsky', '081', 'benyawakan jaya', 'faiz lah', 'remark faiz', 'Y', '2021-02-10 15:41:54', NULL, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_detail`
+-- Struktur dari tabel `customer_detail`
 --
 
 CREATE TABLE `customer_detail` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `id_customer` varchar(225) NOT NULL,
   `email` varchar(225) NOT NULL
-) ;
-
---
--- Dumping data for table `customer_detail`
---
-
-INSERT INTO `customer_detail` (`id`, `id_customer`, `email`) VALUES
-(7, '60239c09c668a', 'ahmad@yahoo.com'),
-(8, '60239c2b3ca6e', 'afwan@gmail.com'),
-(9, '60239c528987b', 'faizi@space.com');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `request`
+-- Struktur dari tabel `request`
 --
 
 CREATE TABLE `request` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `item` varchar(225) NOT NULL,
   `category` enum('TOYS','BABY_WEAR','BICYCLE','OTHERS') NOT NULL,
   `remark` text NOT NULL,
   `enable` enum('Y','N') NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
-
---
--- Dumping data for table `request`
---
-
-INSERT INTO `request` (`id`, `item`, `category`, `remark`, `enable`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(5, 'item holad', 'BICYCLE', 'tunggangan', 'Y', '2021-02-10 15:43:35', NULL, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sample`
+-- Struktur dari tabel `sample`
 --
 
 CREATE TABLE `sample` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `id_sample` varchar(225) NOT NULL,
   `quotation_no` text NOT NULL,
   `id_customer` varchar(225) NOT NULL,
   `id_brand` varchar(225) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
-
---
--- Dumping data for table `sample`
---
-
-INSERT INTO `sample` (`id`, `id_sample`, `quotation_no`, `id_customer`, `id_brand`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(4, 'SMPL-H-60239d076a562', '111', '60239c528987b', '6', '2021-02-10 15:44:55', NULL, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sample_detail`
+-- Struktur dari tabel `sample_detail`
 --
 
 CREATE TABLE `sample_detail` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `id_sample` varchar(225) NOT NULL,
   `sample_code` varchar(225) NOT NULL,
   `sample_description` text NOT NULL,
-  `quantity` int NOT NULL,
+  `quantity` int(11) NOT NULL,
   `bapc_no` text NOT NULL,
   `date_received` date NOT NULL,
   `date_testing` date NOT NULL,
   `age_grading` text NOT NULL,
   `status_sample` enum('PENDING','PROGRESS','FINISH') NOT NULL DEFAULT 'PENDING',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
-
---
--- Dumping data for table `sample_detail`
---
-
-INSERT INTO `sample_detail` (`id`, `id_sample`, `sample_code`, `sample_description`, `quantity`, `bapc_no`, `date_received`, `date_testing`, `age_grading`, `status_sample`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(7, 'SMPL-H-60239d076a562', 'RTL-SMPL-02/21/0001', 'deskripsi yah', 12, 'bapac kau', '2021-02-01', '2021-02-10', 'grading', 'PROGRESS', '2021-02-10 15:47:14', NULL, NULL),
-(8, 'SMPL-H-60239d076a562', 'RTL-SMPL-02/21/0002', 'desc ke 2', 22, 'bapac ke dua', '2021-02-01', '2021-02-10', 'grading 2', 'PENDING', '2021-02-10 15:47:48', NULL, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sni_iso`
+-- Struktur dari tabel `sni_iso`
 --
 
 CREATE TABLE `sni_iso` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `iso` varchar(225) NOT NULL,
   `category` enum('INCLUDE','BABY_WEAR','BICYCLE','OTHERS','BASED','OTHER') NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `sni_iso`
+-- Dumping data untuk tabel `sni_iso`
 --
 
 INSERT INTO `sni_iso` (`id`, `iso`, `category`) VALUES
@@ -231,53 +179,46 @@ INSERT INTO `sni_iso` (`id`, `iso`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `submition`
+-- Struktur dari tabel `submition`
 --
 
 CREATE TABLE `submition` (
-  `id` int NOT NULL,
-  `sample_code` varchar(225)  NOT NULL,
-  `id_term_of_service` varchar(10)  NOT NULL,
-  `item_no` varchar(225)  NOT NULL,
-  `iso_submition` varchar(225)  NOT NULL,
-  `sni_certification` enum('TRUE','FALSE')  DEFAULT NULL,
-  `do_not_show_pass` enum('TRUE','FALSE')  DEFAULT NULL,
-  `retain_sample` enum('TRUE','FALSE')  DEFAULT NULL,
-  `other_method` text ,
-  `family_product` text ,
-  `product_end_use` text ,
-  `age_group` text ,
-  `country` text ,
-  `lab_subcont` text ,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id` int(11) NOT NULL,
+  `sample_code` varchar(225) NOT NULL,
+  `id_term_of_service` varchar(10) NOT NULL,
+  `item_no` varchar(225) NOT NULL,
+  `iso_submition` varchar(225) NOT NULL,
+  `sni_certification` enum('TRUE','FALSE') DEFAULT NULL,
+  `do_not_show_pass` enum('TRUE','FALSE') DEFAULT NULL,
+  `retain_sample` enum('TRUE','FALSE') DEFAULT NULL,
+  `other_method` text DEFAULT NULL,
+  `family_product` text DEFAULT NULL,
+  `product_end_use` text DEFAULT NULL,
+  `age_group` text DEFAULT NULL,
+  `country` text DEFAULT NULL,
+  `lab_subcont` text DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
-
---
--- Dumping data for table `submition`
---
-
-INSERT INTO `submition` (`id`, `sample_code`, `id_term_of_service`, `item_no`, `iso_submition`, `sni_certification`, `do_not_show_pass`, `retain_sample`, `other_method`, `family_product`, `product_end_use`, `age_group`, `country`, `lab_subcont`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(4, 'RTL-SMPL-02/21/0001', '1', '111', 'ISO60239ec894f02', 'TRUE', 'TRUE', 'TRUE', 'other', 'toyes', '1', '1', 'indo', 'subb', '2021-02-10 15:52:24', '2021-02-10 15:54:21', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `submition_detail`
+-- Struktur dari tabel `submition_detail`
 --
 
 CREATE TABLE `submition_detail` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `iso_submition` varchar(225) NOT NULL,
   `id_sni_iso` varchar(100) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `submition_detail`
+-- Dumping data untuk tabel `submition_detail`
 --
 
 INSERT INTO `submition_detail` (`id`, `iso_submition`, `id_sni_iso`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -307,17 +248,17 @@ INSERT INTO `submition_detail` (`id`, `iso_submition`, `id_sni_iso`, `created_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `term_of_service`
+-- Struktur dari tabel `term_of_service`
 --
 
 CREATE TABLE `term_of_service` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `category` enum('1','2') NOT NULL COMMENT '1.TOYS/ BABY WEAR/OTHERS 2.CHILDREN BICYCLE',
   `type` enum('REGULAR','EXPRESS') NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `term_of_service`
+-- Dumping data untuk tabel `term_of_service`
 --
 
 INSERT INTO `term_of_service` (`id`, `category`, `type`) VALUES
@@ -329,167 +270,170 @@ INSERT INTO `term_of_service` (`id`, `category`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(225) NOT NULL,
   `password` varchar(225) NOT NULL,
   `role` enum('A','B','C','ADMIN') NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT NULL
-) ;
+  `image` varchar(225) NOT NULL,
+  `status` enum('Y','N') NOT NULL DEFAULT 'N',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin', 'ADMIN', '2021-02-06 22:03:31', NULL),
-(2, 'aa', '123', 'A', '2021-02-06 19:07:35', NULL),
-(4, 'bb', '123', 'B', '2021-02-10 15:30:10', NULL),
-(5, 'cc', '123', 'C', '2021-02-10 15:30:10', NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `role`, `image`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'admin', 'admin', 'ADMIN', 'user_default.png', 'Y', '2021-02-06 22:03:31', NULL, NULL),
+(2, 'aa', '123', 'A', 'user_default.png', 'Y', '2021-02-06 19:07:35', NULL, NULL),
+(4, 'bb', '123', 'B', 'user_default.png', 'Y', '2021-02-10 15:30:10', NULL, NULL),
+(5, 'cc', '123', 'C', 'user_default.png', 'Y', '2021-02-10 15:30:10', NULL, NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `brand`
+-- Indeks untuk tabel `brand`
 --
 ALTER TABLE `brand`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `customer`
+-- Indeks untuk tabel `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `customer_detail`
+-- Indeks untuk tabel `customer_detail`
 --
 ALTER TABLE `customer_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `request`
+-- Indeks untuk tabel `request`
 --
 ALTER TABLE `request`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `sample`
+-- Indeks untuk tabel `sample`
 --
 ALTER TABLE `sample`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `sample_detail`
+-- Indeks untuk tabel `sample_detail`
 --
 ALTER TABLE `sample_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `sni_iso`
+-- Indeks untuk tabel `sni_iso`
 --
 ALTER TABLE `sni_iso`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `submition`
+-- Indeks untuk tabel `submition`
 --
 ALTER TABLE `submition`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `submition_detail`
+-- Indeks untuk tabel `submition_detail`
 --
 ALTER TABLE `submition_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `term_of_service`
+-- Indeks untuk tabel `term_of_service`
 --
 ALTER TABLE `term_of_service`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `brand`
+-- AUTO_INCREMENT untuk tabel `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT untuk tabel `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `customer_detail`
+-- AUTO_INCREMENT untuk tabel `customer_detail`
 --
 ALTER TABLE `customer_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `request`
+-- AUTO_INCREMENT untuk tabel `request`
 --
 ALTER TABLE `request`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `sample`
+-- AUTO_INCREMENT untuk tabel `sample`
 --
 ALTER TABLE `sample`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `sample_detail`
+-- AUTO_INCREMENT untuk tabel `sample_detail`
 --
 ALTER TABLE `sample_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `sni_iso`
+-- AUTO_INCREMENT untuk tabel `sni_iso`
 --
 ALTER TABLE `sni_iso`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table `submition`
+-- AUTO_INCREMENT untuk tabel `submition`
 --
 ALTER TABLE `submition`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `submition_detail`
+-- AUTO_INCREMENT untuk tabel `submition_detail`
 --
 ALTER TABLE `submition_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
--- AUTO_INCREMENT for table `term_of_service`
+-- AUTO_INCREMENT untuk tabel `term_of_service`
 --
 ALTER TABLE `term_of_service`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
