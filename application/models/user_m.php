@@ -20,7 +20,8 @@ class User_m extends CI_model
             'username'   => $post['username'],
             'password'   => $post['password'],
             'role'       => $post['role'],
-            'image'      => $post['image    '],
+            'status'     => $post['status'],
+            'image'      => $post['image'],
             'created_at' => waktu_sekarang()
         ];
         $this->db->insert('user', $data);
@@ -30,17 +31,12 @@ class User_m extends CI_model
     {
         $data = [
             'username'   => $post['username'],
+            'password'   => $post['password'],
             'role'       => $post['role'],
+            'status'     => $post['status'],
+            'image'      => $post['image'],
             'updated_at' => waktu_sekarang()
         ];
-        if ($post['password']) {
-            $data['password'] = $post['password'];
-        }
-        if (!empty($_FILES["image"]["name"])) {
-            $data['image'] = $this->_uploadImage();
-        } else {
-            $data['image'] = $post["old_image"];
-        }
         $this->db->where('id', $post['id']);
         $this->db->update('user', $data);
     }

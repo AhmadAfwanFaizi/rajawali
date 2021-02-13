@@ -27,7 +27,6 @@ class User extends CI_Controller
     {
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('passwordConf', 'Password', 'required|matches[password]');
         $this->form_validation->set_rules('role', 'Role', 'required');
 
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
@@ -37,7 +36,6 @@ class User extends CI_Controller
             $data = [
                 "page"     => "add user",
             ];
-            if (form_error('passwordConf')) notif("W", "Passwords are not the same");
             // var_dump($data);
             // die;
             $this->template->load('template/template', 'user/add', $data);
@@ -45,6 +43,10 @@ class User extends CI_Controller
 
             $post = $this->input->post(null, true);
             $post['image'] = $this->_uploadImage();
+            if (isset($post['status'])) $post['status'] = $post['status'];
+            else  $post['status'] = 'N';
+            // var_dump($post);
+            // die;
             $this->user_m->add($post);
             if ($this->db->affected_rows() > 0) {
                 notif('S', 'Successfully added');
@@ -53,31 +55,42 @@ class User extends CI_Controller
         }
     }
 
-    public function editBrand($id = null)
+    public function edit($id = null)
     {
-        $this->form_validation->set_rules('brand', 'Brand', 'required');
-        $this->form_validation->set_rules('remark', 'Remark', 'required');
-        $this->form_validation->set_rules('enable', 'Enable', 'required');
-        // $this->form_validation->set_message('is_unique', '{field} Already Used');
-        $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('role', 'Role', 'required');
+
+        $this->form_validation->set_message('is_unique', '{field} Already Used');
+        // $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 
         if ($this->form_validation->run() == false) {
+            if (form_error('username')) notif("W", form_error('username'));
             $data = [
-                "page" => "edit brand",
-                'data' => $this->brand_m->getData($id)->row(),
+                "page" => "edit user",
+                'data' => $this->user_m->getData($id)->row(),
             ];
             // var_dump($data);
             // die;
-            $this->template->load('template/template', 'master/brand/edit', $data);
+            $this->template->load('template/template', 'User/edit', $data);
         } else {
             $post = $this->input->post(null, true);
+            $user = $this->user_m->getData($post['id'])->row();
+            (isset($post['status'])) ? $post['status'] = $post['status'] : $post['status'] = $user->status;
+            (isset($post['password'])) ? $post['password'] = $post['password'] : $post['password'] = $user->password;
+
+            if ($_FILES['image']['error'] == 0) {
+                $post['image'] = $this->_uploadImage();
+            } else {
+                $post['image'] = $post['oldImage'];
+            }
+
             // var_dump($post);
             // die;
-            $this->brand_m->edit($post);
+            $this->user_m->edit($post);
             if ($this->db->affected_rows() > 0) {
                 notif('S', 'Successfully updated');
             }
-            redirect('Master/brand');
+            redirect('User');
         }
     }
 
