@@ -8,7 +8,7 @@ class Master extends CI_Controller
         parent::__construct();
         login();
         Admin();
-        $this->load->model(['customer_m', 'brand_m', 'request_m']);
+        $this->load->model(['customer_m', 'brand_m', 'request_m', 'iso_m']);
     }
 
     public function customer()
@@ -164,7 +164,7 @@ class Master extends CI_Controller
         redirect('Master/brand');
     }
 
-    public function Request()
+    public function request()
     {
         $data = [
             "page" => "request",
@@ -238,5 +238,77 @@ class Master extends CI_Controller
             notif('S', 'Successfully deleted');
         }
         redirect('Master/request');
+    }
+
+    public function iso()
+    {
+        $data = [
+            "page" => "iso",
+            "data" => $this->iso_m->getData()->result(),
+        ];
+        // var_dump($data);
+        // die;
+        $this->template->load('template/template', 'master/iso/data', $data);
+    }
+
+    public function addIso()
+    {
+        $this->form_validation->set_rules('iso', 'ISO', 'required');
+        $this->form_validation->set_rules('category', 'Category', 'required');
+        // $this->form_validation->set_message('is_unique', '{field} Already Used');
+        $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
+
+        if ($this->form_validation->run() == false) {
+            $data = [
+                "page" => "add iso",
+            ];
+
+            $this->template->load('template/template', 'master/iso/add', $data);
+        } else {
+            $post = $this->input->post(null, true);
+            // var_dump($post);
+            // die;
+            $this->iso_m->add($post);
+            if ($this->db->affected_rows() > 0) {
+                notif('S', 'Successfully added');
+            }
+            redirect('Master/addIso');
+        }
+    }
+
+    public function editIso($id = null)
+    {
+        $this->form_validation->set_rules('iso', 'ISO', 'required');
+        $this->form_validation->set_rules('category', 'Category', 'required');
+        // $this->form_validation->set_message('is_unique', '{field} Already Used');
+        $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
+
+        if ($this->form_validation->run() == false) {
+            $data = [
+                "page" => "edit iso",
+                'data' => $this->iso_m->getData($id)->row(),
+            ];
+            // var_dump($data);
+            // die;
+            $this->template->load('template/template', 'master/iso/edit', $data);
+        } else {
+            $post = $this->input->post(null, true);
+            // var_dump($post);
+            // die;
+            $this->iso_m->edit($post);
+            if ($this->db->affected_rows() > 0) {
+                notif('S', 'Successfully updated');
+            }
+            redirect('Master/iso');
+        }
+    }
+
+    public function deleteIso($id)
+    {
+        $this->iso_m->delete($id);
+        if ($this->db->affected_rows() > 0) {
+            notif('S', 'Successfully deleted');
+        }
+        redirect('Master/iso');
     }
 }

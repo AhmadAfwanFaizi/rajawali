@@ -44,6 +44,11 @@
                                 <i class="fa fa-circle-o"></i> <span>Request</span>
                             </a>
                         </li>
+                        <li class="<?= segment(2) == 'iso' ? 'active' : null ?>">
+                            <a href="<?= base_url() ?>Master/iso">
+                                <i class="fa fa-circle-o"></i> <span>Iso</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             <?php } ?>
