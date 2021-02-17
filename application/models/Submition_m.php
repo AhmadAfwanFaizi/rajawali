@@ -53,9 +53,9 @@ class Submition_m extends CI_model
     public function getIso($category)
     {
         $this->db->select('*')
-            ->from('sni_iso SI');
+            ->from('iso I');
         if ($category) {
-            $this->db->where("SI.category", $category);
+            $this->db->where("I.category", $category);
         }
         return $this->db->get();
     }

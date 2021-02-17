@@ -14,7 +14,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="sampleCode">Sample Code</label>
-                                    <select name="sampleCode" id="sampleCode" class="form-control">
+                                    <select name="sampleCode" id="sampleCode" class="form-control" required>
+                                        <option value="">Pilih Sample Code</option>
                                         <?php foreach ($sample_code as $row) { ?>
                                             <option value="<?= $row->sample_code ?>"><?= $row->sample_code ?></option>
                                         <?php } ?>

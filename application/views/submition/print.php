@@ -15,6 +15,7 @@
 
         .iso-data {
             padding: 10px;
+            padding-bottom: 0px;
         }
 
         table {
@@ -28,6 +29,7 @@
 
         .kotak {
             border: 1px solid;
+            padding: 0px;
         }
 
         .bawah {
@@ -50,6 +52,8 @@
             border: 1px solid black;
             padding: 5px;
             text-align: center;
+            width: 50%;
+            float: right;
         }
 
         @media print {
@@ -91,10 +95,7 @@
             </div>
             <div class="col-xs-5">
                 <div class="row">
-                    <div class="col-md-6">
-
-                    </div>
-                    <div class="col-md-6 rlm">
+                    <div class="rlm">
                         RLM-FR-001/017
                     </div>
                 </div>
@@ -482,8 +483,8 @@
     </div>
 
     <script>
-        window.print();
-        setTimeout(window.close, 1000);
+        // window.print();
+        // setTimeout(window.close, 1000);
     </script>
 
 </body>
