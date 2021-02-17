@@ -8,7 +8,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="tableSubmition" class="table table-bordered table-hover">
+                    <table id="tableSubmition" class="table table-bordered table-hover" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th>Sample Code</th>
@@ -53,7 +53,7 @@
 <script>
     $(function() {
         $('#tableSubmition').DataTable({
-            "autoWidth": false,
+            // "autoWidth": false,
             "scrollX": "100%",
             "columnDefs": [{
                 "targets": [0, 1],
