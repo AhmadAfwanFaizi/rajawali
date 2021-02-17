@@ -13,6 +13,7 @@
                             <tr>
                                 <th>Iso Name</th>
                                 <th>Category</th>
+                                <th>Enable</th>
                                 <th style="width: 85px;">Action</th>
                             </tr>
                         </thead>
@@ -21,6 +22,9 @@
                                 <tr>
                                     <td><?= $row->iso ?></td>
                                     <td><?= $row->category ?></td>
+                                    <td>
+                                        <?= $row->enable == 'Y' ? 'YES' : 'NO' ?>
+                                    </td>
                                     <td>
                                         <a href="<?= base_url('Master/editIso/') . $row->id ?>" class="btn btn-warning">
                                             <i class="fas fa fa-edit"></i>
@@ -36,6 +40,7 @@
                             <tr>
                                 <th>Iso Name</th>
                                 <th>Category</th>
+                                <th>Enable</th>
                                 <th style="width: 85px;">Action</th>
                             </tr>
                         </tfoot>

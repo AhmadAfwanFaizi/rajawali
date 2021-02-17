@@ -24,6 +24,13 @@
                                 <option value="OTHERS">OTHERS</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="enable">Enable</label>
+                            <select name="enable" id="enable" class="form-control" required>
+                                <option value="Y">YES</option>
+                                <option value="N">NO</option>
+                            </select>
+                        </div>
                     </div>
                     <!-- /.box-body -->
 

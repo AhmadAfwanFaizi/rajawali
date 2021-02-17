@@ -19,6 +19,7 @@ class Iso_m extends CI_model
         $data = [
             'iso'        => $post['iso'],
             'category'   => $post['category'],
+            'enable'     => $post['enable'],
             'created_at' => waktu_sekarang()
         ];
         $this->db->insert('iso', $data);
@@ -29,6 +30,7 @@ class Iso_m extends CI_model
         $data = [
             'iso'        => $post['iso'],
             'category'   => $post['category'],
+            'enable'     => $post['enable'],
             'updated_at' => waktu_sekarang()
         ];
         $this->db->where('id', $post['id']);

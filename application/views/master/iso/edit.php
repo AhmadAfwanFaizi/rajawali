@@ -25,6 +25,13 @@
                                 <option value="OTHERS" <?= $data->category == 'OTHERS' ? 'selected' : null ?>>OTHERS</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="enable">Enable</label>
+                            <select name="enable" id="enable" class="form-control" required>
+                                <option value="Y" <?= $data->enable == 'Y' ? 'selected' : null ?>>YES</option>
+                                <option value="N" <?= $data->enable == 'N' ? 'selected' : null ?>>NO</option>
+                            </select>
+                        </div>
                     </div>
                     <!-- /.box-body -->
 
