@@ -53,8 +53,8 @@ class Sample extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data = [
                 "page"     => "add sample",
-                'customer' => $this->customer_m->getData()->result(),
-                'brand'    => $this->brand_m->getData()->result(),
+                'customer' => $this->customer_m->getData(null, true)->result(),
+                'brand'    => $this->brand_m->getData(null, true)->result(),
             ];
             // var_dump($data);
             // die;

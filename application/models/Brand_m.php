@@ -3,11 +3,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Brand_m extends CI_model
 {
-    public function getData($id = null)
+    public function getData($id = null, $enable = null)
     {
         $this->db->select('*')->from('brand');
         if ($id) {
             $this->db->where("id", $id);
+        }
+
+        if ($enable) {
+            $this->db->where("enable", "Y");
         }
         $this->db->where("deleted_at", NULL);
         return $this->db->get();

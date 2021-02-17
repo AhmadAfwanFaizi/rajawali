@@ -3,13 +3,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Customer_m extends CI_model
 {
-    public function getData($idCustomer = null)
+    public function getData($idCustomer = null, $enable = null)
     {
         $this->db->select('C.*')
             ->from('customer C');
         // ->join('customer_detail CD', 'CD.id_customer = C.id_customer');
         if ($idCustomer) {
             $this->db->where("C.id_customer", $idCustomer);
+        }
+
+        if ($enable) {
+            $this->db->where("C.enable", "Y");
         }
         $this->db->where("C.deleted_at", NULL);
         return $this->db->get();

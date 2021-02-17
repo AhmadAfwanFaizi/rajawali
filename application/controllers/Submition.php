@@ -34,12 +34,12 @@ class Submition extends CI_Controller
             $data = [
                 "page"        => "add submition",
                 'sample_code' => $this->submition_m->getSampleCode()->result(),
-                'include'     => $this->submition_m->getIso('include')->result(),
-                'baby_wear'   => $this->submition_m->getIso('baby_wear')->result(),
-                'bicycle'     => $this->submition_m->getIso('bicycle')->result(),
-                'others'      => $this->submition_m->getIso('others')->result(),
-                'based'       => $this->submition_m->getIso('based')->result(),
-                'other'       => $this->submition_m->getIso('other')->result(),
+                'include'     => $this->submition_m->getIso('include', true)->result(),
+                'baby_wear'   => $this->submition_m->getIso('baby_wear', true)->result(),
+                'bicycle'     => $this->submition_m->getIso('bicycle', true)->result(),
+                'others'      => $this->submition_m->getIso('others', true)->result(),
+                'based'       => $this->submition_m->getIso('based', true)->result(),
+                'other'       => $this->submition_m->getIso('other', true)->result(),
             ];
             // var_dump($data['data']);
             // die;

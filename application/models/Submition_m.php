@@ -51,13 +51,19 @@ class Submition_m extends CI_model
         return $this->db->get();
     }
 
-    public function getIso($category)
+    public function getIso($category, $enable = null)
     {
         $this->db->select('*')
             ->from('iso I');
         if ($category) {
             $this->db->where("I.category", $category);
         }
+
+        if ($enable) {
+            $this->db->where("I.enable", 'Y');
+        }
+        $this->db->where("I.deleted_at", NULL);
+
         return $this->db->get();
     }
 
