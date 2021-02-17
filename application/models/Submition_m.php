@@ -5,8 +5,9 @@ class Submition_m extends CI_model
 {
     public function getData($id = null)
     {
-        $this->db->select('*')
-            ->from('submition S');
+        $this->db->select('*, S.id as id_submition')
+            ->from('submition S')
+            ->join('term_of_service TOS', 'TOS.id = S.id_term_of_service');
         if ($id) {
             $this->db->where("S.id", $id);
         }

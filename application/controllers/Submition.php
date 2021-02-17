@@ -56,7 +56,7 @@ class Submition extends CI_Controller
         }
     }
 
-    public function edit($id = null)
+    public function edit($idSubmition = null)
     {
         $this->form_validation->set_rules('sampleCode', 'Sample Code', 'required');
         $this->form_validation->set_rules('termOfService', 'Term Of Service', 'required');
@@ -65,8 +65,10 @@ class Submition extends CI_Controller
 
         if ($this->form_validation->run() == false) {
 
-            $getData   = $this->submition_m->getData($id)->row();
+            $getData   = $this->submition_m->getData($idSubmition)->row();
             $getDetail = $this->submition_m->getDetailData($getData->iso_submition)->result();
+            // var_dump($getDetail);
+            // die;
 
             $data = [
                 "page"      => "edit submition",
@@ -80,7 +82,7 @@ class Submition extends CI_Controller
                 'other'     => $this->submition_m->getIso('other')->result(),
             ];
 
-            // var_dump($data);
+            // var_dump($getData);
             // die;
             $this->template->load('template/template', 'submition/edit', $data);
         } else {

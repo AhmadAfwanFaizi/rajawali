@@ -67,7 +67,7 @@
         }
 
         .checkbox {
-            margin: 5px 0px;
+            margin: 3px 0px;
         }
 
         img {
@@ -118,7 +118,11 @@
         </div>
 
         <div class="row">
-            <h3><u>Submission Testing Request Form</u></h3>
+            <h3 style="margin-top: 10px;">
+                <u>
+                    Submission Testing Request Form
+                </u>
+            </h3>
             <table>
                 <tr>
                     <td class="kotak" rowspan="2">
@@ -351,7 +355,6 @@
                                 <?php } ?>
                             </div>
 
-                            <br />
                             <div class="form-group">
                                 <?php foreach ($based as $row) { ?>
                                     <div class="checkbox">
@@ -419,7 +422,7 @@
                                     </div>
                                 <?php } ?>
                             </div>
-                            <br />
+
                             <div class="form-group">
                                 <?php foreach ($other as $row) { ?>
                                     <div class="checkbox">
@@ -483,8 +486,8 @@
     </div>
 
     <script>
-        // window.print();
-        // setTimeout(window.close, 1000);
+        window.print();
+        setTimeout(window.close, 1000);
     </script>
 
 </body>

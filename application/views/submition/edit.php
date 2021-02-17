@@ -9,7 +9,7 @@
                 <!-- /.box-header -->
                 <!-- form start -->
                 <form role="form" action="<?= base_url() ?>Submition/edit" method="post">
-                    <input type="hidden" name="idSubmition" value="<?= $data->id ?>">
+                    <input type="hidden" name="idSubmition" value="<?= $data->id_submition ?>">
                     <input type="hidden" name="isoSubmition" value="<?= $data->iso_submition ?>">
                     <?php foreach ($detail as $d) { ?>
                         <input type="hidden" name="isoLama[]" value="<?= $d->id_sni_iso ?>">
@@ -52,24 +52,25 @@
 
                                 <div class="form-group">
                                     <label for="familyProduct">Family Product</label>
-                                    <input type="text" class="form-control" name="familyProduct" placeholder="Family Product" value=<?= $data->family_product ?> required>
+                                    <textarea class="form-control" name="familyProduct" id="familyProduct" cols="30" rows="1" required><?= $data->family_product ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="productEndUse">Product End Use</label>
-                                    <input type="text" class="form-control" name="productEndUse" placeholder="Product End Use" value=<?= $data->product_end_use ?> required>
+                                    <textarea class="form-control" name="productEndUse" id="productEndUse" cols="30" rows="1" required><?= $data->product_end_use ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="ageGroup">Age Group</label>
-                                    <input type="text" class="form-control" name="ageGroup" placeholder="Age Group" value=<?= $data->age_group ?> required>
+                                    <textarea class="form-control" name="ageGroup" id="ageGroup" cols="30" rows="1" required><?= $data->age_group ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="country">Country</label>
-                                    <input type="text" class="form-control" name="country" placeholder="Country" value=<?= $data->country ?> required>
+                                    <textarea class="form-control" name="country" id="country" cols="30" rows="1" required><?= $data->country ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="labSubcont">Lab Subcont</label>
-                                    <input type="text" class="form-control" name="labSubcont" placeholder="Family Product" value=<?= $data->lab_subcont ?> required>
+                                    <textarea class="form-control" name="labSubcont" id="labSubcont" cols="30" rows="1" required><?= $data->lab_subcont ?></textarea>
                                 </div>
+
 
                                 <div class="checkbox">
                                     <label>
@@ -85,7 +86,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="otherMethod">Other</label>
-                                    <input type="text" class="form-control" name="otherMethod" placeholder="Please Specify Method" value="<?= $data->other_method ?>">
+                                    <textarea class="form-control" name="otherMethod" id="otherMethod" cols="30" rows="1" required><?= $data->other_method ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="ItemNo">Item No</label>
