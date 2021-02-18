@@ -5,13 +5,16 @@ class Submition_m extends CI_model
 {
     public function getData($id = null)
     {
-        $this->db->select('*, S.id as id_submition')
+        $this->db->select('S.*, TOS.*, S.id as id_submition')
             ->from('submition S')
-            ->join('term_of_service TOS', 'TOS.id = S.id_term_of_service');
+            ->join('term_of_service TOS', 'TOS.id = S.id_term_of_service')
+            ->join('sample_detail SD', 'SD.sample_code = S.sample_code')
+            ->join('sample', 'sample.id_sample = SD.id_sample');
         if ($id) {
             $this->db->where("S.id", $id);
         }
         $this->db->where("S.deleted_at", NULL);
+        $this->db->where("sample.deleted_at", NULL);
         return $this->db->get();
     }
 

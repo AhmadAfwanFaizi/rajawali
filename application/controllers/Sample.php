@@ -23,8 +23,10 @@ class Sample extends CI_Controller
         $data      = [
             "page" => "sample",
             'data' => $getData,
-            // 'detail' => $getDetail
+            'role' => $this->session->userdata('role'),
         ];
+        // var_dump($data);
+        // die;
         $this->template->load('template/template', 'sample/data', $data);
     }
 
@@ -77,8 +79,9 @@ class Sample extends CI_Controller
     {
         $getDetail = $this->sample_m->getDetail()->result();
         $data      = [
-            "page" => "sample detail",
-            'detail' => $getDetail
+            'page'   => 'sample detail',
+            'detail' => $getDetail,
+            'role'   => $this->session->userdata('role'),
         ];
         // var_dump($data);
         // die;
