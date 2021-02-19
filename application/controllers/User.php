@@ -71,7 +71,7 @@ class User extends CI_Controller
             ];
             // var_dump($data);
             // die;
-            $this->template->load('template/template', 'User/edit', $data);
+            $this->template->load('template/template', 'user/edit', $data);
         } else {
             $post = $this->input->post(null, true);
             $user = $this->user_m->getData($post['id'])->row();
