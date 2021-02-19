@@ -30,6 +30,7 @@ class Sample_m extends CI_model
             $this->db->where("SD.id", $id);
         }
         $this->db->where("SD.deleted_at", NULL);
+        $this->db->where("S.deleted_at", NULL);
         return $this->db->get();
     }
 

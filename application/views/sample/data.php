@@ -4,7 +4,7 @@
 
             <div class="box">
                 <div class="box-header">
-                    <a href="<?= base_url() ?>Sample/add" class="btn btn-primary">Add Data</a>
+                    <a href="<?= base_url() ?>Sample/add" class="btn btn-primary" style="<?= $role == "C" ? 'display: none;' : null ?>">Add Data</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -14,7 +14,7 @@
                                 <th>Quotation</th>
                                 <th>Customer</th>
                                 <th>Brand</th>
-                                <th style="width: 130px;">Action</th>
+                                <th style="width: 130px; <?= $role == "C" ? 'display: none;' : null ?>">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -23,7 +23,7 @@
                                     <td><?= $row->quotation_no ?></td>
                                     <td><?= $row->customer_name ?></td>
                                     <td><?= $row->brand ?></td>
-                                    <td>
+                                    <td style="<?= $role == "C" ? 'display: none;' : null ?>">
                                         <a href="<?= base_url('Sample/addDetail/') . $row->id_sample ?>" class="btn btn-primary">
                                             <i class="fas fa fa-plus"></i>
                                         </a>
@@ -45,7 +45,7 @@
                                 <th>Quotation</th>
                                 <th>Customer</th>
                                 <th>Brand</th>
-                                <th style="width: 85px;">Action</th>
+                                <th style="width: 85px; <?= $role == "C" ? 'display: none;' : null ?>">Action</th>
                             </tr>
                         </tfoot>
                     </table>

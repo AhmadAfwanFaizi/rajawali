@@ -17,6 +17,7 @@ class Submition extends CI_Controller
         $data = [
             "page" => "submition",
             'data' => $this->submition_m->getData()->result(),
+            'role'   => $this->session->userdata('role'),
         ];
         // var_dump($data);
         // die;

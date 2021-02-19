@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 17, 2021 at 04:28 PM
--- Server version: 8.0.23-0ubuntu0.20.04.1
--- PHP Version: 7.4.3
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 18 Feb 2021 pada 14.08
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,21 +25,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `brand`
+-- Struktur dari tabel `brand`
 --
 
 CREATE TABLE `brand` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `brand` varchar(225) NOT NULL,
   `remark` text NOT NULL,
   `enable` enum('Y','N') NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `brand`
+-- Dumping data untuk tabel `brand`
 --
 
 INSERT INTO `brand` (`id`, `brand`, `remark`, `enable`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -48,11 +48,11 @@ INSERT INTO `brand` (`id`, `brand`, `remark`, `enable`, `created_at`, `updated_a
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Struktur dari tabel `customer`
 --
 
 CREATE TABLE `customer` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `id_customer` varchar(225) NOT NULL,
   `customer_name` varchar(225) NOT NULL,
   `contact_person` varchar(225) NOT NULL,
@@ -61,32 +61,32 @@ CREATE TABLE `customer` (
   `bill_to` text NOT NULL,
   `remark` text NOT NULL,
   `enable` enum('Y','N') NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `customer`
+-- Dumping data untuk tabel `customer`
 --
 
 INSERT INTO `customer` (`id`, `id_customer`, `customer_name`, `contact_person`, `phone_number`, `address`, `bill_to`, `remark`, `enable`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '602c7eed2b6f9', 'Ahmad', '@ahmad', '021', 'benyawakan', 'ahmad lah', 'remark', 'Y', '2021-02-17 09:26:53', '2021-02-17 09:29:23', '2021-02-17 16:27:55');
+(1, '602c7eed2b6f9', 'Ahmad', '@ahmad', '021', 'benyawakan', 'ahmad lah', 'remark', 'Y', '2021-02-17 09:26:53', '2021-02-17 09:29:23', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_detail`
+-- Struktur dari tabel `customer_detail`
 --
 
 CREATE TABLE `customer_detail` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `id_customer` varchar(225) NOT NULL,
   `email` varchar(225) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `customer_detail`
+-- Dumping data untuk tabel `customer_detail`
 --
 
 INSERT INTO `customer_detail` (`id`, `id_customer`, `email`) VALUES
@@ -95,21 +95,21 @@ INSERT INTO `customer_detail` (`id`, `id_customer`, `email`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `iso`
+-- Struktur dari tabel `iso`
 --
 
 CREATE TABLE `iso` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `iso` varchar(225) NOT NULL,
   `category` enum('INCLUDE','BABY_WEAR','BICYCLE','OTHERS','BASED','OTHER') NOT NULL,
-  `enable` enum('Y','N')  NOT NULL DEFAULT 'Y',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `enable` enum('Y','N') NOT NULL DEFAULT 'Y',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `iso`
+-- Dumping data untuk tabel `iso`
 --
 
 INSERT INTO `iso` (`id`, `iso`, `category`, `enable`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -151,22 +151,22 @@ INSERT INTO `iso` (`id`, `iso`, `category`, `enable`, `created_at`, `updated_at`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `request`
+-- Struktur dari tabel `request`
 --
 
 CREATE TABLE `request` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `item` varchar(225) NOT NULL,
   `category` enum('TOYS','BABY_WEAR','BICYCLE','OTHERS') NOT NULL,
   `remark` text NOT NULL,
   `enable` enum('Y','N') NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `request`
+-- Dumping data untuk tabel `request`
 --
 
 INSERT INTO `request` (`id`, `item`, `category`, `remark`, `enable`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -175,67 +175,59 @@ INSERT INTO `request` (`id`, `item`, `category`, `remark`, `enable`, `created_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sample`
+-- Struktur dari tabel `sample`
 --
 
 CREATE TABLE `sample` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `id_sample` varchar(225) NOT NULL,
   `quotation_no` text NOT NULL,
   `id_customer` varchar(225) NOT NULL,
   `id_brand` varchar(225) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `sample`
+-- Dumping data untuk tabel `sample`
 --
 
 INSERT INTO `sample` (`id`, `id_sample`, `quotation_no`, `id_customer`, `id_brand`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'SMPL-H-602c807e93f66', '111', '602c7eed2b6f9', '1', '2021-02-17 09:33:34', NULL, NULL),
+(1, 'SMPL-H-602c807e93f66', '111', '602c7eed2b6f9', '1', '2021-02-17 09:33:34', NULL, '2021-02-18 19:48:13'),
 (2, 'SMPL-H-602cdee58cbef', '222', '602c7eed2b6f9', '1', '2021-02-17 16:16:21', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sample_detail`
+-- Struktur dari tabel `sample_detail`
 --
 
 CREATE TABLE `sample_detail` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `id_sample` varchar(225) NOT NULL,
   `sample_code` varchar(225) NOT NULL,
   `sample_description` text NOT NULL,
-  `quantity` int NOT NULL,
+  `quantity` int(11) NOT NULL,
   `bapc_no` text NOT NULL,
   `date_received` date NOT NULL,
   `date_testing` date NOT NULL,
   `age_grading` text NOT NULL,
   `status_sample` enum('PENDING','PROGRESS','FINISH') NOT NULL DEFAULT 'PENDING',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
-
---
--- Dumping data for table `sample_detail`
---
-
-INSERT INTO `sample_detail` (`id`, `id_sample`, `sample_code`, `sample_description`, `quantity`, `bapc_no`, `date_received`, `date_testing`, `age_grading`, `status_sample`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'SMPL-H-602c807e93f66', 'RTL-SMPL-02/21/0001', 'description', 12, 'BAPAC2', '2021-02-01', '2021-02-17', '12', 'PROGRESS', '2021-02-17 09:34:14', NULL, NULL),
-(2, 'SMPL-H-602c807e93f66', 'RTL-SMPL-02/21/0002', 'description ke 2', 222, 'bapc ke dua', '2021-02-01', '2021-02-17', '11', 'PROGRESS', '2021-02-17 09:36:58', NULL, NULL),
-(3, 'SMPL-H-602cdee58cbef', 'RTL-SMPL-02/21/0003', 'sample desc dua 2', 222, 'bapc 2', '2021-02-01', '2021-02-17', 'age grading dua dua', 'PROGRESS', '2021-02-17 16:18:09', NULL, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Kesalahan membaca data untuk tabel rajawali.sample_detail: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `rajawali`.`sample_detail`' at line 1
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `submition`
+-- Struktur dari tabel `submition`
 --
 
 CREATE TABLE `submition` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `sample_code` varchar(225) NOT NULL,
   `id_term_of_service` varchar(10) NOT NULL,
   `item_no` varchar(225) NOT NULL,
@@ -243,42 +235,42 @@ CREATE TABLE `submition` (
   `sni_certification` enum('TRUE','FALSE') DEFAULT NULL,
   `do_not_show_pass` enum('TRUE','FALSE') DEFAULT NULL,
   `retain_sample` enum('TRUE','FALSE') DEFAULT NULL,
-  `other_method` text,
-  `family_product` text ,
-  `product_end_use` text,
-  `age_group` text,
-  `country` text,
-  `lab_subcont` text,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `other_method` text DEFAULT NULL,
+  `family_product` text DEFAULT NULL,
+  `product_end_use` text DEFAULT NULL,
+  `age_group` text DEFAULT NULL,
+  `country` text DEFAULT NULL,
+  `lab_subcont` text DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `submition`
+-- Dumping data untuk tabel `submition`
 --
 
 INSERT INTO `submition` (`id`, `sample_code`, `id_term_of_service`, `item_no`, `iso_submition`, `sni_certification`, `do_not_show_pass`, `retain_sample`, `other_method`, `family_product`, `product_end_use`, `age_group`, `country`, `lab_subcont`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (2, 'RTL-SMPL-02/21/0002', '1', 'ITEM77 2', 'ISO602cd212f1a97', 'TRUE', 'TRUE', 'TRUE', 'other', 'indodant SNI ISO 8124-1 Safety of toys - SNI ISO 14184-1 Formaldehyde', '2022 sampai akhir tahun lebaran', '12th', 'indonesia raya merdeka merdeka', 'sub lab', '2021-02-17 15:21:38', '2021-02-17 15:31:24', NULL),
-(3, 'RTL-SMPL-02/21/0003', '1', 'ITEM77 2', 'ISO602ce0d449391', 'TRUE', 'TRUE', 'TRUE', 'coba 2', 'coba 2', 'coba 2', 'coba 2', 'coba 2', 'coba 2', '2021-02-17 16:24:36', NULL, NULL);
+(3, 'RTL-SMPL-02/21/0003', '1', 'ITEM77 2', 'ISO602ce0d449391', 'TRUE', 'TRUE', 'TRUE', 'coba 2', 'coba  2 percobaan karakter panjang untuk memnentukan fleksibilitas tabel', 'coba 2', 'coba 2', 'coba 2', 'coba 2', '2021-02-17 16:24:36', '2021-02-18 19:51:55', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `submition_detail`
+-- Struktur dari tabel `submition_detail`
 --
 
 CREATE TABLE `submition_detail` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `iso_submition` varchar(225) NOT NULL,
   `id_sni_iso` varchar(100) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `submition_detail`
+-- Dumping data untuk tabel `submition_detail`
 --
 
 INSERT INTO `submition_detail` (`id`, `iso_submition`, `id_sni_iso`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -387,27 +379,42 @@ INSERT INTO `submition_detail` (`id`, `iso_submition`, `id_sni_iso`, `created_at
 (161, 'ISO602cd212f1a97', '17', '2021-02-17 15:31:24', NULL, NULL),
 (162, 'ISO602cd212f1a97', '34', '2021-02-17 15:31:24', NULL, NULL),
 (163, 'ISO602cd212f1a97', '33', '2021-02-17 15:31:24', NULL, NULL),
-(164, 'ISO602ce0d449391', '12', '2021-02-17 16:24:36', NULL, NULL),
-(165, 'ISO602ce0d449391', '32', '2021-02-17 16:24:36', NULL, NULL),
-(166, 'ISO602ce0d449391', '17', '2021-02-17 16:24:36', NULL, NULL),
-(167, 'ISO602ce0d449391', '18', '2021-02-17 16:24:36', NULL, NULL),
-(168, 'ISO602ce0d449391', '31', '2021-02-17 16:24:36', NULL, NULL),
-(169, 'ISO602ce0d449391', '33', '2021-02-17 16:24:36', NULL, NULL);
+(164, 'ISO602ce0d449391', '12', '2021-02-17 16:24:36', NULL, '2021-02-18 19:51:55'),
+(165, 'ISO602ce0d449391', '32', '2021-02-17 16:24:36', NULL, '2021-02-18 19:51:55'),
+(166, 'ISO602ce0d449391', '17', '2021-02-17 16:24:36', NULL, '2021-02-18 19:51:55'),
+(167, 'ISO602ce0d449391', '18', '2021-02-17 16:24:36', NULL, '2021-02-18 19:50:20'),
+(168, 'ISO602ce0d449391', '31', '2021-02-17 16:24:36', NULL, '2021-02-18 19:51:55'),
+(169, 'ISO602ce0d449391', '33', '2021-02-17 16:24:36', NULL, '2021-02-18 19:51:55'),
+(170, 'ISO602ce0d449391', '12', '2021-02-18 19:50:20', NULL, '2021-02-18 19:51:55'),
+(171, 'ISO602ce0d449391', '32', '2021-02-18 19:50:20', NULL, '2021-02-18 19:51:55'),
+(172, 'ISO602ce0d449391', '17', '2021-02-18 19:50:20', NULL, '2021-02-18 19:51:55'),
+(173, 'ISO602ce0d449391', '31', '2021-02-18 19:50:20', NULL, '2021-02-18 19:51:55'),
+(174, 'ISO602ce0d449391', '33', '2021-02-18 19:50:20', NULL, '2021-02-18 19:51:55'),
+(175, 'ISO602ce0d449391', '12', '2021-02-18 19:51:02', NULL, '2021-02-18 19:51:55'),
+(176, 'ISO602ce0d449391', '32', '2021-02-18 19:51:02', NULL, '2021-02-18 19:51:55'),
+(177, 'ISO602ce0d449391', '17', '2021-02-18 19:51:02', NULL, '2021-02-18 19:51:55'),
+(178, 'ISO602ce0d449391', '31', '2021-02-18 19:51:02', NULL, '2021-02-18 19:51:55'),
+(179, 'ISO602ce0d449391', '33', '2021-02-18 19:51:02', NULL, '2021-02-18 19:51:55'),
+(180, 'ISO602ce0d449391', '12', '2021-02-18 19:51:55', NULL, NULL),
+(181, 'ISO602ce0d449391', '32', '2021-02-18 19:51:55', NULL, NULL),
+(182, 'ISO602ce0d449391', '17', '2021-02-18 19:51:55', NULL, NULL),
+(183, 'ISO602ce0d449391', '31', '2021-02-18 19:51:55', NULL, NULL),
+(184, 'ISO602ce0d449391', '33', '2021-02-18 19:51:55', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `term_of_service`
+-- Struktur dari tabel `term_of_service`
 --
 
 CREATE TABLE `term_of_service` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `category` enum('1','2') NOT NULL COMMENT '1.TOYS/ BABY WEAR/OTHERS 2.CHILDREN BICYCLE',
   `type` enum('REGULAR','EXPRESS') NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `term_of_service`
+-- Dumping data untuk tabel `term_of_service`
 --
 
 INSERT INTO `term_of_service` (`id`, `category`, `type`) VALUES
@@ -419,23 +426,23 @@ INSERT INTO `term_of_service` (`id`, `category`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(225) NOT NULL,
   `password` varchar(225) NOT NULL,
   `role` enum('A','B','C','ADMIN') NOT NULL,
   `image` varchar(225) NOT NULL,
   `status` enum('Y','N') NOT NULL DEFAULT 'N',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `role`, `image`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -443,147 +450,147 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`, `image`, `status`, `cr
 (2, 'aa', '123', 'A', 'user_default.png', 'Y', '2021-02-06 19:07:35', NULL, NULL),
 (4, 'bb', '123', 'B', 'user_default.png', 'Y', '2021-02-10 15:30:10', NULL, NULL),
 (5, 'cc', '123', 'C', 'user_default.png', 'Y', '2021-02-10 15:30:10', NULL, NULL),
-(16, 'coba 1', '', 'A', '6027e8f0c703a.jpg', 'Y', '2021-02-13 21:57:38', '2021-02-13 21:57:52', NULL);
+(16, 'lapili', '12345678', 'C', '602e58398ad09.jpg', 'Y', '2021-02-13 21:57:38', '2021-02-18 19:06:49', '2021-02-18 19:07:40');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `brand`
+-- Indeks untuk tabel `brand`
 --
 ALTER TABLE `brand`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `customer`
+-- Indeks untuk tabel `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `customer_detail`
+-- Indeks untuk tabel `customer_detail`
 --
 ALTER TABLE `customer_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `iso`
+-- Indeks untuk tabel `iso`
 --
 ALTER TABLE `iso`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `request`
+-- Indeks untuk tabel `request`
 --
 ALTER TABLE `request`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `sample`
+-- Indeks untuk tabel `sample`
 --
 ALTER TABLE `sample`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `sample_detail`
+-- Indeks untuk tabel `sample_detail`
 --
 ALTER TABLE `sample_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `submition`
+-- Indeks untuk tabel `submition`
 --
 ALTER TABLE `submition`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `submition_detail`
+-- Indeks untuk tabel `submition_detail`
 --
 ALTER TABLE `submition_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `term_of_service`
+-- Indeks untuk tabel `term_of_service`
 --
 ALTER TABLE `term_of_service`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `brand`
+-- AUTO_INCREMENT untuk tabel `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT untuk tabel `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `customer_detail`
+-- AUTO_INCREMENT untuk tabel `customer_detail`
 --
 ALTER TABLE `customer_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `iso`
+-- AUTO_INCREMENT untuk tabel `iso`
 --
 ALTER TABLE `iso`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
--- AUTO_INCREMENT for table `request`
+-- AUTO_INCREMENT untuk tabel `request`
 --
 ALTER TABLE `request`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `sample`
+-- AUTO_INCREMENT untuk tabel `sample`
 --
 ALTER TABLE `sample`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `sample_detail`
+-- AUTO_INCREMENT untuk tabel `sample_detail`
 --
 ALTER TABLE `sample_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `submition`
+-- AUTO_INCREMENT untuk tabel `submition`
 --
 ALTER TABLE `submition`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `submition_detail`
+-- AUTO_INCREMENT untuk tabel `submition_detail`
 --
 ALTER TABLE `submition_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 
 --
--- AUTO_INCREMENT for table `term_of_service`
+-- AUTO_INCREMENT untuk tabel `term_of_service`
 --
 ALTER TABLE `term_of_service`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
