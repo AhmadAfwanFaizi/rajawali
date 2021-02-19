@@ -43,8 +43,9 @@ class User extends CI_Controller
 
             $post = $this->input->post(null, true);
             $post['image'] = $this->_uploadImage();
-            if (isset($post['status'])) $post['status'] = $post['status'];
-            else  $post['status'] = 'N';
+            (isset($post['status'])) ? $post['status'] = $post['status'] : $post['status'] = 'N';
+
+            // var_dump($_FILES);
             // var_dump($post);
             // die;
             $this->user_m->add($post);
@@ -75,14 +76,16 @@ class User extends CI_Controller
         } else {
             $post = $this->input->post(null, true);
             $user = $this->user_m->getData($post['id'])->row();
-            (isset($post['status'])) ? $post['status'] = $post['status'] : $post['status'] = $user->status;
-            (isset($post['password'])) ? $post['password'] = $post['password'] : $post['password'] = $user->password;
 
             if ($_FILES['image']['error'] == 0) {
                 $post['image'] = $this->_uploadImage();
             } else {
                 $post['image'] = $post['oldImage'];
             }
+
+            (!isset($post['status'])) ? $post['status'] = 'N' : $post['status'] = 'Y';
+            ($post['password'] == "") ? $post['password'] = $user->password : $post['password'] = $post['password'];
+
 
             // var_dump($post);
             // die;
@@ -105,21 +108,23 @@ class User extends CI_Controller
         redirect('user');
     }
 
-    private function _uploadImage()
+    public function _uploadImage()
     {
         $config['upload_path']          = './assets/img/user/';
         $config['allowed_types']        = 'gif|jpg|jpeg|png';
-        $config['file_name']            = uniqid();
+        $config['file_name']            = "USR" . uniqid();
         $config['overwrite']            = true;
-        $config['max_size']             = 1024; // 1MB
+        $config['max_size']             = 1024; // 2MB
         // $config['max_width']            = 1024;
         // $config['max_height']           = 768;
 
         $this->load->library('upload', $config);
-
         if ($this->upload->do_upload('image')) {
             return $this->upload->data("file_name");
         }
+        //  else {
+        //     return  $this->upload->display_errors();
+        // }
 
         return "user_default.png";
     }
