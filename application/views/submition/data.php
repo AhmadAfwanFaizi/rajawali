@@ -3,9 +3,11 @@
         <div class="col-xs-12">
 
             <div class="box">
-                <div class="box-header">
-                    <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
-                </div>
+                <?php if (privilege()->add_privilege == 'Y') { ?>
+                    <div class="box-header">
+                        <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
+                    </div>
+                <?php } ?>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="tableSubmition" class="table table-bordered table-hover" style="min-width: 50%;">
@@ -44,12 +46,16 @@
                                     <td><?= $row->country ?></td>
                                     <td><?= $row->lab_subcont ?></td>
                                     <td>
-                                        <a target="_blank" href="<?= base_url('Submition/print/') . $row->id_submition ?>" class="btn btn-success">
-                                            <i class="fas fa fa-print"></i>
-                                        </a>
-                                        <a href="<?= base_url('Submition/edit/') . $row->id_submition ?>" class="btn btn-warning">
-                                            <i class="fas fa fa-edit"></i>
-                                        </a>
+                                        <?php if (privilege()->print_privilege == 'Y') { ?>
+                                            <a target="_blank" href="<?= base_url('Submition/print/') . $row->id_submition ?>" class="btn btn-success">
+                                                <i class="fas fa fa-print"></i>
+                                            </a>
+                                        <?php } ?>
+                                        <?php if (privilege()->edit_privilege == 'Y') { ?>
+                                            <a href="<?= base_url('Submition/edit/') . $row->id_submition ?>" class="btn btn-warning">
+                                                <i class="fas fa fa-edit"></i>
+                                            </a>
+                                        <?php } ?>
                                         <!-- <button onclick="hapus('<?= $row->id_submition ?>')" class="btn btn-danger">
                                             <i class="fas fa fa-trash"></i>
                                         </button> -->

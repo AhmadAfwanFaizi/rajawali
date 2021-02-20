@@ -3,9 +3,11 @@
         <div class="col-xs-12">
 
             <div class="box">
-                <div class="box-header">
-                    <a href="<?= base_url() ?>Master/addBrand" class="btn btn-primary">Add Data</a>
-                </div>
+                <?php if (privilege()->add_privilege == 'Y') { ?>
+                    <div class="box-header">
+                        <a href="<?= base_url() ?>Master/addBrand" class="btn btn-primary">Add Data</a>
+                    </div>
+                <?php } ?>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="tableBrand" class="table table-bordered table-hover">
@@ -24,9 +26,11 @@
                                     <td><?= $row->remark ?></td>
                                     <td><?= $row->enable == 'Y' ? 'YES' : 'NO' ?></td>
                                     <td>
-                                        <a href="<?= base_url('Master/editBrand/') . $row->id ?>" class="btn btn-warning">
-                                            <i class="fas fa fa-edit"></i>
-                                        </a>
+                                        <?php if (privilege()->edit_privilege == 'Y') { ?>
+                                            <a href="<?= base_url('Master/editBrand/') . $row->id ?>" class="btn btn-warning">
+                                                <i class="fas fa fa-edit"></i>
+                                            </a>
+                                        <?php } ?>
                                         <!-- <button onclick="hapus('<?= $row->id ?>')" class="btn btn-danger">
                                             <i class="fas fa fa-trash"></i>
                                         </button> -->
@@ -57,7 +61,7 @@
     $(function() {
         $('#tableBrand').DataTable({
             "columnDefs": [{
-                "targets": [0, 1, 2, 3],
+                "targets": [1, 2, 3],
                 "orderable": false,
             }],
         });
