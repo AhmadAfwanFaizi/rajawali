@@ -7,7 +7,7 @@
                 <div class="box-header with-border">
                 </div>
                 <div class="box-body">
-                    <table id="tableSampleDetail" class="table table-bordered table-hover">
+                    <table id="tableSampleDetail" class="table table-bordered table-hover" style="min-width: 50%;">
                         <thead>
                             <tr>
                                 <th>Quotation</th>
@@ -20,7 +20,7 @@
                                 <th>Date Received</th>
                                 <th>Date Testing</th>
                                 <th>Age Grading</th>
-                                <th style="width: 130px; <?= $role == "C" ? 'display: none;' : null ?>">Action</th>
+                                <th style="width: 130px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,18 +37,15 @@
                                     <td><?= $row->date_testing ?></td>
                                     <td><?= $row->age_grading ?></td>
                                     <td>
-                                        <?php if ($row->status_sample == 'PENDING') { ?>
-                                            <a href="<?= base_url('Sample/editDetail/') . $row->id_detail ?>" class="btn btn-warning">
-                                                <i class="fas fa fa-edit"></i>
-                                            </a>
-                                            <!-- <button onclick="hapus('<?= $row->id_detail ?>')" class="btn btn-danger">
+                                        <a href="<?= base_url('Sample/editDetail/') . $row->id_detail ?>" class="btn btn-warning">
+                                            <i class="fas fa fa-edit"></i>
+                                        </a>
+                                        <!-- <button onclick="hapus('<?= $row->id_detail ?>')" class="btn btn-danger">
                                                 <i class="fas fa fa-trash"></i>
                                             </button> -->
-                                        <?php } else { ?>
-                                            <a href="<?= base_url('Sample/printDetail/') . $row->id_detail ?>" target="_blank" class="btn btn-success">
-                                                <i class="fas fa fa-print"></i>
-                                            </a>
-                                        <?php } ?>
+                                        <a href="<?= base_url('Sample/printDetail/') . $row->id_detail ?>" target="_blank" class="btn btn-success">
+                                            <i class="fas fa fa-print"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -64,8 +61,10 @@
 <script>
     $(function() {
         $("#tableSampleDetail").DataTable({
+            "scrollX": "200%",
+            "scrollCollapse": true,
             "columnDefs": [{
-                "targets": [0, 1, 2, 3, 4, 5, 6, 7],
+                "targets": [10],
                 "orderable": false,
             }],
         });
