@@ -193,7 +193,7 @@ class Sample extends CI_Controller
     public function printDetail($id)
     {
         $data = $this->sample_m->getDetail(null, $id)->row();
-        // var_dump($data);
+        // var_dump($id);
         // die;
         $this->load->view('sample/printDetail', $data);
     }
