@@ -61,7 +61,6 @@ class User extends CI_Controller
     public function edit($id = null)
     {
         $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('role', 'Role', 'required');
 
         $this->form_validation->set_message('is_unique', '{field} Already Used');
         // $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
@@ -85,9 +84,12 @@ class User extends CI_Controller
                 $post['image'] = $post['oldImage'];
             }
 
-            (!isset($post['status'])) ? $post['status'] = 'N' : $post['status'] = 'Y';
+            (isset($post['status'])) ? $post['status'] = $post['status'] : $post['status'] = 'N';
             ($post['password'] == "") ? $post['password'] = $user->password : $post['password'] = $post['password'];
 
+            (isset($post['add'])) ? $post['add'] = $post['add'] : $post['add'] = 'N';
+            (isset($post['edit'])) ? $post['edit'] = $post['edit'] : $post['edit'] = 'N';
+            (isset($post['print'])) ? $post['print'] = $post['print'] : $post['print'] = 'N';
 
             // var_dump($post);
             // die;

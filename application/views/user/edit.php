@@ -9,7 +9,7 @@
                 <!-- /.box-header -->
                 <!-- form start -->
                 <form role="form" enctype="multipart/form-data" action="<?= base_url() ?>User/edit" method="post">
-                    <input type="hidden" name="id" id="id" value="<?= $data->id ?>">
+                    <input type="hidden" name="idUser" id="idUser" value="<?= $data->id_user ?>">
                     <div class="box-body">
 
                         <div class="form-group">
@@ -17,24 +17,43 @@
                             <input type="text" class="form-control" name="username" placeholder="Username" value="<?= $data->username ?>" required>
                         </div>
                         <div class="form-group">
-                            <label for="role">Role</label>
-                            <select name="role" id="role" class="form-control" required>
-                                <option value="">Select a role</option>
-                                <option value="A" <?= $data->role == 'A' ? 'selected' : null ?>>A</option>
-                                <option value="B" <?= $data->role == 'B' ? 'selected' : null ?>>B</option>
-                                <option value="C" <?= $data->role == 'C' ? 'selected' : null ?>>C</option>
-                                <option value="ADMIN" <?= $data->role == 'ADMIN' ? 'selected' : null ?>>ADMIN</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Privilege</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="add" value="Y" <?= $data->add_privilege == 'Y' ? 'checked' : null ?>>
+                                            Add
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="edit" value="Y" <?= $data->edit_privilege == 'Y' ? 'checked' : null ?>>
+                                            Edit
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="print" value="Y" <?= $data->print_privilege == 'Y' ? 'checked' : null ?>>
+                                            Print
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="status">Status</label>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="status" value="Y" <?= $data->status == 'Y' ? 'checked' : null ?>>
+                                    <input type="checkbox" name="status" value="Y" checked>
                                     Active
                                 </label>
                             </div>

@@ -5,7 +5,7 @@ class User_m extends CI_model
 {
     public function getData($id = null)
     {
-        $this->db->select('*')
+        $this->db->select('*, U.id as id_user')
             ->from('user U')
             ->join('privilege_user PU', 'PU.id_user = U.id');
         if ($id) {
@@ -22,6 +22,7 @@ class User_m extends CI_model
             'id'         => $id_user,
             'username'   => $post['username'],
             'password'   => $post['password'],
+            'role'       => 'USER',
             'status'     => $post['status'],
             'image'      => $post['image'],
             'created_at' => waktu_sekarang()
@@ -40,15 +41,26 @@ class User_m extends CI_model
 
     public function edit($post)
     {
-        $data = [
+        $dataUser = [
             'username'   => $post['username'],
             'password'   => $post['password'],
             'status'     => $post['status'],
             'image'      => $post['image'],
             'updated_at' => waktu_sekarang()
         ];
-        $this->db->where('id', $post['id']);
-        $this->db->update('user', $data);
+        $this->db->where('id', $post['idUser']);
+        $user = $this->db->update('user', $dataUser);
+
+        $dataPrivilege = [
+            'add_privilege'   => $post['add'],
+            'edit_privilege'  => $post['edit'],
+            'print_privilege' => $post['print'],
+            'updated_at'      => waktu_sekarang()
+        ];
+        $this->db->where('id_user', $post['idUser']);
+        $privilege = $this->db->update('privilege_user', $dataPrivilege);
+
+        if ($user || $privilege) return true;
     }
 
     public function delete($id)

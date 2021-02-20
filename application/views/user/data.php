@@ -35,16 +35,16 @@
                                         <?php } ?>
                                     </td>
                                     <td>
-                                        <?= $row->add_privilege = 'Y' ? 'YES' : 'NO' ?>
+                                        <?= $row->add_privilege == 'Y' ? 'YES' : 'NO' ?>
                                     </td>
                                     <td>
-                                        <?= $row->edit_privilege = 'Y' ? 'YES' : 'NO' ?>
+                                        <?= $row->edit_privilege == 'Y' ? 'YES' : 'NO' ?>
                                     </td>
                                     <td>
-                                        <?= $row->print_privilege = 'Y' ? 'YES' : 'NO' ?>
+                                        <?= $row->print_privilege == 'Y' ? 'YES' : 'NO' ?>
                                     </td>
                                     <td>
-                                        <a href="<?= base_url('User/edit/') . $row->id ?>" class="btn btn-warning">
+                                        <a href="<?= base_url('User/edit/') . $row->id_user ?>" class="btn btn-warning">
                                             <i class="fas fa fa-edit"></i>
                                         </a>
                                         <!-- <button class="btn btn-danger" onclick="hapus('<?= $row->id ?>')">
