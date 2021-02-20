@@ -1,7 +1,6 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-
             <div class="box">
                 <div class="box-header">
                     <a href="<?= base_url() ?>User/add" class="btn btn-primary">Add Data</a>

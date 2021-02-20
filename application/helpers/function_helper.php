@@ -18,7 +18,18 @@ function Admin()
     }
 }
 
-
+function privilege()
+{
+    $ci        = &get_instance();
+    $userId    = $ci->session->userdata('id');
+    $privilege = $ci->db->select('*')
+        ->from('privilege_user PU')
+        ->join('user U', 'U.id = PU.id_user')
+        ->where('id_user', $userId)
+        ->where('role !=', 'ADMIN')
+        ->get()->row();
+    return $privilege;
+}
 
 function segment($url)
 {

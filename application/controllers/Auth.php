@@ -37,15 +37,16 @@ class Auth extends CI_Controller
 		$login    = $this->db->select('*')
 			->from('user')
 			->where([
-				"username" => $username,
-				"password" => $password,
-				"status" => 'Y',
+				"username"   => $username,
+				"password"   => $password,
+				"status"     => 'Y',
 				"deleted_at" => NULL
 			])
 			->get()->row();
 
 		if ($login) {
 			$data = [
+				'id'       => $login->id,
 				'username' => $login->username,
 				'role'     => $login->role,
 				'img'      => $login->image,

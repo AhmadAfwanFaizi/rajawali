@@ -18,7 +18,7 @@ class User extends CI_Controller
             "page" => "user",
             'data' => $this->user_m->getData()->result(),
         ];
-        // var_dump($data);
+        // var_dump($_SESSION);
         // die;
         $this->template->load('template/template', 'user/data', $data);
     }
