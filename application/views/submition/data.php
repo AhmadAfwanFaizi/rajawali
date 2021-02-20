@@ -12,7 +12,8 @@
                         <thead>
                             <tr>
                                 <th>Sample Code</th>
-                                <th>Term Of Service</th>
+                                <th>Term Of Service 1</th>
+                                <th>Term Of Service 2</th>
                                 <th>Item No</th>
                                 <th>SNI Certification</th>
                                 <th>Do Not Show Pass</th>
@@ -30,6 +31,7 @@
                             <?php foreach ($data as $row) { ?>
                                 <tr>
                                     <td><?= $row->sample_code ?></td>
+                                    <td><?= $row->type ?></td>
                                     <td><?= $row->type ?></td>
                                     <td><?= $row->item_no ?></td>
                                     <td><?= $row->sni_certification ?></td>
