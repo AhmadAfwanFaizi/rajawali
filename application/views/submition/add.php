@@ -25,25 +25,25 @@
                                     <label for="termOfService">Term Of Service</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="termOfService" id="termOfService1" value="1" checked>
+                                            <input type="radio" name="termOfService1" id="termOfService1" value="1" checked>
                                             (TOYS/ BABY WEAR/OTHERS) REGULAR
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="termOfService" id="termOfService2" value="2">
+                                            <input type="radio" name="termOfService1" id="termOfService2" value="2">
                                             (TOYS/ BABY WEAR/OTHERS) EXPRESS
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="termOfService" id="termOfService3" value="3">
+                                            <input type="radio" name="termOfService2" id="termOfService3" value="3" checked>
                                             (CHILDREN BICYCLE) REGULAR
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="termOfService" id="termOfService4" value="4">
+                                            <input type="radio" name="termOfService2" id="termOfService4" value="4">
                                             (CHILDREN BICYCLE) EXPRESS
                                         </label>
                                     </div>
