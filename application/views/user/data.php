@@ -37,9 +37,9 @@
                                         <a href="<?= base_url('User/edit/') . $row->id ?>" class="btn btn-warning">
                                             <i class="fas fa fa-edit"></i>
                                         </a>
-                                        <button class="btn btn-danger" onclick="hapus('<?= $row->id ?>')">
+                                        <!-- <button class="btn btn-danger" onclick="hapus('<?= $row->id ?>')">
                                             <i class="fas fa fa-trash"></i>
-                                        </button>
+                                        </button> -->
                                     </td>
                                 </tr>
                             <?php } ?>

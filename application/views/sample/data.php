@@ -30,12 +30,9 @@
                                         <a href="<?= base_url('Sample/edit/') . $row->id_sample ?>" class="btn btn-warning">
                                             <i class="fas fa fa-edit"></i>
                                         </a>
-                                        <!-- <a href="<?= base_url('Sample/delete/') . $row->id_sample ?>" class="btn btn-danger">
+                                        <!-- <button onclick="hapus('<?= $row->id_sample ?>')" class="btn btn-danger">
                                             <i class="fas fa fa-trash"></i>
-                                        </a> -->
-                                        <button onclick="hapus('<?= $row->id_sample ?>')" class="btn btn-danger">
-                                            <i class="fas fa fa-trash"></i>
-                                        </button>
+                                        </button> -->
                                     </td>
                                 </tr>
                             <?php } ?>

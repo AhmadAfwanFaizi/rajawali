@@ -27,9 +27,9 @@
                                         <a href="<?= base_url('Master/editBrand/') . $row->id ?>" class="btn btn-warning">
                                             <i class="fas fa fa-edit"></i>
                                         </a>
-                                        <button onclick="hapus('<?= $row->id ?>')" class="btn btn-danger">
+                                        <!-- <button onclick="hapus('<?= $row->id ?>')" class="btn btn-danger">
                                             <i class="fas fa fa-trash"></i>
-                                        </button>
+                                        </button> -->
                                     </td>
                                 </tr>
                             <?php } ?>
