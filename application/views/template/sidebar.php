@@ -39,11 +39,11 @@
                                 <i class="fa fa-circle-o"></i> <span>Brand</span>
                             </a>
                         </li>
-                        <li class="<?= segment(2) == 'request' ? 'active' : null ?>">
+                        <!-- <li class="<?= segment(2) == 'request' ? 'active' : null ?>">
                             <a href="<?= base_url() ?>Master/request">
                                 <i class="fa fa-circle-o"></i> <span>Request</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="<?= segment(2) == 'iso' ? 'active' : null ?>">
                             <a href="<?= base_url() ?>Master/iso">
                                 <i class="fa fa-circle-o"></i> <span>Iso</span>
