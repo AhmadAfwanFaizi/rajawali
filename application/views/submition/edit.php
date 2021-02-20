@@ -26,25 +26,25 @@
                                     <label for="termOfService">Term Of Service</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="termOfService" id="termOfService1" value="1" <?= $data->id_term_of_service == '1' ? 'checked' : null ?>>
+                                            <input type="radio" name="termOfService1" id="termOfService1" value="1" <?= $data->id_term_of_service_1 == '1' ? 'checked' : null ?>>
                                             (TOYS/ BABY WEAR/OTHERS) REGULAR
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="termOfService" id="termOfService2" value="2" <?= $data->id_term_of_service == '2' ? 'checked' : null ?>>
+                                            <input type="radio" name="termOfService1" id="termOfService2" value="2" <?= $data->id_term_of_service_1 == '2' ? 'checked' : null ?>>
                                             (TOYS/ BABY WEAR/OTHERS) EXPRESS
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="termOfService" id="termOfService3" value="3" <?= $data->id_term_of_service == '3' ? 'checked' : null ?>>
+                                            <input type="radio" name="termOfService2" id="termOfService3" value="1" <?= $data->id_term_of_service_2 == '1' ? 'checked' : null ?>>
                                             (CHILDREN BICYCLE) REGULAR
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="termOfService" id="termOfService4" value="4" <?= $data->id_term_of_service == '4' ? 'checked' : null ?>>
+                                            <input type="radio" name="termOfService2" id="termOfService4" value="2" <?= $data->id_term_of_service_2 == '2' ? 'checked' : null ?>>
                                             (CHILDREN BICYCLE) EXPRESS
                                         </label>
                                     </div>

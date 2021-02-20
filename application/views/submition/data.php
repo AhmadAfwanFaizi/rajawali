@@ -31,8 +31,8 @@
                             <?php foreach ($data as $row) { ?>
                                 <tr>
                                     <td><?= $row->sample_code ?></td>
-                                    <td><?= $row->type ?></td>
-                                    <td><?= $row->type ?></td>
+                                    <td><?= $row->type_1 ?></td>
+                                    <td><?= $row->type_2 ?></td>
                                     <td><?= $row->item_no ?></td>
                                     <td><?= $row->sni_certification ?></td>
                                     <td><?= $row->do_not_show_pass ?></td>
