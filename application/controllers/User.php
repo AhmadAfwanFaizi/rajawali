@@ -27,7 +27,6 @@ class User extends CI_Controller
     {
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('role', 'Role', 'required');
 
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
@@ -45,6 +44,9 @@ class User extends CI_Controller
             $post['image'] = $this->_uploadImage();
             (isset($post['status'])) ? $post['status'] = $post['status'] : $post['status'] = 'N';
 
+            (isset($post['add'])) ? $post['add'] = $post['add'] : $post['add'] = 'N';
+            (isset($post['edit'])) ? $post['edit'] = $post['edit'] : $post['edit'] = 'N';
+            (isset($post['print'])) ? $post['print'] = $post['print'] : $post['print'] = 'N';
             // var_dump($_FILES);
             // var_dump($post);
             // die;

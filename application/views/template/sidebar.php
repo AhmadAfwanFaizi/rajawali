@@ -17,76 +17,61 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">NAVIGATION</li>
 
-            <!-- Role Admin  -->
+            <li class="treeview <?= segment(1) == 'Master' ? 'active menu-open' : null ?>">
+                <a href="#">
+                    <i class="fa fa-file"></i> <span>Master Data</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="<?= segment(2) == 'customer' ? 'active' : null ?>">
+                        <a href="<?= base_url() ?>Master/customer">
+                            <i class="fa fa-circle-o"></i> <span>Customer</span>
+                        </a>
+                    </li>
+                    <li class="<?= segment(2) == 'brand' ? 'active' : null ?>">
+                        <a href="<?= base_url() ?>Master/brand">
+                            <i class="fa fa-circle-o"></i> <span>Brand</span>
+                        </a>
+                    </li>
+                    <li class="<?= segment(2) == 'iso' ? 'active' : null ?>">
+                        <a href="<?= base_url() ?>Master/iso">
+                            <i class="fa fa-circle-o"></i> <span>Iso</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
-            <?php $role = $this->session->userdata('role');
+            <li class="treeview <?= segment(1) == 'Sample' ? 'active menu-open' : null ?>">
+                <a href="#">
+                    <i class="fa fa-tag"></i> <span>Sample</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="<?= segment(2) == 'head' ? 'active' : null ?>">
+                        <a href="<?= base_url() ?>Sample/head">
+                            <i class="fa fa-circle-o"></i> <span>Head</span>
+                        </a>
+                    </li>
+                    <li class="<?= segment(2) == 'dataDetail' ? 'active' : null ?>">
+                        <a href="<?= base_url() ?>Sample/dataDetail">
+                            <i class="fa fa-circle-o"></i> <span>Detail</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="<?= segment(1) == 'Submition' ? 'active' : null ?>">
+                <a href="<?= base_url() ?>Submition">
+                    <i class="fa fa-file-text"></i> <span>Submition</span>
+                </a>
+            </li>
+            <?php
+            $role = $this->session->userdata('role');
             if ($role == 'ADMIN') { ?>
-                <li class="treeview <?= segment(1) == 'Master' ? 'active menu-open' : null ?>">
-                    <a href="#">
-                        <i class="fa fa-file"></i> <span>Master Data</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="<?= segment(2) == 'customer' ? 'active' : null ?>">
-                            <a href="<?= base_url() ?>Master/customer">
-                                <i class="fa fa-circle-o"></i> <span>Customer</span>
-                            </a>
-                        </li>
-                        <li class="<?= segment(2) == 'brand' ? 'active' : null ?>">
-                            <a href="<?= base_url() ?>Master/brand">
-                                <i class="fa fa-circle-o"></i> <span>Brand</span>
-                            </a>
-                        </li>
-                        <!-- <li class="<?= segment(2) == 'request' ? 'active' : null ?>">
-                            <a href="<?= base_url() ?>Master/request">
-                                <i class="fa fa-circle-o"></i> <span>Request</span>
-                            </a>
-                        </li> -->
-                        <li class="<?= segment(2) == 'iso' ? 'active' : null ?>">
-                            <a href="<?= base_url() ?>Master/iso">
-                                <i class="fa fa-circle-o"></i> <span>Iso</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            <?php } ?>
-
-            <?php if ($role == 'ADMIN' || $role == 'C' || $role == 'A') { ?>
-                <!-- Role A -->
-                <li class="treeview <?= segment(1) == 'Sample' ? 'active menu-open' : null ?>">
-                    <a href="#">
-                        <i class="fa fa-tag"></i> <span>Sample</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="<?= segment(2) == 'head' ? 'active' : null ?>">
-                            <a href="<?= base_url() ?>Sample/head">
-                                <i class="fa fa-circle-o"></i> <span>Head</span>
-                            </a>
-                        </li>
-                        <li class="<?= segment(2) == 'dataDetail' ? 'active' : null ?>">
-                            <a href="<?= base_url() ?>Sample/dataDetail">
-                                <i class="fa fa-circle-o"></i> <span>Detail</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            <?php } ?>
-
-            <?php if ($role == 'ADMIN' || $role == 'C' || $role == 'B') { ?>
-                <!-- Role B -->
-                <li class="<?= segment(1) == 'Submition' ? 'active' : null ?>">
-                    <a href="<?= base_url() ?>Submition">
-                        <i class="fa fa-file-text"></i> <span>Submition</span>
-                    </a>
-                </li>
-            <?php } ?>
-
-            <?php if ($role == 'ADMIN') { ?>
                 <li class="<?= segment(1) == 'User' ? 'active' : null ?>">
                     <a href="<?= base_url() ?>User">
                         <i class="fa fa-user"></i> <span>User</span>

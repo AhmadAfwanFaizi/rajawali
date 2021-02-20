@@ -18,21 +18,7 @@ function Admin()
     }
 }
 
-function A()
-{
-    $ci = &get_instance();
-    if ($ci->session->userdata('role') == "B") {
-        redirect('auth');
-    }
-}
 
-function B()
-{
-    $ci = &get_instance();
-    if ($ci->session->userdata('role') == "A") {
-        redirect('auth');
-    }
-}
 
 function segment($url)
 {

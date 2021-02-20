@@ -12,9 +12,11 @@
                         <thead>
                             <tr>
                                 <th>Image</th>
-                                <th>username</th>
-                                <th>Role</th>
+                                <th>Username</th>
                                 <th>Status</th>
+                                <th>Add</th>
+                                <th>Edit</th>
+                                <th>Print</th>
                                 <th style="width: 130px;">Action</th>
                             </tr>
                         </thead>
@@ -25,13 +27,21 @@
                                         <img src="<?= base_url('assets/img/user/' . $row->image) ?>" alt="image user" style="width: 60px; height: auto; border-radius: 50%;">
                                     </td>
                                     <td><?= $row->username ?></td>
-                                    <td><?= $row->role ?></td>
                                     <td>
                                         <?php if ($row->status == 'Y') { ?>
                                             <small class="label bg-green">Active</small>
                                         <?php } else { ?>
                                             <small class="label bg-red">Not active</small>
                                         <?php } ?>
+                                    </td>
+                                    <td>
+                                        <?= $row->add_privilege = 'Y' ? 'YES' : 'NO' ?>
+                                    </td>
+                                    <td>
+                                        <?= $row->edit_privilege = 'Y' ? 'YES' : 'NO' ?>
+                                    </td>
+                                    <td>
+                                        <?= $row->print_privilege = 'Y' ? 'YES' : 'NO' ?>
                                     </td>
                                     <td>
                                         <a href="<?= base_url('User/edit/') . $row->id ?>" class="btn btn-warning">

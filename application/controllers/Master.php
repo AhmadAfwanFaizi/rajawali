@@ -7,7 +7,6 @@ class Master extends CI_Controller
     {
         parent::__construct();
         login();
-        Admin();
         $this->load->model(['customer_m', 'brand_m', 'request_m', 'iso_m']);
     }
 

@@ -16,18 +16,37 @@
                             <input type="text" class="form-control" name="username" placeholder="Username" required>
                         </div>
                         <div class="form-group">
-                            <label for="role">Role</label>
-                            <select name="role" id="role" class="form-control" required>
-                                <option value="">Select a role</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="ADMIN">ADMIN</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Privilege</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="add" value="Y" checked>
+                                            Add
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="edit" value="Y" checked>
+                                            Edit
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="print" value="Y" checked>
+                                            Print
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="status">Status</label>
