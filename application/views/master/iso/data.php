@@ -3,7 +3,11 @@
         <div class="col-xs-12">
 
             <div class="box">
-                <?php if (privilege()->add_privilege == 'Y') { ?>
+                <?php if (privilege() && privilege()->add_privilege == 'Y') { ?>
+                    <div class="box-header">
+                        <a href="<?= base_url() ?>Master/addIso" class="btn btn-primary">Add Data</a>
+                    </div>
+                <?php } else { ?>
                     <div class="box-header">
                         <a href="<?= base_url() ?>Master/addIso" class="btn btn-primary">Add Data</a>
                     </div>
@@ -28,7 +32,11 @@
                                         <?= $row->enable == 'Y' ? 'YES' : 'NO' ?>
                                     </td>
                                     <td>
-                                        <?php if (privilege()->edit_privilege == 'Y') { ?>
+                                        <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
+                                            <a href="<?= base_url('Master/editIso/') . $row->id ?>" class="btn btn-warning">
+                                                <i class="fas fa fa-edit"></i>
+                                            </a>
+                                        <?php } else { ?>
                                             <a href="<?= base_url('Master/editIso/') . $row->id ?>" class="btn btn-warning">
                                                 <i class="fas fa fa-edit"></i>
                                             </a>

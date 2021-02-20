@@ -1,9 +1,12 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-
             <div class="box">
-                <?php if (privilege()->add_privilege == 'Y') { ?>
+                <?php if (privilege() && privilege() && privilege()->add_privilege == 'Y') { ?>
+                    <div class="box-header">
+                        <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
+                    </div>
+                <?php } else { ?>
                     <div class="box-header">
                         <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
                     </div>
@@ -46,12 +49,21 @@
                                     <td><?= $row->country ?></td>
                                     <td><?= $row->lab_subcont ?></td>
                                     <td>
-                                        <?php if (privilege()->print_privilege == 'Y') { ?>
+                                        <?php if (privilege() && privilege()->print_privilege == 'Y') { ?>
+                                            <a target="_blank" href="<?= base_url('Submition/print/') . $row->id_submition ?>" class="btn btn-success">
+                                                <i class="fas fa fa-print"></i>
+                                            </a>
+                                        <?php } else { ?>
                                             <a target="_blank" href="<?= base_url('Submition/print/') . $row->id_submition ?>" class="btn btn-success">
                                                 <i class="fas fa fa-print"></i>
                                             </a>
                                         <?php } ?>
-                                        <?php if (privilege()->edit_privilege == 'Y') { ?>
+
+                                        <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
+                                            <a href="<?= base_url('Submition/edit/') . $row->id_submition ?>" class="btn btn-warning">
+                                                <i class="fas fa fa-edit"></i>
+                                            </a>
+                                        <?php } else { ?>
                                             <a href="<?= base_url('Submition/edit/') . $row->id_submition ?>" class="btn btn-warning">
                                                 <i class="fas fa fa-edit"></i>
                                             </a>
@@ -63,21 +75,6 @@
                                 </tr>
                             <?php } ?>
                         </tbody>
-                        <tfoot>
-                            <th>Sample Code</th>
-                            <th>Term Of Service</th>
-                            <th>Item No</th>
-                            <th>SNI Certification</th>
-                            <th>Do Not Show Pass</th>
-                            <th>Retain Sample</th>
-                            <th>Other Method </th>
-                            <th>Family Product</th>
-                            <th>Product End Use</th>
-                            <th>Age Group</th>
-                            <th>Country</th>
-                            <th>Lab Subcont</th>
-                            <th>Action</th>
-                        </tfoot>
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -96,7 +93,7 @@
             "scrollX": "200%",
             "scrollCollapse": true,
             "columnDefs": [{
-                "targets": [12],
+                "targets": [13],
                 "orderable": false,
             }],
         });

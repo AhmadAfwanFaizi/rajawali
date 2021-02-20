@@ -3,7 +3,11 @@
         <div class="col-xs-12">
 
             <div class="box">
-                <?php if (privilege()->add_privilege == 'Y') { ?>
+                <?php if (privilege() && privilege()->add_privilege == 'Y') { ?>
+                    <div class="box-header">
+                        <a href="<?= base_url() ?>Sample/add" class="btn btn-primary">Add Data</a>
+                    </div>
+                <?php } else { ?>
                     <div class="box-header">
                         <a href="<?= base_url() ?>Sample/add" class="btn btn-primary">Add Data</a>
                     </div>
@@ -26,12 +30,21 @@
                                     <td><?= $row->customer_name ?></td>
                                     <td><?= $row->brand ?></td>
                                     <td>
-                                        <?php if (privilege()->add_privilege == 'Y') { ?>
+                                        <?php if (privilege() && privilege()->add_privilege == 'Y') { ?>
+                                            <a href="<?= base_url('Sample/addDetail/') . $row->id_sample ?>" class="btn btn-primary">
+                                                <i class="fas fa fa-plus"></i>
+                                            </a>
+                                        <?php } else { ?>
                                             <a href="<?= base_url('Sample/addDetail/') . $row->id_sample ?>" class="btn btn-primary">
                                                 <i class="fas fa fa-plus"></i>
                                             </a>
                                         <?php } ?>
-                                        <?php if (privilege()->edit_privilege == 'Y') { ?>
+
+                                        <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
+                                            <a href="<?= base_url('Sample/edit/') . $row->id_sample ?>" class="btn btn-warning">
+                                                <i class="fas fa fa-edit"></i>
+                                            </a>
+                                        <?php } else { ?>
                                             <a href="<?= base_url('Sample/edit/') . $row->id_sample ?>" class="btn btn-warning">
                                                 <i class="fas fa fa-edit"></i>
                                             </a>
