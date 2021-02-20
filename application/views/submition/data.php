@@ -4,7 +4,7 @@
 
             <div class="box">
                 <div class="box-header">
-                    <a href="<?= base_url() ?>Submition/add" class="btn btn-primary" style="<?= $role == "C" ? 'display: none;' : null ?>">Add Data</a>
+                    <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -23,7 +23,7 @@
                                 <th>Age Group</th>
                                 <th>Country</th>
                                 <th>Lab Subcont</th>
-                                <th style="min-width: 130px; <?= $role == "C" ? 'display: none;' : null ?>">Action</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,7 +41,7 @@
                                     <td><?= $row->age_group ?></td>
                                     <td><?= $row->country ?></td>
                                     <td><?= $row->lab_subcont ?></td>
-                                    <td style="<?= $role == "C" ? 'display: none;' : null ?>">
+                                    <td>
                                         <a target="_blank" href="<?= base_url('Submition/print/') . $row->id_submition ?>" class="btn btn-success">
                                             <i class="fas fa fa-print"></i>
                                         </a>
@@ -56,16 +56,19 @@
                             <?php } ?>
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <th>Sample Code</th>
-                                <th>Term Of Service</th>
-                                <th>Family Product</th>
-                                <th>Product End Use</th>
-                                <th>Age Group</th>
-                                <th>Country</th>
-                                <th>Lab Subcont</th>
-                                <th style="min-width: 130px; <?= $role == "C" ? 'display: none;' : null ?>">Action</th>
-                            </tr>
+                            <th>Sample Code</th>
+                            <th>Term Of Service</th>
+                            <th>Item No</th>
+                            <th>SNI Certification</th>
+                            <th>Do Not Show Pass</th>
+                            <th>Retain Sample</th>
+                            <th>Other Method </th>
+                            <th>Family Product</th>
+                            <th>Product End Use</th>
+                            <th>Age Group</th>
+                            <th>Country</th>
+                            <th>Lab Subcont</th>
+                            <th>Action</th>
                         </tfoot>
                     </table>
                 </div>
@@ -85,7 +88,7 @@
             "scrollX": "200%",
             "scrollCollapse": true,
             "columnDefs": [{
-                "targets": [0, 1, 2, 3, 4, 5, 6, 7],
+                "targets": [12],
                 "orderable": false,
             }],
         });

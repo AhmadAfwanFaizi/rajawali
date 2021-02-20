@@ -116,7 +116,7 @@
                                 <th>Date Received</th>
                                 <th>Date Testing</th>
                                 <th>Age Grading</th>
-                                <th style="width: 130px; ">Action</th>
+                                <th style="width: 130px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,18 +130,15 @@
                                     <td><?= $row->date_testing ?></td>
                                     <td><?= $row->age_grading ?></td>
                                     <td>
-                                        <?php if ($row->status_sample == 'PENDING') { ?>
-                                            <a href="<?= base_url('Sample/editDetail/') . $row->id ?>" class="btn btn-warning">
-                                                <i class="fas fa fa-edit"></i>
-                                            </a>
-                                            <button onclick="hapus('<?= $row->id_detail ?>')" class="btn btn-danger">
-                                                <i class="fas fa fa-trash"></i>
-                                            </button>
-                                        <?php } else { ?>
-                                            <a href="<?= base_url('Sample/printDetail/') . $row->id ?>" target="_blank" class="btn btn-success">
-                                                <i class="fas fa fa-print"></i>
-                                            </a>
-                                        <?php } ?>
+                                        <a href="<?= base_url('Sample/editDetail/') . $row->id_detail ?>" class="btn btn-warning">
+                                            <i class="fas fa fa-edit"></i>
+                                        </a>
+                                        <!-- <button onclick="hapus('<?= $row->id_detail ?>')" class="btn btn-danger">
+                                            <i class="fas fa fa-trash"></i>
+                                        </button> -->
+                                        <a href="<?= base_url('Sample/printDetail/') . $row->id_detail ?>" target="_blank" class="btn btn-success">
+                                            <i class="fas fa fa-print"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             <?php } ?>
