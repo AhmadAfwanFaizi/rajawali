@@ -44,7 +44,8 @@ class Customer_m extends CI_model
             'bill_to'        => $post['billTo'],
             'remark'         => $post['remark'],
             'enable'         => $post['enable'],
-            'created_at'     => waktu_sekarang()
+            'created_at'     => waktu_sekarang(),
+            'created_by'     => $this->session->userdata('id'),
         ];
         $this->db->insert('customer', $data);
 
@@ -69,7 +70,8 @@ class Customer_m extends CI_model
             'bill_to'        => $post['billTo'],
             'remark'         => $post['remark'],
             'enable'         => $post['enable'],
-            'updated_at'     => waktu_sekarang()
+            'updated_at'     => waktu_sekarang(),
+            'updated_by'     => $this->session->userdata('id'),
         ];
         $this->db->where('id_customer', $post['id_customer']);
         $this->db->update('customer', $data);

@@ -130,7 +130,11 @@
                                     <td><?= $row->date_testing ?></td>
                                     <td><?= $row->age_grading ?></td>
                                     <td>
-                                        <?php if (privilege()->edit_privilege == 'Y') { ?>
+                                        <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
+                                            <a href="<?= base_url('Sample/editDetail/') . $row->id_detail ?>" class="btn btn-warning">
+                                                <i class="fas fa fa-edit"></i>
+                                            </a>
+                                        <?php } else { ?>
                                             <a href="<?= base_url('Sample/editDetail/') . $row->id_detail ?>" class="btn btn-warning">
                                                 <i class="fas fa fa-edit"></i>
                                             </a>
@@ -138,7 +142,11 @@
                                         <!-- <button onclick="hapus('<?= $row->id_detail ?>')" class="btn btn-danger">
                                             <i class="fas fa fa-trash"></i>
                                         </button> -->
-                                        <?php if (privilege()->print_privilege == 'Y') { ?>
+                                        <?php if (privilege() && privilege()->print_privilege == 'Y') { ?>
+                                            <a href="<?= base_url('Sample/printDetail/') . $row->id_detail ?>" target="_blank" class="btn btn-success">
+                                                <i class="fas fa fa-print"></i>
+                                            </a>
+                                        <?php } else { ?>
                                             <a href="<?= base_url('Sample/printDetail/') . $row->id_detail ?>" target="_blank" class="btn btn-success">
                                                 <i class="fas fa fa-print"></i>
                                             </a>

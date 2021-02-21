@@ -26,7 +26,6 @@ class Submition extends CI_Controller
     public function add()
     {
         $this->form_validation->set_rules('sampleCode', 'Sample Code', 'required');
-        $this->form_validation->set_rules('termOfService', 'Term Of Service', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 

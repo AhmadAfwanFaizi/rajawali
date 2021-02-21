@@ -1,7 +1,7 @@
 <section class="content">
 
     <form role="form" action="<?= base_url() ?>Sample/editDetail" method="post">
-        <input type="hidden" name="idDetail" value="<?= $detail->id ?>">
+        <input type="hidden" name="idDetail" value="<?= $detail->id_detail ?>">
         <div class="row">
             <div class="col-md-12">
                 <!-- general form elements -->

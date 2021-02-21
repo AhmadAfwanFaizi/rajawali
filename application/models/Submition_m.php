@@ -93,6 +93,7 @@ class Submition_m extends CI_model
             'country'              => $post['country'],
             'lab_subcont'          => $post['labSubcont'],
             'created_at'           => waktu_sekarang(),
+            'created_by'           => $this->session->userdata('id'),
         ];
         $this->db->insert('submition', $data);
 
@@ -142,6 +143,7 @@ class Submition_m extends CI_model
             'country'              => $post['country'],
             'lab_subcont'          => $post['labSubcont'],
             'updated_at'           => waktu_sekarang(),
+            'updated_by'           => $this->session->userdata('id'),
         ];
         $this->db->where('id', $post['idSubmition']);
         $this->db->update('submition', $data);
@@ -149,7 +151,6 @@ class Submition_m extends CI_model
         $isoLama = $post['isoLama'];
         // var_dump(count($isoLama));
         // die;
-        $sekarang = waktu_sekarang();
         for ($i = 0; $i < count($isoLama); $i++) {
 
             $this->db->where('iso_submition', $post['isoSubmition']);

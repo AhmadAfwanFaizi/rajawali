@@ -43,7 +43,8 @@ class Sample_m extends CI_model
             'quotation_no' => $post['quotationNo'],
             'id_customer'  => $post['idCustomer'],
             'id_brand'     => $post['idBrand'],
-            'created_at'   => waktu_sekarang()
+            'created_at'   => waktu_sekarang(),
+            'created_by'   => $this->session->userdata('id'),
         ];
         $this->db->insert('sample', $data);
     }
@@ -62,7 +63,8 @@ class Sample_m extends CI_model
             'date_testing'       => $post['dateTesting'],
             'age_grading'        => $post['ageGrading'],
             'status_sample'      => 'PENDING',
-            'created_at'         => waktu_sekarang()
+            'created_at'         => waktu_sekarang(),
+            'created_by'         => $this->session->userdata('id'),
         ];
         $this->db->insert('sample_detail', $data);
     }
@@ -75,7 +77,8 @@ class Sample_m extends CI_model
             'quotation_no' => $post['quotationNo'],
             'id_customer'  => $post['idCustomer'],
             'id_brand'     => $post['idBrand'],
-            'updated_at'   => waktu_sekarang()
+            'updated_at'   => waktu_sekarang(),
+            'updated_by'   => $this->session->userdata('id'),
         ];
         $this->db->where('id_sample', $post['idSample']);
         $this->db->update('sample', $data);
@@ -88,12 +91,12 @@ class Sample_m extends CI_model
         $data = [
             'quantity'           => $post['quantity'],
             'bapc_no'            => $post['bapcNo'],
-            'sample_code'        => $post['sampleCode'],
             'sample_description' => $post['sampleDescription'],
             'date_received'      => $post['dateReceived'],
             'date_testing'       => $post['dateTesting'],
             'age_grading'        => $post['ageGrading'],
-            'updated_at'         => waktu_sekarang()
+            'updated_at'         => waktu_sekarang(),
+            'updated_by'         => $this->session->userdata('id'),
         ];
         $this->db->where('id', $post['idDetail']);
         $this->db->update('sample_detail', $data);

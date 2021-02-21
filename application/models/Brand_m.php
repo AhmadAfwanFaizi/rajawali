@@ -23,7 +23,8 @@ class Brand_m extends CI_model
             'brand'      => $post['brand'],
             'remark'     => $post['remark'],
             'enable'     => $post['enable'],
-            'created_at' => waktu_sekarang()
+            'created_at' => waktu_sekarang(),
+            'created_by' => $this->session->userdata('id'),
         ];
         $this->db->insert('brand', $data);
     }
@@ -34,7 +35,8 @@ class Brand_m extends CI_model
             'brand'      => $post['brand'],
             'remark'     => $post['remark'],
             'enable'     => $post['enable'],
-            'updated_at' => waktu_sekarang()
+            'updated_at' => waktu_sekarang(),
+            'updated_by' => $this->session->userdata('id'),
         ];
         $this->db->where('id', $post['id']);
         $this->db->update('brand', $data);
