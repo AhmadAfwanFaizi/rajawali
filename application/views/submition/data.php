@@ -2,15 +2,14 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
-                <?php if (privilege() && privilege() && privilege()->add_privilege == 'Y') { ?>
-                    <div class="box-header">
+                <div class="box-header">
+                    <?php if (privilege() && privilege() && privilege()->add_privilege == 'Y') { ?>
                         <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
-                    </div>
-                <?php } else { ?>
-                    <div class="box-header">
+                    <?php } else { ?>
                         <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                    <a href="<?= base_url() ?>Submition/export" class="btn btn-success" target="_blank">Export Excel</a>
+                </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="tableSubmition" class="table table-bordered table-hover" style="min-width: 50%;">

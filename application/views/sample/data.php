@@ -3,15 +3,14 @@
         <div class="col-xs-12">
 
             <div class="box">
-                <?php if (privilege() && privilege()->add_privilege == 'Y') { ?>
-                    <div class="box-header">
+                <div class="box-header">
+                    <?php if (privilege() && privilege()->add_privilege == 'Y') { ?>
                         <a href="<?= base_url() ?>Sample/add" class="btn btn-primary">Add Data</a>
-                    </div>
-                <?php } else { ?>
-                    <div class="box-header">
+                    <?php } else { ?>
                         <a href="<?= base_url() ?>Sample/add" class="btn btn-primary">Add Data</a>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                    <a href="<?= base_url() ?>Sample/export_head" target="_blank" class="btn btn-success" style="<?= $role == "C" ? 'display: none;' : null ?>">Export Excel</a>
+                </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="tableSample" class="table table-bordered table-hover" style="min-width: 50%;">

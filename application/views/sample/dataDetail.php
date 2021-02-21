@@ -5,6 +5,9 @@
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
+                    <div class="box-header with-border">
+                        <a href="<?= base_url() ?>Sample/export_detail" target="_blank" class="btn btn-success" style="<?= $role == "C" ? 'display: none;' : null ?>">Export Excel</a>
+                    </div>
                 </div>
                 <div class="box-body">
                     <table id="tableSampleDetail" class="table table-bordered table-hover" style="min-width: 50%;">
