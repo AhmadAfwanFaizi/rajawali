@@ -16,7 +16,7 @@
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <select name="category" id="category" class="form-control" required>
+                            <select name="category" id="category" class="form-control">
                                 <option value="" hidden>Select Category</option>
                                 <option value="INCLUDE">INCLUDE</option>
                                 <option value="BABY_WEAR">BABY_WEAR</option>

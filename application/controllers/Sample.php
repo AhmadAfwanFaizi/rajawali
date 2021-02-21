@@ -45,8 +45,8 @@ class Sample extends CI_Controller
     public function add()
     {
         $this->form_validation->set_rules('quotationNo', 'Quotation', 'required');
-        $this->form_validation->set_rules('idCustomer', 'Customer', 'required');
-        $this->form_validation->set_rules('idBrand', 'Brand', 'required');
+        // $this->form_validation->set_rules('idCustomer', 'Customer', 'required');
+        // $this->form_validation->set_rules('idBrand', 'Brand', 'required');
 
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
@@ -91,13 +91,13 @@ class Sample extends CI_Controller
     public function addDetail($idSample = null)
     {
         $this->form_validation->set_rules('idSample', 'ID Sample', 'required');
-        $this->form_validation->set_rules('quantity', 'Quantity', 'required');
-        $this->form_validation->set_rules('bapcNo', 'BAPC', 'required');
-        $this->form_validation->set_rules('sampleCode', 'Sample Code', 'required');
-        $this->form_validation->set_rules('sampleDescription', 'Sample Description', 'required');
-        $this->form_validation->set_rules('dateTesting', 'Date Testing', 'required');
-        $this->form_validation->set_rules('dateReceived', 'Date Received', 'required');
-        $this->form_validation->set_rules('ageGrading', 'Age Grading', 'required');
+        // $this->form_validation->set_rules('quantity', 'Quantity', 'required');
+        // $this->form_validation->set_rules('bapcNo', 'BAPC', 'required');
+        // $this->form_validation->set_rules('sampleCode', 'Sample Code', 'required');
+        // $this->form_validation->set_rules('sampleDescription', 'Sample Description', 'required');
+        // $this->form_validation->set_rules('dateTesting', 'Date Testing', 'required');
+        // $this->form_validation->set_rules('dateReceived', 'Date Received', 'required');
+        // $this->form_validation->set_rules('ageGrading', 'Age Grading', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 
@@ -128,8 +128,8 @@ class Sample extends CI_Controller
     public function edit($idSample = null)
     {
         $this->form_validation->set_rules('quotationNo', 'Quotation', 'required');
-        $this->form_validation->set_rules('idCustomer', 'Customer', 'required');
-        $this->form_validation->set_rules('idBrand', 'Brand', 'required');
+        // $this->form_validation->set_rules('idCustomer', 'Customer', 'required');
+        // $this->form_validation->set_rules('idBrand', 'Brand', 'required');
 
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
@@ -159,13 +159,13 @@ class Sample extends CI_Controller
     public function editDetail($id = null)
     {
         $this->form_validation->set_rules('idSample', 'ID Sample', 'required');
-        $this->form_validation->set_rules('quantity', 'Quantity', 'required');
-        $this->form_validation->set_rules('bapcNo', 'BAPC', 'required');
-        $this->form_validation->set_rules('sampleCode', 'Sample Code', 'required');
-        $this->form_validation->set_rules('sampleDescription', 'Sample Description', 'required');
-        $this->form_validation->set_rules('dateTesting', 'Date Testing', 'required');
-        $this->form_validation->set_rules('dateReceived', 'Date Received', 'required');
-        $this->form_validation->set_rules('ageGrading', 'Age Grading', 'required');
+        // $this->form_validation->set_rules('quantity', 'Quantity', 'required');
+        // $this->form_validation->set_rules('bapcNo', 'BAPC', 'required');
+        // $this->form_validation->set_rules('sampleCode', 'Sample Code', 'required');
+        // $this->form_validation->set_rules('sampleDescription', 'Sample Description', 'required');
+        // $this->form_validation->set_rules('dateTesting', 'Date Testing', 'required');
+        // $this->form_validation->set_rules('dateReceived', 'Date Received', 'required');
+        // $this->form_validation->set_rules('ageGrading', 'Age Grading', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 

@@ -22,12 +22,12 @@ class Master extends CI_Controller
     public function addCustomer()
     {
         $this->form_validation->set_rules('customerName', 'Customer Name', 'required');
-        $this->form_validation->set_rules('phoneNumber', 'Phone Number', 'required');
-        $this->form_validation->set_rules('address', 'Address', 'required');
-        $this->form_validation->set_rules('remark', 'Remark', 'required');
-        $this->form_validation->set_rules('contactPerson', 'Contact Person', 'required');
+        // $this->form_validation->set_rules('phoneNumber', 'Phone Number', 'required');
+        // $this->form_validation->set_rules('address', 'Address', 'required');
+        // $this->form_validation->set_rules('remark', 'Remark', 'required');
+        // $this->form_validation->set_rules('contactPerson', 'Contact Person', 'required');
         // $this->form_validation->set_rules('email[]', 'Email', 'required');
-        $this->form_validation->set_rules('billTo', 'Bill To', 'required');
+        // $this->form_validation->set_rules('billTo', 'Bill To', 'required');
         $this->form_validation->set_rules('enable', 'Enable', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
@@ -52,13 +52,13 @@ class Master extends CI_Controller
     public function editCustomer($idCustomer = null)
     {
         $this->form_validation->set_rules('customerName', 'Customer Name', 'required');
-        $this->form_validation->set_rules('phoneNumber', 'Phone Number', 'required');
-        $this->form_validation->set_rules('address', 'Address', 'required');
-        $this->form_validation->set_rules('remark', 'Remark', 'required');
-        $this->form_validation->set_rules('contactPerson', 'Contact Person', 'required');
+        // $this->form_validation->set_rules('phoneNumber', 'Phone Number', 'required');
+        // $this->form_validation->set_rules('address', 'Address', 'required');
+        // $this->form_validation->set_rules('remark', 'Remark', 'required');
+        // $this->form_validation->set_rules('contactPerson', 'Contact Person', 'required');
         // $this->form_validation->set_rules('email[]', 'Email', 'required');
-        $this->form_validation->set_rules('billTo', 'Bill To', 'required');
-        $this->form_validation->set_rules('enable', 'Enable', 'required');
+        // $this->form_validation->set_rules('billTo', 'Bill To', 'required');
+        // $this->form_validation->set_rules('enable', 'Enable', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 
@@ -104,7 +104,7 @@ class Master extends CI_Controller
     public function addBrand()
     {
         $this->form_validation->set_rules('brand', 'Brand', 'required');
-        $this->form_validation->set_rules('remark', 'Remark', 'required');
+        // $this->form_validation->set_rules('remark', 'Remark', 'required');
         $this->form_validation->set_rules('enable', 'Enable', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
@@ -129,7 +129,7 @@ class Master extends CI_Controller
     public function editBrand($id = null)
     {
         $this->form_validation->set_rules('brand', 'Brand', 'required');
-        $this->form_validation->set_rules('remark', 'Remark', 'required');
+        // $this->form_validation->set_rules('remark', 'Remark', 'required');
         $this->form_validation->set_rules('enable', 'Enable', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
@@ -177,8 +177,8 @@ class Master extends CI_Controller
     public function addRequest()
     {
         $this->form_validation->set_rules('item', 'Item', 'required');
-        $this->form_validation->set_rules('category', 'Category', 'required');
-        $this->form_validation->set_rules('remark', 'Remark', 'required');
+        // $this->form_validation->set_rules('category', 'Category', 'required');
+        // $this->form_validation->set_rules('remark', 'Remark', 'required');
         $this->form_validation->set_rules('enable', 'Enable', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
@@ -204,8 +204,8 @@ class Master extends CI_Controller
     public function editRequest($id = null)
     {
         $this->form_validation->set_rules('item', 'Item', 'required');
-        $this->form_validation->set_rules('category', 'Category', 'required');
-        $this->form_validation->set_rules('remark', 'Remark', 'required');
+        // $this->form_validation->set_rules('category', 'Category', 'required');
+        // $this->form_validation->set_rules('remark', 'Remark', 'required');
         $this->form_validation->set_rules('enable', 'Enable', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
@@ -253,7 +253,7 @@ class Master extends CI_Controller
     public function addIso()
     {
         $this->form_validation->set_rules('iso', 'ISO', 'required');
-        $this->form_validation->set_rules('category', 'Category', 'required');
+        // $this->form_validation->set_rules('category', 'Category', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 
@@ -278,7 +278,7 @@ class Master extends CI_Controller
     public function editIso($id = null)
     {
         $this->form_validation->set_rules('iso', 'ISO', 'required');
-        $this->form_validation->set_rules('category', 'Category', 'required');
+        // $this->form_validation->set_rules('category', 'Category', 'required');
         // $this->form_validation->set_message('is_unique', '{field} Already Used');
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 

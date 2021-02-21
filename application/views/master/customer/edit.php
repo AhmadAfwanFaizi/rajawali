@@ -19,21 +19,21 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="phoneNumber">Phone Number</label>
-                                    <input type="text" class="form-control" name="phoneNumber" placeholder="Phone Number" value="<?= $data->phone_number ?>" required>
+                                    <input type="text" class="form-control" name="phoneNumber" placeholder="Phone Number" value="<?= $data->phone_number ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label>
-                                    <textarea name="address" id="address" cols="0" rows="5" class="form-control"><?= $data->address ?></textarea required>
+                                    <textarea name="address" id="address" cols="0" rows="5" class="form-control"><?= $data->address ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="remark">Remark</label>
-                                    <input type="text" class="form-control" name="remark" placeholder="Remark" value="<?= $data->remark ?>" required>
+                                    <input type="text" class="form-control" name="remark" placeholder="Remark" value="<?= $data->remark ?>">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="contactPerson">Contact Person</label>
-                                    <input type="text" class="form-control" name="contactPerson" placeholder="Contact Person" value="<?= $data->contact_person ?>" required>
+                                    <input type="text" class="form-control" name="contactPerson" placeholder="Contact Person" value="<?= $data->contact_person ?>">
                                 </div>
                                 <div class="form-group">
 
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="billTo">Bill To</label>
-                                    <textarea name="billTo" id="billTo" cols="0" rows="5" class="form-control" required><?= $data->bill_to ?></textarea>
+                                    <textarea name="billTo" id="billTo" cols="0" rows="5" class="form-control"><?= $data->bill_to ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="enable">Enable</label>

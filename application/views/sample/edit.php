@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             <label for="idCustomer">Customer</label>
-                            <select name="idCustomer" id="idCustomer" class="form-control" required>
+                            <select name="idCustomer" id="idCustomer" class="form-control">
                                 <option value="">Select a customer</option>
                                 <?php foreach ($customer as $row) { ?>
                                     <option value="<?= $row->id_customer ?>" <?= $row->id_customer == $data->id_customer ? 'selected' : null ?>><?= $row->customer_name ?></option>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="idBrand">Brand</label>
-                            <select name="idBrand" id="idBrand" class="form-control" required>
+                            <select name="idBrand" id="idBrand" class="form-control">
                                 <option value="">Select a brand</option>
                                 <?php foreach ($brand as $row) { ?>
                                     <option value="<?= $row->id ?>" <?= $row->id == $data->id_brand ? 'selected' : null ?>><?= $row->brand ?></option>

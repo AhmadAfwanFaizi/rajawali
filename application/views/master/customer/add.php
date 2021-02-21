@@ -18,21 +18,21 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="phoneNumber">Phone Number</label>
-                                    <input type="text" class="form-control" name="phoneNumber" placeholder="Phone Number" required>
+                                    <input type="text" class="form-control" name="phoneNumber" placeholder="Phone Number">
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label>
-                                    <textarea name="address" id="address" cols="30" rows="5" class="form-control"></textarea required>
+                                    <textarea name="address" id="address" cols="30" rows="5" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="remark">Remark</label>
-                                    <input type="text" class="form-control" name="remark" placeholder="Remark" required>
+                                    <input type="text" class="form-control" name="remark" placeholder="Remark">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="contactPerson">Contect Person</label>
-                                    <input type="text" class="form-control" name="contactPerson" placeholder="Contact Person" required>
+                                    <input type="text" class="form-control" name="contactPerson" placeholder="Contact Person">
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="billTo">Bill To</label>
-                                    <textarea name="billTo" id="billTo" cols="30" rows="5" class="form-control" required></textarea>
+                                    <textarea name="billTo" id="billTo" cols="30" rows="5" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="enable">Enable</label>

@@ -51,23 +51,23 @@
 
                                 <div class="form-group">
                                     <label for="familyProduct">Family Product</label>
-                                    <textarea class="form-control" name="familyProduct" id="familyProduct" cols="30" rows="1" required></textarea>
+                                    <textarea class="form-control" name="familyProduct" id="familyProduct" cols="30" rows="1"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="productEndUse">Product End Use</label>
-                                    <textarea class="form-control" name="productEndUse" id="productEndUse" cols="30" rows="1" required></textarea>
+                                    <textarea class="form-control" name="productEndUse" id="productEndUse" cols="30" rows="1"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="ageGroup">Age Group</label>
-                                    <textarea class="form-control" name="ageGroup" id="ageGroup" cols="30" rows="1" required></textarea>
+                                    <textarea class="form-control" name="ageGroup" id="ageGroup" cols="30" rows="1"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="country">Country</label>
-                                    <textarea class="form-control" name="country" id="country" cols="30" rows="1" required></textarea>
+                                    <textarea class="form-control" name="country" id="country" cols="30" rows="1"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="labSubcont">Lab Subcont</label>
-                                    <textarea class="form-control" name="labSubcont" id="labSubcont" cols="30" rows="1" required></textarea>
+                                    <textarea class="form-control" name="labSubcont" id="labSubcont" cols="30" rows="1"></textarea>
                                 </div>
 
                                 <div class="checkbox">
@@ -84,11 +84,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="otherMethod">Other</label>
-                                    <textarea class="form-control" name="otherMethod" id="otherMethod" cols="30" rows="1" required></textarea>
+                                    <textarea class="form-control" name="otherMethod" id="otherMethod" cols="30" rows="1"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="ItemNo">Item No</label>
-                                    <input type="text" class="form-control" name="ItemNo" placeholder="Item No" required>
+                                    <input type="text" class="form-control" name="ItemNo" placeholder="Item No">
                                 </div>
                             </div>
                             <div class="col-md-6">

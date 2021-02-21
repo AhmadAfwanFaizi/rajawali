@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             <label for="remark">Remark</label>
-                            <textarea name="remark" id="remark" cols="0" rows="5" class="form-control" required><?= $data->remark ?></textarea>
+                            <textarea name="remark" id="remark" cols="0" rows="5" class="form-control"><?= $data->remark ?></textarea>
                         </div>
                         <div class="form-group">
                             <label for="enable">Enable</label>

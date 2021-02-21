@@ -15,6 +15,8 @@
                     <table id="tableSubmition" class="table table-bordered table-hover" style="min-width: 50%;">
                         <thead>
                             <tr>
+                                <th>Customer</th>
+                                <th>Brand</th>
                                 <th>Sample Code</th>
                                 <th>Term Of Service 1</th>
                                 <th>Term Of Service 2</th>
@@ -38,6 +40,8 @@
                         <tbody>
                             <?php foreach ($data as $row) { ?>
                                 <tr>
+                                    <td><?= $row->customer_name ?></td>
+                                    <td><?= $row->brand ?></td>
                                     <td><?= $row->sample_code ?></td>
                                     <td><?= $row->type_1 ?></td>
                                     <td><?= $row->type_2 ?></td>
@@ -100,7 +104,7 @@
             "scrollCollapse": true,
             "scrollX": "200%",
             "columnDefs": [{
-                "targets": [17],
+                "targets": [19],
                 "orderable": false,
             }],
         });
