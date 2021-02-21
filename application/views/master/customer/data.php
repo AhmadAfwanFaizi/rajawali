@@ -14,7 +14,7 @@
                 <?php } ?>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="tableCustomer" class="table table-bordered table-hover">
+                    <table id="tableCustomer" class="table table-bordered table-hover" style="min-width: 50%;">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -25,6 +25,10 @@
                                 <th>Bill To</th>
                                 <th>Remark</th>
                                 <th>Enable</th>
+                                <th>Created By</th>
+                                <th>Created At</th>
+                                <th>Updated By</th>
+                                <th>Updated At</th>
                                 <th style="width: 85px;">Action</th>
                             </tr>
                         </thead>
@@ -46,6 +50,10 @@
                                     <td><?= $row->bill_to ?></td>
                                     <td><?= $row->remark ?></td>
                                     <td><?= $row->enable == 'Y' ? 'YES' : 'NO' ?></td>
+                                    <td><?= $row->created_by ?></td>
+                                    <td><?= $row->created_at ?></td>
+                                    <td><?= $row->updated_by ?></td>
+                                    <td><?= $row->updated_at ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Master/editCustomer/') . $row->id_customer ?>" class="btn btn-warning">
@@ -63,19 +71,7 @@
                                 </tr>
                             <?php } ?>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Contact</th>
-                                <th>Phone</th>
-                                <th>email</th>
-                                <th>Bill To</th>
-                                <th>Remark</th>
-                                <th>Enable</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
+
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -90,8 +86,10 @@
 <script>
     $(function() {
         $('#tableCustomer').DataTable({
+            "scrollCollapse": true,
+            "scrollX": "200%",
             "columnDefs": [{
-                "targets": [1, 2, 3, 4, 5, 6, 7, 8],
+                "targets": [12],
                 "orderable": false,
             }],
         });

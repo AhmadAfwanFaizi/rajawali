@@ -14,12 +14,16 @@
                 <?php } ?>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="tableIso" class="table table-bordered table-hover">
+                    <table id="tableIso" class="table table-bordered table-hover" style="min-width: 50%;">
                         <thead>
                             <tr>
                                 <th>Iso Name</th>
                                 <th>Category</th>
                                 <th>Enable</th>
+                                <th>Created By</th>
+                                <th>Created At</th>
+                                <th>Updated By</th>
+                                <th>Updated At</th>
                                 <th style="width: 85px;">Action</th>
                             </tr>
                         </thead>
@@ -31,6 +35,10 @@
                                     <td>
                                         <?= $row->enable == 'Y' ? 'YES' : 'NO' ?>
                                     </td>
+                                    <td><?= $row->created_by ?></td>
+                                    <td><?= $row->created_at ?></td>
+                                    <td><?= $row->updated_by ?></td>
+                                    <td><?= $row->updated_at ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Master/editIso/') . $row->id ?>" class="btn btn-warning">
@@ -70,8 +78,10 @@
 <script>
     $(function() {
         $('#tableIso').DataTable({
+            "scrollCollapse": true,
+            "scrollX": "200%",
             "columnDefs": [{
-                "targets": [1, 2, 3],
+                "targets": [7],
                 "orderable": false,
             }],
         });

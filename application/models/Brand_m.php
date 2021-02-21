@@ -5,15 +5,18 @@ class Brand_m extends CI_model
 {
     public function getData($id = null, $enable = null)
     {
-        $this->db->select('*')->from('brand');
+        $this->db->select('B.*, U.username as created_by, U2.username as updated_by')
+            ->from('brand B')
+            ->join('user U', 'U.id = B.created_by')
+            ->join('user U2', 'U2.id = B.updated_by', 'left');
         if ($id) {
-            $this->db->where("id", $id);
+            $this->db->where("B.id", $id);
         }
 
         if ($enable) {
-            $this->db->where("enable", "Y");
+            $this->db->where("B.enable", "Y");
         }
-        $this->db->where("deleted_at", NULL);
+        $this->db->where("B.deleted_at", NULL);
         return $this->db->get();
     }
 

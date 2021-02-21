@@ -5,9 +5,10 @@ class Customer_m extends CI_model
 {
     public function getData($idCustomer = null, $enable = null)
     {
-        $this->db->select('C.*')
-            ->from('customer C');
-        // ->join('customer_detail CD', 'CD.id_customer = C.id_customer');
+        $this->db->select('C.*, U.username as created_by, U2.username as updated_by')
+            ->from('customer C')
+            ->join('user U', 'U.id = C.created_by')
+            ->join('user U2', 'U2.id = C.updated_by', 'left');
         if ($idCustomer) {
             $this->db->where("C.id_customer", $idCustomer);
         }

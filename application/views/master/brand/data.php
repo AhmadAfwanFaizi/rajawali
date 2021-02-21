@@ -14,12 +14,16 @@
                 <?php } ?>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="tableBrand" class="table table-bordered table-hover">
+                    <table id="tableBrand" class="table table-bordered table-hover" style="min-width: 50%;">
                         <thead>
                             <tr>
                                 <th>Brand</th>
                                 <th>Remark</th>
                                 <th>Enable</th>
+                                <th>Created By</th>
+                                <th>Created At</th>
+                                <th>Updated By</th>
+                                <th>Updated At</th>
                                 <th style="width: 85px;">Action</th>
                             </tr>
                         </thead>
@@ -29,6 +33,10 @@
                                     <td><?= $row->brand ?></td>
                                     <td><?= $row->remark ?></td>
                                     <td><?= $row->enable == 'Y' ? 'YES' : 'NO' ?></td>
+                                    <td><?= $row->created_by ?></td>
+                                    <td><?= $row->created_at ?></td>
+                                    <td><?= $row->updated_by ?></td>
+                                    <td><?= $row->updated_at ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Master/editBrand/') . $row->id ?>" class="btn btn-warning">
@@ -46,14 +54,6 @@
                                 </tr>
                             <?php } ?>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Brand</th>
-                                <th>Remark</th>
-                                <th>Enable</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -68,8 +68,10 @@
 <script>
     $(function() {
         $('#tableBrand').DataTable({
+            "scrollCollapse": true,
+            "scrollX": "200%",
             "columnDefs": [{
-                "targets": [1, 2, 3],
+                "targets": [7],
                 "orderable": false,
             }],
         });

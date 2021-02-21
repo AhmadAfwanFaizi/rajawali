@@ -29,6 +29,10 @@
                                 <th>Age Group</th>
                                 <th>Country</th>
                                 <th>Lab Subcont</th>
+                                <th>Created By</th>
+                                <th>Created At</th>
+                                <th>Updated By</th>
+                                <th>Updated At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -48,6 +52,10 @@
                                     <td><?= $row->age_group ?></td>
                                     <td><?= $row->country ?></td>
                                     <td><?= $row->lab_subcont ?></td>
+                                    <td><?= $row->created_by ?></td>
+                                    <td><?= $row->created_at ?></td>
+                                    <td><?= $row->updated_by ?></td>
+                                    <td><?= $row->updated_at ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->print_privilege == 'Y') { ?>
                                             <a target="_blank" href="<?= base_url('Submition/print/') . $row->id_submition ?>" class="btn btn-success">
@@ -90,10 +98,10 @@
     $(function() {
         $('#tableSubmition').DataTable({
             // "autoWidth": false,
-            "scrollX": "200%",
             "scrollCollapse": true,
+            "scrollX": "200%",
             "columnDefs": [{
-                "targets": [13],
+                "targets": [17],
                 "orderable": false,
             }],
         });

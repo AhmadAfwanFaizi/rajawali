@@ -20,6 +20,10 @@
                                 <th>Date Received</th>
                                 <th>Date Testing</th>
                                 <th>Age Grading</th>
+                                <th>Created By</th>
+                                <th>Created At</th>
+                                <th>Updated By</th>
+                                <th>Updated At</th>
                                 <th style="width: 130px;">Action</th>
                             </tr>
                         </thead>
@@ -36,6 +40,10 @@
                                     <td><?= $row->date_received ?></td>
                                     <td><?= $row->date_testing ?></td>
                                     <td><?= $row->age_grading ?></td>
+                                    <td><?= $row->created_by ?></td>
+                                    <td><?= $row->created_at ?></td>
+                                    <td><?= $row->updated_by ?></td>
+                                    <td><?= $row->updated_at ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Sample/editDetail/') . $row->id_detail ?>" class="btn btn-warning">
@@ -73,10 +81,10 @@
 <script>
     $(function() {
         $("#tableSampleDetail").DataTable({
-            "scrollX": "200%",
             "scrollCollapse": true,
+            "scrollX": "200%",
             "columnDefs": [{
-                "targets": [10],
+                "targets": [14],
                 "orderable": false,
             }],
         });

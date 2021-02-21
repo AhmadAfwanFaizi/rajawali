@@ -5,10 +5,12 @@ class Sample_m extends CI_model
 {
     public function getData($idSample = null)
     {
-        $this->db->select('*')
+        $this->db->select('*, U.username as created_by, U2.username as updated_by')
             ->from('sample S')
             ->join('customer C', 'C.id_customer = S.id_customer')
-            ->join('brand B', 'B.id = S.id_brand');
+            ->join('brand B', 'B.id = S.id_brand')
+            ->join('user U', 'U.id = B.created_by')
+            ->join('user U2', 'U2.id = B.updated_by', 'left');
         if ($idSample) {
             $this->db->where("S.id_sample", $idSample);
         }
@@ -18,11 +20,13 @@ class Sample_m extends CI_model
 
     public function getDetail($idSample = null, $id = null)
     {
-        $this->db->select('*, SD.id as id_detail')
+        $this->db->select('*, SD.id as id_detail, U.username as created_by, U2.username as updated_by')
             ->from('sample_detail SD')
             ->join('sample S', 'S.id_sample = SD.id_sample')
             ->join('customer C', 'C.id_customer = S.id_customer')
-            ->join('brand B', 'B.id = S.id_brand');
+            ->join('brand B', 'B.id = S.id_brand')
+            ->join('user U', 'U.id = B.created_by')
+            ->join('user U2', 'U2.id = B.updated_by', 'left');
         if ($idSample) {
             $this->db->where("SD.id_sample", $idSample);
         }

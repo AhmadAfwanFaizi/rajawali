@@ -14,12 +14,16 @@
                 <?php } ?>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="tableSample" class="table table-bordered table-hover">
+                    <table id="tableSample" class="table table-bordered table-hover" style="min-width: 50%;">
                         <thead>
                             <tr>
                                 <th>Quotation</th>
                                 <th>Customer</th>
                                 <th>Brand</th>
+                                <th>Created By</th>
+                                <th>Created At</th>
+                                <th>Updated By</th>
+                                <th>Updated At</th>
                                 <th style="width: 130px; ">Action</th>
                             </tr>
                         </thead>
@@ -29,6 +33,10 @@
                                     <td><?= $row->quotation_no ?></td>
                                     <td><?= $row->customer_name ?></td>
                                     <td><?= $row->brand ?></td>
+                                    <td><?= $row->created_by ?></td>
+                                    <td><?= $row->created_at ?></td>
+                                    <td><?= $row->updated_by ?></td>
+                                    <td><?= $row->updated_at ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->add_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Sample/addDetail/') . $row->id_sample ?>" class="btn btn-primary">
@@ -78,8 +86,10 @@
 <script>
     $(function() {
         $('#tableSample').DataTable({
+            "scrollCollapse": true,
+            "scrollX": "200%",
             "columnDefs": [{
-                "targets": [3],
+                "targets": [7],
                 "orderable": false,
             }],
         });
