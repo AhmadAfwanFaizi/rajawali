@@ -63,14 +63,6 @@
                                 </tr>
                             <?php } ?>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Quotation</th>
-                                <th>Customer</th>
-                                <th>Brand</th>
-                                <th style="width: 85px; ">Action</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
                 <!-- /.box-body -->

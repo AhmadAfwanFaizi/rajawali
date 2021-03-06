@@ -7,7 +7,7 @@ class Master extends CI_Controller
     {
         parent::__construct();
         login();
-        $this->load->model(['customer_m', 'brand_m', 'request_m', 'iso_m']);
+        $this->load->model(['customer_m', 'brand_m', 'iso_m', 'term_of_service_m']);
     }
 
     public function customer()
@@ -163,82 +163,6 @@ class Master extends CI_Controller
         redirect('Master/brand');
     }
 
-    public function request()
-    {
-        $data = [
-            "page" => "request",
-            "data" => $this->request_m->getData()->result(),
-        ];
-        // var_dump($data);
-        // die;
-        $this->template->load('template/template', 'master/request/data', $data);
-    }
-
-    public function addRequest()
-    {
-        $this->form_validation->set_rules('item', 'Item', 'required');
-        // $this->form_validation->set_rules('category', 'Category', 'required');
-        // $this->form_validation->set_rules('remark', 'Remark', 'required');
-        $this->form_validation->set_rules('enable', 'Enable', 'required');
-        // $this->form_validation->set_message('is_unique', '{field} Already Used');
-        $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
-
-        if ($this->form_validation->run() == false) {
-            $data = [
-                "page" => "add request",
-            ];
-
-            $this->template->load('template/template', 'master/request/add', $data);
-        } else {
-            $post = $this->input->post(null, true);
-            // var_dump($post);
-            // die;
-            $this->request_m->add($post);
-            if ($this->db->affected_rows() > 0) {
-                notif('S', 'Successfully added');
-            }
-            redirect('Master/addBrand');
-        }
-    }
-
-    public function editRequest($id = null)
-    {
-        $this->form_validation->set_rules('item', 'Item', 'required');
-        // $this->form_validation->set_rules('category', 'Category', 'required');
-        // $this->form_validation->set_rules('remark', 'Remark', 'required');
-        $this->form_validation->set_rules('enable', 'Enable', 'required');
-        // $this->form_validation->set_message('is_unique', '{field} Already Used');
-        $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
-
-        if ($this->form_validation->run() == false) {
-            $data = [
-                "page" => "edit request",
-                'data' => $this->request_m->getData($id)->row(),
-            ];
-            // var_dump($data);
-            // die;
-            $this->template->load('template/template', 'master/request/edit', $data);
-        } else {
-            $post = $this->input->post(null, true);
-            // var_dump($post);
-            // die;
-            $this->request_m->edit($post);
-            if ($this->db->affected_rows() > 0) {
-                notif('S', 'Successfully updated');
-            }
-            redirect('Master/request');
-        }
-    }
-
-    public function deleteRequest($id)
-    {
-        $this->request_m->delete($id);
-        if ($this->db->affected_rows() > 0) {
-            notif('S', 'Successfully deleted');
-        }
-        redirect('Master/request');
-    }
-
     public function iso()
     {
         $data = [
@@ -310,4 +234,126 @@ class Master extends CI_Controller
         }
         redirect('Master/iso');
     }
+
+    public function termOfService()
+    {
+        $data = [
+            "page" => "term of service",
+            "data" => $this->term_of_service_m->getData()->result(),
+        ];
+        // var_dump($data);
+        // die;
+        $this->template->load('template/template', 'master/termOfService/head/data', $data);
+    }
+
+    public function addTermOfService()
+    {
+        $this->form_validation->set_rules('category', 'Category', 'required');
+        $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
+
+        if ($this->form_validation->run() == false) {
+            $data = [
+                "page" => "add term of service",
+            ];
+            $this->template->load('template/template', 'master/termOfService/head/add', $data);
+        } else {
+            $post = $this->input->post(null, true);
+            // var_dump($post);
+            // die;
+            $this->term_of_service_m->add($post);
+            if ($this->db->affected_rows() > 0) {
+                notif('S', 'Successfully added');
+            }
+            redirect('Master/termOfService');
+        }
+    }
+
+    public function editTermOfService($id = null)
+    {
+        $this->form_validation->set_rules('category', 'Category', 'required');
+        $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
+
+        if ($this->form_validation->run() == false) {
+            $data = [
+                "page" => "edit term of service",
+                'data' => $this->term_of_service_m->getData($id)->row(),
+            ];
+            // var_dump($data);
+            // die;
+            $this->template->load('template/template', 'master/termOfService/head/edit', $data);
+        } else {
+            $post = $this->input->post(null, true);
+            // var_dump($post);
+            // die;
+            $this->term_of_service_m->edit($post);
+            if ($this->db->affected_rows() > 0) {
+                notif('S', 'Successfully updated');
+            }
+            redirect('Master/termOfService');
+        }
+    }
+
+    public function termOfServiceDetail()
+    {
+        $data = [
+            "page" => "term of service detail",
+            "data" => $this->term_of_service_m->getDataDetail(null, true)->result(),
+        ];
+        // var_dump($data);
+        // die;
+        $this->template->load('template/template', 'master/termOfService/detail/data', $data);
+    }
+
+    public function addTermOfServiceDetail()
+    {
+        $this->form_validation->set_rules('id_term_of_service', 'Term Of Service Category', 'required');
+        $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
+
+        if ($this->form_validation->run() == false) {
+            $data = [
+                "page"            => "add term of service",
+                "term_of_service" => $this->term_of_service_m->getData(null, true)->result(),
+            ];
+            // var_dump($data);
+            // die;
+            $this->template->load('template/template', 'master/termOfService/detail/add', $data);
+        } else {
+            $post = $this->input->post(null, true);
+            // var_dump($post);
+            // die;
+            $this->term_of_service_m->addDetail($post);
+            if ($this->db->affected_rows() > 0) {
+                notif('S', 'Successfully added');
+            }
+            redirect('Master/termOfServiceDetail');
+        }
+    }
+
+    public function editTermOfServiceDetail($id = null)
+    {
+        $this->form_validation->set_rules('id_term_of_service', 'Term Of Service Category', 'required');
+        $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
+
+        if ($this->form_validation->run() == false) {
+            $data = [
+                "page"            => "edit term of service",
+                'data'            => $this->term_of_service_m->getDataDetail($id)->row(),
+                "term_of_service" => $this->term_of_service_m->getData(null, true)->result(),
+            ];
+            // var_dump($data);
+            // die;
+            $this->template->load('template/template', 'master/termOfService/detail/edit', $data);
+        } else {
+            $post = $this->input->post(null, true);
+            // var_dump($post);
+            // die;
+            $this->term_of_service_m->editDetail($post);
+            if ($this->db->affected_rows() > 0) {
+                notif('S', 'Successfully updated');
+            }
+            redirect('Master/termOfServiceDetail');
+        }
+    }
+
+    // END CLASS
 }

@@ -56,14 +56,6 @@
                                 </tr>
                             <?php } ?>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Iso Name</th>
-                                <th>Category</th>
-                                <th>Enable</th>
-                                <th style="width: 85px;">Action</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
                 <!-- /.box-body -->

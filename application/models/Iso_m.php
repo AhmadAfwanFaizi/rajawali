@@ -36,7 +36,7 @@ class Iso_m extends CI_model
             'category'   => $post['category'],
             'enable'     => $post['enable'],
             'updated_at' => waktu_sekarang(),
-            'updated_at' => $this->session->userdata('id'),
+            'updated_by' => $this->session->userdata('id'),
         ];
         $this->db->where('id', $post['id']);
         $this->db->update('iso', $data);

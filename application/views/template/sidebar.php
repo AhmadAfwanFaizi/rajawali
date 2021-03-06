@@ -46,6 +46,20 @@
                             <i class="fa fa-circle-o"></i> <span>Iso</span>
                         </a>
                     </li>
+                    <li class="treeview <?= segment(2) == 'termOfService' ? 'menu-open' : null ?>">
+                        <a href="#"><i class="fa fa-circle-o"></i> Term Of Service
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu" <?= segment(2) == 'termOfService' ||
+                                                        segment(2) == 'addTermOfService' ||
+                                                        segment(2) == 'editTermOfService' ||
+                                                        segment(2) == 'termOfServiceDetail' ? 'style="display: block;"' : null ?>>
+                            <li <?= segment(2) == 'termOfService' ? 'class="active"' : null ?>><a href="<?= base_url() ?>Master/termOfService"><i class="fa fa-circle-o"></i> Head</a></li>
+                            <li <?= segment(2) == 'termOfServiceDetail' ? 'class="active"' : null ?>><a href="<?= base_url() ?>Master/termOfServiceDetail"><i class="fa fa-circle-o"></i> Detail</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
 

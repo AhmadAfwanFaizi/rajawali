@@ -30,6 +30,25 @@
                                 <th style="width: 130px;">Action</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Quotation</th>
+                                <th>Customer</th>
+                                <th>Brand</th>
+                                <th>Sample Code</th>
+                                <th>Sample Description</th>
+                                <th>Quantity</th>
+                                <th>BAPC</th>
+                                <th>Date Received</th>
+                                <th>Date Testing</th>
+                                <th>Age Grading</th>
+                                <th>Created By</th>
+                                <th>Created At</th>
+                                <th>Updated By</th>
+                                <th>Updated At</th>
+                                <th style="width: 130px;">Action</th>
+                            </tr>
+                        </tfoot>
                         <tbody>
                             <?php foreach ($detail as $row) { ?>
                                 <tr>
