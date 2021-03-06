@@ -18,8 +18,7 @@
                                 <th>Customer</th>
                                 <th>Brand</th>
                                 <th>Sample Code</th>
-                                <th>Term Of Service 1</th>
-                                <th>Term Of Service 2</th>
+                                <th>Term Of Service</th>
                                 <th>Item No</th>
                                 <th>SNI Certification</th>
                                 <th>Do Not Show Pass</th>
@@ -37,14 +36,36 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Brand</th>
+                                <th>Sample Code</th>
+                                <th>Term Of Service</th>
+                                <th>Item No</th>
+                                <th>SNI Certification</th>
+                                <th>Do Not Show Pass</th>
+                                <th>Retain Sample</th>
+                                <th>Other Method </th>
+                                <th>Family Product</th>
+                                <th>Product End Use</th>
+                                <th>Age Group</th>
+                                <th>Country</th>
+                                <th>Lab Subcont</th>
+                                <th>Created By</th>
+                                <th>Created At</th>
+                                <th>Updated By</th>
+                                <th>Updated At</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
                         <tbody>
                             <?php foreach ($data as $row) { ?>
                                 <tr>
                                     <td><?= $row->customer_name ?></td>
                                     <td><?= $row->brand ?></td>
                                     <td><?= $row->sample_code ?></td>
-                                    <td><?= $row->type_1 ?></td>
-                                    <td><?= $row->type_2 ?></td>
+                                    <td><?= $row->category . ' - ' . $row->type ?></td>
                                     <td><?= $row->item_no ?></td>
                                     <td><?= $row->sni_certification ?></td>
                                     <td><?= $row->do_not_show_pass ?></td>
@@ -104,7 +125,7 @@
             "scrollCollapse": true,
             "scrollX": "200%",
             "columnDefs": [{
-                "targets": [19],
+                "targets": [18],
                 "orderable": false,
             }],
         });

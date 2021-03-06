@@ -5,10 +5,10 @@ class Submition_m extends CI_model
 {
     public function getData($id = null)
     {
-        $this->db->select('S.*, TOS1.type as type_1, TOS2.type as type_2, S.id as id_submition, customer_name, brand')
+        $this->db->select('S.*, TOS.category, TOSD.type, S.id as id_submition, customer_name, brand')
             ->from('submition S')
-            ->join('term_of_service_1 TOS1', 'TOS1.id = S.id_term_of_service_1')
-            ->join('term_of_service_2 TOS2', 'TOS2.id = S.id_term_of_service_2')
+            ->join('term_of_service_detail TOSD', 'TOSD.id = S.id_term_of_service_detail')
+            ->join('term_of_service TOS', 'TOS.id = TOSD.id_term_of_service')
             ->join('sample_detail SD', 'SD.sample_code = S.sample_code')
             ->join('sample', 'sample.id_sample = SD.id_sample')
             ->join('customer C', 'C.id_customer = sample.id_customer')

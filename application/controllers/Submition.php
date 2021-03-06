@@ -8,7 +8,7 @@ class Submition extends CI_Controller
     {
         parent::__construct();
         login();
-        $this->load->model(['submition_m', 'customer_m']);
+        $this->load->model(['submition_m', 'customer_m', 'term_of_service_m']);
     }
 
     public function index()
@@ -109,25 +109,29 @@ class Submition extends CI_Controller
 
     public function print($id)
     {
-        $getData      = $this->submition_m->getData($id)->row();
-        $getDetail    = $this->submition_m->getDetailData($getData->iso_submition)->result();
-        $getDataPrint = $this->submition_m->getDataPrint($getData->sample_code)->row();
-        $getEmail     = $this->customer_m->getDataDetail($getDataPrint->id_customer)->result();
+        $getData                = $this->submition_m->getData($id)->row();
+        $getDetail              = $this->submition_m->getDetailData($getData->iso_submition)->result();
+        $getDataPrint           = $this->submition_m->getDataPrint($getData->sample_code)->row();
+        $getEmail               = $this->customer_m->getDataDetail($getDataPrint->id_customer)->result();
+        $getTermOfService       = $this->term_of_service_m->getData()->result();
+        $getTermOfServiceDetail = $this->term_of_service_m->getDataDetail()->result();
 
         $data = [
             // 'sample_code' => $this->submition_m->getSampleCode()->result(),
-            'data'      => $getData,
-            'detail'    => $getDetail,
-            'dataPrint' => $getDataPrint,
-            'email'     => $getEmail,
-            'include'   => $this->submition_m->getIso('include')->result(),
-            'baby_wear' => $this->submition_m->getIso('baby_wear')->result(),
-            'bicycle'   => $this->submition_m->getIso('bicycle')->result(),
-            'others'    => $this->submition_m->getIso('others')->result(),
-            'based'     => $this->submition_m->getIso('based')->result(),
-            'other'     => $this->submition_m->getIso('other')->result(),
+            'data'                   => $getData,
+            'detail'                 => $getDetail,
+            'dataPrint'              => $getDataPrint,
+            'email'                  => $getEmail,
+            'term_of_service'        => $getTermOfService,
+            'term_of_service_detail' => $getTermOfServiceDetail,
+            'include'                => $this->submition_m->getIso('include')->result(),
+            'baby_wear'              => $this->submition_m->getIso('baby_wear')->result(),
+            'bicycle'                => $this->submition_m->getIso('bicycle')->result(),
+            'others'                 => $this->submition_m->getIso('others')->result(),
+            'based'                  => $this->submition_m->getIso('based')->result(),
+            'other'                  => $this->submition_m->getIso('other')->result(),
         ];
-        // var_dump($getDetail);
+        // var_dump($getTermOfService);
         // die;
         $this->load->view('submition/print', $data);
     }

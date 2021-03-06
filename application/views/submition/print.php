@@ -128,16 +128,27 @@
                     <td class="kotak" rowspan="2">
                         <b>TERM OF SERVICE:</b>
                     </td>
-                    <td class="kotak" colspan="2">
-                        <b>TOYS/ BABY WEAR/OTHERS</b>
-                    </td>
-                    <td class="kotak" colspan="2">
-                        <b>CHILDREN BICYCLE</b>
-                    </td>
+                    <?php foreach ($term_of_service as $row) { ?>
+                        <td class="kotak" colspan="2">
+                            <b><?= $row->category ?></b>
+                        </td>
+                    <?php } ?>
                     <td class="kotak">Date received : <?= $dataPrint->date_received ?></td>
                 </tr>
                 <tr>
-                    <td class="kotak" class="term">
+                    <?php foreach ($term_of_service_detail as $row) { ?>
+                        <td class="kotak" class="term">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="" <?= $row->id == $data->id_term_of_service_detail ? 'checked' : null ?>>
+                                    <b><?= $row->type ?></b> <br />
+                                    <?= $row->information ?>
+                                </label>
+                            </div>
+
+                        </td>
+                    <?php } ?>
+                    <!-- <td class="kotak" class="term">
                         <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="" <?= $data->id_term_of_service == '1' ? 'checked' : null ?>>
@@ -177,7 +188,7 @@
                                 (40% surcharge)
                             </label>
                         </div>
-                    </td>
+                    </td> -->
                     <td class="kotak">21 Desember 2020</td>
                 </tr>
                 <tr>
@@ -485,10 +496,10 @@
         </div>
     </div>
 
-    <script>
+    <!-- <script>
         window.print();
         setTimeout(window.close, 1000);
-    </script>
+    </script> -->
 
 </body>
 
