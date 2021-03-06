@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Term_of_service_m extends CI_model
 {
-    public function getData($id = null, $enable = null)
+    public function getData($id = null, $enable = null, $orderBy = null)
     {
         $this->db->select('TOS.*, TOS.id as id_term_of_service, U.username as created_by_tos, U2.username as updated_by_tos')
             ->from('term_of_service TOS')
@@ -14,6 +14,9 @@ class Term_of_service_m extends CI_model
         }
         if ($enable) {
             $this->db->where("TOS.enable", 'Y');
+        }
+        if ($orderBy) {
+            $this->db->order_by("TOS.id", 'ASC');
         }
         return $this->db->get();
     }
@@ -41,7 +44,7 @@ class Term_of_service_m extends CI_model
         $this->db->update('term_of_service', $data);
     }
 
-    public function getDataDetail($id = null, $enable = null)
+    public function getDataDetail($id = null, $enable = null, $orderBy = null)
     {
         $this->db->select('TOSD.*, TOSD.id as id_term_of_service_detail, TOS.category, U.username as created_by_tosd, U2.username as updated_by_tosd')
             ->from('term_of_service_detail TOSD')
@@ -53,6 +56,9 @@ class Term_of_service_m extends CI_model
         }
         if ($enable) {
             $this->db->where("TOS.enable", 'Y');
+        }
+        if ($orderBy) {
+            $this->db->order_by("TOSD.id_term_of_service", 'ASC');
         }
         return $this->db->get();
     }

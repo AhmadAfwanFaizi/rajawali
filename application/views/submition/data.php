@@ -76,10 +76,10 @@
                                     <td><?= $row->age_group ?></td>
                                     <td><?= $row->country ?></td>
                                     <td><?= $row->lab_subcont ?></td>
-                                    <td><?= $row->created_by ?></td>
-                                    <td><?= $row->created_at ?></td>
-                                    <td><?= $row->updated_by ?></td>
-                                    <td><?= $row->updated_at ?></td>
+                                    <td><?= $row->created_by_submition ?></td>
+                                    <td><?= $row->created_at_submition ?></td>
+                                    <td><?= $row->updated_by_submition ?></td>
+                                    <td><?= $row->updated_at_submition ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->print_privilege == 'Y') { ?>
                                             <a target="_blank" href="<?= base_url('Submition/print/') . $row->id_submition ?>" class="btn btn-success">
@@ -128,6 +128,9 @@
                 "targets": [18],
                 "orderable": false,
             }],
+            "order": [
+                [15, "desc"]
+            ]
         });
     });
 

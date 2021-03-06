@@ -264,7 +264,7 @@ class Master extends CI_Controller
             if ($this->db->affected_rows() > 0) {
                 notif('S', 'Successfully added');
             }
-            redirect('Master/termOfService');
+            redirect('Master/addTermOfService');
         }
     }
 
@@ -325,7 +325,7 @@ class Master extends CI_Controller
             if ($this->db->affected_rows() > 0) {
                 notif('S', 'Successfully added');
             }
-            redirect('Master/termOfServiceDetail');
+            redirect('Master/addTermOfServiceDetail');
         }
     }
 

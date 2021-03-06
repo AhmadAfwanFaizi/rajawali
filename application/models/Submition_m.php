@@ -5,14 +5,20 @@ class Submition_m extends CI_model
 {
     public function getData($id = null)
     {
-        $this->db->select('S.*, TOS.category, TOSD.type, S.id as id_submition, customer_name, brand')
+        $this->db->select('S.*, TOS.category, TOSD.type, S.id as id_submition, customer_name, brand,
+        S.created_at as created_at_submition,
+        S.updated_at as updated_at_submition,
+        U.username as created_by_submition, 
+        U2.username as updated_by_submition')
             ->from('submition S')
             ->join('term_of_service_detail TOSD', 'TOSD.id = S.id_term_of_service_detail')
             ->join('term_of_service TOS', 'TOS.id = TOSD.id_term_of_service')
             ->join('sample_detail SD', 'SD.sample_code = S.sample_code')
             ->join('sample', 'sample.id_sample = SD.id_sample')
             ->join('customer C', 'C.id_customer = sample.id_customer')
-            ->join('brand B', 'B.id = sample.id_brand');
+            ->join('brand B', 'B.id = sample.id_brand')
+            ->join('user U', 'U.id = S.created_by')
+            ->join('user U2', 'U2.id = S.updated_by', 'left');
         if ($id) {
             $this->db->where("S.id", $id);
         }

@@ -113,8 +113,8 @@ class Submition extends CI_Controller
         $getDetail              = $this->submition_m->getDetailData($getData->iso_submition)->result();
         $getDataPrint           = $this->submition_m->getDataPrint($getData->sample_code)->row();
         $getEmail               = $this->customer_m->getDataDetail($getDataPrint->id_customer)->result();
-        $getTermOfService       = $this->term_of_service_m->getData()->result();
-        $getTermOfServiceDetail = $this->term_of_service_m->getDataDetail()->result();
+        $getTermOfService       = $this->term_of_service_m->getData(null, null, true)->result();
+        $getTermOfServiceDetail = $this->term_of_service_m->getDataDetail(null, null, true)->result();
 
         $data = [
             // 'sample_code' => $this->submition_m->getSampleCode()->result(),
