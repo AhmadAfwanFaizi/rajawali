@@ -13,8 +13,8 @@ class Sample_m extends CI_model
             ->from('sample S')
             ->join('customer C', 'C.id_customer = S.id_customer')
             ->join('brand B', 'B.id = S.id_brand')
-            ->join('user U', 'U.id = B.created_by')
-            ->join('user U2', 'U2.id = B.updated_by', 'left');
+            ->join('user U', 'U.id = S.created_by')
+            ->join('user U2', 'U2.id = S.updated_by', 'left');
         if ($idSample) {
             $this->db->where("S.id_sample", $idSample);
         }

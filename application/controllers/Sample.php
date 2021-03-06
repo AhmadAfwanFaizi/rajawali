@@ -101,7 +101,7 @@ class Sample extends CI_Controller
             if ($this->db->affected_rows() > 0) {
                 notif('S', 'Successfully updated');
             }
-            redirect('Sample');
+            redirect('Sample/head');
         }
     }
 
