@@ -71,18 +71,19 @@ class Submition extends CI_Controller
             // die;
 
             $data = [
-                "page"      => "edit submition",
-                'data'      => $getData,
-                'detail'    => $getDetail,
-                'include'   => $this->submition_m->getIso('include')->result(),
-                'baby_wear' => $this->submition_m->getIso('baby_wear')->result(),
-                'bicycle'   => $this->submition_m->getIso('bicycle')->result(),
-                'others'    => $this->submition_m->getIso('others')->result(),
-                'based'     => $this->submition_m->getIso('based')->result(),
-                'other'     => $this->submition_m->getIso('other')->result(),
+                "page"            => "edit submition",
+                'data'            => $getData,
+                'detail'          => $getDetail,
+                'term_of_service' => $this->submition_m->selectTermOfService()->result(),
+                'include'         => $this->submition_m->getIso('include')->result(),
+                'baby_wear'       => $this->submition_m->getIso('baby_wear')->result(),
+                'bicycle'         => $this->submition_m->getIso('bicycle')->result(),
+                'others'          => $this->submition_m->getIso('others')->result(),
+                'based'           => $this->submition_m->getIso('based')->result(),
+                'other'           => $this->submition_m->getIso('other')->result(),
             ];
 
-            // var_dump($getData);
+            // var_dump($getDetail);
             // die;
             $this->template->load('template/template', 'submition/edit', $data);
         } else {
