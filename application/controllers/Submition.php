@@ -31,16 +31,17 @@ class Submition extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data = [
-                "page"        => "add submition",
-                'sample_code' => $this->submition_m->getSampleCode()->result(),
-                'include'     => $this->submition_m->getIso('include', true)->result(),
-                'baby_wear'   => $this->submition_m->getIso('baby_wear', true)->result(),
-                'bicycle'     => $this->submition_m->getIso('bicycle', true)->result(),
-                'others'      => $this->submition_m->getIso('others', true)->result(),
-                'based'       => $this->submition_m->getIso('based', true)->result(),
-                'other'       => $this->submition_m->getIso('other', true)->result(),
+                "page"                   => "add submition",
+                'sample_code'            => $this->submition_m->getSampleCode()->result(),
+                'term_of_service'        => $this->submition_m->selectTermOfService()->result(),
+                'include'                => $this->submition_m->getIso('include', true)->result(),
+                'baby_wear'              => $this->submition_m->getIso('baby_wear', true)->result(),
+                'bicycle'                => $this->submition_m->getIso('bicycle', true)->result(),
+                'others'                 => $this->submition_m->getIso('others', true)->result(),
+                'based'                  => $this->submition_m->getIso('based', true)->result(),
+                'other'                  => $this->submition_m->getIso('other', true)->result(),
             ];
-            // var_dump($data['data']);
+            // var_dump($data['term_of_service']);
             // die;
             $this->template->load('template/template', 'submition/add', $data);
         } else {

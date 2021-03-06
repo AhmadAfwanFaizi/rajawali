@@ -7,7 +7,6 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Sample Head Data</h3>
                 </div>
-
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-4">
@@ -39,7 +38,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 

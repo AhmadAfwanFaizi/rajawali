@@ -1,5 +1,46 @@
 <section class="content">
 
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Sample Head Data</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="quotationNo">Quotation</label>
+                                <input type="text" class="form-control" name="quotationNo" placeholder="Quotation" value="<?= $data->quotation_no ?>" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="idCustomer">Customer</label>
+                                <select name="idCustomer" id="idCustomer" class="form-control" disabled="disabled">
+                                    <?php foreach ($customer as $row) { ?>
+                                        <option value="<?= $row->id_customer ?>" <?= $row->id_customer == $data->id_customer ? 'selected' : null ?>><?= $row->customer_name ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="idBrand">Brand</label>
+                                <select name="idBrand" id="idBrand" class="form-control" disabled="disabled">
+                                    <?php foreach ($brand as $row) { ?>
+                                        <option value="<?= $row->id ?>" <?= $row->id == $data->id_brand ? 'selected' : null ?>><?= $row->brand ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <form role="form" action="<?= base_url() ?>Sample/editDetail" method="post">
         <input type="hidden" name="idDetail" value="<?= $detail->id_detail ?>">
         <div class="row">

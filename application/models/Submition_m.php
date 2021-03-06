@@ -50,6 +50,18 @@ class Submition_m extends CI_model
         return $this->db->get();
     }
 
+    public function selectTermOfService($id = null)
+    {
+        $this->db->select('*')
+            ->from('term_of_service TOS')
+            ->join('term_of_service_detail TOSD', 'TOSD.id_term_of_service = TOS.id');
+        if ($id) {
+            $this->db->where("TOS.id", $id);
+        }
+        $this->db->order_by('TOSD.id_term_of_service', 'ASC');
+        return $this->db->get();
+    }
+
     public function getDataPrint($sampleCode = null)
     {
         $this->db->select('*')

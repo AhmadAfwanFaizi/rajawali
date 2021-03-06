@@ -23,7 +23,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="termOfService">Term Of Service</label>
-                                    <div class="radio">
+
+                                    <?php foreach ($term_of_service as $row) { ?>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="termOfService" id="termOfService" value="<?= $row->id ?>" checked>
+                                                <?= '(' . $row->category . ') ' . $row->type ?>
+                                            </label>
+                                        </div>
+                                    <?php } ?>
+
+                                    <!-- <div class="radio">
                                         <label>
                                             <input type="radio" name="termOfService1" id="termOfService1" value="1" checked>
                                             (TOYS/ BABY WEAR/OTHERS) REGULAR
@@ -46,7 +56,7 @@
                                             <input type="radio" name="termOfService2" id="termOfService4" value="4">
                                             (CHILDREN BICYCLE) EXPRESS
                                         </label>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="form-group">

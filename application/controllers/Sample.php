@@ -74,6 +74,48 @@ class Sample extends CI_Controller
         }
     }
 
+    public function edit($idSample = null)
+    {
+        $this->form_validation->set_rules('quotationNo', 'Quotation', 'required');
+        // $this->form_validation->set_rules('idCustomer', 'Customer', 'required');
+        // $this->form_validation->set_rules('idBrand', 'Brand', 'required');
+
+        // $this->form_validation->set_message('is_unique', '{field} Already Used');
+        $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
+
+        if ($this->form_validation->run() == false) {
+            $data = [
+                "page"     => "edit sample",
+                'data'     => $this->sample_m->getData($idSample)->row(),
+                'customer' => $this->customer_m->getData()->result(),
+                'brand'    => $this->brand_m->getData()->result(),
+            ];
+            // var_dump($data);
+            // die;
+            $this->template->load('template/template', 'sample/edit', $data);
+        } else {
+            $post = $this->input->post(null, true);
+            // var_dump($_POST);
+            // die;
+            $this->sample_m->edit($post);
+            if ($this->db->affected_rows() > 0) {
+                notif('S', 'Successfully updated');
+            }
+            redirect('Sample');
+        }
+    }
+
+    public function delete($idCustomer)
+    {
+        // var_dump($idCustomer);
+        // die;
+        $this->sample_m->delete($idCustomer);
+        if ($this->db->affected_rows() > 0) {
+            notif('S', 'Successfully Deleted');
+        }
+        redirect('Sample/head');
+    }
+
     public function DataDetail()
     {
         $getDetail = $this->sample_m->getDetail()->result();
@@ -125,37 +167,6 @@ class Sample extends CI_Controller
         }
     }
 
-    public function edit($idSample = null)
-    {
-        $this->form_validation->set_rules('quotationNo', 'Quotation', 'required');
-        // $this->form_validation->set_rules('idCustomer', 'Customer', 'required');
-        // $this->form_validation->set_rules('idBrand', 'Brand', 'required');
-
-        // $this->form_validation->set_message('is_unique', '{field} Already Used');
-        $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
-
-        if ($this->form_validation->run() == false) {
-            $data = [
-                "page"     => "edit sample",
-                'data'     => $this->sample_m->getData($idSample)->row(),
-                'customer' => $this->customer_m->getData()->result(),
-                'brand'    => $this->brand_m->getData()->result(),
-            ];
-            // var_dump($data);
-            // die;
-            $this->template->load('template/template', 'sample/edit', $data);
-        } else {
-            $post = $this->input->post(null, true);
-            // var_dump($_POST);
-            // die;
-            $this->sample_m->edit($post);
-            if ($this->db->affected_rows() > 0) {
-                notif('S', 'Successfully updated');
-            }
-            redirect('Sample');
-        }
-    }
-
     public function editDetail($id = null)
     {
         $this->form_validation->set_rules('idSample', 'ID Sample', 'required');
@@ -170,11 +181,17 @@ class Sample extends CI_Controller
         $this->form_validation->set_error_delimiters('<small class="text-danger pl-3">', '</small>');
 
         if ($this->form_validation->run() == false) {
-            $data = [
-                "page"   => "edit detail sample",
-                'detail' => $this->sample_m->getDetail(null, $id)->row(),
+
+            $getDetail = $this->sample_m->getDetail(null, $id)->row();
+            $getData   = $this->sample_m->getData($getDetail->id_sample)->row();
+            $data      = [
+                "page"     => "edit detail sample",
+                'detail'   => $getDetail,
+                'data'     => $getData,
+                'customer' => $this->customer_m->getData()->result(),
+                'brand'    => $this->brand_m->getData()->result(),
             ];
-            // var_dump($data['detail']);
+            // var_dump($data);
             // die;
             $this->template->load('template/template', 'sample/editDetail', $data);
         } else {
@@ -195,17 +212,6 @@ class Sample extends CI_Controller
         // var_dump($id);
         // die;
         $this->load->view('sample/printDetail', $data);
-    }
-
-    public function delete($idCustomer)
-    {
-        // var_dump($idCustomer);
-        // die;
-        $this->sample_m->delete($idCustomer);
-        if ($this->db->affected_rows() > 0) {
-            notif('S', 'Successfully Deleted');
-        }
-        redirect('Sample/head');
     }
 
     public function deleteDetail($id)
