@@ -32,10 +32,10 @@
                                     <td><?= $row->quotation_no ?></td>
                                     <td><?= $row->customer_name ?></td>
                                     <td><?= $row->brand ?></td>
-                                    <td><?= $row->created_by ?></td>
-                                    <td><?= $row->created_at ?></td>
-                                    <td><?= $row->updated_by ?></td>
-                                    <td><?= $row->updated_at ?></td>
+                                    <td><?= $row->created_by_sample ?></td>
+                                    <td><?= $row->created_at_sample ?></td>
+                                    <td><?= $row->updated_by_sample ?></td>
+                                    <td><?= $row->updated_at_sample ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->add_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Sample/addDetail/') . $row->id_sample ?>" class="btn btn-primary">
@@ -83,6 +83,9 @@
                 "targets": [7],
                 "orderable": false,
             }],
+            "order": [
+                [4, "desc"]
+            ]
         });
     });
 

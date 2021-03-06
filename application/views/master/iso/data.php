@@ -35,10 +35,10 @@
                                     <td>
                                         <?= $row->enable == 'Y' ? 'YES' : 'NO' ?>
                                     </td>
-                                    <td><?= $row->created_by ?></td>
-                                    <td><?= $row->created_at ?></td>
-                                    <td><?= $row->updated_by ?></td>
-                                    <td><?= $row->updated_at ?></td>
+                                    <td><?= $row->created_by_iso ?></td>
+                                    <td><?= $row->created_at_iso ?></td>
+                                    <td><?= $row->updated_by_iso ?></td>
+                                    <td><?= $row->updated_at_iso ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Master/editIso/') . $row->id ?>" class="btn btn-warning">
@@ -76,6 +76,9 @@
                 "targets": [7],
                 "orderable": false,
             }],
+            "order": [
+                [4, "desc"]
+            ]
         });
     });
 

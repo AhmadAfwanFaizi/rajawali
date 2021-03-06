@@ -50,10 +50,10 @@
                                     <td><?= $row->bill_to ?></td>
                                     <td><?= $row->remark ?></td>
                                     <td><?= $row->enable == 'Y' ? 'YES' : 'NO' ?></td>
-                                    <td><?= $row->created_by ?></td>
-                                    <td><?= $row->created_at ?></td>
-                                    <td><?= $row->updated_by ?></td>
-                                    <td><?= $row->updated_at ?></td>
+                                    <td><?= $row->created_by_customer ?></td>
+                                    <td><?= $row->created_at_customer ?></td>
+                                    <td><?= $row->updated_by_customer ?></td>
+                                    <td><?= $row->updated_at_customer ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Master/editCustomer/') . $row->id_customer ?>" class="btn btn-warning">
@@ -92,6 +92,9 @@
                 "targets": [12],
                 "orderable": false,
             }],
+            "order": [
+                [9, "desc"]
+            ]
         });
     });
 

@@ -5,7 +5,11 @@ class Customer_m extends CI_model
 {
     public function getData($idCustomer = null, $enable = null)
     {
-        $this->db->select('C.*, U.username as created_by, U2.username as updated_by')
+        $this->db->select('C.*, 
+        C.created_at as created_at_customer, 
+        C.updated_at as updated_at_customer, 
+        U.username as created_by_customer, 
+        U2.username as updated_by_customer')
             ->from('customer C')
             ->join('user U', 'U.id = C.created_by')
             ->join('user U2', 'U2.id = C.updated_by', 'left');

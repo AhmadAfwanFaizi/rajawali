@@ -133,10 +133,10 @@
                                     <td><?= $row->date_received ?></td>
                                     <td><?= $row->date_testing ?></td>
                                     <td><?= $row->age_grading ?></td>
-                                    <td><?= $row->created_by ?></td>
-                                    <td><?= $row->created_at ?></td>
-                                    <td><?= $row->updated_by ?></td>
-                                    <td><?= $row->updated_at ?></td>
+                                    <td><?= $row->created_by_sd ?></td>
+                                    <td><?= $row->created_at_sd ?></td>
+                                    <td><?= $row->updated_by_sd ?></td>
+                                    <td><?= $row->updated_at_sd ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Sample/editDetail/') . $row->id_detail ?>" class="btn btn-warning">
@@ -177,9 +177,12 @@
             "scrollCollapse": true,
             "scrollX": "200%",
             "columnDefs": [{
-                "targets": [0, 1, 2, 3, 4, 5, 6, 7],
+                "targets": [10],
                 "orderable": false,
             }],
+            "order": [
+                [7, "desc"]
+            ]
         });
 
         $("#idCustomer").select2();

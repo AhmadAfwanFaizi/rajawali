@@ -5,7 +5,11 @@ class Iso_m extends CI_model
 {
     public function getData($id = null)
     {
-        $this->db->select('I.*, U.username as created_by, U2.username as updated_by')
+        $this->db->select('I.*, 
+        I.created_at as created_at_iso,
+        I.updated_at as updated_at_iso,
+        U.username as created_by_iso, 
+        U2.username as updated_by_iso')
             ->from('iso I')
             ->join('user U', 'U.id = I.created_by')
             ->join('user U2', 'U2.id = I.updated_by', 'left');

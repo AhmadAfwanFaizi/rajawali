@@ -5,7 +5,11 @@ class Brand_m extends CI_model
 {
     public function getData($id = null, $enable = null)
     {
-        $this->db->select('B.*, U.username as created_by, U2.username as updated_by')
+        $this->db->select('B.*, 
+        B.created_at as created_at_brand, 
+        B.updated_at as updated_at_brand, 
+        U.username as created_by_brand, 
+        U2.username as updated_by_brand')
             ->from('brand B')
             ->join('user U', 'U.id = B.created_by')
             ->join('user U2', 'U2.id = B.updated_by', 'left');

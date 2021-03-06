@@ -33,10 +33,10 @@
                                     <td><?= $row->brand ?></td>
                                     <td><?= $row->remark ?></td>
                                     <td><?= $row->enable == 'Y' ? 'YES' : 'NO' ?></td>
-                                    <td><?= $row->created_by ?></td>
-                                    <td><?= $row->created_at ?></td>
-                                    <td><?= $row->updated_by ?></td>
-                                    <td><?= $row->updated_at ?></td>
+                                    <td><?= $row->created_by_brand ?></td>
+                                    <td><?= $row->created_at_brand ?></td>
+                                    <td><?= $row->updated_by_brand ?></td>
+                                    <td><?= $row->updated_at_brand ?></td>
                                     <td>
                                         <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Master/editBrand/') . $row->id ?>" class="btn btn-warning">
@@ -74,6 +74,9 @@
                 "targets": [7],
                 "orderable": false,
             }],
+            "order": [
+                [4, "desc"]
+            ]
         });
     });
 

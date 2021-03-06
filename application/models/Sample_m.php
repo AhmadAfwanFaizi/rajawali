@@ -5,7 +5,11 @@ class Sample_m extends CI_model
 {
     public function getData($idSample = null)
     {
-        $this->db->select('*, U.username as created_by, U2.username as updated_by')
+        $this->db->select('S.*, C.customer_name, B.brand, 
+        S.created_at as created_at_sample, 
+        S.updated_at as updated_at_sample, 
+        U.username as created_by_sample, 
+        U2.username as updated_by_sample')
             ->from('sample S')
             ->join('customer C', 'C.id_customer = S.id_customer')
             ->join('brand B', 'B.id = S.id_brand')
@@ -20,13 +24,17 @@ class Sample_m extends CI_model
 
     public function getDetail($idSample = null, $id = null)
     {
-        $this->db->select('*, SD.id as id_detail, U.username as created_by, U2.username as updated_by')
+        $this->db->select('SD.*, SD.id as id_detail, S.quotation_no, C.customer_name, B.brand, 
+        SD.created_at as created_at_sd,
+        SD.updated_at as updated_at_sd,
+        U.username as created_by_sd, 
+        U2.username as updated_by_sd')
             ->from('sample_detail SD')
             ->join('sample S', 'S.id_sample = SD.id_sample')
             ->join('customer C', 'C.id_customer = S.id_customer')
             ->join('brand B', 'B.id = S.id_brand')
-            ->join('user U', 'U.id = B.created_by')
-            ->join('user U2', 'U2.id = B.updated_by', 'left');
+            ->join('user U', 'U.id = SD.created_by')
+            ->join('user U2', 'U2.id = SD.updated_by', 'left');
         if ($idSample) {
             $this->db->where("SD.id_sample", $idSample);
         }
