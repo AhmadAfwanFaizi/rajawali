@@ -17,6 +17,12 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">NAVIGATION</li>
 
+            <li class="<?= segment(1) == 'Dashboard' ? 'active' : null ?>">
+                <a href="<?= base_url() ?>Dashboard">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                </a>
+            </li>
+
             <li class="treeview <?= segment(1) == 'Master' ? 'active menu-open' : null ?>">
                 <a href="#">
                     <i class="fa fa-file"></i> <span>Master Data</span>
