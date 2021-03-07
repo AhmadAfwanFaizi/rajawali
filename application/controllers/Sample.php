@@ -13,14 +13,27 @@ class Sample extends CI_Controller
 
     public function sampleCode()
     {
-        $query = $this->db->select("MAX(sample_code) as max_code")
+        $queryMaxCode = $this->db->select("MAX(sample_code) as max_code")
             ->from("sample_detail")->get()->row();
+        $year = date('Y');
+        // $year = '2022';
+        $queryThisYear = $this->db->select("created_at")
+            ->from("sample_detail")
+            ->like('created_at', $year, 'after')
+            ->get()->row();
 
-        $int = (int) substr($query->max_code, -4);
+        if (!$queryThisYear) {
+            $maxCode = '0000';
+        } else {
+            $maxCode = $queryMaxCode->max_code;
+        }
+
+        $int = (int) substr($maxCode, -4);
         $int++;
-
         $date = date('m/y/');
+
         $code =  'RTL-SMPL-' . $date . sprintf("%04s", $int);
+        echo $code;
         return $code;
     }
 
