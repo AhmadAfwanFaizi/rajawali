@@ -19,9 +19,10 @@
                             <select name="category" id="category" class="form-control">
                                 <option value="" hidden>Select Category</option>
                                 <option value="INCLUDE">INCLUDE</option>
-                                <option value="BABY_WEAR">BABY_WEAR</option>
+                                <option value="BABY_WEAR">BABY WEAR</option>
                                 <option value="BICYCLE">BICYCLE</option>
                                 <option value="OTHERS">OTHERS</option>
+                                <option value="BASED">BASED</option>
                             </select>
                         </div>
                         <div class="form-group">

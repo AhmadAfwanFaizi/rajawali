@@ -31,7 +31,7 @@
                             <?php foreach ($data as $row) { ?>
                                 <tr>
                                     <td><?= $row->iso ?></td>
-                                    <td><?= $row->category ?></td>
+                                    <td><?= str_replace('_', ' ', $row->category) ?></td>
                                     <td>
                                         <?= $row->enable == 'Y' ? 'YES' : 'NO' ?>
                                     </td>

@@ -23,6 +23,7 @@
                                 <option value="BABY_WEAR" <?= $data->category == 'BABY_WEAR' ? 'selected' : null ?>>BABY WEAR</option>
                                 <option value="BICYCLE" <?= $data->category == 'BICYCLE' ? 'selected' : null ?>>BICYCLE</option>
                                 <option value="OTHERS" <?= $data->category == 'OTHERS' ? 'selected' : null ?>>OTHERS</option>
+                                <option value="BASED" <?= $data->category == 'BASED' ? 'selected' : null ?>>BASED</option>
                             </select>
                         </div>
                         <div class="form-group">

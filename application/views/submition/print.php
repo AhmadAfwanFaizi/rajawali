@@ -9,6 +9,17 @@
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <style>
+        @media print {
+            @page {
+                margin: 0;
+            }
+
+            body {
+                margin: 1.6cm;
+            }
+        }
+    </style>
+    <style>
         .container {
             font-size: xx-small;
         }
@@ -496,10 +507,10 @@
         </div>
     </div>
 
-    <!-- <script>
+    <script>
         window.print();
         setTimeout(window.close, 1000);
-    </script> -->
+    </script>
 
 </body>
 

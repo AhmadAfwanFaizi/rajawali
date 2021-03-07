@@ -83,6 +83,10 @@
                                     <textarea name="sampleDescription" id="sampleDescription" cols="30" rows="5" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
+                                    <label for="remark">Remark</label>
+                                    <textarea name="remark" id="remark" cols="30" rows="5" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
                                     <label for="dateReceived">Date Received</label>
                                     <input type="date" class="form-control" name="dateReceived" placeholder="Date Received">
                                 </div>
@@ -121,6 +125,7 @@
                                 <th>Date Received</th>
                                 <th>Date Testing</th>
                                 <th>Age Grading</th>
+                                <th>Remark</th>
                                 <th>Enable</th>
                                 <th>Created By</th>
                                 <th>Created At</th>
@@ -139,6 +144,7 @@
                                     <td><?= $row->date_received ?></td>
                                     <td><?= $row->date_testing ?></td>
                                     <td><?= $row->age_grading ?></td>
+                                    <td><?= $row->remark ?></td>
                                     <td><?= $row->enable == 'Y' ? 'YES' : 'NO' ?></td>
                                     <td><?= $row->created_by_sd ?></td>
                                     <td><?= $row->created_at_sd ?></td>

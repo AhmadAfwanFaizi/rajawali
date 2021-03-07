@@ -23,6 +23,8 @@
                                 <th>Date Received</th>
                                 <th>Date Testing</th>
                                 <th>Age Grading</th>
+                                <th>Remark</th>
+                                <th>Enbale</th>
                                 <th>Created By</th>
                                 <th>Created At</th>
                                 <th>Updated By</th>
@@ -42,6 +44,7 @@
                                 <th>Date Received</th>
                                 <th>Date Testing</th>
                                 <th>Age Grading</th>
+                                <th>Remark</th>
                                 <th>Enbale</th>
                                 <th>Created By</th>
                                 <th>Created At</th>
@@ -63,6 +66,7 @@
                                     <td><?= $row->date_received ?></td>
                                     <td><?= $row->date_testing ?></td>
                                     <td><?= $row->age_grading ?></td>
+                                    <td><?= $row->remark ?></td>
                                     <td><?= $row->enable == 'Y' ? 'YES' : 'NO' ?></td>
                                     <td><?= $row->created_by_sd ?></td>
                                     <td><?= $row->created_at_sd ?></td>
@@ -108,11 +112,11 @@
             "scrollCollapse": true,
             "scrollX": "200%",
             "columnDefs": [{
-                "targets": [15],
+                "targets": [16],
                 "orderable": false,
             }],
             "order": [
-                [12, "desc"]
+                [13, "desc"]
             ]
         });
     });

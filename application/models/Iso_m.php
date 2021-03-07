@@ -17,7 +17,7 @@ class Iso_m extends CI_model
             $this->db->where("I.id", $id);
         }
         $this->db->where("I.deleted_at", NULL);
-        $this->db->where_not_in("I.category", ['BASED', 'OTHER']);
+        $this->db->where_not_in("I.category", ['OTHER']);
         return $this->db->get();
     }
 

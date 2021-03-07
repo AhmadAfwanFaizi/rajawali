@@ -22,12 +22,12 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="termOfService">Term Of Service</label>
+                                    <label for="termOfServiceDetail">Term Of Service</label>
 
                                     <?php foreach ($term_of_service as $row) { ?>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="termOfService" id="termOfService" value="<?= $row->id ?>" checked>
+                                                <input type="radio" name="termOfServiceDetail" id="termOfServiceDetail" value="<?= $row->id ?>" checked>
                                                 <?= '(' . $row->category . ') ' . $row->type ?>
                                             </label>
                                         </div>

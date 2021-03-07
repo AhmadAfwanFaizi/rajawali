@@ -77,11 +77,15 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="sampleCode">Sample Code</label>
-                                    <input type="text" class="form-control" name="sampleCode" placeholder="Sample Code" value="<?= $detail->id_sample ?>" readonly required>
+                                    <input type="text" class="form-control" name="sampleCode" placeholder="Sample Code" value="<?= $detail->sample_code ?>" readonly required>
                                 </div>
                                 <div class="form-group">
                                     <label for="sampleDescription">Sample Description</label>
                                     <textarea name="sampleDescription" id="sampleDescription" cols="30" rows="5" class="form-control"><?= $detail->sample_description ?></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="remark">Remark</label>
+                                    <textarea name="remark" id="remark" cols="30" rows="5" class="form-control"><?= $detail->remark ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="dateReceived">Date Received</label>

@@ -65,9 +65,9 @@ class Auth extends CI_Controller
 	public function location($role)
 	{
 		if ($role == 'ADMIN') {
-			redirect('Master/customer');
+			redirect('Dashboard');
 		} else if ($role == 'USER') {
-			redirect('Master/customer');
+			redirect('Dashboard');
 		} else {
 			redirect('auth');
 		}
