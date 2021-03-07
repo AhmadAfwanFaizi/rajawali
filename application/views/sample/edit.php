@@ -33,6 +33,13 @@
                                 <?php } ?>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="enable">Enable</label>
+                            <select name="enable" id="enable" class="form-control">
+                                <option value="Y" <?= $data->enable == 'Y' ? 'selected' : null ?>>YES</option>
+                                <option value="N" <?= $data->enable == 'N' ? 'selected' : null ?>>NO</option>
+                            </select>
+                        </div>
                     </div>
                     <!-- /.box-body -->
 

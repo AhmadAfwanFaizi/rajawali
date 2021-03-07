@@ -65,6 +65,13 @@
                                     <label for="ageGrading">Age Grading</label>
                                     <input type="text" class="form-control" name="ageGrading" placeholder="Age Grading">
                                 </div>
+                                <div class="form-group">
+                                    <label for="enable">Enable</label>
+                                    <select name="enable" id="enable" class="form-control">
+                                        <option value="Y">YES</option>
+                                        <option value="N">NO</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -114,6 +121,7 @@
                                 <th>Date Received</th>
                                 <th>Date Testing</th>
                                 <th>Age Grading</th>
+                                <th>Enable</th>
                                 <th>Created By</th>
                                 <th>Created At</th>
                                 <th>Updated By</th>
@@ -131,6 +139,7 @@
                                     <td><?= $row->date_received ?></td>
                                     <td><?= $row->date_testing ?></td>
                                     <td><?= $row->age_grading ?></td>
+                                    <td><?= $row->enable == 'Y' ? 'YES' : 'NO' ?></td>
                                     <td><?= $row->created_by_sd ?></td>
                                     <td><?= $row->created_at_sd ?></td>
                                     <td><?= $row->updated_by_sd ?></td>
@@ -175,11 +184,11 @@
             "scrollCollapse": true,
             "scrollX": "200%",
             "columnDefs": [{
-                "targets": [10],
+                "targets": [11],
                 "orderable": false,
             }],
             "order": [
-                [7, "desc"]
+                [8, "desc"]
             ]
         });
 

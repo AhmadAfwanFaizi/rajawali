@@ -66,6 +66,13 @@
                                     <label for="ageGrading">Age Grading</label>
                                     <input type="text" class="form-control" name="ageGrading" placeholder="Age Grading" value="<?= $detail->age_grading ?>">
                                 </div>
+                                <div class="form-group">
+                                    <label for="enable">Enable</label>
+                                    <select name="enable" id="enable" class="form-control">
+                                        <option value="Y" <?= $detail->enable == 'Y' ? 'selected' : null ?>>YES</option>
+                                        <option value="N" <?= $detail->enable == 'N' ? 'selected' : null ?>>NO</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">

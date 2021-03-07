@@ -19,6 +19,7 @@
                                 <th>Quotation</th>
                                 <th>Customer</th>
                                 <th>Brand</th>
+                                <th>Enable</th>
                                 <th>Created By</th>
                                 <th>Created At</th>
                                 <th>Updated By</th>
@@ -32,6 +33,7 @@
                                     <td><?= $row->quotation_no ?></td>
                                     <td><?= $row->customer_name ?></td>
                                     <td><?= $row->brand ?></td>
+                                    <td><?= $row->enable == 'Y' ? 'YES' : 'NO' ?></td>
                                     <td><?= $row->created_by_sample ?></td>
                                     <td><?= $row->created_at_sample ?></td>
                                     <td><?= $row->updated_by_sample ?></td>
@@ -80,11 +82,11 @@
             "scrollCollapse": true,
             "scrollX": "200%",
             "columnDefs": [{
-                "targets": [7],
+                "targets": [8],
                 "orderable": false,
             }],
             "order": [
-                [4, "desc"]
+                [5, "desc"]
             ]
         });
     });

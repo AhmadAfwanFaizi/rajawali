@@ -55,10 +55,27 @@ class Sample_m extends CI_model
             'quotation_no' => $post['quotationNo'],
             'id_customer'  => $post['idCustomer'],
             'id_brand'     => $post['idBrand'],
+            'enable'       => $post['enable'],
             'created_at'   => waktu_sekarang(),
             'created_by'   => $this->session->userdata('id'),
         ];
         $this->db->insert('sample', $data);
+    }
+
+    public function edit($post)
+    {
+        // var_dump($post);
+        // die;
+        $data = [
+            'quotation_no' => $post['quotationNo'],
+            'id_customer'  => $post['idCustomer'],
+            'id_brand'     => $post['idBrand'],
+            'enable'       => $post['enable'],
+            'updated_at'   => waktu_sekarang(),
+            'updated_by'   => $this->session->userdata('id'),
+        ];
+        $this->db->where('id_sample', $post['idSample']);
+        $this->db->update('sample', $data);
     }
 
     public function addDetail($post)
@@ -74,26 +91,12 @@ class Sample_m extends CI_model
             'date_received'      => $post['dateReceived'],
             'date_testing'       => $post['dateTesting'],
             'age_grading'        => $post['ageGrading'],
+            'enable'             => $post['enable'],
             'status_sample'      => 'PENDING',
             'created_at'         => waktu_sekarang(),
             'created_by'         => $this->session->userdata('id'),
         ];
         $this->db->insert('sample_detail', $data);
-    }
-
-    public function edit($post)
-    {
-        // var_dump($post);
-        // die;
-        $data = [
-            'quotation_no' => $post['quotationNo'],
-            'id_customer'  => $post['idCustomer'],
-            'id_brand'     => $post['idBrand'],
-            'updated_at'   => waktu_sekarang(),
-            'updated_by'   => $this->session->userdata('id'),
-        ];
-        $this->db->where('id_sample', $post['idSample']);
-        $this->db->update('sample', $data);
     }
 
     public function editDetail($post)
@@ -107,6 +110,7 @@ class Sample_m extends CI_model
             'date_received'      => $post['dateReceived'],
             'date_testing'       => $post['dateTesting'],
             'age_grading'        => $post['ageGrading'],
+            'enable'             => $post['enable'],
             'updated_at'         => waktu_sekarang(),
             'updated_by'         => $this->session->userdata('id'),
         ];
