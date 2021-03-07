@@ -33,7 +33,7 @@ class Sample extends CI_Controller
         $date = date('m/y/');
 
         $code =  'RTL-SMPL-' . $date . sprintf("%04s", $int);
-        echo $code;
+        // echo $code;
         return $code;
     }
 
