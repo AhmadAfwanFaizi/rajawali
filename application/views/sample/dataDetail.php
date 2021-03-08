@@ -7,18 +7,18 @@
                 <div class="box-header with-border">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="<?= base_url() ?>Sample/export_detail" target="_blank" class="btn btn-success" style="<?= $role == "C" ? 'display: none;' : null ?>">Export Excel</a>
+                            <button onclick="exportSampleDetail()" class="btn btn-success">Export Excel</button>
                         </div>
                     </div>
                     <div class="row">
                         <form action="" method="post">
                             <div class="form-group col-md-3">
                                 <label for="start_date">Start Date</label>
-                                <input class="form-control" type="date" name="start_date" value="<?= ($start_date) ? $start_date : null ?>" required>
+                                <input class="form-control" type="date" name="start_date" id="start_date" value="<?= ($start_date) ? $start_date : null ?>" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="end_date">End Date</label>
-                                <input class="form-control" type="date" name="end_date" value="<?= ($end_date) ? $end_date : null ?>" required>
+                                <input class="form-control" type="date" name="end_date" id="end_date" value="<?= ($end_date) ? $end_date : null ?>" required>
                             </div>
                             <div class="form-group col-md-1">
                                 <button class="btn btn-info" type="submit" style="margin-top: 40%;">
@@ -133,6 +133,16 @@
         let conf = confirm('Are you sure?');
         if (conf) {
             location.replace("<?= base_url('Sample/deleteDetail/') ?>" + id)
+        }
+    }
+
+    function exportSampleDetail() {
+        let start_date = $('#start_date').val();
+        let end_date = $('#end_date').val();
+        if (start_date && end_date) {
+            location.replace("<?= base_url('Sample/export_detail/') ?>" + start_date + '/' + end_date);
+        } else {
+            location.replace("<?= base_url('Sample/export_detail/') ?>");
         }
     }
 </script>

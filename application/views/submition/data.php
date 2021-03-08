@@ -3,12 +3,34 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <?php if (privilege()->add_privilege == 'Y') { ?>
-                        <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
-                    <?php } else { ?>
-                        <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
-                    <?php } ?>
-                    <a href="<?= base_url() ?>Submition/export" class="btn btn-success" target="_blank">Export Excel</a>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <?php if (privilege()->add_privilege == 'Y') { ?>
+                                <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
+                            <?php } ?>
+
+                            <button onclick="exportSubmition()" class="btn btn-success">Export Excel</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <form action="" method="post">
+                            <div class="form-group col-md-3">
+                                <label for="start_date">Start Date</label>
+                                <input class="form-control" type="date" name="start_date" id="start_date" value="<?= ($start_date) ? $start_date : null ?>" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="end_date">End Date</label>
+                                <input class="form-control" type="date" name="end_date" id="end_date" value="<?= ($end_date) ? $end_date : null ?>" required>
+                            </div>
+                            <div class="form-group col-md-1">
+                                <button class="btn btn-info" type="submit" style="margin-top: 40%;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -130,6 +152,16 @@
         let conf = confirm('Are you sure?');
         if (conf) {
             location.replace("<?= base_url('Submition/delete/') ?>" + id)
+        }
+    }
+
+    function exportSubmition() {
+        let start_date = $('#start_date').val();
+        let end_date = $('#end_date').val();
+        if (start_date && end_date) {
+            location.replace("<?= base_url('Submition/export/') ?>" + start_date + '/' + end_date);
+        } else {
+            location.replace("<?= base_url('Submition/export/') ?>");
         }
     }
 </script>

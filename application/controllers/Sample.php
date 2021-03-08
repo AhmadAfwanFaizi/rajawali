@@ -262,17 +262,20 @@ class Sample extends CI_Controller
         } else {
             $data['data'] =  $this->sample_m->getData()->result();
         }
+        // var_dump($data);
+        // die;
         $this->load->view('sample/exportExcelHead', $data);
     }
 
     public function export_detail($startDate = null, $endDate = null)
     {
         if ($startDate && $endDate) {
-            $data['data'] =  $this->sample_m->getDetail(null, null, $startDate, $endDate)->result();
+            $data['detail'] =  $this->sample_m->getDetail(null, null, $startDate, $endDate)->result();
         } else {
-            $data['data'] =  $this->sample_m->getDetail()->result();
+            $data['detail'] =  $this->sample_m->getDetail()->result();
         }
-        var_dump($data);
+        // var_dump($data);
+        // die;
         $this->load->view('sample/exportExcelDetail', $data);
     }
     // END CLASS

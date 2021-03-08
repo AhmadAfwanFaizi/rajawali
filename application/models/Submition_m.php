@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Submition_m extends CI_model
 {
-    public function getData($id = null)
+    public function getData($id = null, $startDate = null, $endDate = null)
     {
         $this->db->select('S.*, TOS.category, TOSD.type, S.id as id_submition, customer_name, brand,
         S.created_at as created_at_submition,
@@ -21,6 +21,10 @@ class Submition_m extends CI_model
             ->join('user U2', 'U2.id = S.updated_by', 'left');
         if ($id) {
             $this->db->where("S.id", $id);
+        }
+
+        if ($startDate && $endDate) {
+            $this->db->where("DATE(S.created_at) BETWEEN '$startDate' AND '$endDate'");
         }
         $this->db->where("S.deleted_at", NULL);
         $this->db->where("sample.deleted_at", NULL);

@@ -10,8 +10,7 @@
                                 <a href="<?= base_url() ?>Sample/add" class="btn btn-primary">Add Data</a>
                             <?php } ?>
 
-
-                            <button onclick="exportHeadSample()" class="btn btn-success">Export Excel</button>
+                            <button onclick="exportSampleHead()" class="btn btn-success">Export Excel</button>
                         </div>
                     </div>
                     <div class="row">
@@ -108,9 +107,13 @@
         }
     }
 
-    function exportHeadSample() {
+    function exportSampleHead() {
         let start_date = $('#start_date').val();
         let end_date = $('#end_date').val();
-        location.replace("<?= base_url('Sample/export_head/') ?>" + start_date + '/' + end_date);
+        if (start_date && end_date) {
+            location.replace("<?= base_url('Sample/export_head/') ?>" + start_date + '/' + end_date);
+        } else {
+            location.replace("<?= base_url('Sample/export_head/') ?>");
+        }
     }
 </script>

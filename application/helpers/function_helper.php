@@ -26,7 +26,6 @@ function privilege()
         ->from('privilege_user PU')
         ->join('user U', 'U.id = PU.id_user')
         ->where('id_user', $userId)
-        ->where('role !=', 'ADMIN')
         ->get()->row();
     return $privilege;
 }
