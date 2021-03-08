@@ -3,11 +3,7 @@
         <div class="col-xs-12">
 
             <div class="box">
-                <?php if (privilege() && privilege()->add_privilege == 'Y') { ?>
-                    <div class="box-header">
-                        <a href="<?= base_url() ?>Master/addIso" class="btn btn-primary">Add Data</a>
-                    </div>
-                <?php } else { ?>
+                <?php if (privilege()->add_privilege == 'Y') { ?>
                     <div class="box-header">
                         <a href="<?= base_url() ?>Master/addIso" class="btn btn-primary">Add Data</a>
                     </div>
@@ -40,18 +36,12 @@
                                     <td><?= $row->updated_by_iso ?></td>
                                     <td><?= $row->updated_at_iso ?></td>
                                     <td>
-                                        <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
-                                            <a href="<?= base_url('Master/editIso/') . $row->id ?>" class="btn btn-warning">
-                                                <i class="fas fa fa-edit"></i>
-                                            </a>
-                                        <?php } else { ?>
+                                        <?php if (privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Master/editIso/') . $row->id ?>" class="btn btn-warning">
                                                 <i class="fas fa fa-edit"></i>
                                             </a>
                                         <?php } ?>
-                                        <!-- <button onclick="hapus('<?= $row->id ?>')" class="btn btn-danger">
-                                            <i class="fas fa fa-trash"></i>
-                                        </button> -->
+
                                     </td>
                                 </tr>
                             <?php } ?>

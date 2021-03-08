@@ -5,8 +5,27 @@
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <div class="box-header with-border">
-                        <a href="<?= base_url() ?>Sample/export_detail" target="_blank" class="btn btn-success" style="<?= $role == "C" ? 'display: none;' : null ?>">Export Excel</a>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="<?= base_url() ?>Sample/export_detail" target="_blank" class="btn btn-success" style="<?= $role == "C" ? 'display: none;' : null ?>">Export Excel</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <form action="" method="post">
+                            <div class="form-group col-md-3">
+                                <label for="start_date">Start Date</label>
+                                <input class="form-control" type="date" name="start_date" value="<?= ($start_date) ? $start_date : null ?>" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="end_date">End Date</label>
+                                <input class="form-control" type="date" name="end_date" value="<?= ($end_date) ? $end_date : null ?>" required>
+                            </div>
+                            <div class="form-group col-md-1">
+                                <button class="btn btn-info" type="submit" style="margin-top: 40%;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="box-body">
@@ -73,23 +92,12 @@
                                     <td><?= $row->updated_by_sd ?></td>
                                     <td><?= $row->updated_at_sd ?></td>
                                     <td>
-                                        <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
-                                            <a href="<?= base_url('Sample/editDetail/') . $row->id_detail ?>" class="btn btn-warning">
-                                                <i class="fas fa fa-edit"></i>
-                                            </a>
-                                        <?php } else { ?>
+                                        <?php if (privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Sample/editDetail/') . $row->id_detail ?>" class="btn btn-warning">
                                                 <i class="fas fa fa-edit"></i>
                                             </a>
                                         <?php } ?>
-                                        <!-- <button onclick="hapus('<?= $row->id_detail ?>')" class="btn btn-danger">
-                                                <i class="fas fa fa-trash"></i>
-                                            </button> -->
-                                        <?php if (privilege() && privilege()->print_privilege == 'Y') { ?>
-                                            <a href="<?= base_url('Sample/printDetail/') . $row->id_detail ?>" target="_blank" class="btn btn-success">
-                                                <i class="fas fa fa-print"></i>
-                                            </a>
-                                        <?php } else { ?>
+                                        <?php if (privilege()->print_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Sample/printDetail/') . $row->id_detail ?>" target="_blank" class="btn btn-success">
                                                 <i class="fas fa fa-print"></i>
                                             </a>

@@ -3,7 +3,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <?php if (privilege() && privilege() && privilege()->add_privilege == 'Y') { ?>
+                    <?php if (privilege()->add_privilege == 'Y') { ?>
                         <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
                     <?php } else { ?>
                         <a href="<?= base_url() ?>Submition/add" class="btn btn-primary">Add Data</a>
@@ -81,21 +81,13 @@
                                     <td><?= $row->updated_by_submition ?></td>
                                     <td><?= $row->updated_at_submition ?></td>
                                     <td>
-                                        <?php if (privilege() && privilege()->print_privilege == 'Y') { ?>
-                                            <a target="_blank" href="<?= base_url('Submition/print/') . $row->id_submition ?>" class="btn btn-success">
-                                                <i class="fas fa fa-print"></i>
-                                            </a>
-                                        <?php } else { ?>
+                                        <?php if (privilege()->print_privilege == 'Y') { ?>
                                             <a target="_blank" href="<?= base_url('Submition/print/') . $row->id_submition ?>" class="btn btn-success">
                                                 <i class="fas fa fa-print"></i>
                                             </a>
                                         <?php } ?>
 
-                                        <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
-                                            <a href="<?= base_url('Submition/edit/') . $row->id_submition ?>" class="btn btn-warning">
-                                                <i class="fas fa fa-edit"></i>
-                                            </a>
-                                        <?php } else { ?>
+                                        <?php if (privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Submition/edit/') . $row->id_submition ?>" class="btn btn-warning">
                                                 <i class="fas fa fa-edit"></i>
                                             </a>

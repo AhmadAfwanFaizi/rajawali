@@ -3,11 +3,7 @@
         <div class="col-xs-12">
 
             <div class="box">
-                <?php if (privilege() && privilege()->add_privilege == 'Y') { ?>
-                    <div class="box-header">
-                        <a href="<?= base_url() ?>Master/addTermOfServiceDetail" class="btn btn-primary">Add Data</a>
-                    </div>
-                <?php } else { ?>
+                <?php if (privilege()->add_privilege == 'Y') { ?>
                     <div class="box-header">
                         <a href="<?= base_url() ?>Master/addTermOfServiceDetail" class="btn btn-primary">Add Data</a>
                     </div>
@@ -38,11 +34,7 @@
                                     <td><?= $row->updated_by_tosd ?></td>
                                     <td><?= $row->updated_at ?></td>
                                     <td>
-                                        <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
-                                            <a href="<?= base_url('Master/editTermOfServiceDetail/') . $row->id_term_of_service_detail ?>" class="btn btn-warning">
-                                                <i class="fas fa fa-edit"></i>
-                                            </a>
-                                        <?php } else { ?>
+                                        <?php if (privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Master/editTermOfServiceDetail/') . $row->id_term_of_service_detail ?>" class="btn btn-warning">
                                                 <i class="fas fa fa-edit"></i>
                                             </a>

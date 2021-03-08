@@ -44,13 +44,21 @@ class Sample extends CI_Controller
 
     public function head()
     {
-        $getData   = $this->sample_m->getData()->result();
+        $post = $this->input->post(null, true);
         $data      = [
             "page" => "sample",
-            'data' => $getData,
             'role' => $this->session->userdata('role'),
         ];
-        // var_dump($data);
+        if ($post) {
+            $data['start_date'] = $post['start_date'];
+            $data['end_date']   = $post['end_date'];
+            $data['data']       = $this->sample_m->getData(null, $post['start_date'], $post['end_date'])->result();
+        } else {
+            $data['start_date'] = null;
+            $data['end_date']   = null;
+            $data['data']       = $this->sample_m->getData()->result();
+        }
+        // var_dump($data['data']);
         // die;
         $this->template->load('template/template', 'sample/data', $data);
     }
@@ -131,12 +139,21 @@ class Sample extends CI_Controller
 
     public function DataDetail()
     {
-        $getDetail = $this->sample_m->getDetail()->result();
+        $post = $this->input->post(null, true);
         $data      = [
             'page'   => 'sample detail',
-            'detail' => $getDetail,
-            'role'   => $this->session->userdata('role'),
+            'role' => $this->session->userdata('role'),
         ];
+        if ($post) {
+            $data['start_date'] = $post['start_date'];
+            $data['end_date']   = $post['end_date'];
+            $data['detail']     = $this->sample_m->getDetail(null, null, $post['start_date'], $post['end_date'])->result();
+        } else {
+            $data['start_date'] = null;
+            $data['end_date']   = null;
+            $data['detail']     = $this->sample_m->getDetail()->result();
+        }
+
         // var_dump($data);
         // die;
         $this->template->load('template/template', 'sample/dataDetail', $data);
@@ -238,19 +255,24 @@ class Sample extends CI_Controller
         redirect('Sample/dataDetail/');
     }
 
-    public function export_head()
+    public function export_head($startDate = null, $endDate = null)
     {
-        $data = [
-            'data' => $this->sample_m->getData()->result(),
-        ];
+        if ($startDate && $endDate) {
+            $data['data'] =  $this->sample_m->getData(null, $startDate, $endDate)->result();
+        } else {
+            $data['data'] =  $this->sample_m->getData()->result();
+        }
         $this->load->view('sample/exportExcelHead', $data);
     }
 
-    public function export_detail()
+    public function export_detail($startDate = null, $endDate = null)
     {
-        $data = [
-            'detail' => $this->sample_m->getDetail()->result(),
-        ];
+        if ($startDate && $endDate) {
+            $data['data'] =  $this->sample_m->getDetail(null, null, $startDate, $endDate)->result();
+        } else {
+            $data['data'] =  $this->sample_m->getDetail()->result();
+        }
+        var_dump($data);
         $this->load->view('sample/exportExcelDetail', $data);
     }
     // END CLASS

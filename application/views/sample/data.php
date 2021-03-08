@@ -4,12 +4,33 @@
 
             <div class="box">
                 <div class="box-header">
-                    <?php if (privilege() && privilege()->add_privilege == 'Y') { ?>
-                        <a href="<?= base_url() ?>Sample/add" class="btn btn-primary">Add Data</a>
-                    <?php } else { ?>
-                        <a href="<?= base_url() ?>Sample/add" class="btn btn-primary">Add Data</a>
-                    <?php } ?>
-                    <a href="<?= base_url() ?>Sample/export_head" target="_blank" class="btn btn-success" style="<?= $role == "C" ? 'display: none;' : null ?>">Export Excel</a>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <?php if (privilege()->add_privilege == 'Y') { ?>
+                                <a href="<?= base_url() ?>Sample/add" class="btn btn-primary">Add Data</a>
+                            <?php } ?>
+
+
+                            <button onclick="exportHeadSample()" class="btn btn-success">Export Excel</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <form action="" method="post">
+                            <div class="form-group col-md-3">
+                                <label for="start_date">Start Date</label>
+                                <input class="form-control" type="date" name="start_date" id="start_date" value="<?= ($start_date) ? $start_date : null ?>" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="end_date">End Date</label>
+                                <input class="form-control" type="date" name="end_date" id="end_date" value="<?= ($end_date) ? $end_date : null ?>" required>
+                            </div>
+                            <div class="form-group col-md-1">
+                                <button class="btn btn-info" type="submit" style="margin-top: 40%;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -39,28 +60,17 @@
                                     <td><?= $row->updated_by_sample ?></td>
                                     <td><?= $row->updated_at_sample ?></td>
                                     <td>
-                                        <?php if (privilege() && privilege()->add_privilege == 'Y') { ?>
-                                            <a href="<?= base_url('Sample/addDetail/') . $row->id_sample ?>" class="btn btn-primary">
-                                                <i class="fas fa fa-plus"></i>
-                                            </a>
-                                        <?php } else { ?>
+                                        <?php if (privilege()->add_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Sample/addDetail/') . $row->id_sample ?>" class="btn btn-primary">
                                                 <i class="fas fa fa-plus"></i>
                                             </a>
                                         <?php } ?>
 
-                                        <?php if (privilege() && privilege()->edit_privilege == 'Y') { ?>
-                                            <a href="<?= base_url('Sample/edit/') . $row->id_sample ?>" class="btn btn-warning">
-                                                <i class="fas fa fa-edit"></i>
-                                            </a>
-                                        <?php } else { ?>
+                                        <?php if (privilege()->edit_privilege == 'Y') { ?>
                                             <a href="<?= base_url('Sample/edit/') . $row->id_sample ?>" class="btn btn-warning">
                                                 <i class="fas fa fa-edit"></i>
                                             </a>
                                         <?php } ?>
-                                        <!-- <button onclick="hapus('<?= $row->id_sample ?>')" class="btn btn-danger">
-                                            <i class="fas fa fa-trash"></i>
-                                        </button> -->
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -96,5 +106,11 @@
         if (conf) {
             location.replace("<?= base_url('Sample/delete/') ?>" + id)
         }
+    }
+
+    function exportHeadSample() {
+        let start_date = $('#start_date').val();
+        let end_date = $('#end_date').val();
+        location.replace("<?= base_url('Sample/export_head/') ?>" + start_date + '/' + end_date);
     }
 </script>

@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Sample_m extends CI_model
 {
-    public function getData($idSample = null)
+    public function getData($idSample = null, $startDate = null, $endDate = null)
     {
         $this->db->select('S.*, C.customer_name, B.brand, 
         S.created_at as created_at_sample, 
@@ -18,11 +18,14 @@ class Sample_m extends CI_model
         if ($idSample) {
             $this->db->where("S.id_sample", $idSample);
         }
+        if ($startDate && $endDate) {
+            $this->db->where("DATE(S.created_at) BETWEEN '$startDate' AND '$endDate'");
+        }
         $this->db->where("S.deleted_at", NULL);
         return $this->db->get();
     }
 
-    public function getDetail($idSample = null, $id = null)
+    public function getDetail($idSample = null, $id = null, $startDate = null, $endDate = null)
     {
         $this->db->select('SD.*, SD.id as id_detail, S.quotation_no, C.customer_name, B.brand, 
         SD.created_at as created_at_sd,
@@ -40,6 +43,9 @@ class Sample_m extends CI_model
         }
         if ($id) {
             $this->db->where("SD.id", $id);
+        }
+        if ($startDate && $endDate) {
+            $this->db->where("DATE(SD.created_at) BETWEEN '$startDate' AND '$endDate'");
         }
         $this->db->where("SD.deleted_at", NULL);
         $this->db->where("S.deleted_at", NULL);
