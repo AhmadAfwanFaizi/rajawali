@@ -151,6 +151,7 @@ CREATE TABLE `privilege_user` (
 INSERT INTO `privilege_user` (`id`, `id_user`, `add_privilege`, `edit_privilege`, `print_privilege`, `created_at`, `updated_at`) VALUES
 (1, 'USR60313b6f580e4', 'Y', 'Y', 'Y', '2021-02-20 23:40:15', '2021-03-07 23:47:29'),
 (2, 'USR603611bc1f335', 'N', 'N', 'N', '2021-02-24 15:43:40', '2021-03-07 02:04:29');
+(2, '1', 'Y', 'Y', 'Y', NULL, NULL);
 
 -- --------------------------------------------------------
 
