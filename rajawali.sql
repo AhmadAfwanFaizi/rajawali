@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Mar 2021 pada 18.42
+-- Waktu pembuatan: 09 Mar 2021 pada 16.23
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -108,7 +108,7 @@ INSERT INTO `customer_detail` (`id`, `id_customer`, `email`) VALUES
 CREATE TABLE `iso` (
   `id` int(11) NOT NULL,
   `iso` varchar(225) NOT NULL,
-  `category` enum('INCLUDE','BABY_WEAR','BICYCLE','OTHERS','BASED','OTHER') DEFAULT NULL COMMENT '''INCLUDE'',''BABY_WEAR'',''BICYCLE'',''OTHERS'',''BASED'',''OTHER''',
+  `category` enum('TOYS','BABY_WEAR','BICYCLE','OTHERS','BASED','OTHER') DEFAULT NULL COMMENT '''TOYS'',''BABY_WEAR'',''BICYCLE'',''OTHERS'',''BASED'',''OTHER''',
   `enable` enum('Y','N') NOT NULL DEFAULT 'Y',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` varchar(225) NOT NULL,
@@ -122,11 +122,12 @@ CREATE TABLE `iso` (
 --
 
 INSERT INTO `iso` (`id`, `iso`, `category`, `enable`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`) VALUES
-(39, 'SNI Certification Part 1', 'INCLUDE', 'Y', '2021-02-26 14:46:56', '1', NULL, NULL, NULL),
+(39, 'SNI Certification Part 1', 'TOYS', 'Y', '2021-02-26 14:46:56', '1', NULL, NULL, NULL),
 (40, 'Baby Wear', 'BABY_WEAR', 'Y', '2021-02-26 14:47:06', '1', NULL, NULL, NULL),
 (41, 'Bicycle', 'BICYCLE', 'Y', '2021-02-26 14:47:16', '1', NULL, NULL, NULL),
 (42, 'Others', 'OTHERS', 'N', '2021-02-26 14:47:25', '1', '2021-03-07 23:37:15', '1', NULL),
-(44, 'Based on laboratory quotation no 0757', 'BASED', 'N', '2021-03-08 00:34:31', '1', '2021-03-08 00:37:17', '1', NULL);
+(44, 'Based on laboratory quotation no 0757', 'BASED', 'N', '2021-03-08 00:34:31', '1', '2021-03-08 00:37:17', '1', NULL),
+(46, 'toys add test', 'TOYS', 'Y', '2021-03-09 20:30:01', '1', '2021-03-09 20:34:04', '1', NULL);
 
 -- --------------------------------------------------------
 
@@ -150,8 +151,8 @@ CREATE TABLE `privilege_user` (
 
 INSERT INTO `privilege_user` (`id`, `id_user`, `add_privilege`, `edit_privilege`, `print_privilege`, `created_at`, `updated_at`) VALUES
 (1, 'USR60313b6f580e4', 'Y', 'Y', 'Y', '2021-02-20 23:40:15', '2021-03-07 23:47:29'),
-(2, 'USR603611bc1f335', 'N', 'N', 'N', '2021-02-24 15:43:40', '2021-03-07 02:04:29');
-(2, '1', 'Y', 'Y', 'Y', NULL, NULL);
+(2, 'USR603611bc1f335', 'N', 'N', 'N', '2021-02-24 15:43:40', '2021-03-07 02:04:29'),
+(3, '1', 'Y', 'Y', 'Y', '2021-03-08 21:32:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -217,7 +218,7 @@ INSERT INTO `sample_detail` (`id`, `id_sample`, `sample_code`, `sample_descripti
 (10, 'SMPL-H-6038c35bcfbda', 'RTL-SMPL-02/21/0001', 'Edt', 12, 'adasd', '2021-02-26', '2021-02-27', '1', 'Edit', 'Y', 'PROGRESS', '2021-02-26 16:46:26', '1', '2021-02-26 16:46:54', '1', NULL),
 (11, 'SMPL-H-603a2b49d04cb', 'RTL-SMPL-02/21/0002', 'desc', 123, 'bapc', '2021-02-01', '2021-02-27', '123', 'remark', 'N', 'PROGRESS', '2021-02-27 18:22:15', '1', '2021-03-08 00:21:01', '1', NULL),
 (12, 'SMPL-H-60450117af189', 'RTL-SMPL-03/21/0003', 'sample', 512, 'bapc 512', '2021-03-01', '2021-03-07', '5', 'remark update', 'N', 'PROGRESS', '2021-03-07 23:43:01', '1', '2021-03-08 00:07:14', '1', NULL),
-(13, 'SMPL-H-6038c35bcfbda', 'RTL-SMPL-03/21/0004', 'sampl', 123, 'bapc123', '2021-03-01', '2021-03-08', '2022', 'rmek', 'Y', 'PENDING', '2021-03-08 00:22:12', '1', NULL, NULL, NULL);
+(13, 'SMPL-H-6038c35bcfbda', 'RTL-SMPL-03/21/0004', 'sampl', 123, 'bapc123', '2021-03-01', '2021-03-08', '2022', 'rmek', 'Y', 'PROGRESS', '2021-03-08 00:22:12', '1', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -228,7 +229,7 @@ INSERT INTO `sample_detail` (`id`, `id_sample`, `sample_code`, `sample_descripti
 CREATE TABLE `submition` (
   `id` int(11) NOT NULL,
   `sample_code` varchar(225) NOT NULL,
-  `id_term_of_service_detail` varchar(10) NOT NULL,
+  `id_submition_tos` varchar(225) NOT NULL,
   `item_no` varchar(225) DEFAULT NULL,
   `iso_submition` varchar(225) DEFAULT NULL,
   `sni_certification` enum('TRUE','FALSE') DEFAULT NULL,
@@ -251,10 +252,13 @@ CREATE TABLE `submition` (
 -- Dumping data untuk tabel `submition`
 --
 
-INSERT INTO `submition` (`id`, `sample_code`, `id_term_of_service_detail`, `item_no`, `iso_submition`, `sni_certification`, `do_not_show_pass`, `retain_sample`, `other_method`, `family_product`, `product_end_use`, `age_group`, `country`, `lab_subcont`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`) VALUES
+INSERT INTO `submition` (`id`, `sample_code`, `id_submition_tos`, `item_no`, `iso_submition`, `sni_certification`, `do_not_show_pass`, `retain_sample`, `other_method`, `family_product`, `product_end_use`, `age_group`, `country`, `lab_subcont`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`) VALUES
 (10, 'RTL-SMPL-02/21/0001', '2', 'item no', 'ISO603a29b876b85', 'TRUE', 'TRUE', 'TRUE', 'other sample', 'family proudk', '12', '12', '12', '12', '2021-02-27 18:15:04', '1', '2021-02-27 18:20:41', '1', NULL),
 (11, 'RTL-SMPL-02/21/0002', '2', '2', 'ISO603a2b9847237', 'TRUE', 'TRUE', 'TRUE', '2', 'produk brnadon', '2', '2', '2', '2', '2021-02-27 18:23:04', '1', '2021-02-27 18:23:33', '1', NULL),
-(12, 'RTL-SMPL-03/21/0003', '4', '2', 'ISO60450ac914254', 'TRUE', 'TRUE', 'TRUE', 'opth', '123', '2022', '3', 'idn', 'rjwl', '2021-03-08 00:18:01', '1', NULL, NULL, NULL);
+(12, 'RTL-SMPL-03/21/0003', '4', '2', 'ISO60450ac914254', 'TRUE', 'TRUE', 'TRUE', 'opth', '123', '2022', '3', 'idn', 'rjwl', '2021-03-08 00:18:01', '1', NULL, NULL, NULL),
+(13, 'RTL-SMPL-03/21/0004', '4', '123', 'ISO604779b47a1b2', 'TRUE', 'TRUE', 'TRUE', 'q', 'q', 'q', 'q', 'q', 'q', '2021-03-09 20:35:48', '1', '2021-03-09 20:36:25', '1', NULL),
+(14, 'RTL-SMPL-02/21/0001', '1', '123', 'ISO60477a684c2d9', 'TRUE', 'TRUE', 'TRUE', 'w', 'w', 'w', 'w', 'w', 'w', '2021-03-09 20:38:48', '1', NULL, NULL, NULL),
+(15, 'RTL-SMPL-03/21/0003', 'STOS604783fac524c', '123', 'ISO604783fac5246', 'TRUE', 'TRUE', 'TRUE', 'r', 'r', 'rr', 'r', 'r', 'r', '2021-03-09 21:19:38', '1', '2021-03-09 22:11:37', '1', NULL);
 
 -- --------------------------------------------------------
 
@@ -310,7 +314,95 @@ INSERT INTO `submition_detail` (`id`, `iso_submition`, `id_sni_iso`, `created_at
 (264, 'ISO603a2b9847237', '42', '2021-02-27 18:23:33', NULL, NULL),
 (265, 'ISO60450ac914254', '39', '2021-03-08 00:18:01', NULL, NULL),
 (266, 'ISO60450ac914254', '40', '2021-03-08 00:18:01', NULL, NULL),
-(267, 'ISO60450ac914254', '41', '2021-03-08 00:18:01', NULL, NULL);
+(267, 'ISO60450ac914254', '41', '2021-03-08 00:18:01', NULL, NULL),
+(268, 'ISO604779b47a1b2', '39', '2021-03-09 20:35:48', NULL, '2021-03-09 20:36:25'),
+(269, 'ISO604779b47a1b2', '46', '2021-03-09 20:35:48', NULL, '2021-03-09 20:36:25'),
+(270, 'ISO604779b47a1b2', '39', '2021-03-09 20:36:25', NULL, NULL),
+(271, 'ISO604779b47a1b2', '46', '2021-03-09 20:36:25', NULL, NULL),
+(272, 'ISO604779b47a1b2', '44', '2021-03-09 20:36:25', NULL, NULL),
+(273, 'ISO604779b47a1b2', '40', '2021-03-09 20:36:25', NULL, NULL),
+(274, 'ISO604779b47a1b2', '42', '2021-03-09 20:36:25', NULL, NULL),
+(275, 'ISO60477a684c2d9', '39', '2021-03-09 20:38:48', NULL, NULL),
+(276, 'ISO60477a684c2d9', '46', '2021-03-09 20:38:48', NULL, NULL),
+(277, 'ISO60477a684c2d9', '40', '2021-03-09 20:38:48', NULL, NULL),
+(278, 'ISO60477a684c2d9', '41', '2021-03-09 20:38:48', NULL, NULL),
+(279, 'ISO604783fac5246', '39', '2021-03-09 21:19:38', NULL, '2021-03-09 22:11:37'),
+(280, 'ISO604783fac5246', '46', '2021-03-09 21:19:38', NULL, '2021-03-09 22:11:37'),
+(281, 'ISO604783fac5246', '40', '2021-03-09 21:19:38', NULL, '2021-03-09 22:11:37'),
+(282, 'ISO604783fac5246', '41', '2021-03-09 21:19:38', NULL, '2021-03-09 22:05:28'),
+(283, 'ISO604783fac5246', '39', '2021-03-09 22:05:28', NULL, '2021-03-09 22:11:37'),
+(284, 'ISO604783fac5246', '46', '2021-03-09 22:05:28', NULL, '2021-03-09 22:11:37'),
+(285, 'ISO604783fac5246', '40', '2021-03-09 22:05:28', NULL, '2021-03-09 22:11:37'),
+(286, 'ISO604783fac5246', '39', '2021-03-09 22:05:37', NULL, '2021-03-09 22:11:37'),
+(287, 'ISO604783fac5246', '46', '2021-03-09 22:05:37', NULL, '2021-03-09 22:11:37'),
+(288, 'ISO604783fac5246', '40', '2021-03-09 22:05:37', NULL, '2021-03-09 22:11:37'),
+(289, 'ISO604783fac5246', '39', '2021-03-09 22:05:54', NULL, '2021-03-09 22:11:37'),
+(290, 'ISO604783fac5246', '46', '2021-03-09 22:05:54', NULL, '2021-03-09 22:11:37'),
+(291, 'ISO604783fac5246', '40', '2021-03-09 22:05:54', NULL, '2021-03-09 22:11:37'),
+(292, 'ISO604783fac5246', '39', '2021-03-09 22:08:18', NULL, '2021-03-09 22:11:37'),
+(293, 'ISO604783fac5246', '46', '2021-03-09 22:08:18', NULL, '2021-03-09 22:11:37'),
+(294, 'ISO604783fac5246', '40', '2021-03-09 22:08:18', NULL, '2021-03-09 22:11:37'),
+(295, 'ISO604783fac5246', '39', '2021-03-09 22:08:25', NULL, '2021-03-09 22:11:37'),
+(296, 'ISO604783fac5246', '46', '2021-03-09 22:08:25', NULL, '2021-03-09 22:11:37'),
+(297, 'ISO604783fac5246', '40', '2021-03-09 22:08:25', NULL, '2021-03-09 22:11:37'),
+(298, 'ISO604783fac5246', '39', '2021-03-09 22:09:41', NULL, '2021-03-09 22:11:37'),
+(299, 'ISO604783fac5246', '46', '2021-03-09 22:09:41', NULL, '2021-03-09 22:11:37'),
+(300, 'ISO604783fac5246', '40', '2021-03-09 22:09:41', NULL, '2021-03-09 22:11:37'),
+(301, 'ISO604783fac5246', '39', '2021-03-09 22:09:48', NULL, '2021-03-09 22:11:37'),
+(302, 'ISO604783fac5246', '46', '2021-03-09 22:09:48', NULL, '2021-03-09 22:11:37'),
+(303, 'ISO604783fac5246', '40', '2021-03-09 22:09:48', NULL, '2021-03-09 22:11:37'),
+(304, 'ISO604783fac5246', '39', '2021-03-09 22:10:00', NULL, '2021-03-09 22:11:37'),
+(305, 'ISO604783fac5246', '46', '2021-03-09 22:10:00', NULL, '2021-03-09 22:11:37'),
+(306, 'ISO604783fac5246', '40', '2021-03-09 22:10:00', NULL, '2021-03-09 22:11:37'),
+(307, 'ISO604783fac5246', '39', '2021-03-09 22:10:34', NULL, '2021-03-09 22:11:37'),
+(308, 'ISO604783fac5246', '46', '2021-03-09 22:10:34', NULL, '2021-03-09 22:11:37'),
+(309, 'ISO604783fac5246', '40', '2021-03-09 22:10:34', NULL, '2021-03-09 22:11:37'),
+(310, 'ISO604783fac5246', '39', '2021-03-09 22:11:21', NULL, '2021-03-09 22:11:37'),
+(311, 'ISO604783fac5246', '46', '2021-03-09 22:11:21', NULL, '2021-03-09 22:11:37'),
+(312, 'ISO604783fac5246', '40', '2021-03-09 22:11:21', NULL, '2021-03-09 22:11:37'),
+(313, 'ISO604783fac5246', '39', '2021-03-09 22:11:31', NULL, '2021-03-09 22:11:37'),
+(314, 'ISO604783fac5246', '46', '2021-03-09 22:11:31', NULL, '2021-03-09 22:11:37'),
+(315, 'ISO604783fac5246', '40', '2021-03-09 22:11:31', NULL, '2021-03-09 22:11:37'),
+(316, 'ISO604783fac5246', '39', '2021-03-09 22:11:37', NULL, NULL),
+(317, 'ISO604783fac5246', '46', '2021-03-09 22:11:37', NULL, NULL),
+(318, 'ISO604783fac5246', '40', '2021-03-09 22:11:37', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `submition_tos`
+--
+
+CREATE TABLE `submition_tos` (
+  `id` int(11) NOT NULL,
+  `id_submition_tos` varchar(225) NOT NULL,
+  `id_term_of_service_detail` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `submition_tos`
+--
+
+INSERT INTO `submition_tos` (`id`, `id_submition_tos`, `id_term_of_service_detail`, `created_at`, `created_by`, `deleted_at`) VALUES
+(1, 'STOS604783fac524c', 1, '2021-03-09 21:19:38', NULL, '2021-03-09 22:11:37'),
+(2, 'STOS604783fac524c', 3, '2021-03-09 21:19:38', NULL, '2021-03-09 22:11:31'),
+(3, 'STOS604783fac524c', 2, '2021-03-09 21:19:38', NULL, '2021-03-09 22:11:31'),
+(4, 'STOS604783fac524c', 4, '2021-03-09 21:19:38', NULL, '2021-03-09 22:11:37'),
+(5, 'STOS604783fac524c', 2, '2021-03-09 22:05:28', NULL, '2021-03-09 22:11:31'),
+(6, 'STOS604783fac524c', 1, '2021-03-09 22:05:37', NULL, '2021-03-09 22:11:37'),
+(7, 'STOS604783fac524c', 1, '2021-03-09 22:09:41', NULL, '2021-03-09 22:11:37'),
+(8, 'STOS604783fac524c', 1, '2021-03-09 22:09:48', NULL, '2021-03-09 22:11:37'),
+(9, 'STOS604783fac524c', 1, '2021-03-09 22:10:00', NULL, '2021-03-09 22:11:37'),
+(10, 'STOS604783fac524c', 1, '2021-03-09 22:11:21', NULL, '2021-03-09 22:11:37'),
+(11, 'STOS604783fac524c', 3, '2021-03-09 22:11:21', NULL, '2021-03-09 22:11:31'),
+(12, 'STOS604783fac524c', 2, '2021-03-09 22:11:21', NULL, '2021-03-09 22:11:31'),
+(13, 'STOS604783fac524c', 4, '2021-03-09 22:11:21', NULL, '2021-03-09 22:11:37'),
+(14, 'STOS604783fac524c', 1, '2021-03-09 22:11:31', NULL, '2021-03-09 22:11:37'),
+(15, 'STOS604783fac524c', 4, '2021-03-09 22:11:31', NULL, '2021-03-09 22:11:37'),
+(16, 'STOS604783fac524c', 4, '2021-03-09 22:11:37', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -449,6 +541,12 @@ ALTER TABLE `submition_detail`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `submition_tos`
+--
+ALTER TABLE `submition_tos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `term_of_service`
 --
 ALTER TABLE `term_of_service`
@@ -492,13 +590,13 @@ ALTER TABLE `customer_detail`
 -- AUTO_INCREMENT untuk tabel `iso`
 --
 ALTER TABLE `iso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT untuk tabel `privilege_user`
 --
 ALTER TABLE `privilege_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `sample`
@@ -516,13 +614,19 @@ ALTER TABLE `sample_detail`
 -- AUTO_INCREMENT untuk tabel `submition`
 --
 ALTER TABLE `submition`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `submition_detail`
 --
 ALTER TABLE `submition_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=268;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=319;
+
+--
+-- AUTO_INCREMENT untuk tabel `submition_tos`
+--
+ALTER TABLE `submition_tos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `term_of_service`
