@@ -45,20 +45,24 @@ class Sample extends CI_Controller
     public function head()
     {
         $post = $this->input->post(null, true);
+        // var_dump($post);
         $data      = [
             "page" => "sample",
             'role' => $this->session->userdata('role'),
+            'brand' => $this->brand_m->getData()->result(),
         ];
         if ($post) {
-            $data['start_date'] = $post['start_date'];
-            $data['end_date']   = $post['end_date'];
-            $data['data']       = $this->sample_m->getData(null, $post['start_date'], $post['end_date'])->result();
+            $data['start_date']  = $post['start_date'];
+            $data['end_date']    = $post['end_date'];
+            $data['selectField'] = $post['selectField'];
+            $data['data']        = $this->sample_m->getData(null, $post['start_date'], $post['end_date'])->result();
         } else {
-            $data['start_date'] = null;
-            $data['end_date']   = null;
-            $data['data']       = $this->sample_m->getData()->result();
+            $data['start_date']  = null;
+            $data['end_date']    = null;
+            $data['selectField'] = null;
+            $data['data']        = $this->sample_m->getData()->result();
         }
-        // var_dump($data['data']);
+        // var_dump($param);
         // die;
         $this->template->load('template/template', 'sample/data', $data);
     }

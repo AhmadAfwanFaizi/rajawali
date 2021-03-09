@@ -15,11 +15,12 @@
     <?php
     header("Content-type: application/vnd-ms-excel");
     header("Content-Disposition: attachment; filename=sample-detail.xls");
+
     ?>
 </head>
 
 <body>
-
+    <h4>Sample Detail</h4>
     <table id="tableSampleDetail" class="table table-bordered table-hover" style="min-width: 50%;">
         <thead>
             <tr>

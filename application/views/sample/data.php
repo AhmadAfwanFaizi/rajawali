@@ -16,6 +16,15 @@
                     <div class="row">
                         <form action="" method="post">
                             <div class="form-group col-md-3">
+                                <label for="searchField">Brand</label>
+                                <select class="form-control" name="selectField" id="selectField">
+                                    <option value="">Pilih Brand</option>
+                                    <?php foreach ($brand as $row) { ?>
+                                        <option value="<?= $row->id ?>" <?= $row->id == $selectField ? 'selected' : null ?>><?= $row->brand ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
                                 <label for="start_date">Start Date</label>
                                 <input class="form-control" type="date" name="start_date" id="start_date" value="<?= ($start_date) ? $start_date : null ?>" required>
                             </div>
@@ -28,8 +37,8 @@
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
-                        </form>
                     </div>
+                    </form>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -115,5 +124,10 @@
         } else {
             location.replace("<?= base_url('Sample/export_head/') ?>");
         }
+    }
+
+    function selectField() {
+        let id = $("#selectField").val();
+        location.replace("<?= base_url('Sample/head?id_brand=') ?>" + id);
     }
 </script>
