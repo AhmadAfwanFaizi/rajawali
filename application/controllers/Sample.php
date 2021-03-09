@@ -54,12 +54,10 @@ class Sample extends CI_Controller
         if ($post) {
             $data['start_date']  = $post['start_date'];
             $data['end_date']    = $post['end_date'];
-            $data['selectField'] = $post['selectField'];
             $data['data']        = $this->sample_m->getData(null, $post['start_date'], $post['end_date'])->result();
         } else {
             $data['start_date']  = null;
             $data['end_date']    = null;
-            $data['selectField'] = null;
             $data['data']        = $this->sample_m->getData()->result();
         }
         // var_dump($param);
