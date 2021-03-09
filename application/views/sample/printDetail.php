@@ -11,8 +11,8 @@
         .frame {
             margin: 10px;
             border: 1px solid #3e2f2f;
-            width: 300px;
-            height: 150px;
+            width: 227px;
+            height: 151px;
         }
 
         th {
@@ -72,8 +72,8 @@
     </div>
 
     <script>
-        window.print();
-        setTimeout(window.close, 1000);
+        // window.print();
+        // setTimeout(window.close, 1000);
     </script>
 </body>
 
