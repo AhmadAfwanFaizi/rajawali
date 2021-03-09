@@ -11,8 +11,12 @@
                 <form role="form" action="<?= base_url() ?>Submition/edit" method="post">
                     <input type="hidden" name="idSubmition" value="<?= $data->id_submition ?>">
                     <input type="hidden" name="isoSubmition" value="<?= $data->iso_submition ?>">
+                    <input type="hidden" name="idSubmitionTos" value="<?= $data->id_submition_tos    ?>">
                     <?php foreach ($detail as $d) { ?>
                         <input type="hidden" name="isoLama[]" value="<?= $d->id_sni_iso ?>">
+                    <?php } ?>
+                    <?php foreach ($get_submition_tos as $d) { ?>
+                        <input type="hidden" name="tosLama[]" value="<?= $d->id ?>">
                     <?php } ?>
 
                     <div class="box-body">
@@ -23,12 +27,13 @@
                                     <input type="text" class="form-control" name="sampleCode" value="<?= $data->sample_code ?>" readonly requires>
                                 </div>
                                 <div class="form-group">
-                                    <label for="termOfServiceDetail">Term Of Service</label>
-
+                                    <label for="">Term Of Service</label>
                                     <?php foreach ($term_of_service as $row) { ?>
-                                        <div class="radio">
+                                        <div class="checkbox">
                                             <label>
-                                                <input type="radio" name="termOfServiceDetail" id="termOfServiceDetail" value="<?= $row->id ?>" <?= $row->id == $data->id_term_of_service_detail ? 'checked' : null ?>>
+                                                <input type="checkbox" name="idTermOfService[]" value="<?= $row->id ?>" <?= $row->id ?> <?php foreach ($get_submition_tos as $d) {
+                                                                                                                                            echo ($row->id == $d->id) ? 'checked' : null;
+                                                                                                                                        } ?>>
                                                 <?= '(' . $row->category . ') ' . $row->type ?>
                                             </label>
                                         </div>
@@ -75,7 +80,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="ItemNo">Item No</label>
-                                    <input type="text" class="form-control" name="ItemNo" placeholder="Item No" value="<?= $data->item_no ?>">
+                                    <input type="number" class="form-control" name="ItemNo" placeholder="Item No" value="<?= $data->item_no ?>">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -88,7 +93,7 @@
                                 <div class="form-group">
                                     <label for="">SNI ISO INDONESIAN STANDARD PACKAGE for toys</label>
 
-                                    <?php foreach ($include as $row) { ?>
+                                    <?php foreach ($toys as $row) { ?>
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" name="iso[]" value="<?= $row->id ?>" <?php foreach ($detail as $d) {

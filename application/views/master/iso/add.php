@@ -18,7 +18,7 @@
                             <label for="category">Category</label>
                             <select name="category" id="category" class="form-control">
                                 <option value="" hidden>Select Category</option>
-                                <option value="INCLUDE">INCLUDE</option>
+                                <option value="TOYS">TOYS</option>
                                 <option value="BABY_WEAR">BABY WEAR</option>
                                 <option value="BICYCLE">BICYCLE</option>
                                 <option value="OTHERS">OTHERS</option>

@@ -50,7 +50,7 @@ class Submition extends CI_Controller
                 "page"                   => "add submition",
                 'sample_code'            => $this->submition_m->getSampleCode()->result(),
                 'term_of_service'        => $this->submition_m->selectTermOfService()->result(),
-                'include'                => $this->submition_m->getIso('include', true)->result(),
+                'toys'                   => $this->submition_m->getIso('toys', true)->result(),
                 'baby_wear'              => $this->submition_m->getIso('baby_wear', true)->result(),
                 'bicycle'                => $this->submition_m->getIso('bicycle', true)->result(),
                 'others'                 => $this->submition_m->getIso('others', true)->result(),
@@ -81,22 +81,24 @@ class Submition extends CI_Controller
 
         if ($this->form_validation->run() == false) {
 
-            $getData   = $this->submition_m->getData($idSubmition)->row();
-            $getDetail = $this->submition_m->getDetailData($getData->iso_submition)->result();
-            // var_dump($getDetail);
+            $getData         = $this->submition_m->getData($idSubmition)->row();
+            $getDetail       = $this->submition_m->getDetailData($getData->iso_submition)->result();
+            $getSubmitionTos = $this->submition_m->getSubmitionTos($getData->id_submition_tos)->result();
+            // var_dump($getSubmitionTos);
             // die;
 
             $data = [
-                "page"            => "edit submition",
-                'data'            => $getData,
-                'detail'          => $getDetail,
-                'term_of_service' => $this->submition_m->selectTermOfService()->result(),
-                'include'         => $this->submition_m->getIso('include')->result(),
-                'baby_wear'       => $this->submition_m->getIso('baby_wear')->result(),
-                'bicycle'         => $this->submition_m->getIso('bicycle')->result(),
-                'others'          => $this->submition_m->getIso('others')->result(),
-                'based'           => $this->submition_m->getIso('based')->result(),
-                'other'           => $this->submition_m->getIso('other')->result(),
+                "page"              => "edit submition",
+                'data'              => $getData,
+                'detail'            => $getDetail,
+                'get_submition_tos' => $getSubmitionTos,
+                'term_of_service'   => $this->submition_m->selectTermOfService()->result(),
+                'toys'              => $this->submition_m->getIso('toys', true)->result(),
+                'baby_wear'         => $this->submition_m->getIso('baby_wear', true)->result(),
+                'bicycle'           => $this->submition_m->getIso('bicycle', true)->result(),
+                'others'            => $this->submition_m->getIso('others', true)->result(),
+                'based'             => $this->submition_m->getIso('based', true)->result(),
+                'other'             => $this->submition_m->getIso('other', true)->result(),
             ];
 
             // var_dump($getDetail);
@@ -142,12 +144,12 @@ class Submition extends CI_Controller
             'email'                  => $getEmail,
             'term_of_service'        => $getTermOfService,
             'term_of_service_detail' => $getTermOfServiceDetail,
-            'include'                => $this->submition_m->getIso('include')->result(),
-            'baby_wear'              => $this->submition_m->getIso('baby_wear')->result(),
-            'bicycle'                => $this->submition_m->getIso('bicycle')->result(),
-            'others'                 => $this->submition_m->getIso('others')->result(),
-            'based'                  => $this->submition_m->getIso('based')->result(),
-            'other'                  => $this->submition_m->getIso('other')->result(),
+            'toys'                   => $this->submition_m->getIso('toys', true)->result(),
+            'baby_wear'              => $this->submition_m->getIso('baby_wear', true)->result(),
+            'bicycle'                => $this->submition_m->getIso('bicycle', true)->result(),
+            'others'                 => $this->submition_m->getIso('others', true)->result(),
+            'based'                  => $this->submition_m->getIso('based', true)->result(),
+            'other'                  => $this->submition_m->getIso('other', true)->result(),
         ];
         // var_dump($getTermOfService);
         // die;

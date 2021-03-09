@@ -19,7 +19,7 @@
                             <label for="category">Category</label>
                             <select name="category" id="category" class="form-control">
                                 <option value="" hidden>Select Category</option>
-                                <option value="INCLUDE" <?= $data->category == 'INCLUDE' ? 'selected' : null ?>>INCLUDE</option>
+                                <option value="TOYS" <?= $data->category == 'TOYS' ? 'selected' : null ?>>TOYS</option>
                                 <option value="BABY_WEAR" <?= $data->category == 'BABY_WEAR' ? 'selected' : null ?>>BABY WEAR</option>
                                 <option value="BICYCLE" <?= $data->category == 'BICYCLE' ? 'selected' : null ?>>BICYCLE</option>
                                 <option value="OTHERS" <?= $data->category == 'OTHERS' ? 'selected' : null ?>>OTHERS</option>

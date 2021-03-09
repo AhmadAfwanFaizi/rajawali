@@ -22,18 +22,16 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="termOfServiceDetail">Term Of Service</label>
-
+                                    <label for="">Term Of Service</label>
                                     <?php foreach ($term_of_service as $row) { ?>
-                                        <div class="radio">
+                                        <div class="checkbox">
                                             <label>
-                                                <input type="radio" name="termOfServiceDetail" id="termOfServiceDetail" value="<?= $row->id ?>" checked>
+                                                <input type="checkbox" name="idTermOfService[]" value="<?= $row->id ?>">
                                                 <?= '(' . $row->category . ') ' . $row->type ?>
                                             </label>
                                         </div>
                                     <?php } ?>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="familyProduct">Family Product</label>
                                     <textarea class="form-control" name="familyProduct" id="familyProduct" cols="30" rows="1"></textarea>
@@ -68,12 +66,12 @@
                                     </label>
                                 </div>
                                 <div class="form-group">
-                                    <label for="otherMethod">Other</label>
+                                    <label for="otherMethod">Others (Please Specify Method)</label>
                                     <textarea class="form-control" name="otherMethod" id="otherMethod" cols="30" rows="1"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="ItemNo">Item No</label>
-                                    <input type="text" class="form-control" name="ItemNo" placeholder="Item No">
+                                    <input type="number" class="form-control" name="ItemNo" placeholder="Item No">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -85,7 +83,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">SNI ISO INDONESIAN STANDARD PACKAGE for toys</label>
-                                    <?php foreach ($include as $row) { ?>
+                                    <?php foreach ($toys as $row) { ?>
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" name="iso[]" value="<?= $row->id ?>">

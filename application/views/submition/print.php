@@ -365,7 +365,7 @@
                             </b> <br />
                             Include: <br />
                             <div class="form-group">
-                                <?php foreach ($include as $row) { ?>
+                                <?php foreach ($toys as $row) { ?>
                                     <div class="checkbox">
                                         <label>
                                             <input type="checkbox" name="" <?php foreach ($detail as $d) {

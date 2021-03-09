@@ -40,7 +40,6 @@
                                 <th>Customer</th>
                                 <th>Brand</th>
                                 <th>Sample Code</th>
-                                <th>Term Of Service</th>
                                 <th>Item No</th>
                                 <th>SNI Certification</th>
                                 <th>Do Not Show Pass</th>
@@ -63,7 +62,6 @@
                                 <th>Customer</th>
                                 <th>Brand</th>
                                 <th>Sample Code</th>
-                                <th>Term Of Service</th>
                                 <th>Item No</th>
                                 <th>SNI Certification</th>
                                 <th>Do Not Show Pass</th>
@@ -87,7 +85,6 @@
                                     <td><?= $row->customer_name ?></td>
                                     <td><?= $row->brand ?></td>
                                     <td><?= $row->sample_code ?></td>
-                                    <td><?= $row->category . ' - ' . $row->type ?></td>
                                     <td><?= $row->item_no ?></td>
                                     <td><?= $row->sni_certification ?></td>
                                     <td><?= $row->do_not_show_pass ?></td>
@@ -139,11 +136,11 @@
             "scrollCollapse": true,
             "scrollX": "200%",
             "columnDefs": [{
-                "targets": [18],
+                "targets": [17],
                 "orderable": false,
             }],
             "order": [
-                [15, "desc"]
+                [14, "desc"]
             ]
         });
     });

@@ -5,14 +5,14 @@ class Submition_m extends CI_model
 {
     public function getData($id = null, $startDate = null, $endDate = null)
     {
-        $this->db->select('S.*, TOS.category, TOSD.type, S.id as id_submition, customer_name, brand,
+        $this->db->select('S.*, S.id as id_submition, customer_name, brand,
         S.created_at as created_at_submition,
         S.updated_at as updated_at_submition,
         U.username as created_by_submition, 
         U2.username as updated_by_submition')
             ->from('submition S')
-            ->join('term_of_service_detail TOSD', 'TOSD.id = S.id_term_of_service_detail')
-            ->join('term_of_service TOS', 'TOS.id = TOSD.id_term_of_service')
+            // ->join('term_of_service_detail TOSD', 'TOSD.id = S.id_term_of_service_detail')
+            // ->join('term_of_service TOS', 'TOS.id = TOSD.id_term_of_service')
             ->join('sample_detail SD', 'SD.sample_code = S.sample_code')
             ->join('sample', 'sample.id_sample = SD.id_sample')
             ->join('customer C', 'C.id_customer = sample.id_customer')
@@ -39,6 +39,19 @@ class Submition_m extends CI_model
             $this->db->where("SD.iso_submition", $isoSub);
         }
         $this->db->where("SD.deleted_at", NULL);
+        return $this->db->get();
+    }
+
+    public function getSubmitionTos($idSubmitionTos = null)
+    {
+        $this->db->select('TOSD.id, TOS.category')
+            ->from('submition_tos ST')
+            ->join('term_of_service_detail TOSD', 'TOSD.id = ST.id_term_of_service_detail')
+            ->join('term_of_service TOS', 'TOS.id = TOSD.id_term_of_service');
+        if ($idSubmitionTos) {
+            $this->db->where("ST.id_submition_tos", $idSubmitionTos);
+        }
+        $this->db->where("ST.deleted_at", NULL);
         return $this->db->get();
     }
 
@@ -79,7 +92,7 @@ class Submition_m extends CI_model
         return $this->db->get();
     }
 
-    public function getIso($category, $enable = null)
+    public function getIso($category = null, $enable = null)
     {
         $this->db->select('*')
             ->from('iso I');
@@ -100,10 +113,11 @@ class Submition_m extends CI_model
         $this->db->where('sample_code', $post['sampleCode'])
             ->update('sample_detail', ['status_sample' => 'PROGRESS']);
 
-        $iso_sub = 'ISO' . uniqid();
-        $data = [
+        $iso_sub        = 'ISO' . uniqid();
+        $idSubmitionTos = 'STOS' . uniqid();
+        $data           = [
             'sample_code'               => $post['sampleCode'],
-            'id_term_of_service_detail' => $post['termOfServiceDetail'],
+            'id_submition_tos'          => $idSubmitionTos,
             'item_no'                   => $post['ItemNo'],
             'iso_submition'             => $iso_sub,
             'sni_certification'         => $post['sniCertification'],
@@ -120,6 +134,15 @@ class Submition_m extends CI_model
         ];
         $this->db->insert('submition', $data);
 
+        $idTermOfService = $post['idTermOfService'];
+        for ($i = 0; $i < count($idTermOfService); $i++) {
+            $subData = [
+                'id_submition_tos'          => $idSubmitionTos,
+                'id_term_of_service_detail' => $idTermOfService[$i],
+                'created_at'                => waktu_sekarang(),
+            ];
+            $this->db->insert('submition_tos', $subData);
+        }
 
         $iso = $post['iso'];
         for ($i = 0; $i < count($iso); $i++) {
@@ -153,7 +176,6 @@ class Submition_m extends CI_model
         // var_dump($post);
         // die;
         $data = [
-            'id_term_of_service_detail' => $post['termOfServiceDetail'],
             'item_no'                   => $post['ItemNo'],
             'sni_certification'         => $sniCertification,
             'do_not_show_pass'          => $doNotShowPass,
@@ -170,20 +192,14 @@ class Submition_m extends CI_model
         $this->db->where('id', $post['idSubmition']);
         $this->db->update('submition', $data);
 
-        $isoLama = $post['isoLama'];
-        // var_dump(count($isoLama));
-        // die;
+        // submition detail
+        $isoLama        = $post['isoLama'];
         for ($i = 0; $i < count($isoLama); $i++) {
 
             $this->db->where('iso_submition', $post['isoSubmition']);
             $this->db->where('id_sni_iso', $post['isoLama'][$i]);
             $this->db->update('submition_detail', ['deleted_at' => waktu_sekarang()]);
         }
-
-        // var_dump($this->db->last_query());
-        // die;
-
-
         $iso = $post['iso'];
         for ($i = 0; $i < count($iso); $i++) {
             $subData = [
@@ -192,6 +208,27 @@ class Submition_m extends CI_model
                 'created_at'    => waktu_sekarang(),
             ];
             $this->db->insert('submition_detail', $subData);
+        }
+
+        // susbmition_tos
+        $tosLama         = $post['tosLama'];
+        $idSubmitionTos  = $post['idSubmitionTos'];
+        $idTermOfService = $post['idTermOfService'];
+        for ($i = 0; $i < count($tosLama); $i++) {
+
+            $this->db->where('id_submition_tos', $idSubmitionTos);
+            $this->db->where('id_term_of_service_detail', $tosLama[$i]);
+            $this->db->update('submition_tos', ['deleted_at' => waktu_sekarang()]);
+        }
+        if ($idTermOfService) {
+            for ($i = 0; $i < count($idTermOfService); $i++) {
+                $subData = [
+                    'id_submition_tos'          => $idSubmitionTos,
+                    'id_term_of_service_detail' => $idTermOfService[$i],
+                    'created_at'                => waktu_sekarang(),
+                ];
+                $this->db->insert('submition_tos', $subData);
+            }
         }
     }
 
