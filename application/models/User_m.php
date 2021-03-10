@@ -31,9 +31,9 @@ class User_m extends CI_model
 
         $dataPrivilege = [
             'id_user'          => $id_user,
-            'master_menu'      => htmlspecialchars($post['master_menu']),
-            'master_sample'    => htmlspecialchars($post['master_sample']),
-            'master_submition' => htmlspecialchars($post['master_submition']),
+            'master_menu'      => htmlspecialchars($post['master']),
+            'sample_menu'    => htmlspecialchars($post['sample']),
+            'submition_menu' => htmlspecialchars($post['submition']),
             'add_privilege'    => htmlspecialchars($post['add']),
             'edit_privilege'   => htmlspecialchars($post['edit']),
             'print_privilege'  => htmlspecialchars($post['print']),
@@ -55,9 +55,9 @@ class User_m extends CI_model
         $user = $this->db->update('user', $dataUser);
 
         $dataPrivilege = [
-            'master_menu'      => htmlspecialchars($post['master_menu']),
-            'master_sample'    => htmlspecialchars($post['master_sample']),
-            'master_submition' => htmlspecialchars($post['master_submition']),
+            'master_menu'      => htmlspecialchars($post['master']),
+            'sample_menu'    => htmlspecialchars($post['sample']),
+            'submition_menu' => htmlspecialchars($post['submition']),
             'add_privilege'    => htmlspecialchars($post['add']),
             'edit_privilege'   => htmlspecialchars($post['edit']),
             'print_privilege'  => htmlspecialchars($post['print']),
