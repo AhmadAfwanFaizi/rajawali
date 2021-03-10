@@ -65,8 +65,8 @@
                                     <label for="enable">Enable</label>
                                     <!-- <input type="text" class="form-control" name="enable" placeholder="Enable"> -->
                                     <select name="enable" id="enable" class="form-control" required>
-                                        <option value="Y" <?= $data->bill_to == 'Y' ? 'selected' : '' ?>>YES</option>
-                                        <option value="N" <?= $data->bill_to == 'N' ? 'selected' : '' ?>>NO</option>
+                                        <option value="Y" <?= $data->enable == 'Y' ? 'selected' : '' ?>>YES</option>
+                                        <option value="N" <?= $data->enable == 'N' ? 'selected' : '' ?>>NO</option>
                                     </select>
                                 </div>
                             </div>

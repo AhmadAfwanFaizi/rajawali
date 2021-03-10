@@ -151,7 +151,9 @@
                         <td class="kotak" class="term">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="" <?= $row->id == $data->id_term_of_service_detail ? 'checked' : null ?>>
+                                    <input type="checkbox" name="term" <?php foreach ($submition_tos as $d) {
+                                                                            echo ($row->id == $d->id) ? 'checked' : null;
+                                                                        } ?>>
                                     <b><?= $row->type ?></b> <br />
                                     <?= $row->information ?>
                                 </label>
@@ -508,8 +510,8 @@
     </div>
 
     <script>
-        window.print();
-        setTimeout(window.close, 1000);
+        // window.print();
+        // setTimeout(window.close, 1000);
     </script>
 
 </body>

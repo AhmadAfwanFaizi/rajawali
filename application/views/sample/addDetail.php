@@ -190,7 +190,7 @@
             "scrollCollapse": true,
             "scrollX": "200%",
             "columnDefs": [{
-                "targets": [11],
+                "targets": [12],
                 "orderable": false,
             }],
             "order": [

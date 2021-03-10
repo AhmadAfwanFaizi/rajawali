@@ -31,6 +31,7 @@ class Sample extends CI_Controller
         $int = (int) substr($maxCode, -4);
         $int++;
         $date = date('m/y/');
+        // $date = ('03/22/');
 
         $code =  'RTL-SMPL-' . $date . sprintf("%04s", $int);
         // echo $code;

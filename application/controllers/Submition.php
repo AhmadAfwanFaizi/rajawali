@@ -135,6 +135,7 @@ class Submition extends CI_Controller
         $getEmail               = $this->customer_m->getDataDetail($getDataPrint->id_customer)->result();
         $getTermOfService       = $this->term_of_service_m->getData(null, null, true)->result();
         $getTermOfServiceDetail = $this->term_of_service_m->getDataDetail(null, null, true)->result();
+        $getSubmitionTos        = $this->submition_m->getSubmitionTos($getData->id_submition_tos)->result();
 
         $data = [
             // 'sample_code' => $this->submition_m->getSampleCode()->result(),
@@ -144,6 +145,7 @@ class Submition extends CI_Controller
             'email'                  => $getEmail,
             'term_of_service'        => $getTermOfService,
             'term_of_service_detail' => $getTermOfServiceDetail,
+            'submition_tos'          => $getSubmitionTos,
             'toys'                   => $this->submition_m->getIso('toys', true)->result(),
             'baby_wear'              => $this->submition_m->getIso('baby_wear', true)->result(),
             'bicycle'                => $this->submition_m->getIso('bicycle', true)->result(),
@@ -151,7 +153,7 @@ class Submition extends CI_Controller
             'based'                  => $this->submition_m->getIso('based', true)->result(),
             'other'                  => $this->submition_m->getIso('other', true)->result(),
         ];
-        // var_dump($getTermOfService);
+        // var_dump($getSubmitionTos);
         // die;
         $this->load->view('submition/print', $data);
     }
