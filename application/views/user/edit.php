@@ -21,6 +21,35 @@
                             <input type="password" class="form-control" name="password" placeholder="Password">
                         </div>
                         <div class="form-group">
+                            <label for="status">Menu</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="master" value="Y" <?= $data->master_menu == 'Y' ? 'checked' : null ?>>
+                                            Master
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="sample" value="Y" <?= $data->sample_menu == 'Y' ? 'checked' : null ?>>
+                                            Sample
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="submition" value="Y" <?= $data->submition_menu == 'Y' ? 'checked' : null ?>>
+                                            Submition
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="status">Privilege</label>
                             <div class="row">
                                 <div class="col-md-4">

@@ -20,21 +20,24 @@ class User_m extends CI_model
         $id_user = 'USR' . uniqid();
         $dataUser = [
             'id'         => $id_user,
-            'username'   => $post['username'],
-            'password'   => $post['password'],
+            'username'   => htmlspecialchars($post['username']),
+            'password'   => htmlspecialchars($post['password']),
             'role'       => 'USER',
-            'status'     => $post['status'],
+            'status'     => htmlspecialchars($post['status']),
             'image'      => $post['image'],
             'created_at' => waktu_sekarang()
         ];
         $this->db->insert('user', $dataUser);
 
         $dataPrivilege = [
-            'id_user'         => $id_user,
-            'add_privilege'   => $post['add'],
-            'edit_privilege'  => $post['edit'],
-            'print_privilege' => $post['print'],
-            'created_at'      => waktu_sekarang()
+            'id_user'          => $id_user,
+            'master_menu'      => htmlspecialchars($post['master_menu']),
+            'master_sample'    => htmlspecialchars($post['master_sample']),
+            'master_submition' => htmlspecialchars($post['master_submition']),
+            'add_privilege'    => htmlspecialchars($post['add']),
+            'edit_privilege'   => htmlspecialchars($post['edit']),
+            'print_privilege'  => htmlspecialchars($post['print']),
+            'created_at'       => waktu_sekarang()
         ];
         $this->db->insert('privilege_user', $dataPrivilege);
     }
@@ -42,9 +45,9 @@ class User_m extends CI_model
     public function edit($post)
     {
         $dataUser = [
-            'username'   => $post['username'],
-            'password'   => $post['password'],
-            'status'     => $post['status'],
+            'username'   => htmlspecialchars($post['username']),
+            'password'   => htmlspecialchars($post['password']),
+            'status'     => htmlspecialchars($post['status']),
             'image'      => $post['image'],
             'updated_at' => waktu_sekarang()
         ];
@@ -52,10 +55,13 @@ class User_m extends CI_model
         $user = $this->db->update('user', $dataUser);
 
         $dataPrivilege = [
-            'add_privilege'   => $post['add'],
-            'edit_privilege'  => $post['edit'],
-            'print_privilege' => $post['print'],
-            'updated_at'      => waktu_sekarang()
+            'master_menu'      => htmlspecialchars($post['master_menu']),
+            'master_sample'    => htmlspecialchars($post['master_sample']),
+            'master_submition' => htmlspecialchars($post['master_submition']),
+            'add_privilege'    => htmlspecialchars($post['add']),
+            'edit_privilege'   => htmlspecialchars($post['edit']),
+            'print_privilege'  => htmlspecialchars($post['print']),
+            'updated_at'       => waktu_sekarang()
         ];
         $this->db->where('id_user', $post['idUser']);
         $privilege = $this->db->update('privilege_user', $dataPrivilege);

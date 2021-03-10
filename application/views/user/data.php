@@ -13,6 +13,9 @@
                                 <th>Image</th>
                                 <th>Username</th>
                                 <th>Status</th>
+                                <th>Master Menu</th>
+                                <th>Sample Menu</th>
+                                <th>Submition Menu</th>
                                 <th>Add</th>
                                 <th>Edit</th>
                                 <th>Print</th>
@@ -32,6 +35,15 @@
                                         <?php } else { ?>
                                             <small class="label bg-red">Not active</small>
                                         <?php } ?>
+                                    </td>
+                                    <td>
+                                        <?= $row->master_menu == 'Y' ? 'YES' : 'NO' ?>
+                                    </td>
+                                    <td>
+                                        <?= $row->sample_menu == 'Y' ? 'YES' : 'NO' ?>
+                                    </td>
+                                    <td>
+                                        <?= $row->submition_menu == 'Y' ? 'YES' : 'NO' ?>
                                     </td>
                                     <td>
                                         <?= $row->add_privilege == 'Y' ? 'YES' : 'NO' ?>
@@ -68,7 +80,7 @@
     $(function() {
         $('#tableUser').DataTable({
             "columnDefs": [{
-                "targets": [0, 2, 3, 4, 5, 6],
+                "targets": [0, 2, 3, 4, 5, 6, 7, 8, 9],
                 "orderable": false,
             }],
         });

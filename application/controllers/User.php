@@ -18,7 +18,7 @@ class User extends CI_Controller
             "page" => "user",
             'data' => $this->user_m->getData()->result(),
         ];
-        // var_dump($_SESSION);
+        // var_dump(privilege());
         // die;
         $this->template->load('template/template', 'user/data', $data);
     }
@@ -47,6 +47,11 @@ class User extends CI_Controller
             (isset($post['add'])) ? $post['add'] = $post['add'] : $post['add'] = 'N';
             (isset($post['edit'])) ? $post['edit'] = $post['edit'] : $post['edit'] = 'N';
             (isset($post['print'])) ? $post['print'] = $post['print'] : $post['print'] = 'N';
+
+            (isset($post['master'])) ? $post['master'] = $post['master'] : $post['master'] = 'N';
+            (isset($post['sample'])) ? $post['sample'] = $post['sample'] : $post['sample'] = 'N';
+            (isset($post['submition'])) ? $post['submition'] = $post['submition'] : $post['submition'] = 'N';
+
             // var_dump($_FILES);
             // var_dump($post);
             // die;
