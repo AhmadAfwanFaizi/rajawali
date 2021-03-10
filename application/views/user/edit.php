@@ -82,7 +82,7 @@
                             <label for="status">Status</label>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="status" value="Y" checked>
+                                    <input type="checkbox" name="status" value="Y" <?= $data->status == 'Y' ? 'checked' : null ?>>
                                     Active
                                 </label>
                             </div>
