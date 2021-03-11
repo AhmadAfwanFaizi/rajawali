@@ -20,6 +20,10 @@
                                 <label for="end_date">End Date</label>
                                 <input class="form-control" type="date" name="end_date" id="end_date" value="<?= ($end_date) ? $end_date : null ?>" required>
                             </div>
+                            <div class="form-group col-md-3">
+                                <label for="keyword">Keyword</label>
+                                <input class="form-control" type="text" name="keyword" id="keyword" value="<?= ($keyword) ? $keyword : null ?>" required>
+                            </div>
                             <div class="form-group col-md-1">
                                 <button class="btn btn-info" type="submit" style="margin-top: 40%;">
                                     <i class="fa fa-search"></i>

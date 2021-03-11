@@ -27,10 +27,12 @@ class Submition extends CI_Controller
         if ($post) {
             $data['start_date'] = $post['start_date'];
             $data['end_date']   = $post['end_date'];
+            $data['keyword']    = $post['keyword'];
             $data['data']       = $this->submition_m->getData(null, $post['start_date'], $post['end_date'])->result();
         } else {
             $data['start_date'] = null;
             $data['end_date']   = null;
+            $data['keyword']    = null;
             $data['data']       = $this->submition_m->getData()->result();
         }
 

@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Submition_m extends CI_model
 {
-    public function getData($id = null, $startDate = null, $endDate = null)
+    public function getData($id = null, $startDate = null, $endDate = null, $keyword = null)
     {
         $this->db->select('S.*, S.id as id_submition, customer_name, brand,
         S.created_at as created_at_submition,
@@ -25,6 +25,11 @@ class Submition_m extends CI_model
 
         if ($startDate && $endDate) {
             $this->db->where("DATE(S.created_at) BETWEEN '$startDate' AND '$endDate'");
+        }
+        if ($keyword) {
+            $this->db->like("S.quotation_no", $keyword)
+                ->or_like("C.customer_name", $keyword)
+                ->or_like("B.brand", $keyword);
         }
         $this->db->where("S.deleted_at", NULL);
         $this->db->where("sample.deleted_at", NULL);

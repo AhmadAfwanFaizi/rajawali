@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Sample_m extends CI_model
 {
-    public function getData($idSample = null, $startDate = null, $endDate = null, $idBrand = null)
+    public function getData($idSample = null, $startDate = null, $endDate = null, $idBrand = null, $keyword = null)
     {
         $this->db->select('S.*, C.customer_name, B.brand, 
         S.created_at as created_at_sample, 
@@ -24,13 +24,18 @@ class Sample_m extends CI_model
         if ($idBrand) {
             $this->db->where("S.id_brand", $idBrand);
         }
+        if ($keyword) {
+            $this->db->like("S.quotation_no", $keyword)
+                ->or_like("C.customer_name", $keyword)
+                ->or_like("B.brand", $keyword);
+        }
         $this->db->where("S.deleted_at", NULL);
         // $this->db->get();
         // var_dump($this->db->last_query());
         return $this->db->get();
     }
 
-    public function getDetail($idSample = null, $id = null, $startDate = null, $endDate = null)
+    public function getDetail($idSample = null, $id = null, $startDate = null, $endDate = null, $keyword = null)
     {
         $this->db->select('SD.*, SD.id as id_detail, S.quotation_no, C.customer_name, B.brand, 
         SD.created_at as created_at_sd,
@@ -51,6 +56,11 @@ class Sample_m extends CI_model
         }
         if ($startDate && $endDate) {
             $this->db->where("DATE(SD.created_at) BETWEEN '$startDate' AND '$endDate'");
+        }
+        if ($keyword) {
+            $this->db->like("S.quotation_no", $keyword)
+                ->or_like("C.customer_name", $keyword)
+                ->or_like("B.brand", $keyword);
         }
         $this->db->where("SD.deleted_at", NULL);
         $this->db->where("S.deleted_at", NULL);
