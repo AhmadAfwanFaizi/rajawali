@@ -27,8 +27,7 @@ class Submition_m extends CI_model
             $this->db->where("DATE(S.created_at) BETWEEN '$startDate' AND '$endDate'");
         }
         if ($keyword) {
-            $this->db->like("S.quotation_no", $keyword)
-                ->or_like("C.customer_name", $keyword)
+            $this->db->like("C.customer_name", $keyword)
                 ->or_like("B.brand", $keyword);
         }
         $this->db->where("S.deleted_at", NULL);
